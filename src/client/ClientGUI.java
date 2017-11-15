@@ -16,7 +16,8 @@ import javax.swing.JTextField;
 
 
 @SuppressWarnings("serial")
-public class ClientGUI extends JFrame implements ActionListener {
+public class ClientGUI extends JFrame {
+	ButtonsAdapter buttonsAdapter;
 	Client client;
 	JButton submitButton;
 	JTextField inputField;
@@ -25,6 +26,7 @@ public class ClientGUI extends JFrame implements ActionListener {
 	public ClientGUI(Client client) {
 		super("Chinese Checkers");
 		this.client = client;
+		buttonsAdapter = new ButtonsAdapter(this);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setLayout(new BoxLayout(this.getContentPane(), BoxLayout.Y_AXIS));
 		setSize(600, 600);
@@ -36,7 +38,7 @@ public class ClientGUI extends JFrame implements ActionListener {
 		inputField = new JTextField();
 		inputField.setPreferredSize(new Dimension(200, 20));
 		submitButton = new JButton("Send");
-		submitButton.addActionListener(this);
+		submitButton.addActionListener(buttonsAdapter);
 		
 		outputField = new JLabel();
 		
@@ -47,18 +49,6 @@ public class ClientGUI extends JFrame implements ActionListener {
 		this.add(p2);
 		
 		setVisible(true);
-	}
-	
-	@Override
-	public void actionPerformed(ActionEvent e) {
-		Object source = e.getSource();
-		if(source == submitButton) {
-				try {
-					client.p.printStr(sendString());
-				} catch (RemoteException e1) {
-					e1.printStackTrace();
-				}
-		}
 	}
 	
 	String sendString() {
