@@ -9,30 +9,23 @@ import java.io.InputStreamReader;
 import rmi.ITest;
 
 public class Client{
-    public static void main(String[] args) throws IOException { 
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        System.out.print("Enter String: \n Enter 'close' to exit \n");
-        while (true) {
-        	String s = br.readLine();
-        	rmi(s);
-        	if (s.equals("close")) {
-        		break;
-        	}
-        } 
-    }
-
-    private static void rmi(String s) throws RemoteException {
-        try { 
-                //int pid = Integer.parseInt(ManagementFactory.getRuntimeMXBean().getName().split("@")[0]);   
-
-                ITest p = (ITest)Naming.lookup( "print" ); 
-                p.printStr(s);
-            }
-            catch( NotBoundException ex )
-            { ex.printStackTrace(); }
-            catch( RemoteException e )
-            { e.printStackTrace(); }
-            catch( MalformedURLException e )
-            { e.printStackTrace(); }
-    }
+	ITest p;
+	
+	public Client() {
+		ClientGUI gui = new ClientGUI(this);
+		try { 
+			//int pid = Integer.parseInt(ManagementFactory.getRuntimeMXBean().getName().split("@")[0]);   
+			p = (ITest)Naming.lookup("print"); 
+		}
+		catch( NotBoundException ex )
+		{ ex.printStackTrace(); }
+		catch( RemoteException e )
+		{ e.printStackTrace(); }
+		catch( MalformedURLException e )
+		{ e.printStackTrace(); }
+	}
+	
+	public static void main(String[] args) throws IOException {
+		new Client();
+	}
 }
