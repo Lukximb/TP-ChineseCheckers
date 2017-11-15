@@ -15,7 +15,7 @@ public class Client{
 		ClientGUI gui = new ClientGUI(this);
 		try { 
 			//int pid = Integer.parseInt(ManagementFactory.getRuntimeMXBean().getName().split("@")[0]);   
-			p = (ITest)Naming.lookup( "print" ); 
+			p = (ITest)Naming.lookup("print"); 
 		}
 		catch( NotBoundException ex )
 		{ ex.printStackTrace(); }
