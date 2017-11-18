@@ -1,0 +1,445 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="14.2.0">
+  <zoom_level>10</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>640</x>
+      <y>50</y>
+      <w>210</w>
+      <h>130</h>
+    </coordinates>
+    <panel_attributes>Package::sever.core
+Server
+--
+# manager: Manager
++ factory: Factory
++ playerList: ArrayList&lt;Player&gt;
+--
++ main()
+- createFactory(this)
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>810</x>
+      <y>460</y>
+      <w>210</w>
+      <h>50</h>
+    </coordinates>
+    <panel_attributes>Package::sever.core
+Factory</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>810</x>
+      <y>260</y>
+      <w>210</w>
+      <h>160</h>
+    </coordinates>
+    <panel_attributes>Package::sever.core
+&lt;&lt;Interface&gt;&gt;
+IFactory
+--
+# createConnection()
+# createPlayer()
+# createManager()
+# createLobbyManager()
+# createPlayerManager()
+# createLobby()</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>450</x>
+      <y>260</y>
+      <w>210</w>
+      <h>160</h>
+    </coordinates>
+    <panel_attributes>Package::sever.manager
+&lt;&lt;Interface&gt;&gt;
+IManager
+--
+- lobbyManager: LobbyManager
+- playerManager: PlayerManager
+--
+# addPlayerToLobby()
+# removePlayerFromLobby()
+# createLobbyManager()
+# createPlayerManager()</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>460</x>
+      <y>490</y>
+      <w>210</w>
+      <h>50</h>
+    </coordinates>
+    <panel_attributes>Package::sever.manager
+Manager</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>330</x>
+      <y>630</y>
+      <w>210</w>
+      <h>130</h>
+    </coordinates>
+    <panel_attributes>Package::sever.manager
+&lt;&lt;Interface&gt;&gt;
+ILobbyManager
+--
+# lobbyList: ArrayList&lt;Lobby&gt;
+--
+# createLobby()
+# removeLobby()
+# joinLobby(Lobby l1, Lobby L2)</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>670</x>
+      <y>620</y>
+      <w>210</w>
+      <h>180</h>
+    </coordinates>
+    <panel_attributes>Package::sever.manager
+&lt;&lt;Interface&gt;&gt;
+IPlayerManager
+--
+# playerInGameList: ArrayList&lt;Player&gt;
+# freePlayerList: ArrayList&lt;Player&gt;
+--
+# addPlayerToLobby()
+# removePlayerFromLobby()
+# createLobbyManager()
+# createPlayerManager()
+# createPlayerManager()</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>330</x>
+      <y>810</y>
+      <w>210</w>
+      <h>50</h>
+    </coordinates>
+    <panel_attributes>Package::sever.manager
+LobbyManager</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>670</x>
+      <y>920</y>
+      <w>210</w>
+      <h>280</h>
+    </coordinates>
+    <panel_attributes>Package::sever.player
+&lt;&lt;Interface&gt;&gt;
+IPlayer
+--
+# pid: String
+# armNumber: int
+# lobbyNumber: int
+# playingNow: boolean
+# ready: boolean
+--
+# doMove()
+# doPass()
+# exit()
+# joinLobby()
+# createLobby()
+# createPlayerManager()
+# iAmReady()
+# iAmNotReady()</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>670</x>
+      <y>830</y>
+      <w>210</w>
+      <h>50</h>
+    </coordinates>
+    <panel_attributes>Package::sever.manager
+PlayerManager</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>960</x>
+      <y>1060</y>
+      <w>210</w>
+      <h>50</h>
+    </coordinates>
+    <panel_attributes>Package::sever.player
+Player</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1010</x>
+      <y>1310</y>
+      <w>210</w>
+      <h>170</h>
+    </coordinates>
+    <panel_attributes>Package::client
+&lt;&lt;Interface&gt;&gt;
+Client
+--
+# player: IPlayerApi
+# factory: IFactory
+--
++ start()
+# createConnection()
+# createPlayer(String pid)
+# getFactory()</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>670</x>
+      <y>1260</y>
+      <w>210</w>
+      <h>270</h>
+    </coordinates>
+    <panel_attributes>Package::sever.player
+&lt;&lt;Interface&gt;&gt;
+IPlayerApi
+--
+# pid: String
+# armNumber: int
+# playingNow: boolean
+# ready: boolean
+--
+# doMove()
+# doPass()
+# exit()
+# joinLobby()
+# iAmReady()
+# iAmNotReady()
+# getResponse()</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>760</x>
+      <y>1190</y>
+      <w>30</w>
+      <h>90</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;70.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>870</x>
+      <y>1070</y>
+      <w>110</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;.</panel_attributes>
+    <additional_attributes>10.0;10.0;90.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>730</x>
+      <y>790</y>
+      <w>30</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;.</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;40.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>400</x>
+      <y>750</y>
+      <w>30</w>
+      <h>80</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;.</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;60.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>540</x>
+      <y>410</y>
+      <w>30</w>
+      <h>100</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;.</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;80.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>840</x>
+      <y>410</y>
+      <w>30</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;.</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;50.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>820</x>
+      <y>170</y>
+      <w>60</w>
+      <h>110</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.&gt;
+&lt;&lt;use&gt;&gt;</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;90.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>640</x>
+      <y>170</y>
+      <w>60</w>
+      <h>110</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.&gt;
+&lt;&lt;use&gt;&gt;</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;90.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>460</x>
+      <y>530</y>
+      <w>60</w>
+      <h>120</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.&gt;
+&lt;&lt;use&gt;&gt;</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;100.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>660</x>
+      <y>530</y>
+      <w>60</w>
+      <h>110</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.&gt;
+&lt;&lt;use&gt;&gt;</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;90.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>700</x>
+      <y>870</y>
+      <w>60</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.&gt;
+&lt;&lt;use&gt;&gt;</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;50.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>870</x>
+      <y>1360</y>
+      <w>160</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.&gt;
+&lt;&lt;use&gt;&gt;</panel_attributes>
+    <additional_attributes>140.0;20.0;10.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1300</x>
+      <y>1290</y>
+      <w>210</w>
+      <h>240</h>
+    </coordinates>
+    <panel_attributes>Package::client
+ClientControler
+--
+# clienr: Client
+
+--
++ start()
+# createConnection()
+# createPlayer(String pid)
+# getFactory()</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1010</x>
+      <y>1210</y>
+      <w>210</w>
+      <h>50</h>
+    </coordinates>
+    <panel_attributes>Package::javafx.aplication
+Aplication</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1110</x>
+      <y>1250</y>
+      <w>30</w>
+      <h>80</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;60.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1010</x>
+      <y>1520</y>
+      <w>210</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>Package::client
+Client</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1110</x>
+      <y>1470</y>
+      <w>30</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;.</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;50.0</additional_attributes>
+  </element>
+</diagram>
