@@ -1,67 +1,63 @@
 package client;
 
-import java.awt.BorderLayout;
-import java.awt.Dimension;
-import java.awt.EventQueue;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.net.MalformedURLException;
+import java.rmi.Naming;
+import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 
-import javax.swing.BoxLayout;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
+import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
+import javafx.scene.layout.StackPane;
+import javafx.stage.Stage;
+import rmi.ITest;
 
-
-@SuppressWarnings("serial")
-public class ClientGUI extends JFrame {
-	ButtonsAdapter buttonsAdapter;
-	Client client;
-	JButton submitButton;
-	JTextField inputField;
-	JLabel outputField;
+public class ClientGUI extends Application {
+	ITest p;
 	
-	public ClientGUI(Client client) {
-		super("Chinese Checkers");
-		this.client = client;
-		buttonsAdapter = new ButtonsAdapter(this);
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setLayout(new BoxLayout(this.getContentPane(), BoxLayout.Y_AXIS));
-		setSize(600, 600);
-		
-		JPanel p1 = new JPanel();
-		p1.setLayout(new BoxLayout(p1, BoxLayout.X_AXIS));
-		JPanel p2 = new JPanel();
-		
-		inputField = new JTextField();
-		inputField.setPreferredSize(new Dimension(200, 20));
-		submitButton = new JButton("Send");
-		submitButton.addActionListener(buttonsAdapter);
-		
-		outputField = new JLabel();
-		
-		p1.add(inputField);
-		p1.add(submitButton);
-		p2.add(outputField);
-		this.add(p1);
-		this.add(p2);
-		
-		setVisible(true);
+	public ClientGUI() {
 	}
 	
-	String sendString() {
-		String s = inputField.getText();
-		return s;
+	
+	@Override
+	public void init() {
+		
 	}
 	
-//	public static void main(String[] args) {
-//		EventQueue.invokeLater(new Runnable() {
-//			@Override
-//			public void run() {
-//				new ClientGUI();
-//			}
-//		});
-//	}
+	@Override
+	public void start(Stage primaryStage) throws Exception {
+		setConnection();
+		
+		FXMLLoader loader = new FXMLLoader();
+		loader.setLocation(this.getClass().getResource("/client/ClientFXML.fxml"));
+		
+		ClientGUIController controller = new ClientGUIController(this);
+		loader.setController(controller);
+		StackPane stackPane=loader.load();
+		
+		Scene scene = new Scene(stackPane);
+		
+		primaryStage.setScene(scene);
+		primaryStage.setTitle("Chinese Checkers");
+		primaryStage.show();
+	}
+	
+	public void setConnection() {
+		try { 
+			//int pid = Integer.parseInt(ManagementFactory.getRuntimeMXBean().getName().split("@")[0]);   
+			p = (ITest)Naming.lookup("print"); 
+		}
+		catch( NotBoundException ex )
+		{ ex.printStackTrace(); }
+		catch( RemoteException e )
+		{ e.printStackTrace(); }
+		catch( MalformedURLException e )
+		{ e.printStackTrace(); }
+	}
+	
+	public static void main(String[] args) {
+		launch(args);
+	}
 }
+
+
