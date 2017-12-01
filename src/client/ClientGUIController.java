@@ -58,15 +58,7 @@ public class ClientGUIController {
 	@FXML
 	private Button cancelJoinLobbyButton;
 	@FXML
-	private Button joinLobbyButton;
-	@FXML 
-	private TableView<Integer> lobbyTable;
-	@FXML
-	private TableColumn<Integer, String> lobbyNameColumn;
-	@FXML
-	private TableColumn<Integer, Integer> pawnColumn;
-	@FXML 
-	private TableColumn<Integer, Integer> playerColumn;	
+	private Button joinLobbyButton;	
 	//LOBBY---------------------------------------
 	@FXML
 	private StackPane lobby;
