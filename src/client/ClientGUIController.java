@@ -2,6 +2,7 @@ package client;
 
 import java.rmi.RemoteException;
 
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -118,10 +119,15 @@ public class ClientGUIController {
 	}
 	
 	public void exitButtonOnClick(ActionEvent event) {
-		
+		Platform.exit();
 	}
 	
 	public void joinGameButtonOnClick(ActionEvent event) {
+		this.menu.setVisible(false);
+		this.menu.setDisable(true);
+		
+		this.joinLobby.setVisible(true);
+		this.joinLobby.setDisable(false);
 		
 	}
 	//CREATE LOBBY
@@ -154,8 +160,8 @@ public class ClientGUIController {
 		this.joinLobby.setVisible(false);
 		this.joinLobby.setDisable(true);
 		
-		this.createLobby.setVisible(true);
-		this.createLobby.setDisable(false);
+		this.menu.setVisible(true);
+		this.menu.setDisable(false);
 	}
 	
 	//LOBBY
