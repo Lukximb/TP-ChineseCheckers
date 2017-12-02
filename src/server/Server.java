@@ -1,17 +1,30 @@
 package server;
 
-import java.rmi.registry.*;
-import logic.*;
+import java.io.IOException;
+
+import server.logic.Connection;
 
 public class Server {
-    public static void main( String[] args ) {
-        try { 
-            Registry registry = LocateRegistry.createRegistry(1099);
-            PrintTest p = new PrintTest();
-            registry.bind("print", p); 
-        }
-        catch( Exception e ){ 
-            e.printStackTrace(); 
+    private Connection connection = null;
+
+    public Server() {
+        connection = new Connection();
+        connection.createRegistry();
+        connection.createMBeanServer();
+        connection.createDomain();
+        connection.createMBeanObject("jmx.Hello", "h1", 1/*PID*/);
+        connection.createConnectorServer();
+        connection.registryMBeanObject("h1");
+
+        System.out.println("server is running...");
+    }
+
+    public static void main(String argv[]) {
+        new Server();
+        try {
+            System.in.read();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 }
