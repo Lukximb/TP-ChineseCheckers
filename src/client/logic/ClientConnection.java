@@ -1,7 +1,5 @@
 package client.logic;
 
-import server.logic.Connection;
-
 import javax.management.MBeanServerConnection;
 import javax.management.ObjectName;
 import javax.management.remote.JMXConnector;
@@ -16,7 +14,7 @@ public class ClientConnection {
 
     public ClientConnection() {
         try {
-            url = new JMXServiceURL("service:jmx:rmi://25.71.213.200:44445/jndi/rmi://25.71.213.200:44444/jmxrmi");
+            url = new JMXServiceURL("service:jmx:rmi://25.0.246.243:44445/jndi/rmi://25.0.246.243:44444/jmxrmi");
             jmxc = JMXConnectorFactory.connect(url, null);
             mbsc = jmxc.getMBeanServerConnection();
             domain = mbsc.getDefaultDomain();

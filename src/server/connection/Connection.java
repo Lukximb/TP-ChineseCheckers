@@ -1,4 +1,4 @@
-package server.logic;
+package server.connection;
 
 import jmx.Hello;
 
@@ -54,7 +54,7 @@ public class Connection {
     public void createConnectorServer() {
         try {
             JMXServiceURL url = new JMXServiceURL(
-                    "service:jmx:rmi://25.71.213.200:44445/jndi/rmi://25.71.213.200:44444/jmxrmi");
+                    "service:jmx:rmi://25.0.246.243:44445/jndi/rmi://25.0.246.243:44444/jmxrmi");
             JMXConnectorServer cs = JMXConnectorServerFactory.newJMXConnectorServer(url, null, mbs);
             cs.start();
             System.out.println("Create ConnectorServer");
@@ -69,7 +69,7 @@ public class Connection {
         ObjectName helloName = null;
 
         try {
-            helloName = new ObjectName("server.Server:name=" + name);
+            helloName = new ObjectName("server.core.Server:name=" + name);
             mbs.registerMBean(helloBean, helloName);
         } catch(Exception e) {
             e.printStackTrace();

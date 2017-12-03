@@ -1,8 +1,8 @@
-package server;
+package server.core;
 
 import java.io.IOException;
 
-import server.logic.Connection;
+import server.connection.Connection;
 
 public class Server {
     private Connection connection = null;
