@@ -3,12 +3,9 @@ package client.logic;
 import client.core.ClientGUI;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
+import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.ProgressBar;
-import javafx.scene.control.TextField;
 import javafx.scene.layout.StackPane;
 
 public class ClientGUIController {
@@ -46,6 +43,8 @@ public class ClientGUIController {
 	private Button player4Button;
 	@FXML
 	private Button player6Button;
+	@FXML
+	private Spinner boardSizeSpinner;
 	@FXML
 	private Button createLobbyButton;
 	@FXML

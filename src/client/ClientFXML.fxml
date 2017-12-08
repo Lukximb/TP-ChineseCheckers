@@ -8,6 +8,7 @@
 <?import javafx.scene.control.ProgressBar?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.Spinner?>
+<?import javafx.scene.control.SpinnerValueFactory.IntegerSpinnerValueFactory?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
@@ -100,12 +101,15 @@
                   <Insets />
                </opaqueInsets>
             </ButtonBar>
-            <Spinner prefHeight="30.0" prefWidth="150.0" StackPane.alignment="TOP_CENTER">
+            <Spinner fx:id="boardSizeSpinner" prefHeight="30.0" prefWidth="150.0" StackPane.alignment="TOP_CENTER">
+               <valueFactory>
+                  <SpinnerValueFactory.IntegerSpinnerValueFactory amountToStepBy="1" initialValue="4" max="6" min="2" />
+               </valueFactory>
                <StackPane.margin>
                   <Insets top="300.0" />
                </StackPane.margin>
             </Spinner>
-            <Label alignment="CENTER" prefHeight="30.0" prefWidth="150.0" text="Pawn number:" textAlignment="CENTER" StackPane.alignment="TOP_CENTER">
+            <Label alignment="CENTER" prefHeight="30.0" prefWidth="170.0" text="Rows of pawns number:" textAlignment="CENTER" StackPane.alignment="TOP_CENTER">
                <StackPane.margin>
                   <Insets top="270.0" />
                </StackPane.margin>
