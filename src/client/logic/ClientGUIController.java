@@ -3,9 +3,11 @@ package client.logic;
 import client.core.ClientGUI;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
+import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.fxml.FXML;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 
 public class ClientGUIController {
@@ -181,8 +183,14 @@ public class ClientGUIController {
 	
 	
     public void fieldsHandleTest(MouseEvent event) {
-        System.out.println("mouse click detected! "+ event.getSource());
+		System.out.println("mouse click detected! "+ event.getSource());
     }
+
+    public void boardClick(MouseEvent event) {
+		System.out.println("Row: " + GridPane.getRowIndex((Node)event.getTarget())
+				+ "\nColumn: " + GridPane.getColumnIndex((Node)event.getTarget()));
+	}
+
 	//TEST
 	public void submitButtonOnClick(ActionEvent event) {
 //		try {
