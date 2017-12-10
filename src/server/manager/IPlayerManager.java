@@ -3,7 +3,7 @@ package server.manager;
 import server.player.*;
 
 public interface IPlayerManager {
-    void getNewPlayer(int pid);
+    void getNewPlayer(Player player);
 
     void addPlayerToInGameList(Player player);
 

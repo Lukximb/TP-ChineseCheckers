@@ -39,9 +39,20 @@ public class ClientConnection {
         System.out.println("Create new MBean: " + mBeanName.toString());
     }
 
-    public void invokeMethod(ObjectName mBeanName, String methodName) {
-        Object  opParams1[] = {"Hello"};
+    /*public void invokeMethod(ObjectName mBeanName, String methodName, String num) {
+        Object  opParams1[] = {"Hello" + num};
         String  opSig[] = {String.class.getName()};
+        try {
+            mbsc.invoke(mBeanName, methodName, opParams1, opSig);
+        } catch (Exception  e) {
+            e.printStackTrace();
+        }
+        System.out.println("Method invoked: " + methodName + " on: " + mBeanName.toString());
+    }*/
+
+    public void invokeMethod(ObjectName mBeanName, String methodName, int num) {
+        Object  opParams1[] = {num};
+        String  opSig[] = {int.class.getName()};
         try {
             mbsc.invoke(mBeanName, methodName, opParams1, opSig);
         } catch (Exception  e) {

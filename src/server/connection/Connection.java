@@ -1,6 +1,7 @@
 package server.connection;
 
 import jmx.Hello;
+import jmx.Factory;
 
 import javax.management.MBeanServer;
 import javax.management.MBeanServerFactory;
@@ -58,8 +59,25 @@ public class Connection {
         try {
             ObjectName mbeanObjectName =
                     ObjectName.getInstance(mbeanObjectNameStr);
-            mbs.createMBean(mbeanClassName, mbeanObjectName);
+            mbs.registerMBean(mbeanClassName, mbeanObjectName);
             System.out.println(">> Create mBean: " + mbeanObjectName.toString());
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.exit(1);
+        }
+    }
+
+    public void createMBeanMainObject(String mBeanClassNameArg, String name, String classID, Object obj) {
+        String mbeanClassName = mBeanClassNameArg;
+        System.out.println(">> Set mbeanClassName: " + mbeanClassName);
+        String mbeanObjectNameStr =
+                domain+ classID + ":type=" + mbeanClassName + ",name=" + name;
+        System.out.println(">> Set mbeanObjectNameStr: " + mbeanObjectNameStr);
+        try {
+            ObjectName mbeanObjectName =
+                    ObjectName.getInstance(mbeanObjectNameStr);
+            mbs.registerMBean(obj, mbeanObjectName);
+            System.out.println(">> Create main mBean: " + mbeanObjectName.toString());
         } catch (Exception e) {
             e.printStackTrace();
             System.exit(1);
@@ -91,5 +109,16 @@ public class Connection {
             e.printStackTrace();
         }
         System.out.println(">> Registry MBeanObject: " + name);
+    }
+
+    public void registryFactoryMBeanObject(Factory factory) {
+        ObjectName obj = null;
+        try {
+            obj = new ObjectName("server.Server:name=Factory");
+            mbs.registerMBean(factory, obj);
+        } catch(Exception e) {
+            e.printStackTrace();
+        }
+        System.out.println(">> Registry MBeanObject: Factory");
     }
 }

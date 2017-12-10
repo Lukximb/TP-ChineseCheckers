@@ -2,13 +2,15 @@ package server.player;
 
 import server.board.Coordinates;
 import server.lobby.Lobby;
+import java.io.Serializable;
 
-public class Player implements IPlayer {
+public class Player implements IPlayer, Serializable{
     public int pid;
     public Lobby lobby = null;
 
-    public Player(){
-
+    public Player(int pid){
+        this.pid = pid;
+        System.out.println(">> Create player with pid= " + pid);
     }
 
     @Override
@@ -53,7 +55,7 @@ public class Player implements IPlayer {
 
     @Override
     public int getPid() {
-        return 0;
+        return pid;
     }
 
     @Override

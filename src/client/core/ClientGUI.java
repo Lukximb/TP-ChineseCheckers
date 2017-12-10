@@ -1,19 +1,21 @@
 package client.core;
 
-import client.logic.ClientGUIController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import javax.management.ObjectName;
+import java.lang.management.ManagementFactory;
 
 import client.logic.*;
 
 @SuppressWarnings("restriction")
 public class ClientGUI extends Application {
 
-    String domain = null;
+    private String domain = null;
+    private ObjectName factory = null;
+    private int pid = 0;
 
     public ClientGUI() {
     }
@@ -25,12 +27,13 @@ public class ClientGUI extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
+        pid = Integer.parseInt(ManagementFactory.getRuntimeMXBean().getName().split("@")[0]);
         ClientConnection connection = new ClientConnection();
         domain = connection.getDomain();
-        ObjectName mBeanName=
-                new ObjectName(domain+"1" +":type=jmx.Hello,name=h2");
-        connection.createNewMBean(mBeanName);
-        connection.invokeMethod(mBeanName, "sayHello");
+
+        factory = new ObjectName(domain+"F" +":type=jmx.Factory,name=Factory");
+        connection.invokeMethod(factory, "createPlayer", pid);
+
         connection.closeConnection();
 
         FXMLLoader loader = new FXMLLoader();

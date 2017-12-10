@@ -2,7 +2,7 @@ package server.lobby;
 
 import server.board.Coordinates;
 import server.board.IBoard;
-import server.core.Factory;
+import jmx.Factory;
 
 public class LobbyMediator {
     private Clock clock;
@@ -12,9 +12,9 @@ public class LobbyMediator {
 
     public LobbyMediator(Lobby lobby) {
         this.lobby = lobby;
-        clock = Factory.getInstance().createClock();
-        rulesManager = Factory.getInstance().createRulesManager();
-        board = Factory.getInstance().createBoard();
+        //clock = Factory.getInstance().createClock();
+        //rulesManager = Factory.getInstance().createRulesManager();
+        //board = Factory.getInstance().createBoard();
     }
 
     public long getRoundTime() {
