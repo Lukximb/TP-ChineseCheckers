@@ -9,7 +9,6 @@ import javafx.stage.Stage;
 import javax.management.ObjectName;
 
 import client.logic.*;
-import org.junit.jupiter.api.Test;
 
 @SuppressWarnings("restriction")
 public class ClientGUI extends Application {

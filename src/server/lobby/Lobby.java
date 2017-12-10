@@ -10,21 +10,26 @@ import java.util.Map;
 public class Lobby {
     public String name;
     public Player admin;
-    public Map<Integer, Player> players;
+    public Player[] players;
     public IBoard board;
     public int numberOfPlayers;
     public Player round;
+    public int roundCorner;
     public LobbyMediator mediator;
     public Chat chat;
 
-    public Lobby(String name, Player admin) {
+    public Lobby(String name, Player admin, int numberOfPlayers) {
         this.name = name;
         this.admin = admin;
-        players = new HashMap<>();
+        this.numberOfPlayers = numberOfPlayers;
+        players = new Player[numberOfPlayers];
+        addPlayer(admin, 0);
     }
 
     public void startGame() {
-
+        mediator = new LobbyMediator(this);
+        round = players[0];
+        roundCorner = 0;
     }
 
     public void endGame() {
@@ -32,7 +37,9 @@ public class Lobby {
     }
 
     public void addPlayer(Player player, int corner) {
-
+        if(corner < numberOfPlayers) {
+            players[corner] = player;
+        }
     }
 
     public void addBot(Bot bot) {
@@ -40,7 +47,19 @@ public class Lobby {
     }
 
     public void removePlayer(Player player) {
-
+        int i = 0;
+        int next = 0;
+        while(i<numberOfPlayers) {
+            if(players[i].equals(player)) {
+                players[i] = null;
+                next = i+1;
+            }
+        }
+        while(next < numberOfPlayers || players[next] != null) {
+            players[next-1] = players[next];
+            players[next] = null;
+            next++;
+        }
     }
 
     public void removeBot(Bot bot) {
@@ -48,10 +67,16 @@ public class Lobby {
     }
 
     public void getRoundTime() {
-
+        mediator.getRoundTime();
     }
 
     public void nextRound() {
+        roundCorner++;
+        if(roundCorner == numberOfPlayers) {
+            roundCorner = 0;
+        }
+        round = players[roundCorner];
+        mediator.startRound();
 
     }
 
