@@ -1,4 +1,4 @@
-package server.core;
+package jmx;
 
 import server.connection.Connection;
 import server.lobby.*;
@@ -6,18 +6,18 @@ import server.manager.*;
 import server.player.*;
 import server.board.*;
 
-public interface IFactory {
+public interface FactoryMBean {
     Connection createConnection();
 
     Manager createManager();
 
-    LobbyManager createLobbyManager();
+    void createLobbyManager();
 
-    PlayerManager createPlayerManager();
+    void createPlayerManager();
 
     RulesManager createRulesManager();
 
-    Player createPlayer();
+    void createPlayer(int pid);
 
     Bot createBot();
 

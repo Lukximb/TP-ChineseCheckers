@@ -1,12 +1,17 @@
-package server.core;
+package jmx;
 
 import server.board.*;
 import server.connection.Connection;
+import server.core.Server;
 import server.lobby.*;
 import server.manager.*;
 import server.player.*;
 
-public class Factory implements IFactory {
+public class Factory implements FactoryMBean {
+    private Server server;
+    private Manager manager;
+    private LobbyManager lobbyManager;
+    private PlayerManager playerManager;
     private static volatile Factory instance = null;
 
     public static Factory getInstance() {
@@ -20,7 +25,8 @@ public class Factory implements IFactory {
         return instance;
     }
 
-    private Factory() {
+    private Factory() {//Server server) {
+        //this.server = server;
     }
 
     @Override
@@ -34,24 +40,22 @@ public class Factory implements IFactory {
 
     @Override
     public Manager createManager() {
-        LobbyManager lobbyManager = createLobbyManager();
-        PlayerManager playerManager = createPlayerManager();
-        Manager manager = Manager.getInstance();
+        createLobbyManager();
+        createPlayerManager();
+        manager = Manager.getInstance();
         manager.setPlayerManager(playerManager);
         manager.setLobbyManager(lobbyManager);
         return manager;
     }
 
     @Override
-    public LobbyManager createLobbyManager() {
-        LobbyManager lobbyManager = LobbyManager.getInstance();
-        return lobbyManager;
+    public void createLobbyManager() {
+        lobbyManager = LobbyManager.getInstance();
     }
 
     @Override
-    public PlayerManager createPlayerManager() {
-        PlayerManager playerManager = PlayerManager.getInstance();
-        return playerManager;
+    public void createPlayerManager() {
+        playerManager = PlayerManager.getInstance();
     }
 
     @Override
@@ -60,8 +64,9 @@ public class Factory implements IFactory {
     }
 
     @Override
-    public Player createPlayer() {
-        return null;
+    public void createPlayer(int pid) {
+        System.out.println(pid);
+        playerManager.getNewPlayer(new Player(pid));
     }
 
     @Override

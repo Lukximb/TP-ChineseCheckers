@@ -2,6 +2,7 @@ package server.core;
 
 import java.io.IOException;
 
+import jmx.Factory;
 import server.connection.Connection;
 import server.manager.Manager;
 
@@ -15,9 +16,10 @@ public class Server {
         getConnection();
         getManager();
 
-        connection.createMBeanObject("jmx.Hello", "h1", 1/*PID*/);
         connection.createConnectorServer();
-        connection.registryMBeanObject("h1");
+
+        connection.createMBeanMainObject("jmx.Factory", "Factory", "F", factory);
+        connection.registryFactoryMBeanObject(factory);
 
         System.out.println(">> server is running...");
     }
