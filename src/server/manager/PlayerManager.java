@@ -63,4 +63,19 @@ public class PlayerManager implements IPlayerManager {
     public void killBot(Bot bot) {
 
     }
+
+    @Override
+    public int checkPlayerStatus(int pid) {
+        for(Player p: playerFreeList) {
+            if(p.pid == pid) {
+                return 1;
+            }
+        }
+        for(Player p: playerInGameList) {
+            if(p.pid == pid) {
+                return 2;
+            }
+        }
+        return 0;
+    }
 }

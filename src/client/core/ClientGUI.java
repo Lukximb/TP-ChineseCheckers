@@ -14,9 +14,9 @@ import client.logic.*;
 public class ClientGUI extends Application {
 
     private String domain = null;
-    public  ObjectName factory = null;
-    public ClientConnection connection;
+    private ObjectName factory = null;
     private int pid = 0;
+    ClientConnection connection;
 
     public ClientGUI() {
     }
@@ -24,6 +24,11 @@ public class ClientGUI extends Application {
 
     @Override
     public void init() {
+    }
+
+    @Override
+    public void stop() {
+        connection.invokeMethod(factory, "deletePlayer", pid);
     }
 
     @Override
@@ -35,7 +40,7 @@ public class ClientGUI extends Application {
         factory = new ObjectName(domain+"F" +":type=jmx.Factory,name=Factory");
         connection.invokeMethod(factory, "createPlayer", pid);
 
-        //connection.closeConnection();
+//        connection.closeConnection();
 
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(this.getClass().getResource("/client/ClientFXML.fxml"));

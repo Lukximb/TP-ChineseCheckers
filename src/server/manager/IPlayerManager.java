@@ -14,4 +14,6 @@ public interface IPlayerManager {
     void removePlayerFromFreeList(Player player);
 
     void killBot(Bot bot);
+
+    int checkPlayerStatus(int pid);
 }

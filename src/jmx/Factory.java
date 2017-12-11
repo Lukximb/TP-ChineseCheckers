@@ -69,6 +69,33 @@ public class Factory implements FactoryMBean {
         playerManager.getNewPlayer(new Player(pid));
     }
 
+    public void deletePlayer(int pid) {
+        if(playerManager.checkPlayerStatus(pid) == 1) {
+            int index = 0;
+            for(Player p: playerManager.playerFreeList) {
+                if(p.pid == pid) {
+                    break;
+                }
+                index++;
+            }
+            playerManager.playerFreeList.remove(index);
+        }
+        else if(playerManager.checkPlayerStatus(pid) == 2) {
+            int index = 0;
+            for(Player p: playerManager.playerInGameList) {
+                if(p.pid == pid) {
+                    break;
+                }
+                index++;
+            }
+            playerManager.playerInGameList.remove(index);
+        }
+        System.out.println("Usunieto");
+        for(Player p: playerManager.playerFreeList){
+            System.out.print(p.pid + " ");
+        }
+    }
+
     @Override
     public Bot createBot() {
         return null;
