@@ -30,4 +30,6 @@ public interface FactoryMBean {
     Chat createChat();
 
     Clock createClock();
+
+    void deletePlayer(int pid);
 }

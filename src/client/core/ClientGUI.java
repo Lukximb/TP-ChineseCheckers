@@ -16,6 +16,7 @@ public class ClientGUI extends Application {
     private String domain = null;
     private ObjectName factory = null;
     private int pid = 0;
+    ClientConnection connection;
 
     public ClientGUI() {
     }
@@ -26,15 +27,20 @@ public class ClientGUI extends Application {
     }
 
     @Override
+    public void stop() {
+        connection.invokeMethod(factory, "deletePlayer", pid);
+    }
+
+    @Override
     public void start(Stage primaryStage) throws Exception {
         pid = Integer.parseInt(ManagementFactory.getRuntimeMXBean().getName().split("@")[0]);
-        ClientConnection connection = new ClientConnection();
+        connection = new ClientConnection();
         domain = connection.getDomain();
 
         factory = new ObjectName(domain+"F" +":type=jmx.Factory,name=Factory");
         connection.invokeMethod(factory, "createPlayer", pid);
 
-        connection.closeConnection();
+//        connection.closeConnection();
 
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(this.getClass().getResource("/client/ClientFXML.fxml"));
