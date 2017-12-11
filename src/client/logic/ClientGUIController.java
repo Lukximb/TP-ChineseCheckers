@@ -125,7 +125,10 @@ public class ClientGUIController {
 	public void createLobbyButtonOnClick(ActionEvent event) {		
 		this.createLobby.setVisible(false);
 		this.createLobby.setDisable(true);
-		
+
+		System.out.println("gowno");
+		client.connection.invokeMethod(client.factory, "createLobby", "name");
+
 		this.lobby.setVisible(true);
 		this.lobby.setDisable(false);
 	}
@@ -189,6 +192,11 @@ public class ClientGUIController {
     public void boardClick(MouseEvent event) {
 		System.out.println("Row: " + GridPane.getRowIndex((Node)event.getTarget())
 				+ "\nColumn: " + GridPane.getColumnIndex((Node)event.getTarget()));
+	}
+
+	public void createLobby(ActionEvent event) {
+		System.out.println("gowno");
+		client.connection.invokeMethod(client.factory, "createLobby", "name");
 	}
 
 	//TEST

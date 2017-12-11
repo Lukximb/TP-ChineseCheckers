@@ -7,7 +7,7 @@ import server.player.Player;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Lobby {
+public class Lobby implements Runnable{
     public String name;
     public Player admin;
     public Player[] players;
@@ -24,6 +24,19 @@ public class Lobby {
         this.numberOfPlayers = numberOfPlayers;
         players = new Player[numberOfPlayers];
         addPlayer(admin, 0);
+    }
+
+    @Override
+    public void run() {
+        while(true) {
+            /*System.out.println("Watek "+id);
+            try {
+                //usypiamy wątek na 100 milisekund
+                Thread.sleep(100);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }*/
+        }
     }
 
     public void startGame() {

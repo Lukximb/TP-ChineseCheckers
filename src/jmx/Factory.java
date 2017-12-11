@@ -75,27 +75,33 @@ public class Factory implements FactoryMBean {
     }
 
     @Override
-    public Lobby createLobby() {
+    public Lobby createLobby(String name) {
+        System.out.println(">> Lobby created");
         return null;
     }
 
     @Override
-    public Field createField() {
-        return null;
+    public Field createField(int n, int m) {
+        return new Field(createCoordinates(n, m));
     }
 
     @Override
-    public Board createBoard() {
+    public Board createBoard(int n, int m) {
         return null;
     }
 
     @Override
     public Chat createChat() {
-        return null;
+        return new Chat();
     }
 
     @Override
     public Clock createClock() {
-        return null;
+        return new Clock();
+    }
+
+    @Override
+    public Coordinates createCoordinates(int n, int m) {
+        return new Coordinates(n, m);
     }
 }

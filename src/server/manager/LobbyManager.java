@@ -44,4 +44,22 @@ public class LobbyManager implements ILobbyManager {
     public void setLobbyAsRunning(Lobby lobby) {
 
     }
+
+    @Override
+    public void runLobby(Lobby lobby) {
+        /*Runnable[] runners = new Runnable[10];
+        Thread[] threads = new Thread[10];
+
+        for(int i=0; i<10; i++) {
+            runners[i] = new MyRun(i);
+        }
+
+        for(int i=0; i<10; i++) {
+            threads[i] = new Thread(runners[i]);
+        }
+
+        for(int i=0; i<10; i++) {
+            threads[i].start();
+        }*/
+    }
 }

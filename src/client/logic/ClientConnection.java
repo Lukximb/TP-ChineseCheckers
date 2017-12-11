@@ -39,8 +39,8 @@ public class ClientConnection {
         System.out.println("Create new MBean: " + mBeanName.toString());
     }
 
-    /*public void invokeMethod(ObjectName mBeanName, String methodName, String num) {
-        Object  opParams1[] = {"Hello" + num};
+    public void invokeMethod(ObjectName mBeanName, String methodName, String arg) {
+        Object  opParams1[] = {arg};
         String  opSig[] = {String.class.getName()};
         try {
             mbsc.invoke(mBeanName, methodName, opParams1, opSig);
@@ -48,7 +48,7 @@ public class ClientConnection {
             e.printStackTrace();
         }
         System.out.println("Method invoked: " + methodName + " on: " + mBeanName.toString());
-    }*/
+    }
 
     public void invokeMethod(ObjectName mBeanName, String methodName, int num) {
         Object  opParams1[] = {num};

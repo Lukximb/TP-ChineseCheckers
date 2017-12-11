@@ -21,13 +21,15 @@ public interface FactoryMBean {
 
     Bot createBot();
 
-    Lobby createLobby();
+    Lobby createLobby(String name);
 
-    Field createField();
+    Field createField(int n, int m);
 
-    Board createBoard();
+    Board createBoard(int n, int m);
 
     Chat createChat();
 
     Clock createClock();
+
+    Coordinates createCoordinates(int n, int m);
 }
