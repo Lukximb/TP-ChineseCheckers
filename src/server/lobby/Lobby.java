@@ -18,8 +18,9 @@ public class Lobby implements Runnable{
     public LobbyMediator mediator;
     public Chat chat;
 
-    public Lobby(String name, Player admin, int numberOfPlayers) {
-        this.name = name;
+    public Lobby(int playerNum, int rowNumber, String lobbyName, Player admin) {
+        numberOfPlayers = playerNum;
+        this.name = lobbyName;
         this.admin = admin;
         this.numberOfPlayers = numberOfPlayers;
         players = new Player[numberOfPlayers];

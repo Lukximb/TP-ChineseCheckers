@@ -15,8 +15,8 @@ public class ClientConnection {
 
     public ClientConnection() {
         try {
-//            url = new JMXServiceURL("service:jmx:rmi://25.0.246.243:44445/jndi/rmi://25.0.246.243:44444/jmxrmi");
-            url = new JMXServiceURL("service:jmx:rmi://25.71.242.160:44445/jndi/rmi://25.71.242.160:44444/jmxrmi");
+            url = new JMXServiceURL("service:jmx:rmi://25.0.246.243:44445/jndi/rmi://25.0.246.243:44444/jmxrmi");
+//            url = new JMXServiceURL("service:jmx:rmi://25.71.242.160:44445/jndi/rmi://25.71.242.160:44444/jmxrmi");
             jmxc = JMXConnectorFactory.connect(url, null);
             mbsc = jmxc.getMBeanServerConnection();
             domain = mbsc.getDefaultDomain();
@@ -40,10 +40,10 @@ public class ClientConnection {
     }
 
     public void invokeMethod(ObjectName mBeanName, String methodName, String arg) {
-        Object  opParams1[] = {arg};
+        Object  opParams[] = {arg};
         String  opSig[] = {String.class.getName()};
         try {
-            mbsc.invoke(mBeanName, methodName, opParams1, opSig);
+            mbsc.invoke(mBeanName, methodName, opParams, opSig);
         } catch (Exception  e) {
             e.printStackTrace();
         }
@@ -51,10 +51,21 @@ public class ClientConnection {
     }
 
     public void invokeMethod(ObjectName mBeanName, String methodName, int num) {
-        Object  opParams1[] = {num};
+        Object  opParams[] = {num};
         String  opSig[] = {int.class.getName()};
         try {
-            mbsc.invoke(mBeanName, methodName, opParams1, opSig);
+            mbsc.invoke(mBeanName, methodName, opParams, opSig);
+        } catch (Exception  e) {
+            e.printStackTrace();
+        }
+        System.out.println("Method invoked: " + methodName + " on: " + mBeanName.toString());
+    }
+
+    public void invokeCreateLobbyMethod(ObjectName mBeanName, String methodName, int playerNum, int rowNumber, String lobbyName, int adminPid) {
+        Object opParams [] = {playerNum, rowNumber, lobbyName, adminPid};
+        String  opSig[] = {int.class.getName(), int.class.getName(), String.class.getName(), int.class.getName()};
+        try {
+            mbsc.invoke(mBeanName, methodName, opParams, opSig);
         } catch (Exception  e) {
             e.printStackTrace();
         }

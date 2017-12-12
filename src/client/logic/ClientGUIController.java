@@ -126,8 +126,11 @@ public class ClientGUIController {
 		this.createLobby.setVisible(false);
 		this.createLobby.setDisable(true);
 
-		System.out.println("gowno");
-		client.connection.invokeMethod(client.factory, "createLobby", "name");
+		client.lobbyName = lobbyNameField.getText();
+		client.rowForPlayerPawn = (int)boardSizeSpinner.getValue();
+		System.out.println(client.lobbyName);
+		System.out.println(client.rowForPlayerPawn);
+		client.connection.invokeCreateLobbyMethod(client.factory, "createLobby", client.playerInLobby , client.rowForPlayerPawn, client.lobbyName, client.pid);
 
 		this.lobby.setVisible(true);
 		this.lobby.setDisable(false);
@@ -194,9 +197,16 @@ public class ClientGUIController {
 				+ "\nColumn: " + GridPane.getColumnIndex((Node)event.getTarget()));
 	}
 
-	public void createLobby(ActionEvent event) {
-		System.out.println("gowno");
-		client.connection.invokeMethod(client.factory, "createLobby", "name");
+	public void setPlayerNumberOn2ButtonOnClick(ActionEvent event) {
+		client.playerInLobby = 2;
+	}
+
+	public void setPlayerNumberOn4ButtonOnClick(ActionEvent event) {
+		client.playerInLobby = 4;
+	}
+
+	public void setPlayerNumberOn6ButtonOnClick(ActionEvent event) {
+		client.playerInLobby = 6;
 	}
 
 	//TEST

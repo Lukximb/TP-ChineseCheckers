@@ -14,13 +14,15 @@ import client.logic.*;
 public class ClientGUI extends Application {
 
     private String domain = null;
-    private ObjectName factory = null;
-    private int pid = 0;
-    ClientConnection connection;
+    public ObjectName factory = null;
+    public int pid = 0;
+    public int playerInLobby = 0;
+    public int rowForPlayerPawn = 0;
+    public String lobbyName = "";
+    public ClientConnection connection;
 
     public ClientGUI() {
     }
-
 
     @Override
     public void init() {

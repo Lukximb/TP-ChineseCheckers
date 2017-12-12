@@ -70,8 +70,9 @@ public class Factory implements FactoryMBean {
     }
 
     public void deletePlayer(int pid) {
-        if(playerManager.checkPlayerStatus(pid) == 1) {
-            int index = 0;
+        int value = playerManager.checkPlayerStatus(pid);
+        int index = 0;
+        if(value == 1) {
             for(Player p: playerManager.playerFreeList) {
                 if(p.pid == pid) {
                     break;
@@ -80,8 +81,7 @@ public class Factory implements FactoryMBean {
             }
             playerManager.playerFreeList.remove(index);
         }
-        else if(playerManager.checkPlayerStatus(pid) == 2) {
-            int index = 0;
+        else if(value == 2) {
             for(Player p: playerManager.playerInGameList) {
                 if(p.pid == pid) {
                     break;
@@ -90,10 +90,7 @@ public class Factory implements FactoryMBean {
             }
             playerManager.playerInGameList.remove(index);
         }
-        System.out.println("Usunieto");
-        for(Player p: playerManager.playerFreeList){
-            System.out.print(p.pid + " ");
-        }
+        System.out.println(">> Delete player: " + pid + " from playerList");
     }
 
     @Override
@@ -102,8 +99,20 @@ public class Factory implements FactoryMBean {
     }
 
     @Override
-    public Lobby createLobby(String name) {
+    public Lobby createLobby(int playerNum, int rowNumber, String lobbyName, int adminPid) {
+        Player admin;
+        int value = playerManager.checkPlayerStatus(adminPid);
+        int index = 0;
+        for(Player p: playerManager.playerFreeList) {
+            if(p.pid == adminPid) {
+                break;
+            }
+            index++;
+        }
+        admin = playerManager.playerFreeList.get(index);
         System.out.println(">> Lobby created");
+        Lobby lobby = new Lobby(playerNum, rowNumber, lobbyName, admin);
+        lobbyManager.waitingLobbyList.add(lobby);
         return null;
     }
 

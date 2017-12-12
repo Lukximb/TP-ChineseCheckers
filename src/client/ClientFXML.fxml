@@ -87,9 +87,9 @@
             </TextField>
             <ButtonBar buttonMinWidth="100.0" maxHeight="30.0" maxWidth="300.0" prefHeight="30.0" prefWidth="300.0" StackPane.alignment="TOP_CENTER">
               <buttons>
-                  <Button fx:id="player2Button" mnemonicParsing="false" text="2 Players" textAlignment="CENTER" />
-                <Button fx:id="player4Button" alignment="CENTER" contentDisplay="TOP" mnemonicParsing="false" text="4 Players" textAlignment="CENTER" />
-                  <Button fx:id="player6Button" mnemonicParsing="false" text="6 Players" textAlignment="CENTER" />
+                  <Button fx:id="player2Button" mnemonicParsing="false" onAction="#setPlayerNumberOn2ButtonOnClick" text="2 Players" textAlignment="CENTER" />
+                <Button fx:id="player4Button" alignment="CENTER" contentDisplay="TOP" mnemonicParsing="false" onAction="#setPlayerNumberOn4ButtonOnClick" text="4 Players" textAlignment="CENTER" />
+                  <Button fx:id="player6Button" mnemonicParsing="false" onAction="#setPlayerNumberOn6ButtonOnClick" text="6 Players" textAlignment="CENTER" />
               </buttons>
                <StackPane.margin>
                   <Insets left="75.0" right="75.0" top="200.0" />
