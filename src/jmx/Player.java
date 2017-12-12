@@ -1,15 +1,19 @@
-package server.player;
+package jmx;
 
 import server.board.Coordinates;
 import server.lobby.Lobby;
+import server.player.Dificult;
+
 import java.io.Serializable;
 
-public class Player implements IPlayer, Serializable{
-    public int pid;
+public class Player implements PlayerMBean, Serializable{
+    public int pid = 0;
+    public String name = "";
     public Lobby lobby = null;
 
-    public Player(int pid){
+    public Player(int pid, String name){
         this.pid = pid;
+        this.name = name;
         System.out.println(">> Create player with pid= " + pid);
     }
 

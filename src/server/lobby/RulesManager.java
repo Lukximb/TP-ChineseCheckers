@@ -1,7 +1,7 @@
 package server.lobby;
 
 import server.board.Coordinates;
-import server.player.Player;
+import jmx.Player;
 
 public class RulesManager implements IRulesManager {
     @Override

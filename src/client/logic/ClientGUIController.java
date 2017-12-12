@@ -10,6 +10,9 @@ import javafx.fxml.FXML;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 
+import javax.management.MalformedObjectNameException;
+import javax.management.ObjectName;
+
 public class ClientGUIController {
 	ClientGUI client;
 
@@ -104,6 +107,8 @@ public class ClientGUIController {
 	public void newGameButtonOnClick(ActionEvent exent) {
 		this.menu.setVisible(false);
 		this.menu.setDisable(true);
+
+		createPlayer();
 		
 		this.createLobby.setVisible(true);
 		this.createLobby.setDisable(false);
@@ -116,6 +121,8 @@ public class ClientGUIController {
 	public void joinGameButtonOnClick(ActionEvent event) {
 		this.menu.setVisible(false);
 		this.menu.setDisable(true);
+
+		createPlayer();
 		
 		this.joinLobby.setVisible(true);
 		this.joinLobby.setDisable(false);
@@ -186,7 +193,17 @@ public class ClientGUIController {
 		this.menu.setVisible(true);
 		this.menu.setDisable(false);
 	}
-	
+
+	private void createPlayer() {
+		if (client.player == null) {
+			client.connection.invokeCreatePlayerMethod(client.factory, "createPlayer", client.pid, nickNameField.getText());
+			try {
+				client.player = new ObjectName(client.domain+ client.pid +":type=jmx.Player,name=player" + client.pid);
+			} catch (MalformedObjectNameException e) {
+				e.printStackTrace();
+			}
+		}
+	}
 	
     public void fieldsHandleTest(MouseEvent event) {
 		System.out.println("mouse click detected! "+ event.getSource());

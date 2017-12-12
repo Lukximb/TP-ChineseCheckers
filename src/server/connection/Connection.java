@@ -2,6 +2,7 @@ package server.connection;
 
 import jmx.Hello;
 import jmx.Factory;
+import jmx.Player;
 
 import javax.management.MBeanServer;
 import javax.management.MBeanServerFactory;
@@ -98,19 +99,6 @@ public class Connection {
         }
     }
 
-    public void registryMBeanObject(String name) {
-        Hello helloBean = new Hello();
-        ObjectName helloName = null;
-
-        try {
-            helloName = new ObjectName("server.Server:name=" + name);
-            mbs.registerMBean(helloBean, helloName);
-        } catch(Exception e) {
-            e.printStackTrace();
-        }
-        System.out.println(">> Registry MBeanObject: " + name);
-    }
-
     public void registryFactoryMBeanObject(Factory factory) {
         ObjectName obj = null;
         try {
@@ -120,5 +108,16 @@ public class Connection {
             e.printStackTrace();
         }
         System.out.println(">> Registry MBeanObject: Factory");
+    }
+
+    public void registryPlayerMBeanObject(Player player) {
+        ObjectName obj = null;
+        try {
+            obj = new ObjectName("server.Server:name=Player");
+            mbs.registerMBean(player, obj);
+        } catch(Exception e) {
+            e.printStackTrace();
+        }
+        System.out.println(">> Registry MBeanObject: Player");
     }
 }

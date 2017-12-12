@@ -72,6 +72,17 @@ public class ClientConnection {
         System.out.println("Method invoked: " + methodName + " on: " + mBeanName.toString());
     }
 
+    public void invokeCreatePlayerMethod(ObjectName mBeanName, String methodName, int pid, String name) {
+        Object  opParams[] = {pid, name};
+        String  opSig[] = {int.class.getName(), String.class.getName()};
+        try {
+            mbsc.invoke(mBeanName, methodName, opParams, opSig);
+        } catch (Exception  e) {
+            e.printStackTrace();
+        }
+        System.out.println("Method invoked: " + methodName + " on: " + mBeanName.toString());
+    }
+
     public void closeConnection() {
         try {
             jmxc.close();

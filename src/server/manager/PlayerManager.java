@@ -1,7 +1,7 @@
 package server.manager;
 
 import server.player.Bot;
-import server.player.Player;
+import jmx.Player;
 
 import java.util.ArrayList;
 

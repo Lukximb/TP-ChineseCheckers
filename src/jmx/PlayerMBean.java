@@ -1,11 +1,12 @@
-package server.player;
+package jmx;
 
 import server.board.Coordinates;
+import server.player.Dificult;
 
 /**
  * Intefrace which is implemented by Player class.
  */
-public interface IPlayer {
+public interface PlayerMBean {
     /**
      * Moves player.
      * @param coordinates

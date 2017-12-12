@@ -7,7 +7,7 @@ import server.connection.Connection;
 import server.manager.Manager;
 
 public class Server {
-    private Connection connection = null;
+    public Connection connection = null;
     public Manager manager = null;
     public Factory factory = null;
 
@@ -25,7 +25,7 @@ public class Server {
     }
 
     private void getFactory() {
-        factory = Factory.getInstance();
+        factory = Factory.getInstance(this);
     }
 
     private void getConnection() {
