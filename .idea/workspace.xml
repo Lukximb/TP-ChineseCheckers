@@ -3,6 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="48f03ab3-071c-4b47-a293-96191b968cd6" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/client/ClientFXML.fxml" afterPath="$PROJECT_DIR$/src/client/ClientFXML.fxml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/client/logic/ClientGUIController.java" afterPath="$PROJECT_DIR$/src/client/logic/ClientGUIController.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -51,22 +52,24 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ClientGUIController.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="ClientGUIController.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/client/logic/ClientGUIController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="462">
-              <caret line="31" column="9" lean-forward="false" selection-start-line="31" selection-start-column="9" selection-end-line="31" selection-end-column="9" />
+            <state relative-caret-position="284">
+              <caret line="244" column="43" lean-forward="true" selection-start-line="244" selection-start-column="43" selection-end-line="244" selection-end-column="43" />
               <folding>
-                <marker date="1513124133375" expanded="true" signature="5346:5349" ph="{...}" />
-                <marker date="1513124133375" expanded="false" signature="5414:5419" ph=" { " />
-                <marker date="1513124133375" expanded="false" signature="5444:5447" ph=" }" />
-                <marker date="1513124133375" expanded="false" signature="5512:5517" ph=" { " />
-                <marker date="1513124133375" expanded="false" signature="5542:5545" ph=" }" />
-                <marker date="1513124133375" expanded="false" signature="5610:5615" ph=" { " />
-                <marker date="1513124133375" expanded="false" signature="5640:5643" ph=" }" />
-                <marker date="1513124133375" expanded="true" signature="5705:5882" ph="{}" />
-                <marker date="1513124133375" expanded="true" signature="5707:5879" ph="//..." />
-                <marker date="1513124133375" expanded="true" signature="5883:5974" ph="//..." />
+                <element signature="e#2417#2418#0" expanded="true" />
+                <element signature="e#2444#2445#0" expanded="true" />
+                <element signature="e#2974#2975#0" expanded="true" />
+                <element signature="e#2996#2997#0" expanded="true" />
+                <element signature="e#4934#4935#0" expanded="true" />
+                <element signature="e#5007#5008#0" expanded="true" />
+                <marker date="1513130806496" expanded="false" signature="5651:5656" ph=" { " />
+                <marker date="1513130806496" expanded="false" signature="5681:5684" ph=" }" />
+                <marker date="1513130806496" expanded="false" signature="5749:5754" ph=" { " />
+                <marker date="1513130806496" expanded="false" signature="5779:5782" ph=" }" />
+                <marker date="1513130806496" expanded="false" signature="5847:5852" ph=" { " />
+                <marker date="1513130806496" expanded="false" signature="5877:5880" ph=" }" />
               </folding>
             </state>
           </provider>
@@ -89,10 +92,11 @@
       <file leaf-file-name="ClientGUI.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/client/core/ClientGUI.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-682">
-              <caret line="9" column="35" lean-forward="false" selection-start-line="9" selection-start-column="35" selection-end-line="9" selection-end-column="35" />
+            <state relative-caret-position="342">
+              <caret line="65" column="5" lean-forward="true" selection-start-line="65" selection-start-column="5" selection-end-line="65" selection-end-column="5" />
               <folding>
                 <element signature="imports" expanded="true" />
+                <element signature="e#344#376#0" expanded="true" />
                 <marker date="1513124133371" expanded="false" signature="2329:2340" ph=" { " />
                 <marker date="1513124133371" expanded="false" signature="2353:2359" ph=" }" />
               </folding>
@@ -100,11 +104,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ClientFXML.fxml" pinned="false" current-in-tab="true">
+      <file leaf-file-name="ClientFXML.fxml" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/client/ClientFXML.fxml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="252">
-              <caret line="325" column="65" lean-forward="true" selection-start-line="325" selection-start-column="65" selection-end-line="325" selection-end-column="65" />
+            <state relative-caret-position="1132">
+              <caret line="994" column="34" lean-forward="true" selection-start-line="994" selection-start-column="34" selection-end-line="994" selection-end-column="34" />
               <folding />
             </state>
           </provider>
@@ -126,6 +130,7 @@
   <component name="FindInProjectRecents">
     <findStrings>
       <find>row=</find>
+      <find>columnIndex=&quot;1&quot;</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -165,13 +170,13 @@
         <option value="$PROJECT_DIR$/src/jmx/FactoryMBean.java" />
         <option value="$PROJECT_DIR$/src/server/core/Server.java" />
         <option value="$PROJECT_DIR$/src/server/connection/Connection.java" />
-        <option value="$PROJECT_DIR$/src/client/logic/ClientGUIController.java" />
         <option value="$PROJECT_DIR$/src/client/logic/ClientConnection.java" />
         <option value="$PROJECT_DIR$/src/client/logic/ClientNotification.java" />
         <option value="$PROJECT_DIR$/src/client/core/ClientGUI.java" />
         <option value="$PROJECT_DIR$/src/client/logic/ClientListener.java" />
         <option value="$PROJECT_DIR$/src/jmx/Factory.java" />
         <option value="$PROJECT_DIR$/src/client/ClientFXML.fxml" />
+        <option value="$PROJECT_DIR$/src/client/logic/ClientGUIController.java" />
       </list>
     </option>
   </component>
@@ -593,7 +598,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="60711000" />
+    <option name="totallyTimeSpent" value="66560000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-9" y="-9" width="1938" height="1048" extended-state="6" />
@@ -660,7 +665,7 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="4" />
+      <option name="time" value="5" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -685,6 +690,7 @@
           <caret line="34" column="0" lean-forward="true" selection-start-line="34" selection-start-column="0" selection-end-line="34" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="e#344#376#0" expanded="true" />
             <marker date="1513124133371" expanded="false" signature="2329:2340" ph=" { " />
             <marker date="1513124133371" expanded="false" signature="2353:2359" ph=" }" />
           </folding>
@@ -696,16 +702,18 @@
         <state relative-caret-position="88">
           <caret line="12" column="13" lean-forward="false" selection-start-line="12" selection-start-column="13" selection-end-line="12" selection-end-column="13" />
           <folding>
-            <marker date="1513124133375" expanded="true" signature="5346:5349" ph="{...}" />
-            <marker date="1513124133375" expanded="false" signature="5414:5419" ph=" { " />
-            <marker date="1513124133375" expanded="false" signature="5444:5447" ph=" }" />
-            <marker date="1513124133375" expanded="false" signature="5512:5517" ph=" { " />
-            <marker date="1513124133375" expanded="false" signature="5542:5545" ph=" }" />
-            <marker date="1513124133375" expanded="false" signature="5610:5615" ph=" { " />
-            <marker date="1513124133375" expanded="false" signature="5640:5643" ph=" }" />
-            <marker date="1513124133375" expanded="true" signature="5705:5882" ph="{}" />
-            <marker date="1513124133375" expanded="true" signature="5707:5879" ph="//..." />
-            <marker date="1513124133375" expanded="true" signature="5883:5974" ph="//..." />
+            <element signature="e#2417#2418#0" expanded="true" />
+            <element signature="e#2444#2445#0" expanded="true" />
+            <element signature="e#2974#2975#0" expanded="true" />
+            <element signature="e#2996#2997#0" expanded="true" />
+            <element signature="e#4934#4935#0" expanded="true" />
+            <element signature="e#5007#5008#0" expanded="true" />
+            <marker date="1513130806496" expanded="false" signature="5651:5656" ph=" { " />
+            <marker date="1513130806496" expanded="false" signature="5681:5684" ph=" }" />
+            <marker date="1513130806496" expanded="false" signature="5749:5754" ph=" { " />
+            <marker date="1513130806496" expanded="false" signature="5779:5782" ph=" }" />
+            <marker date="1513130806496" expanded="false" signature="5847:5852" ph=" { " />
+            <marker date="1513130806496" expanded="false" signature="5877:5880" ph=" }" />
           </folding>
         </state>
       </provider>
@@ -744,6 +752,7 @@
           <caret line="15" column="5" lean-forward="true" selection-start-line="15" selection-start-column="5" selection-end-line="15" selection-end-column="5" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="e#344#376#0" expanded="true" />
             <marker date="1513124133371" expanded="false" signature="2329:2340" ph=" { " />
             <marker date="1513124133371" expanded="false" signature="2353:2359" ph=" }" />
           </folding>
@@ -755,16 +764,18 @@
         <state relative-caret-position="88">
           <caret line="12" column="13" lean-forward="false" selection-start-line="12" selection-start-column="13" selection-end-line="12" selection-end-column="13" />
           <folding>
-            <marker date="1513124133375" expanded="true" signature="5346:5349" ph="{...}" />
-            <marker date="1513124133375" expanded="false" signature="5414:5419" ph=" { " />
-            <marker date="1513124133375" expanded="false" signature="5444:5447" ph=" }" />
-            <marker date="1513124133375" expanded="false" signature="5512:5517" ph=" { " />
-            <marker date="1513124133375" expanded="false" signature="5542:5545" ph=" }" />
-            <marker date="1513124133375" expanded="false" signature="5610:5615" ph=" { " />
-            <marker date="1513124133375" expanded="false" signature="5640:5643" ph=" }" />
-            <marker date="1513124133375" expanded="true" signature="5705:5882" ph="{}" />
-            <marker date="1513124133375" expanded="true" signature="5707:5879" ph="//..." />
-            <marker date="1513124133375" expanded="true" signature="5883:5974" ph="//..." />
+            <element signature="e#2417#2418#0" expanded="true" />
+            <element signature="e#2444#2445#0" expanded="true" />
+            <element signature="e#2974#2975#0" expanded="true" />
+            <element signature="e#2996#2997#0" expanded="true" />
+            <element signature="e#4934#4935#0" expanded="true" />
+            <element signature="e#5007#5008#0" expanded="true" />
+            <marker date="1513130806496" expanded="false" signature="5651:5656" ph=" { " />
+            <marker date="1513130806496" expanded="false" signature="5681:5684" ph=" }" />
+            <marker date="1513130806496" expanded="false" signature="5749:5754" ph=" { " />
+            <marker date="1513130806496" expanded="false" signature="5779:5782" ph=" }" />
+            <marker date="1513130806496" expanded="false" signature="5847:5852" ph=" { " />
+            <marker date="1513130806496" expanded="false" signature="5877:5880" ph=" }" />
           </folding>
         </state>
       </provider>
@@ -963,25 +974,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/client/logic/ClientGUIController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="462">
-          <caret line="31" column="9" lean-forward="false" selection-start-line="31" selection-start-column="9" selection-end-line="31" selection-end-column="9" />
-          <folding>
-            <marker date="1513124133375" expanded="true" signature="5346:5349" ph="{...}" />
-            <marker date="1513124133375" expanded="false" signature="5414:5419" ph=" { " />
-            <marker date="1513124133375" expanded="false" signature="5444:5447" ph=" }" />
-            <marker date="1513124133375" expanded="false" signature="5512:5517" ph=" { " />
-            <marker date="1513124133375" expanded="false" signature="5542:5545" ph=" }" />
-            <marker date="1513124133375" expanded="false" signature="5610:5615" ph=" { " />
-            <marker date="1513124133375" expanded="false" signature="5640:5643" ph=" }" />
-            <marker date="1513124133375" expanded="true" signature="5705:5882" ph="{}" />
-            <marker date="1513124133375" expanded="true" signature="5707:5879" ph="//..." />
-            <marker date="1513124133375" expanded="true" signature="5883:5974" ph="//..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/client/logic/ClientConnection.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="286">
@@ -990,18 +982,6 @@
             <element signature="imports" expanded="true" />
             <marker date="1513124133373" expanded="true" signature="2976:3249" ph="{...}" />
             <marker date="1513124133373" expanded="true" signature="3285:3459" ph="{...}" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/client/core/ClientGUI.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-682">
-          <caret line="9" column="35" lean-forward="false" selection-start-line="9" selection-start-column="35" selection-end-line="9" selection-end-column="35" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <marker date="1513124133371" expanded="false" signature="2329:2340" ph=" { " />
-            <marker date="1513124133371" expanded="false" signature="2353:2359" ph=" }" />
           </folding>
         </state>
       </provider>
@@ -1046,15 +1026,49 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/client/core/ClientGUI.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="342">
+          <caret line="65" column="5" lean-forward="true" selection-start-line="65" selection-start-column="5" selection-end-line="65" selection-end-column="5" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#344#376#0" expanded="true" />
+            <marker date="1513124133371" expanded="false" signature="2329:2340" ph=" { " />
+            <marker date="1513124133371" expanded="false" signature="2353:2359" ph=" }" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/client/ClientFXML.fxml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="252">
-          <caret line="325" column="65" lean-forward="true" selection-start-line="325" selection-start-column="65" selection-end-line="325" selection-end-column="65" />
+        <state relative-caret-position="1132">
+          <caret line="994" column="34" lean-forward="true" selection-start-line="994" selection-start-column="34" selection-end-line="994" selection-end-column="34" />
           <folding />
         </state>
       </provider>
       <provider editor-type-id="JavaFX-Scene-Builder">
         <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/client/logic/ClientGUIController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="284">
+          <caret line="244" column="43" lean-forward="true" selection-start-line="244" selection-start-column="43" selection-end-line="244" selection-end-column="43" />
+          <folding>
+            <element signature="e#2417#2418#0" expanded="true" />
+            <element signature="e#2444#2445#0" expanded="true" />
+            <element signature="e#2974#2975#0" expanded="true" />
+            <element signature="e#2996#2997#0" expanded="true" />
+            <element signature="e#4934#4935#0" expanded="true" />
+            <element signature="e#5007#5008#0" expanded="true" />
+            <marker date="1513130806496" expanded="false" signature="5651:5656" ph=" { " />
+            <marker date="1513130806496" expanded="false" signature="5681:5684" ph=" }" />
+            <marker date="1513130806496" expanded="false" signature="5749:5754" ph=" { " />
+            <marker date="1513130806496" expanded="false" signature="5779:5782" ph=" }" />
+            <marker date="1513130806496" expanded="false" signature="5847:5852" ph=" { " />
+            <marker date="1513130806496" expanded="false" signature="5877:5880" ph=" }" />
+          </folding>
+        </state>
       </provider>
     </entry>
   </component>

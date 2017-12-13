@@ -2,19 +2,27 @@ package client.logic;
 
 import client.core.ClientGUI;
 import javafx.application.Platform;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.scene.Node;
 import javafx.scene.control.*;
+import javafx.scene.effect.Effect;
+import javafx.scene.effect.SepiaTone;
 import javafx.scene.input.MouseEvent;
 import javafx.fxml.FXML;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
+import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
+import javafx.scene.shape.Circle;
 
 import javax.management.MalformedObjectNameException;
 import javax.management.ObjectName;
 
 public class ClientGUIController {
-	ClientGUI client;
+	private ClientGUI client;
+	private Node currentPosition;
+	private Node desinationPosition;
 
 	//LOGIN---------------------------------------
 	@FXML
@@ -89,6 +97,8 @@ public class ClientGUIController {
 	private Button surrenderButton;
 	@FXML
 	private Button sendMsgButton;
+	@FXML
+	private GridPane boardPane;
 	
 	
 	public ClientGUIController(ClientGUI client) {
@@ -138,8 +148,6 @@ public class ClientGUIController {
 
 		client.lobbyName = lobbyNameField.getText();
 		client.rowForPlayerPawn = (int)boardSizeSpinner.getValue();
-		System.out.println(client.lobbyName);
-		System.out.println(client.rowForPlayerPawn);
 		client.connection.invokeCreateLobbyMethod(client.factory, "createLobby", client.playerInLobby , client.rowForPlayerPawn, client.lobbyName, client.pid);
 
 		this.lobby.setVisible(true);
@@ -229,19 +237,42 @@ public class ClientGUIController {
 		client.playerInLobby = 6;
 	}
 
+	public void doMoveOnClick(ActionEvent event) {
+		//TODO
+	}
+
 	//TEST
 	public void submitButtonOnClick(ActionEvent event) {
-//		try {
-//			client.p.printStr(this.sendString());
-//			this.outputLabel.setText(client.p.getReply());
-//		} catch (RemoteException e1) {
-//			e1.printStackTrace();
-//		}
 	}
-//
-//	private String sendString() {
-//		String s = inputField.getText();
-//		return s;
-//	}
-	
+
+	public void chooseCircleOnClick(MouseEvent event) {
+		ObservableList<Node> childrens = boardPane.getChildren();
+		for (Node node : childrens) {
+			if(boardPane.getRowIndex(node) == GridPane.getRowIndex((Node)event.getTarget()) &&
+					boardPane.getColumnIndex(node) == GridPane.getColumnIndex((Node)event.getTarget())) {
+				if (currentPosition == null) {
+					Circle circle = (Circle)node;
+					circle.setStrokeWidth(4);
+					circle.setStroke(Color.GREEN);
+					currentPosition = node;
+				} else if (node == currentPosition) {
+					Circle circle = (Circle)node;
+					circle.setStrokeWidth(1);
+					circle.setStroke(Color.BLACK);
+					currentPosition = null;
+				} else if (desinationPosition == null) {
+					Circle circle = (Circle)node;
+					circle.setStrokeWidth(4);
+					circle.setStroke(Color.RED);
+					desinationPosition = node;
+				} else if (node == desinationPosition) {
+					Circle circle = (Circle)node;
+					circle.setStrokeWidth(1);
+					circle.setStroke(Color.BLACK);
+					desinationPosition = null;
+				}
+				break;
+			}
+		}
+	}
 }
