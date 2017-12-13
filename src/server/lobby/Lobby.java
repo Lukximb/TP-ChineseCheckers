@@ -80,8 +80,10 @@ public class Lobby implements Runnable{
     }
 
     public void initPlayersOnBoard() {
+
         for(int i=0; i<numberOfPlayers; i++) {
             if(numberOfPlayers == 6) {
+//                players[i].setColor();
                 putPawnsOnBoard(players[i], i);
             } else if(numberOfPlayers == 4) {
                 if(i%2 == 0) {

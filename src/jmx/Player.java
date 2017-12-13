@@ -1,5 +1,6 @@
 package jmx;
 
+import javafx.scene.paint.Color;
 import server.board.Coordinates;
 import server.lobby.Lobby;
 import server.player.Dificult;
@@ -10,6 +11,7 @@ public class Player implements PlayerMBean, Serializable{
     public int pid = 0;
     public String name = "";
     public Lobby lobby = null;
+    Color color = null;
 
     public Player(int pid, String name){
         this.pid = pid;
@@ -65,5 +67,13 @@ public class Player implements PlayerMBean, Serializable{
     @Override
     public void sendMessage(String message) {
 
+    }
+
+    public void setColor(Color color) {
+        this.color = color;
+    }
+
+    public Color getColor() {
+        return this.color;
     }
 }
