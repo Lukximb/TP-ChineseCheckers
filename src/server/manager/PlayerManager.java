@@ -1,5 +1,6 @@
 package server.manager;
 
+import javafx.scene.paint.Color;
 import server.player.Bot;
 import server.player.Player;
 
@@ -10,7 +11,9 @@ public class PlayerManager implements IPlayerManager {
     public ArrayList<Player> playerInGameList;
     public ArrayList<Bot> botList;
     public String name;
+    public final Color[] colorPalette = {Color.DEEPPINK, Color.YELLOW, Color.MEDIUMBLUE, Color.LIMEGREEN, Color.FIREBRICK, Color.CYAN};
     private static volatile PlayerManager instance;
+
 
     public static PlayerManager getInstance() {
         if (instance == null) {

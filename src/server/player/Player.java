@@ -1,5 +1,6 @@
 package server.player;
 
+import javafx.scene.paint.Color;
 import server.board.Coordinates;
 import server.lobby.Lobby;
 import java.io.Serializable;
@@ -7,6 +8,7 @@ import java.io.Serializable;
 public class Player implements IPlayer, Serializable{
     public int pid;
     public Lobby lobby = null;
+    Color color = null;
 
     public Player(int pid){
         this.pid = pid;
@@ -61,5 +63,13 @@ public class Player implements IPlayer, Serializable{
     @Override
     public void sendMessage(String message) {
 
+    }
+
+    public void setColor(Color color) {
+        this.color = color;
+    }
+
+    public Color getColor() {
+        return this.color;
     }
 }
