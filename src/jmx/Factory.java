@@ -73,10 +73,8 @@ public class Factory extends NotificationBroadcasterSupport implements FactoryMB
 
 
         server.connection.createMBeanMainObject("jmx.Player", "Player"+pid, String.valueOf(pid), player);
-        server.connection.registryPlayerMBeanObject(player);
         playerManager.getNewPlayer(player);
         sendNotification(new Notification(String.valueOf(pid), player, 001100110011, "####hello player created: " + pid));
-
     }
 
     public void deletePlayer(int pid) {

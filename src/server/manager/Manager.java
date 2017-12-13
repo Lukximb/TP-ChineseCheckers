@@ -2,7 +2,9 @@ package server.manager;
 
 import jmx.Player;
 
-public class Manager implements IManager {
+import javax.management.NotificationBroadcasterSupport;
+
+public class Manager extends NotificationBroadcasterSupport implements ManagerMBean {
     public PlayerManager playerManager;
     public LobbyManager lobbyManager;
     private static volatile Manager instance = null;

@@ -2,7 +2,7 @@ package server.manager;
 
 import jmx.Player;
 
-public interface IManager {
+public interface ManagerMBean {
     Player getPlayer(int pid);
 
     void setPlayerAsFree(int pid);

@@ -19,7 +19,7 @@ public class Server {
         connection.createConnectorServer();
 
         connection.createMBeanMainObject("jmx.Factory", "Factory", "F", factory);
-        connection.registryFactoryMBeanObject(factory);
+        connection.createMBeanMainObject("manager.Manager", "Manager", "M", manager);
 
         System.out.println(">> server is running...");
     }

@@ -41,6 +41,8 @@ public class ClientConnection {
         System.out.println("Create new MBean: " + mBeanName.toString());
     }
 
+    //========================== INVOKE METHOD TEMPLATE ================================
+
     public void invokeMethod(ObjectName mBeanName, String methodName, String arg) {
         Object  opParams[] = {arg};
         String  opSig[] = {String.class.getName()};
@@ -62,6 +64,10 @@ public class ClientConnection {
         }
         System.out.println("Method invoked: " + methodName + " on: " + mBeanName.toString());
     }
+
+    //========================== END OF INVOKE METHOD TEMPLATE ================================
+
+    //================================== INVOKE METHOD ========================================
 
     public void invokeCreateLobbyMethod(ObjectName mBeanName, String methodName, int playerNum, int rowNumber, String lobbyName, int adminPid) {
         Object opParams [] = {playerNum, rowNumber, lobbyName, adminPid};
