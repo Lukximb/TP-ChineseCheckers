@@ -318,7 +318,7 @@
                   <RowConstraints maxHeight="30.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                </rowConstraints>
                <children>
-                  <Circle radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="12">
+                  <Circle radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="12" GridPane.rowIndex="0">
                      <fill>
                         <RadialGradient centerX="0.5" centerY="0.5" radius="0.5">
                            <stops>
@@ -493,7 +493,7 @@
                         </RadialGradient>
                      </fill>
                   </Circle>
-                  <Circle layoutX="320.0" layoutY="560.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.rowIndex="4">
+                  <Circle layoutX="320.0" layoutY="560.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="0" GridPane.rowIndex="4">
                      <fill>
                         <RadialGradient centerX="0.5" centerY="0.5" radius="0.5">
                            <stops>
@@ -869,7 +869,7 @@
                         </RadialGradient>
                      </fill>
                   </Circle>
-                  <Circle layoutX="50.0" layoutY="170.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.rowIndex="12">
+                  <Circle layoutX="50.0" layoutY="170.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="0" GridPane.rowIndex="12">
                      <fill>
                         <RadialGradient centerX="0.5" centerY="0.5" radius="0.5">
                            <stops>
