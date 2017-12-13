@@ -3,10 +3,7 @@ package server.lobby;
 import server.board.Coordinates;
 import server.board.IBoard;
 import server.player.Bot;
-import server.player.Player;
-
-import java.util.HashMap;
-import java.util.Map;
+import jmx.Player;
 
 public class Lobby implements Runnable{
     public String name;

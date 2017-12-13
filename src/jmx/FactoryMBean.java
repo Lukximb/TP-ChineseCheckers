@@ -17,7 +17,7 @@ public interface FactoryMBean {
 
     RulesManager createRulesManager();
 
-    void createPlayer(int pid);
+    void createPlayer(int pid, String name);
 
     Bot createBot();
 

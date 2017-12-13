@@ -2,7 +2,7 @@ package server.manager;
 
 import javafx.scene.paint.Color;
 import server.player.Bot;
-import server.player.Player;
+import jmx.Player;
 
 import java.util.ArrayList;
 

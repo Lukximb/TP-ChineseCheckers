@@ -1,5 +1,6 @@
 package server.manager;
 
+import jmx.Player;
 import server.player.*;
 
 public interface IPlayerManager {

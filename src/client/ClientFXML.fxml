@@ -21,24 +21,39 @@
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
-<StackPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
+<StackPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <StackPane fx:id="test" disable="true" prefHeight="150.0" prefWidth="200.0" visible="false">
+      <StackPane fx:id="playerNickNamePanel" prefHeight="150.0" prefWidth="200.0">
          <children>
-            <Button fx:id="submitButton" alignment="TOP_CENTER" mnemonicParsing="false" onAction="#submitButtonOnClick" text="Send" textAlignment="CENTER" StackPane.alignment="TOP_RIGHT">
+            <Button fx:id="exitButton1" mnemonicParsing="false" onAction="#exitButtonOnClick" prefHeight="30.0" prefWidth="150.0" text="EXIT" StackPane.alignment="TOP_CENTER">
                <StackPane.margin>
-                  <Insets right="75.0" top="100.0" />
+                  <Insets top="600.0" />
                </StackPane.margin>
             </Button>
-            <TextField fx:id="inputField" promptText="Input" StackPane.alignment="TOP_LEFT">
+            <TextField fx:id="nickNameField" alignment="CENTER" prefHeight="31.0" prefWidth="200.0" promptText="Enter your name" StackPane.alignment="TOP_CENTER">
                <StackPane.margin>
-                  <Insets left="75.0" right="150.0" top="100.0" />
+                  <Insets left="75.0" right="75.0" top="400.0" />
                </StackPane.margin>
             </TextField>
-            <Label fx:id="outputLabel" text="Output" />
+            <Label alignment="CENTER" prefHeight="322.0" prefWidth="487.0" text="Cihnese Ckeckers" textAlignment="CENTER" textFill="#e21d1d" wrapText="true" StackPane.alignment="TOP_CENTER">
+               <font>
+                  <Font name="Jokerman" size="69.0" />
+               </font>
+               <StackPane.margin>
+                  <Insets top="75.0" />
+               </StackPane.margin>
+            </Label>
+            <Button fx:id="loginButton" mnemonicParsing="false" onAction="#loginButtonOnClick" prefHeight="45.0" prefWidth="129.0" text="Login" textFill="#4d31ed" StackPane.alignment="TOP_CENTER">
+               <font>
+                  <Font name="Viner Hand ITC" size="16.0" />
+               </font>
+               <StackPane.margin>
+                  <Insets top="450.0" />
+               </StackPane.margin>
+            </Button>
          </children>
       </StackPane>
-      <StackPane fx:id="menu" prefHeight="150.0" prefWidth="200.0">
+      <StackPane fx:id="menu" disable="true" prefHeight="150.0" prefWidth="200.0" visible="false">
          <children>
             <Label alignment="CENTER" prefHeight="50.0" prefWidth="300.0" text="Menu" textAlignment="CENTER" StackPane.alignment="TOP_CENTER">
                <font>
@@ -48,11 +63,6 @@
                   <Insets top="30.0" />
                </StackPane.margin>
             </Label>
-            <TextField fx:id="nickNameField" alignment="CENTER" prefHeight="31.0" prefWidth="200.0" promptText="Enter your name" StackPane.alignment="TOP_CENTER">
-               <StackPane.margin>
-                  <Insets left="75.0" right="75.0" top="100.0" />
-               </StackPane.margin>
-            </TextField>
             <Button fx:id="newGameButton" mnemonicParsing="false" onAction="#newGameButtonOnClick" prefHeight="30.0" prefWidth="200.0" text="Create New Game" textAlignment="CENTER" StackPane.alignment="TOP_CENTER">
                <StackPane.margin>
                   <Insets top="200.0" />

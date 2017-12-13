@@ -1,6 +1,6 @@
 package server.lobby;
 
-import server.player.Player;
+import jmx.Player;
 
 public class Chat {
     public Chat() {

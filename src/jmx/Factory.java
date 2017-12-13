@@ -7,26 +7,29 @@ import server.lobby.*;
 import server.manager.*;
 import server.player.*;
 
-public class Factory implements FactoryMBean {
+import javax.management.Notification;
+import javax.management.NotificationBroadcasterSupport;
+
+public class Factory extends NotificationBroadcasterSupport implements FactoryMBean {
     private Server server;
     private Manager manager;
     private LobbyManager lobbyManager;
     private PlayerManager playerManager;
     private static volatile Factory instance = null;
 
-    public static Factory getInstance() {
+    public static Factory getInstance(Server server) {
         if (instance == null) {
             synchronized (Factory.class) {
                 if (instance == null) {
-                    instance = new Factory();
+                    instance = new Factory(server);
                 }
             }
         }
         return instance;
     }
 
-    private Factory() {//Server server) {
-        //this.server = server;
+    private Factory(Server server) {
+        this.server = server;
     }
 
     @Override
@@ -64,9 +67,15 @@ public class Factory implements FactoryMBean {
     }
 
     @Override
-    public void createPlayer(int pid) {
+    public void createPlayer(int pid, String name) {
         System.out.println(pid);
-        playerManager.getNewPlayer(new Player(pid));
+        Player player = new Player(pid, name);
+        playerManager.getNewPlayer(player);
+
+        server.connection.createMBeanMainObject("jmx.Player", "Player"+pid, ""+pid+"", player);
+        server.connection.registryPlayerMBeanObject(player);
+        sendNotification(new Notification(String.valueOf(pid), player, 001100110011, "####hello player created: " + pid));
+
     }
 
     public void deletePlayer(int pid) {
