@@ -1,7 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
+<<<<<<< HEAD
     <list default="true" id="48f03ab3-071c-4b47-a293-96191b968cd6" name="Default" comment="" />
+=======
+    <list default="true" id="48f03ab3-071c-4b47-a293-96191b968cd6" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/client/core/ClientGUI.java" afterPath="$PROJECT_DIR$/src/client/core/ClientGUI.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/client/logic/ClientConnection.java" afterPath="$PROJECT_DIR$/src/client/logic/ClientConnection.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/client/logic/ClientGUIController.java" afterPath="$PROJECT_DIR$/src/client/logic/ClientGUIController.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/jmx/Factory.java" afterPath="$PROJECT_DIR$/src/jmx/Factory.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/server/connection/Connection.java" afterPath="$PROJECT_DIR$/src/server/connection/Connection.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/server/core/Server.java" afterPath="$PROJECT_DIR$/src/server/core/Server.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/server/manager/Manager.java" afterPath="$PROJECT_DIR$/src/server/manager/Manager.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/server/manager/IManager.java" afterPath="$PROJECT_DIR$/src/server/manager/ManagerMBean.java" />
+    </list>
+>>>>>>> origin/wDevelop
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -20,8 +34,13 @@
       <file leaf-file-name="Server.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/server/core/Server.java">
           <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
             <state relative-caret-position="84">
               <caret line="16" column="21" lean-forward="true" selection-start-line="16" selection-start-column="21" selection-end-line="16" selection-end-column="21" />
+=======
+            <state relative-caret-position="264">
+              <caret line="12" column="21" lean-forward="true" selection-start-line="12" selection-start-column="21" selection-end-line="12" selection-end-column="59" />
+>>>>>>> origin/wDevelop
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -29,6 +48,7 @@
           </provider>
         </entry>
       </file>
+<<<<<<< HEAD
       <file leaf-file-name="PlayerMBean.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/jmx/PlayerMBean.java">
           <provider selected="true" editor-type-id="text-editor">
@@ -51,11 +71,21 @@
                 <element signature="e#4602#4603#0" expanded="true" />
                 <element signature="e#4879#4880#0" expanded="true" />
                 <element signature="e#4929#4930#0" expanded="true" />
+=======
+      <file leaf-file-name="Manager.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/server/manager/Manager.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="330">
+              <caret line="15" column="45" lean-forward="true" selection-start-line="15" selection-start-column="45" selection-end-line="15" selection-end-column="45" />
+              <folding>
+                <element signature="imports" expanded="true" />
+>>>>>>> origin/wDevelop
               </folding>
             </state>
           </provider>
         </entry>
       </file>
+<<<<<<< HEAD
       <file leaf-file-name="Player.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/jmx/Player.java">
           <provider selected="true" editor-type-id="text-editor">
@@ -65,10 +95,19 @@
                 <element signature="e#1496#1497#0" expanded="true" />
                 <element signature="e#1530#1531#0" expanded="true" />
               </folding>
+=======
+      <file leaf-file-name="Server.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/server/core/Server.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="242">
+              <caret line="15" column="24" lean-forward="true" selection-start-line="15" selection-start-column="24" selection-end-line="15" selection-end-column="24" />
+              <folding />
+>>>>>>> origin/wDevelop
             </state>
           </provider>
         </entry>
       </file>
+<<<<<<< HEAD
       <file leaf-file-name="ClientGUIController.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/client/logic/ClientGUIController.java">
           <provider selected="true" editor-type-id="text-editor">
@@ -84,16 +123,31 @@
                 <element signature="e#2815#2816#0" expanded="true" />
                 <element signature="e#4840#4841#0" expanded="true" />
                 <element signature="e#4913#4914#0" expanded="true" />
+=======
+      <file leaf-file-name="Connection.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/server/connection/Connection.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="858">
+              <caret line="49" column="40" lean-forward="false" selection-start-line="49" selection-start-column="40" selection-end-line="49" selection-end-column="40" />
+              <folding>
+                <element signature="e#1319#1320#0" expanded="true" />
+                <element signature="e#1366#1367#0" expanded="true" />
+>>>>>>> origin/wDevelop
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ClientGUI.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/client/core/ClientGUI.java">
+      <file leaf-file-name="ClientGUIController.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/client/logic/ClientGUIController.java">
           <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
             <state relative-caret-position="231">
               <caret line="20" column="36" lean-forward="true" selection-start-line="20" selection-start-column="36" selection-end-line="20" selection-end-column="36" />
+=======
+            <state relative-caret-position="-6672">
+              <caret line="25" column="13" lean-forward="false" selection-start-line="25" selection-start-column="13" selection-end-line="25" selection-end-column="13" />
+>>>>>>> origin/wDevelop
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -101,16 +155,25 @@
           </provider>
         </entry>
       </file>
+<<<<<<< HEAD
       <file leaf-file-name="PlayerManager.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/server/manager/PlayerManager.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="21">
               <caret line="1" column="0" lean-forward="true" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
+=======
+      <file leaf-file-name="ClientGUI.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/client/core/ClientGUI.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="78">
+              <caret line="49" column="0" lean-forward="true" selection-start-line="49" selection-start-column="0" selection-end-line="49" selection-end-column="0" />
+>>>>>>> origin/wDevelop
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
             </state>
           </provider>
+<<<<<<< HEAD
         </entry>
       </file>
       <file leaf-file-name="Factory.java" pinned="false" current-in-tab="false">
@@ -129,6 +192,18 @@
             <state relative-caret-position="105">
               <caret line="5" column="36" lean-forward="true" selection-start-line="5" selection-start-column="36" selection-end-line="5" selection-end-column="36" />
               <folding />
+=======
+        </entry>
+      </file>
+      <file leaf-file-name="ClientConnection.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/client/logic/ClientConnection.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1254">
+              <caret line="65" column="5" lean-forward="true" selection-start-line="65" selection-start-column="5" selection-end-line="65" selection-end-column="5" />
+              <folding>
+                <marker date="1513201606316" expanded="true" signature="3861:4134" ph="{...}" />
+              </folding>
+>>>>>>> origin/wDevelop
             </state>
           </provider>
         </entry>
@@ -185,6 +260,7 @@
         <option value="$PROJECT_DIR$/src/server/core/Server.java" />
         <option value="$PROJECT_DIR$/src/server/player/IPlayer.java" />
         <option value="$PROJECT_DIR$/src/server/manager/IPlayerManager.java" />
+<<<<<<< HEAD
         <option value="$PROJECT_DIR$/src/jmx/FactoryMBean.java" />
         <option value="$PROJECT_DIR$/src/jmx/Factory.java" />
         <option value="$PROJECT_DIR$/src/server/board/Board.java" />
@@ -198,6 +274,24 @@
         <option value="$PROJECT_DIR$/src/server/lobby/Lobby.java" />
         <option value="$PROJECT_DIR$/src/jmx/PlayerMBean.java" />
         <option value="$PROJECT_DIR$/src/client/logic/ClientGUIController.java" />
+=======
+        <option value="$PROJECT_DIR$/src/server/lobby/Lobby.java" />
+        <option value="$PROJECT_DIR$/src/jmx/IPlayer.java" />
+        <option value="$PROJECT_DIR$/src/jmx/FactoryMBean.java" />
+        <option value="$PROJECT_DIR$/src/client/logic/ClientNotification.java" />
+        <option value="$PROJECT_DIR$/src/client/logic/ClientListener.java" />
+        <option value="$PROJECT_DIR$/src/jmx/PlayerMBean.java" />
+        <option value="$PROJECT_DIR$/src/jmx/Player.java" />
+        <option value="$PROJECT_DIR$/src/client/ClientFXML.fxml" />
+        <option value="$PROJECT_DIR$/src/server/board/Coordinates.java" />
+        <option value="$PROJECT_DIR$/src/client/logic/ClientGUIController.java" />
+        <option value="$PROJECT_DIR$/src/server/core/Server.java" />
+        <option value="$PROJECT_DIR$/src/jmx/Factory.java" />
+        <option value="$PROJECT_DIR$/src/client/core/ClientGUI.java" />
+        <option value="$PROJECT_DIR$/src/server/manager/Manager.java" />
+        <option value="$PROJECT_DIR$/src/server/connection/Connection.java" />
+        <option value="$PROJECT_DIR$/src/client/logic/ClientConnection.java" />
+>>>>>>> origin/wDevelop
       </list>
     </option>
   </component>
@@ -227,8 +321,14 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+<<<<<<< HEAD
       <pane id="Scope" />
       <pane id="PackagesPane" />
+=======
+      <pane id="PackagesPane" />
+      <pane id="Scope" />
+      <pane id="Scratches" />
+>>>>>>> origin/wDevelop
       <pane id="AndroidView" />
       <pane id="Scratches" />
       <pane id="ProjectPane">
@@ -376,6 +476,7 @@
       </list>
     </option>
   </component>
+<<<<<<< HEAD
   <component name="RunManager" selected="Application.ClientGUI">
     <configuration default="true" type="Applet" factoryName="Applet">
       <option name="HTML_USED" value="false" />
@@ -383,6 +484,28 @@
       <option name="HEIGHT" value="300" />
       <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
       <module />
+=======
+  <component name="RunManager" selected="Application.Server (1)">
+    <configuration name="Client Test" type="JUnit" factoryName="JUnit">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <module name="NewTP" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" value="client" />
+      <option name="MAIN_CLASS_NAME" value="" />
+      <option name="METHOD_NAME" value="" />
+      <option name="TEST_OBJECT" value="package" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" value="" />
+      <option name="WORKING_DIRECTORY" value="file://$MODULE_DIR$" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <envs />
+      <patterns />
+>>>>>>> origin/wDevelop
     </configuration>
     <configuration name="ClientGUI" type="Application" factoryName="Application" nameIsGenerated="true">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
@@ -605,8 +728,13 @@
       <workItem from="1512722983672" duration="18402000" />
       <workItem from="1512927676701" duration="9181000" />
       <workItem from="1513008830197" duration="2039000" />
+<<<<<<< HEAD
       <workItem from="1513095350938" duration="18490000" />
       <workItem from="1513128354607" duration="2284000" />
+=======
+      <workItem from="1513092200638" duration="1980000" />
+      <workItem from="1513188860814" duration="10330000" />
+>>>>>>> origin/wDevelop
     </task>
     <servers />
   </component>
@@ -619,7 +747,11 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
+<<<<<<< HEAD
     <option name="totallyTimeSpent" value="71265000" />
+=======
+    <option name="totallyTimeSpent" value="83718000" />
+>>>>>>> origin/wDevelop
   </component>
   <component name="ToolWindowManager">
     <frame x="-9" y="-9" width="1938" height="1048" extended-state="6" />
@@ -632,6 +764,10 @@
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+<<<<<<< HEAD
+=======
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.62693155" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+>>>>>>> origin/wDevelop
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3116022" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
@@ -691,6 +827,7 @@
           <caret line="12" column="13" lean-forward="false" selection-start-line="12" selection-start-column="13" selection-end-line="12" selection-end-column="13" />
           <folding>
             <element signature="imports" expanded="true" />
+<<<<<<< HEAD
             <element signature="e#2156#2157#0" expanded="true" />
             <element signature="e#2183#2184#0" expanded="true" />
             <element signature="e#2213#2214#0" expanded="true" />
@@ -699,6 +836,8 @@
             <element signature="e#2815#2816#0" expanded="true" />
             <element signature="e#4840#4841#0" expanded="true" />
             <element signature="e#4913#4914#0" expanded="true" />
+=======
+>>>>>>> origin/wDevelop
           </folding>
         </state>
       </provider>
@@ -709,7 +848,11 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
+<<<<<<< HEAD
             <element signature="imports" expanded="true" />
+=======
+            <marker date="1513201606316" expanded="true" signature="3861:4134" ph="{...}" />
+>>>>>>> origin/wDevelop
           </folding>
         </state>
       </provider>
@@ -745,6 +888,7 @@
           <caret line="12" column="13" lean-forward="false" selection-start-line="12" selection-start-column="13" selection-end-line="12" selection-end-column="13" />
           <folding>
             <element signature="imports" expanded="true" />
+<<<<<<< HEAD
             <element signature="e#2156#2157#0" expanded="true" />
             <element signature="e#2183#2184#0" expanded="true" />
             <element signature="e#2213#2214#0" expanded="true" />
@@ -753,6 +897,8 @@
             <element signature="e#2815#2816#0" expanded="true" />
             <element signature="e#4840#4841#0" expanded="true" />
             <element signature="e#4913#4914#0" expanded="true" />
+=======
+>>>>>>> origin/wDevelop
           </folding>
         </state>
       </provider>
@@ -762,7 +908,11 @@
         <state relative-caret-position="264">
           <caret line="16" column="37" lean-forward="false" selection-start-line="16" selection-start-column="37" selection-end-line="16" selection-end-column="37" />
           <folding>
+<<<<<<< HEAD
             <element signature="imports" expanded="true" />
+=======
+            <marker date="1513201606316" expanded="true" signature="3861:4134" ph="{...}" />
+>>>>>>> origin/wDevelop
           </folding>
         </state>
       </provider>
@@ -788,7 +938,7 @@
     <entry file="file://$PROJECT_DIR$/out/production/NewTP/server/Server.class" />
     <entry file="file://$PROJECT_DIR$/src/server/Server.java" />
     <entry file="file://$PROJECT_DIR$/src/server/logic/Connection.java" />
-    <entry file="file://$PROJECT_DIR$/src/server/manager/IManager.java">
+    <entry file="file://$PROJECT_DIR$/src/server/manager/ManagerMBean.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="68">
           <caret line="4" column="17" lean-forward="false" selection-start-line="4" selection-start-column="17" selection-end-line="4" selection-end-column="17" />
@@ -802,6 +952,16 @@
         </state>
       </provider>
     </entry>
+<<<<<<< HEAD
+=======
+    <entry file="file://$PROJECT_DIR$/src/server/board/Field.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="306">
+          <caret line="23" column="5" lean-forward="false" selection-start-line="23" selection-start-column="5" selection-end-line="23" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+>>>>>>> origin/wDevelop
     <entry file="file://$PROJECT_DIR$/src/server/player/IBot.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="68">
@@ -821,7 +981,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="36">
           <caret line="2" column="13" lean-forward="false" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -837,8 +996,13 @@
     <entry file="jar://C:/Program Files/Java/jdk1.8.0_151/src.zip!/java/lang/Integer.java" />
     <entry file="file://$PROJECT_DIR$/src/server/player/IPlayer.java">
       <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
         <state relative-caret-position="711">
           <caret line="59" column="37" lean-forward="true" selection-start-line="59" selection-start-column="37" selection-end-line="59" selection-end-column="37" />
+=======
+        <state relative-caret-position="289">
+          <caret line="17" column="35" lean-forward="false" selection-start-line="17" selection-start-column="35" selection-end-line="17" selection-end-column="35" />
+>>>>>>> origin/wDevelop
         </state>
       </provider>
     </entry>
@@ -849,19 +1013,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/server/manager/Manager.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="149">
-          <caret line="11" column="42" lean-forward="true" selection-start-line="11" selection-start-column="42" selection-end-line="12" selection-end-column="39" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/server/manager/LobbyManager.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="102">
           <caret line="8" column="44" lean-forward="false" selection-start-line="8" selection-start-column="28" selection-end-line="8" selection-end-column="44" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -883,6 +1038,7 @@
         </state>
       </provider>
     </entry>
+<<<<<<< HEAD
     <entry file="file://$PROJECT_DIR$/src/server/lobby/LobbyMediator.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="525">
@@ -925,25 +1081,43 @@
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
+=======
+    <entry file="file://$PROJECT_DIR$/src/jmx/FactoryMBean.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="330">
+          <caret line="19" column="42" lean-forward="false" selection-start-line="19" selection-start-column="42" selection-end-line="19" selection-end-column="42" />
+          <folding />
+>>>>>>> origin/wDevelop
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/jmx/PlayerMBean.java">
       <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
         <state relative-caret-position="84">
           <caret line="6" column="3" lean-forward="true" selection-start-line="6" selection-start-column="3" selection-end-line="6" selection-end-column="3" />
+=======
+        <state relative-caret-position="330">
+          <caret line="16" column="0" lean-forward="true" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
+>>>>>>> origin/wDevelop
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/jmx/FactoryMBean.java">
+    <entry file="file://$PROJECT_DIR$/src/server/board/Coordinates.java">
       <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
         <state relative-caret-position="229">
           <caret line="23" column="21" lean-forward="true" selection-start-line="23" selection-start-column="21" selection-end-line="23" selection-end-column="83" />
+=======
+        <state relative-caret-position="176">
+          <caret line="8" column="38" lean-forward="true" selection-start-line="8" selection-start-column="38" selection-end-line="8" selection-end-column="38" />
+>>>>>>> origin/wDevelop
           <folding />
         </state>
       </provider>
     </entry>
+<<<<<<< HEAD
     <entry file="file://$PROJECT_DIR$/src/jmx/Player.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="376">
@@ -952,11 +1126,22 @@
             <element signature="e#1496#1497#0" expanded="true" />
             <element signature="e#1530#1531#0" expanded="true" />
           </folding>
+=======
+    <entry file="file://$PROJECT_DIR$/src/client/ClientFXML.fxml">
+      <provider editor-type-id="JavaFX-Scene-Builder">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-256">
+          <caret line="968" column="41" lean-forward="false" selection-start-line="968" selection-start-column="41" selection-end-line="968" selection-end-column="41" />
+          <folding />
+>>>>>>> origin/wDevelop
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/server/lobby/Lobby.java">
       <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
         <state relative-caret-position="399">
           <caret line="56" column="37" lean-forward="true" selection-start-line="56" selection-start-column="37" selection-end-line="56" selection-end-column="37" />
           <folding>
@@ -967,29 +1152,53 @@
             <element signature="e#4879#4880#0" expanded="true" />
             <element signature="e#4929#4930#0" expanded="true" />
           </folding>
+=======
+        <state relative-caret-position="104">
+          <caret line="11" column="5" lean-forward="true" selection-start-line="11" selection-start-column="5" selection-end-line="11" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/jmx/Player.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="374">
+          <caret line="22" column="20" lean-forward="false" selection-start-line="22" selection-start-column="16" selection-end-line="22" selection-end-column="20" />
+          <folding />
+>>>>>>> origin/wDevelop
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/server/manager/PlayerManager.java">
       <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
         <state relative-caret-position="21">
           <caret line="1" column="0" lean-forward="true" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
+=======
+        <state relative-caret-position="264">
+          <caret line="12" column="21" lean-forward="true" selection-start-line="12" selection-start-column="21" selection-end-line="12" selection-end-column="59" />
+>>>>>>> origin/wDevelop
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/client/core/ClientGUI.java">
+    <entry file="file://$PROJECT_DIR$/src/server/manager/Manager.java">
       <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
         <state relative-caret-position="231">
           <caret line="20" column="36" lean-forward="true" selection-start-line="20" selection-start-column="36" selection-end-line="20" selection-end-column="36" />
+=======
+        <state relative-caret-position="330">
+          <caret line="15" column="45" lean-forward="true" selection-start-line="15" selection-start-column="45" selection-end-line="15" selection-end-column="45" />
+>>>>>>> origin/wDevelop
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+<<<<<<< HEAD
     <entry file="file://$PROJECT_DIR$/src/client/logic/ClientConnection.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1006">
@@ -997,11 +1206,19 @@
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
+=======
+    <entry file="file://$PROJECT_DIR$/src/server/core/Server.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="242">
+          <caret line="15" column="24" lean-forward="true" selection-start-line="15" selection-start-column="24" selection-end-line="15" selection-end-column="24" />
+          <folding />
+>>>>>>> origin/wDevelop
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/server/board/Field.java">
       <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
         <state relative-caret-position="105">
           <caret line="5" column="36" lean-forward="true" selection-start-line="5" selection-start-column="36" selection-end-line="5" selection-end-column="36" />
           <folding />
@@ -1033,6 +1250,46 @@
           </folding>
         </state>
       </provider>
+=======
+        <state relative-caret-position="858">
+          <caret line="49" column="40" lean-forward="false" selection-start-line="49" selection-start-column="40" selection-end-line="49" selection-end-column="40" />
+          <folding>
+            <element signature="e#1319#1320#0" expanded="true" />
+            <element signature="e#1366#1367#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/client/logic/ClientGUIController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-6672">
+          <caret line="25" column="13" lean-forward="false" selection-start-line="25" selection-start-column="13" selection-end-line="25" selection-end-column="13" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/client/core/ClientGUI.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="78">
+          <caret line="49" column="0" lean-forward="true" selection-start-line="49" selection-start-column="0" selection-end-line="49" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/client/logic/ClientConnection.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1254">
+          <caret line="65" column="5" lean-forward="true" selection-start-line="65" selection-start-column="5" selection-end-line="65" selection-end-column="5" />
+          <folding>
+            <marker date="1513201606316" expanded="true" signature="3861:4134" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+>>>>>>> origin/wDevelop
     </entry>
   </component>
   <component name="masterDetails">

@@ -3,10 +3,8 @@ package client.core;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
-
 import javax.management.NotificationFilterSupport;
 import javax.management.ObjectName;
 import java.lang.management.ManagementFactory;
@@ -19,11 +17,13 @@ public class ClientGUI extends Application {
     public String domain = null;
     public ObjectName factory = null;
     public ObjectName player = null;
+    public ObjectName manager = null;
     public int pid = 0;
     public int playerInLobby = 0;
     public int rowForPlayerPawn = 0;
     public String lobbyName = "";
     public ClientConnection connection;
+    public ClientListener clientListener;
 
     public ClientGUI() {
     }
@@ -44,14 +44,21 @@ public class ClientGUI extends Application {
         connection = new ClientConnection();
         domain = connection.getDomain();
 
+        //Get factory and manager from registry
         factory = new ObjectName(domain+"F" +":type=jmx.Factory,name=Factory");
+        manager = new ObjectName(domain+"M" +":type=manager.Manager,name=Manager");
 
-        ClientListener clientListener = new ClientListener();
+        //Create notification listener and notification filter
+        clientListener = new ClientListener();
         NotificationFilterSupport myFilter = new NotificationFilterSupport();
         myFilter.disableAllTypes();
         myFilter.enableType(String.valueOf(pid));
-        connection.mbsc.addNotificationListener(factory, clientListener, myFilter, null);
 
+        //Add notification listener
+        connection.mbsc.addNotificationListener(factory, clientListener, myFilter, null);
+        connection.mbsc.addNotificationListener(manager, clientListener, myFilter, null);
+
+        //Load GUI
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(this.getClass().getResource("/client/ClientFXML.fxml"));
 
@@ -65,11 +72,6 @@ public class ClientGUI extends Application {
         primaryStage.setTitle("Chinese Checkers");
         primaryStage.show();
     }
-
-    /*public void handleNotification(Notification notification, Object handback) {
-        System.out.println("Notification type: " + notification.getType());
-        System.out.println("Notification source: " + notification.getSource());
-    }*/
 
     public static void main(String[] args) {
         launch(args);

@@ -48,37 +48,17 @@ public class Connection {
 
     public void createDomain() {
         domain = mbs.getDefaultDomain();
-        System.out.println(">> Set domain: " + domain);
-    }
-
-    public void createMBeanObject(String mBeanClassNameArg, String name, int id) {
-        String mbeanClassName = mBeanClassNameArg;
-        System.out.println(">> Set mbeanClassName: " + mbeanClassName);
-        String mbeanObjectNameStr =
-                domain+ id + ":type=" + mbeanClassName + ",name=" + name;
-        System.out.println(">> Set mbeanObjectNameStr: " + mbeanObjectNameStr);
-        try {
-            ObjectName mbeanObjectName =
-                    ObjectName.getInstance(mbeanObjectNameStr);
-            mbs.registerMBean(mbeanClassName, mbeanObjectName);
-            System.out.println(">> Create mBean: " + mbeanObjectName.toString());
-        } catch (Exception e) {
-            e.printStackTrace();
-            System.exit(1);
-        }
     }
 
     public void createMBeanMainObject(String mBeanClassNameArg, String name, String classID, Object obj) {
         String mbeanClassName = mBeanClassNameArg;
-        System.out.println(">> Set mbeanClassName: " + mbeanClassName);
         String mbeanObjectNameStr =
                 domain+ classID + ":type=" + mbeanClassName + ",name=" + name;
-        System.out.println(">> Set mbeanObjectNameStr: " + mbeanObjectNameStr);
         try {
             ObjectName mbeanObjectName =
                     ObjectName.getInstance(mbeanObjectNameStr);
             mbs.registerMBean(obj, mbeanObjectName);
-            System.out.println(">> Create main mBean: " + mbeanObjectName.toString());
+            System.out.println(">> Registry main mBean: " + name);
         } catch (Exception e) {
             e.printStackTrace();
             System.exit(1);
@@ -88,8 +68,8 @@ public class Connection {
     public void createConnectorServer() {
         try {
             JMXServiceURL url = new JMXServiceURL(
-//                    "service:jmx:rmi://25.0.246.243:44445/jndi/rmi://25.0.246.243:44444/jmxrmi");
-                    "service:jmx:rmi://25.71.242.160:44445/jndi/rmi://25.71.242.160:44444/jmxrmi");
+                    "service:jmx:rmi://25.0.246.243:44445/jndi/rmi://25.0.246.243:44444/jmxrmi");
+//                    "service:jmx:rmi://25.71.242.160:44445/jndi/rmi://25.71.242.160:44444/jmxrmi");
             JMXConnectorServer cs = JMXConnectorServerFactory.newJMXConnectorServer(url, null, mbs);
             cs.start();
             System.out.println(">> Create ConnectorServer");
@@ -97,27 +77,5 @@ public class Connection {
         catch ( Exception e ) {
             e.printStackTrace();
         }
-    }
-
-    public void registryFactoryMBeanObject(Factory factory) {
-        ObjectName obj = null;
-        try {
-            obj = new ObjectName("server.Server:name=Factory");
-            mbs.registerMBean(factory, obj);
-        } catch(Exception e) {
-            e.printStackTrace();
-        }
-        System.out.println(">> Registry MBeanObject: Factory");
-    }
-
-    public void registryPlayerMBeanObject(Player player) {
-        ObjectName obj = null;
-        try {
-            obj = new ObjectName("server.Server:name=Player");
-            mbs.registerMBean(player, obj);
-        } catch(Exception e) {
-            e.printStackTrace();
-        }
-        System.out.println(">> Registry MBeanObject: Player");
     }
 }

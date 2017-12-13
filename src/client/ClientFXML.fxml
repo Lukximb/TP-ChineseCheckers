@@ -989,7 +989,7 @@
                   <Insets top="720.0" />
                </StackPane.margin>
             </ListView>
-            <Button fx:id="moveButton" mnemonicParsing="false" prefHeight="30.0" prefWidth="150.0" text="Move" StackPane.alignment="TOP_LEFT">
+            <Button fx:id="moveButton" onAction="#doMoveOnClick" mnemonicParsing="false" prefHeight="30.0" prefWidth="150.0" text="Move" StackPane.alignment="TOP_LEFT">
                <StackPane.margin>
                   <Insets left="50.0" top="660.0" />
                </StackPane.margin>

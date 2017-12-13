@@ -20,8 +20,8 @@ public class Player implements PlayerMBean, Serializable{
     }
 
     @Override
-    public void move(Coordinates coordinates) {
-
+    public void move(Coordinates currentCoordinates, Coordinates destinationCoordinates) {
+        System.out.println(">> Invoke move from player: " + pid);
     }
 
     @Override
