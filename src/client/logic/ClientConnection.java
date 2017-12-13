@@ -11,7 +11,7 @@ public class ClientConnection {
     JMXServiceURL url = null;
     JMXConnector jmxc = null;
     String domain = null;
-    MBeanServerConnection mbsc = null;
+    public MBeanServerConnection mbsc = null;
 
     public ClientConnection() {
         try {

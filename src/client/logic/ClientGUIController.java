@@ -16,21 +16,17 @@ import javax.management.ObjectName;
 public class ClientGUIController {
 	ClientGUI client;
 
-	//TEST---------------------------------------
+	//LOGIN---------------------------------------
 	@FXML
-	private StackPane test;
+	private StackPane playerNickNamePanel;
 	@FXML
-	private Button submitButton;
+	private Button loginButton;
 	@FXML
-	private Label outputLabel;
-	@FXML
-	private TextField inputField;
+	private TextField nickNameField;
 
 	//MENU----------------------------------------
 	@FXML
 	private StackPane menu;
-	@FXML
-	private TextField nickNameField;
 	@FXML
 	private Button newGameButton;
 	@FXML
@@ -102,14 +98,23 @@ public class ClientGUIController {
 	@FXML
 	void initialize() {
 	}
+
+	//LOGIN
+	public void loginButtonOnClick(ActionEvent exent) {
+		this.playerNickNamePanel.setVisible(false);
+		this.playerNickNamePanel.setDisable(true);
+
+		createPlayer();
+
+		this.menu.setVisible(true);
+		this.menu.setDisable(false);
+	}
 	
 	//MENU
 	public void newGameButtonOnClick(ActionEvent exent) {
 		this.menu.setVisible(false);
 		this.menu.setDisable(true);
 
-		createPlayer();
-		
 		this.createLobby.setVisible(true);
 		this.createLobby.setDisable(false);
 	}
@@ -122,8 +127,6 @@ public class ClientGUIController {
 		this.menu.setVisible(false);
 		this.menu.setDisable(true);
 
-		createPlayer();
-		
 		this.joinLobby.setVisible(true);
 		this.joinLobby.setDisable(false);
 		
@@ -193,17 +196,6 @@ public class ClientGUIController {
 		this.menu.setVisible(true);
 		this.menu.setDisable(false);
 	}
-
-	private void createPlayer() {
-		if (client.player == null) {
-			client.connection.invokeCreatePlayerMethod(client.factory, "createPlayer", client.pid, nickNameField.getText());
-			try {
-				client.player = new ObjectName(client.domain+ client.pid +":type=jmx.Player,name=player" + client.pid);
-			} catch (MalformedObjectNameException e) {
-				e.printStackTrace();
-			}
-		}
-	}
 	
     public void fieldsHandleTest(MouseEvent event) {
 		System.out.println("mouse click detected! "+ event.getSource());
@@ -212,6 +204,17 @@ public class ClientGUIController {
     public void boardClick(MouseEvent event) {
 		System.out.println("Row: " + GridPane.getRowIndex((Node)event.getTarget())
 				+ "\nColumn: " + GridPane.getColumnIndex((Node)event.getTarget()));
+	}
+
+	public void createPlayer() {
+		if (client.player == null) {
+			client.connection.invokeCreatePlayerMethod(client.factory, "createPlayer", client.pid, nickNameField.getText());
+			try {
+				client.player = new ObjectName(client.domain+ client.pid +":type=jmx.Player,name=player" + client.pid);
+			} catch (MalformedObjectNameException e) {
+				e.printStackTrace();
+			}
+		}
 	}
 
 	public void setPlayerNumberOn2ButtonOnClick(ActionEvent event) {

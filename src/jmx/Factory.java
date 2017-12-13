@@ -7,7 +7,10 @@ import server.lobby.*;
 import server.manager.*;
 import server.player.*;
 
-public class Factory implements FactoryMBean {
+import javax.management.Notification;
+import javax.management.NotificationBroadcasterSupport;
+
+public class Factory extends NotificationBroadcasterSupport implements FactoryMBean {
     private Server server;
     private Manager manager;
     private LobbyManager lobbyManager;
@@ -71,6 +74,7 @@ public class Factory implements FactoryMBean {
 
         server.connection.createMBeanMainObject("jmx.Player", "Player"+pid, ""+pid+"", player);
         server.connection.registryPlayerMBeanObject(player);
+        sendNotification(new Notification(String.valueOf(pid), player, 001100110011, "####hello player created: " + pid));
 
     }
 

@@ -5,6 +5,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
+
+import javax.management.NotificationFilterSupport;
 import javax.management.ObjectName;
 import java.lang.management.ManagementFactory;
 
@@ -43,6 +45,12 @@ public class ClientGUI extends Application {
 
         factory = new ObjectName(domain+"F" +":type=jmx.Factory,name=Factory");
 
+        ClientListener clientListener = new ClientListener();
+        NotificationFilterSupport myFilter = new NotificationFilterSupport();
+        myFilter.disableAllTypes();
+        myFilter.enableType(String.valueOf(pid));
+        connection.mbsc.addNotificationListener(factory, clientListener, myFilter, null);
+
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(this.getClass().getResource("/client/ClientFXML.fxml"));
 
@@ -56,6 +64,11 @@ public class ClientGUI extends Application {
         primaryStage.setTitle("Chinese Checkers");
         primaryStage.show();
     }
+
+    /*public void handleNotification(Notification notification, Object handback) {
+        System.out.println("Notification type: " + notification.getType());
+        System.out.println("Notification source: " + notification.getSource());
+    }*/
 
     public static void main(String[] args) {
         launch(args);
