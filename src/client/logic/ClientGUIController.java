@@ -250,7 +250,7 @@ public class ClientGUIController {
 		for (Node node : childrens) {
 			if(board.getRowIndex(node) == GridPane.getRowIndex((Node)event.getTarget()) &&
 					board.getColumnIndex(node) == GridPane.getColumnIndex((Node)event.getTarget())) {
-				if (currentPosition == null) {
+				if (currentPosition == null && node != desinationPosition) {
 					Circle circle = (Circle)node;
 					circle.setStrokeWidth(4);
 					circle.setStroke(Color.GREEN);
