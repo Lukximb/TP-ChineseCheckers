@@ -98,7 +98,7 @@ public class ClientGUIController {
 	@FXML
 	private Button sendMsgButton;
 	@FXML
-	private GridPane boardPane;
+	private GridPane board;
 	
 	
 	public ClientGUIController(ClientGUI client) {
@@ -246,10 +246,10 @@ public class ClientGUIController {
 	}
 
 	public void chooseCircleOnClick(MouseEvent event) {
-		ObservableList<Node> childrens = boardPane.getChildren();
+		ObservableList<Node> childrens = board.getChildren();
 		for (Node node : childrens) {
-			if(boardPane.getRowIndex(node) == GridPane.getRowIndex((Node)event.getTarget()) &&
-					boardPane.getColumnIndex(node) == GridPane.getColumnIndex((Node)event.getTarget())) {
+			if(board.getRowIndex(node) == GridPane.getRowIndex((Node)event.getTarget()) &&
+					board.getColumnIndex(node) == GridPane.getColumnIndex((Node)event.getTarget())) {
 				if (currentPosition == null) {
 					Circle circle = (Circle)node;
 					circle.setStrokeWidth(4);
