@@ -1,5 +1,6 @@
 package server.lobby;
 
+import server.board.Coordinates;
 import server.board.IBoard;
 import server.player.Bot;
 import jmx.Player;
@@ -39,6 +40,7 @@ public class Lobby implements Runnable{
 
     public void startGame() {
         mediator = new LobbyMediator(this);
+        initPlayersOnBoard();
         round = players[0];
         roundCorner = 0;
     }
@@ -75,6 +77,73 @@ public class Lobby implements Runnable{
 
     public void removeBot(Bot bot) {
 
+    }
+
+    public void initPlayersOnBoard() {
+        for(int i=0; i<numberOfPlayers; i++) {
+            if(numberOfPlayers == 6) {
+                putPawnsOnBoard(players[i], i);
+            } else if(numberOfPlayers == 4) {
+                if(i%2 == 0) {
+                    putPawnsOnBoard(players[i], i*2);
+                }
+                else {
+                    putPawnsOnBoard(players[i], i*2-1);
+                }
+            } else if(numberOfPlayers == 2) {
+                putPawnsOnBoard(players[i], i*3);
+            }
+        }
+    }
+
+    public void putPawnsOnBoard(Player player, int corner) {
+        int rows = board.n - board.m;
+        int n, m;
+        if(corner == 0) {
+            n = 3 * rows + 1;
+            m = 2 * rows + 1;
+        } else if(corner == 1) {
+            n = 3 * rows;
+            m = 0;
+        } else if(corner == 2) {
+            n = rows;
+            m = 0;
+        } else if(corner == 3) {
+            n = rows - 1;
+            m = 2 * rows + 1;
+        } else if(corner == 4) {
+            n = rows;
+            m = 4 * rows + 2;
+        } else if(corner == 5) {
+            n = 3 * rows;
+            m = 4 * rows + 2;
+        } else {
+            return;
+        }
+        if(corner == 0 || corner == 2 || corner == 4) {
+            for(int i=0; i<rows; i++) {
+                for(int j=0; j<rows; j++) {
+                    if(i%2 == 0) {
+                        board.getField(new Coordinates(n+i, m+2*j)).setPlayerOn(player);
+                    }
+                    else {
+                        board.getField(new Coordinates(n+i, m+2*j-1)).setPlayerOn(player);
+                    }
+                }
+            }
+        }
+        else {
+            for(int i=0; i<rows; i++) {
+                for(int j=0; j<rows; j++) {
+                    if(i%2 == 0) {
+                        board.getField(new Coordinates(n-i, m+2*j)).setPlayerOn(player);
+                    }
+                    else {
+                        board.getField(new Coordinates(n-i, m+2*j-1)).setPlayerOn(player);
+                    }
+                }
+            }
+        }
     }
 
     public void getRoundTime() {
