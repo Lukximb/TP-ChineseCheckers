@@ -9,9 +9,9 @@ import server.player.Dificult;
 public interface PlayerMBean {
     /**
      * Moves player.
-     * @param coordinates
+     * @param currentCoordinates, destinationCoordinates
      */
-    void move(Coordinates coordinates);
+    void move(Coordinates currentCoordinates, Coordinates destinationCoordinates);
 
     Coordinates getCurrentPosition();
 

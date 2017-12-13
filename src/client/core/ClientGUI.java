@@ -3,7 +3,6 @@ package client.core;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
@@ -65,11 +64,6 @@ public class ClientGUI extends Application {
         primaryStage.setTitle("Chinese Checkers");
         primaryStage.show();
     }
-
-    /*public void handleNotification(Notification notification, Object handback) {
-        System.out.println("Notification type: " + notification.getType());
-        System.out.println("Notification source: " + notification.getSource());
-    }*/
 
     public static void main(String[] args) {
         launch(args);

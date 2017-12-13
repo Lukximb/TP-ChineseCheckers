@@ -2,10 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="48f03ab3-071c-4b47-a293-96191b968cd6" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/client/background.jpg" afterPath="$PROJECT_DIR$/src/client/background.jpg" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/client/ClientFXML.fxml" afterPath="$PROJECT_DIR$/src/client/ClientFXML.fxml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/client/core/ClientGUI.java" afterPath="$PROJECT_DIR$/src/client/core/ClientGUI.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/client/logic/ClientConnection.java" afterPath="$PROJECT_DIR$/src/client/logic/ClientConnection.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/client/logic/ClientGUIController.java" afterPath="$PROJECT_DIR$/src/client/logic/ClientGUIController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/server/connection/Connection.java" afterPath="$PROJECT_DIR$/src/server/connection/Connection.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/jmx/Factory.java" afterPath="$PROJECT_DIR$/src/jmx/Factory.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/jmx/Player.java" afterPath="$PROJECT_DIR$/src/jmx/Player.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/jmx/PlayerMBean.java" afterPath="$PROJECT_DIR$/src/jmx/PlayerMBean.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/server/board/Coordinates.java" afterPath="$PROJECT_DIR$/src/server/board/Coordinates.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -25,31 +29,31 @@
       <file leaf-file-name="Factory.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/jmx/Factory.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1386">
-              <caret line="69" column="39" lean-forward="false" selection-start-line="69" selection-start-column="39" selection-end-line="69" selection-end-column="39" />
+            <state relative-caret-position="220">
+              <caret line="66" column="5" lean-forward="true" selection-start-line="66" selection-start-column="5" selection-end-line="66" selection-end-column="5" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#876#877#0" expanded="true" />
-                <element signature="e#912#913#0" expanded="true" />
-                <element signature="e#1507#1508#0" expanded="true" />
-                <element signature="e#1564#1565#0" expanded="true" />
-                <element signature="e#1619#1620#0" expanded="true" />
-                <element signature="e#1678#1679#0" expanded="true" />
-                <element signature="e#1740#1741#0" expanded="true" />
-                <element signature="e#1767#1768#0" expanded="true" />
-                <marker date="1513131146906" expanded="false" signature="3040:3051" ph=" { " />
-                <marker date="1513131146906" expanded="false" signature="3063:3069" ph=" }" />
-                <marker date="1513131146906" expanded="false" signature="3756:3767" ph=" { " />
-                <marker date="1513131146906" expanded="false" signature="3809:3815" ph=" }" />
-                <marker date="1513131146906" expanded="false" signature="3873:3884" ph=" { " />
-                <marker date="1513131146906" expanded="false" signature="3896:3902" ph=" }" />
-                <marker date="1513131146906" expanded="false" signature="3946:3957" ph=" { " />
-                <marker date="1513131146906" expanded="false" signature="3975:3981" ph=" }" />
-                <marker date="1513131146906" expanded="false" signature="4027:4038" ph=" { " />
-                <marker date="1513131146906" expanded="false" signature="4057:4063" ph=" }" />
-                <marker date="1513131146906" expanded="false" signature="4133:4144" ph=" { " />
-                <marker date="1513131146906" expanded="false" signature="4173:4179" ph=" }" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Server.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/server/core/Server.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="88">
+              <caret line="11" column="34" lean-forward="true" selection-start-line="11" selection-start-column="34" selection-end-line="11" selection-end-column="34" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Connection.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/server/connection/Connection.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="566">
+              <caret line="90" column="0" lean-forward="false" selection-start-line="90" selection-start-column="0" selection-end-line="90" selection-end-column="0" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -57,35 +61,10 @@
       <file leaf-file-name="ClientGUIController.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/client/logic/ClientGUIController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="614">
-              <caret line="263" column="46" lean-forward="true" selection-start-line="263" selection-start-column="46" selection-end-line="263" selection-end-column="46" />
-              <folding>
-                <element signature="e#2413#2414#0" expanded="true" />
-                <element signature="e#2440#2441#0" expanded="true" />
-                <element signature="e#2970#2971#0" expanded="true" />
-                <element signature="e#2992#2993#0" expanded="true" />
-                <element signature="e#4930#4931#0" expanded="true" />
-                <element signature="e#5003#5004#0" expanded="true" />
-                <marker date="1513132359171" expanded="false" signature="5647:5652" ph=" { " />
-                <marker date="1513132359171" expanded="false" signature="5677:5680" ph=" }" />
-                <marker date="1513132359171" expanded="false" signature="5745:5750" ph=" { " />
-                <marker date="1513132359171" expanded="false" signature="5775:5778" ph=" }" />
-                <marker date="1513132359171" expanded="false" signature="5843:5848" ph=" { " />
-                <marker date="1513132359171" expanded="false" signature="5873:5876" ph=" }" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ClientConnection.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/client/logic/ClientConnection.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="374">
-              <caret line="17" column="0" lean-forward="true" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
+            <state relative-caret-position="460">
+              <caret line="280" column="48" lean-forward="true" selection-start-line="280" selection-start-column="48" selection-end-line="280" selection-end-column="48" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#1011#1012#0" expanded="true" />
-                <element signature="e#1040#1041#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -94,17 +73,32 @@
       <file leaf-file-name="ClientGUI.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/client/core/ClientGUI.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="342">
-              <caret line="66" column="5" lean-forward="false" selection-start-line="66" selection-start-column="5" selection-end-line="66" selection-end-column="5" />
+            <state relative-caret-position="-1018">
+              <caret line="4" column="26" lean-forward="false" selection-start-line="4" selection-start-column="26" selection-end-line="4" selection-end-column="26" />
+              <folding>
+                <marker date="1513164620660" expanded="true" signature="344:376" ph="/restriction/" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Player.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/jmx/Player.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-616">
+              <caret line="22" column="20" lean-forward="false" selection-start-line="22" selection-start-column="16" selection-end-line="22" selection-end-column="20" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ClientConnection.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/client/logic/ClientConnection.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="848">
+              <caret line="91" column="0" lean-forward="false" selection-start-line="91" selection-start-column="0" selection-end-line="91" selection-end-column="0" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <marker date="1513131146898" expanded="true" signature="381:413" ph="/restriction/" />
-                <marker date="1513131146898" expanded="true" signature="761:768" ph="{}" />
-                <marker date="1513131146898" expanded="true" signature="807:814" ph="{}" />
-                <marker date="1513131146898" expanded="true" signature="853:961" ph="{...}" />
-                <marker date="1513131146898" expanded="true" signature="1036:2074" ph="{...}" />
-                <marker date="1513131146898" expanded="false" signature="2366:2377" ph=" { " />
-                <marker date="1513131146898" expanded="false" signature="2390:2396" ph=" }" />
               </folding>
             </state>
           </provider>
@@ -113,23 +107,13 @@
       <file leaf-file-name="ClientFXML.fxml" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/client/ClientFXML.fxml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="516">
-              <caret line="881" column="67" lean-forward="true" selection-start-line="881" selection-start-column="67" selection-end-line="881" selection-end-column="67" />
+            <state relative-caret-position="338">
+              <caret line="968" column="41" lean-forward="true" selection-start-line="968" selection-start-column="41" selection-end-line="968" selection-end-column="41" />
               <folding />
             </state>
           </provider>
           <provider editor-type-id="JavaFX-Scene-Builder">
             <state />
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Connection.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/server/connection/Connection.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="302">
-              <caret line="90" column="0" lean-forward="false" selection-start-line="90" selection-start-column="0" selection-end-line="90" selection-end-column="0" />
-              <folding />
-            </state>
           </provider>
         </entry>
       </file>
@@ -182,16 +166,18 @@
         <option value="$PROJECT_DIR$/src/server/manager/IPlayerManager.java" />
         <option value="$PROJECT_DIR$/src/server/lobby/Lobby.java" />
         <option value="$PROJECT_DIR$/src/jmx/IPlayer.java" />
-        <option value="$PROJECT_DIR$/src/jmx/Player.java" />
         <option value="$PROJECT_DIR$/src/jmx/FactoryMBean.java" />
         <option value="$PROJECT_DIR$/src/server/core/Server.java" />
         <option value="$PROJECT_DIR$/src/client/logic/ClientNotification.java" />
-        <option value="$PROJECT_DIR$/src/client/core/ClientGUI.java" />
         <option value="$PROJECT_DIR$/src/client/logic/ClientListener.java" />
-        <option value="$PROJECT_DIR$/src/jmx/Factory.java" />
         <option value="$PROJECT_DIR$/src/server/connection/Connection.java" />
-        <option value="$PROJECT_DIR$/src/client/logic/ClientConnection.java" />
+        <option value="$PROJECT_DIR$/src/jmx/PlayerMBean.java" />
+        <option value="$PROJECT_DIR$/src/jmx/Player.java" />
         <option value="$PROJECT_DIR$/src/client/ClientFXML.fxml" />
+        <option value="$PROJECT_DIR$/src/client/logic/ClientConnection.java" />
+        <option value="$PROJECT_DIR$/src/server/board/Coordinates.java" />
+        <option value="$PROJECT_DIR$/src/jmx/Factory.java" />
+        <option value="$PROJECT_DIR$/src/client/core/ClientGUI.java" />
         <option value="$PROJECT_DIR$/src/client/logic/ClientGUIController.java" />
       </list>
     </option>
@@ -202,7 +188,7 @@
     <detection-done>true</detection-done>
     <sorting>DEFINITION_ORDER</sorting>
   </component>
-  <component name="ProjectFrameBounds" extendedState="7">
+  <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="369" />
     <option name="y" value="-15" />
     <option name="width" value="976" />
@@ -614,10 +600,10 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="68236000" />
+    <option name="totallyTimeSpent" value="71401000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-9" y="-9" width="1938" height="1048" extended-state="7" />
+    <frame x="-9" y="-9" width="1938" height="1048" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -705,14 +691,7 @@
         <state relative-caret-position="572">
           <caret line="34" column="0" lean-forward="true" selection-start-line="34" selection-start-column="0" selection-end-line="34" selection-end-column="0" />
           <folding>
-            <element signature="imports" expanded="true" />
-            <marker date="1513131146898" expanded="true" signature="381:413" ph="/restriction/" />
-            <marker date="1513131146898" expanded="true" signature="761:768" ph="{}" />
-            <marker date="1513131146898" expanded="true" signature="807:814" ph="{}" />
-            <marker date="1513131146898" expanded="true" signature="853:961" ph="{...}" />
-            <marker date="1513131146898" expanded="true" signature="1036:2074" ph="{...}" />
-            <marker date="1513131146898" expanded="false" signature="2366:2377" ph=" { " />
-            <marker date="1513131146898" expanded="false" signature="2390:2396" ph=" }" />
+            <marker date="1513164620660" expanded="true" signature="344:376" ph="/restriction/" />
           </folding>
         </state>
       </provider>
@@ -722,18 +701,7 @@
         <state relative-caret-position="88">
           <caret line="12" column="13" lean-forward="false" selection-start-line="12" selection-start-column="13" selection-end-line="12" selection-end-column="13" />
           <folding>
-            <element signature="e#2413#2414#0" expanded="true" />
-            <element signature="e#2440#2441#0" expanded="true" />
-            <element signature="e#2970#2971#0" expanded="true" />
-            <element signature="e#2992#2993#0" expanded="true" />
-            <element signature="e#4930#4931#0" expanded="true" />
-            <element signature="e#5003#5004#0" expanded="true" />
-            <marker date="1513132359171" expanded="false" signature="5647:5652" ph=" { " />
-            <marker date="1513132359171" expanded="false" signature="5677:5680" ph=" }" />
-            <marker date="1513132359171" expanded="false" signature="5745:5750" ph=" { " />
-            <marker date="1513132359171" expanded="false" signature="5775:5778" ph=" }" />
-            <marker date="1513132359171" expanded="false" signature="5843:5848" ph=" { " />
-            <marker date="1513132359171" expanded="false" signature="5873:5876" ph=" }" />
+            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -745,8 +713,6 @@
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#1011#1012#0" expanded="true" />
-            <element signature="e#1040#1041#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -771,14 +737,7 @@
         <state relative-caret-position="176">
           <caret line="15" column="5" lean-forward="true" selection-start-line="15" selection-start-column="5" selection-end-line="15" selection-end-column="5" />
           <folding>
-            <element signature="imports" expanded="true" />
-            <marker date="1513131146898" expanded="true" signature="381:413" ph="/restriction/" />
-            <marker date="1513131146898" expanded="true" signature="761:768" ph="{}" />
-            <marker date="1513131146898" expanded="true" signature="807:814" ph="{}" />
-            <marker date="1513131146898" expanded="true" signature="853:961" ph="{...}" />
-            <marker date="1513131146898" expanded="true" signature="1036:2074" ph="{...}" />
-            <marker date="1513131146898" expanded="false" signature="2366:2377" ph=" { " />
-            <marker date="1513131146898" expanded="false" signature="2390:2396" ph=" }" />
+            <marker date="1513164620660" expanded="true" signature="344:376" ph="/restriction/" />
           </folding>
         </state>
       </provider>
@@ -788,18 +747,7 @@
         <state relative-caret-position="88">
           <caret line="12" column="13" lean-forward="false" selection-start-line="12" selection-start-column="13" selection-end-line="12" selection-end-column="13" />
           <folding>
-            <element signature="e#2413#2414#0" expanded="true" />
-            <element signature="e#2440#2441#0" expanded="true" />
-            <element signature="e#2970#2971#0" expanded="true" />
-            <element signature="e#2992#2993#0" expanded="true" />
-            <element signature="e#4930#4931#0" expanded="true" />
-            <element signature="e#5003#5004#0" expanded="true" />
-            <marker date="1513132359171" expanded="false" signature="5647:5652" ph=" { " />
-            <marker date="1513132359171" expanded="false" signature="5677:5680" ph=" }" />
-            <marker date="1513132359171" expanded="false" signature="5745:5750" ph=" { " />
-            <marker date="1513132359171" expanded="false" signature="5775:5778" ph=" }" />
-            <marker date="1513132359171" expanded="false" signature="5843:5848" ph=" { " />
-            <marker date="1513132359171" expanded="false" signature="5873:5876" ph=" }" />
+            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -810,8 +758,6 @@
           <caret line="16" column="37" lean-forward="false" selection-start-line="16" selection-start-column="37" selection-end-line="16" selection-end-column="37" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#1011#1012#0" expanded="true" />
-            <element signature="e#1040#1041#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -842,13 +788,6 @@
         <state relative-caret-position="68">
           <caret line="4" column="17" lean-forward="false" selection-start-line="4" selection-start-column="17" selection-end-line="4" selection-end-column="17" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/server/board/Coordinates.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="9" column="5" lean-forward="true" selection-start-line="9" selection-start-column="5" selection-end-line="9" selection-end-column="5" />
         </state>
       </provider>
     </entry>
@@ -954,39 +893,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/jmx/Player.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="246">
-          <caret line="15" column="25" lean-forward="false" selection-start-line="15" selection-start-column="25" selection-end-line="15" selection-end-column="25" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/jmx/PlayerMBean.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-374">
-          <caret line="8" column="17" lean-forward="false" selection-start-line="8" selection-start-column="17" selection-end-line="8" selection-end-column="17" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/jmx/FactoryMBean.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="330">
           <caret line="19" column="42" lean-forward="false" selection-start-line="19" selection-start-column="42" selection-end-line="19" selection-end-column="42" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/server/core/Server.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="220">
-          <caret line="11" column="34" lean-forward="true" selection-start-line="11" selection-start-column="34" selection-end-line="11" selection-end-column="34" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1000,77 +911,70 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/jmx/PlayerMBean.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="330">
+          <caret line="16" column="0" lean-forward="true" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/server/board/Coordinates.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="176">
+          <caret line="8" column="38" lean-forward="true" selection-start-line="8" selection-start-column="38" selection-end-line="8" selection-end-column="38" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/jmx/Player.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-616">
+          <caret line="22" column="20" lean-forward="false" selection-start-line="22" selection-start-column="16" selection-end-line="22" selection-end-column="20" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/jmx/Factory.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1386">
-          <caret line="69" column="39" lean-forward="false" selection-start-line="69" selection-start-column="39" selection-end-line="69" selection-end-column="39" />
+        <state relative-caret-position="220">
+          <caret line="66" column="5" lean-forward="true" selection-start-line="66" selection-start-column="5" selection-end-line="66" selection-end-column="5" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#876#877#0" expanded="true" />
-            <element signature="e#912#913#0" expanded="true" />
-            <element signature="e#1507#1508#0" expanded="true" />
-            <element signature="e#1564#1565#0" expanded="true" />
-            <element signature="e#1619#1620#0" expanded="true" />
-            <element signature="e#1678#1679#0" expanded="true" />
-            <element signature="e#1740#1741#0" expanded="true" />
-            <element signature="e#1767#1768#0" expanded="true" />
-            <marker date="1513131146906" expanded="false" signature="3040:3051" ph=" { " />
-            <marker date="1513131146906" expanded="false" signature="3063:3069" ph=" }" />
-            <marker date="1513131146906" expanded="false" signature="3756:3767" ph=" { " />
-            <marker date="1513131146906" expanded="false" signature="3809:3815" ph=" }" />
-            <marker date="1513131146906" expanded="false" signature="3873:3884" ph=" { " />
-            <marker date="1513131146906" expanded="false" signature="3896:3902" ph=" }" />
-            <marker date="1513131146906" expanded="false" signature="3946:3957" ph=" { " />
-            <marker date="1513131146906" expanded="false" signature="3975:3981" ph=" }" />
-            <marker date="1513131146906" expanded="false" signature="4027:4038" ph=" { " />
-            <marker date="1513131146906" expanded="false" signature="4057:4063" ph=" }" />
-            <marker date="1513131146906" expanded="false" signature="4133:4144" ph=" { " />
-            <marker date="1513131146906" expanded="false" signature="4173:4179" ph=" }" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/client/core/ClientGUI.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="342">
-          <caret line="66" column="5" lean-forward="false" selection-start-line="66" selection-start-column="5" selection-end-line="66" selection-end-column="5" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <marker date="1513131146898" expanded="true" signature="381:413" ph="/restriction/" />
-            <marker date="1513131146898" expanded="true" signature="761:768" ph="{}" />
-            <marker date="1513131146898" expanded="true" signature="807:814" ph="{}" />
-            <marker date="1513131146898" expanded="true" signature="853:961" ph="{...}" />
-            <marker date="1513131146898" expanded="true" signature="1036:2074" ph="{...}" />
-            <marker date="1513131146898" expanded="false" signature="2366:2377" ph=" { " />
-            <marker date="1513131146898" expanded="false" signature="2390:2396" ph=" }" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/server/connection/Connection.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="302">
-          <caret line="90" column="0" lean-forward="false" selection-start-line="90" selection-start-column="0" selection-end-line="90" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/client/logic/ClientConnection.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="374">
-          <caret line="17" column="0" lean-forward="true" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
+        <state relative-caret-position="848">
+          <caret line="91" column="0" lean-forward="false" selection-start-line="91" selection-start-column="0" selection-end-line="91" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#1011#1012#0" expanded="true" />
-            <element signature="e#1040#1041#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/server/core/Server.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="88">
+          <caret line="11" column="34" lean-forward="true" selection-start-line="11" selection-start-column="34" selection-end-line="11" selection-end-column="34" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/server/connection/Connection.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="566">
+          <caret line="90" column="0" lean-forward="false" selection-start-line="90" selection-start-column="0" selection-end-line="90" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/client/ClientFXML.fxml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="516">
-          <caret line="881" column="67" lean-forward="true" selection-start-line="881" selection-start-column="67" selection-end-line="881" selection-end-column="67" />
+        <state relative-caret-position="338">
+          <caret line="968" column="41" lean-forward="true" selection-start-line="968" selection-start-column="41" selection-end-line="968" selection-end-column="41" />
           <folding />
         </state>
       </provider>
@@ -1078,23 +982,22 @@
         <state />
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/client/core/ClientGUI.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1018">
+          <caret line="4" column="26" lean-forward="false" selection-start-line="4" selection-start-column="26" selection-end-line="4" selection-end-column="26" />
+          <folding>
+            <marker date="1513164620660" expanded="true" signature="344:376" ph="/restriction/" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/client/logic/ClientGUIController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="614">
-          <caret line="263" column="46" lean-forward="true" selection-start-line="263" selection-start-column="46" selection-end-line="263" selection-end-column="46" />
+        <state relative-caret-position="460">
+          <caret line="280" column="48" lean-forward="true" selection-start-line="280" selection-start-column="48" selection-end-line="280" selection-end-column="48" />
           <folding>
-            <element signature="e#2413#2414#0" expanded="true" />
-            <element signature="e#2440#2441#0" expanded="true" />
-            <element signature="e#2970#2971#0" expanded="true" />
-            <element signature="e#2992#2993#0" expanded="true" />
-            <element signature="e#4930#4931#0" expanded="true" />
-            <element signature="e#5003#5004#0" expanded="true" />
-            <marker date="1513132359171" expanded="false" signature="5647:5652" ph=" { " />
-            <marker date="1513132359171" expanded="false" signature="5677:5680" ph=" }" />
-            <marker date="1513132359171" expanded="false" signature="5745:5750" ph=" { " />
-            <marker date="1513132359171" expanded="false" signature="5775:5778" ph=" }" />
-            <marker date="1513132359171" expanded="false" signature="5843:5848" ph=" { " />
-            <marker date="1513132359171" expanded="false" signature="5873:5876" ph=" }" />
+            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>

@@ -6,8 +6,6 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.scene.Node;
 import javafx.scene.control.*;
-import javafx.scene.effect.Effect;
-import javafx.scene.effect.SepiaTone;
 import javafx.scene.input.MouseEvent;
 import javafx.fxml.FXML;
 import javafx.scene.layout.GridPane;
@@ -15,6 +13,7 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Circle;
+import server.board.Coordinates;
 
 import javax.management.MalformedObjectNameException;
 import javax.management.ObjectName;
@@ -22,7 +21,7 @@ import javax.management.ObjectName;
 public class ClientGUIController {
 	private ClientGUI client;
 	private Node currentPosition;
-	private Node desinationPosition;
+	private Node destinationPosition;
 
 	//LOGIN---------------------------------------
 	@FXML
@@ -218,7 +217,7 @@ public class ClientGUIController {
 		if (client.player == null) {
 			client.connection.invokeCreatePlayerMethod(client.factory, "createPlayer", client.pid, nickNameField.getText());
 			try {
-				client.player = new ObjectName(client.domain+ client.pid +":type=jmx.Player,name=player" + client.pid);
+				client.player = new ObjectName(client.domain+ client.pid +":type=jmx.Player,name=Player" + client.pid);
 			} catch (MalformedObjectNameException e) {
 				e.printStackTrace();
 			}
@@ -238,7 +237,23 @@ public class ClientGUIController {
 	}
 
 	public void doMoveOnClick(ActionEvent event) {
-		//TODO
+		if (currentPosition != null && destinationPosition != null) {
+			Paint fill;
+			Coordinates cCoordinates = new Coordinates(board.getColumnIndex(currentPosition), board.getRowIndex(currentPosition));
+			Coordinates dCoordinates = new Coordinates(board.getColumnIndex(destinationPosition), board.getRowIndex(destinationPosition));
+			client.connection.invokeMovePlayerMethod(client.player, "move", cCoordinates, dCoordinates);
+			Circle circleC = (Circle)currentPosition;
+			circleC.setStrokeWidth(1);
+			circleC.setStroke(Color.BLACK);
+			fill = circleC.getFill();
+			circleC.setFill(Color.WHITE);
+			currentPosition = null;
+			Circle circleD = (Circle)destinationPosition;
+			circleD.setStrokeWidth(1);
+			circleD.setFill(fill);
+			circleD.setStroke(Color.BLACK);
+			destinationPosition = null;
+		}
 	}
 
 	//TEST
@@ -250,7 +265,7 @@ public class ClientGUIController {
 		for (Node node : childrens) {
 			if(board.getRowIndex(node) == GridPane.getRowIndex((Node)event.getTarget()) &&
 					board.getColumnIndex(node) == GridPane.getColumnIndex((Node)event.getTarget())) {
-				if (currentPosition == null && node != desinationPosition) {
+				if (currentPosition == null && node != destinationPosition) {
 					Circle circle = (Circle)node;
 					circle.setStrokeWidth(4);
 					circle.setStroke(Color.GREEN);
@@ -260,16 +275,16 @@ public class ClientGUIController {
 					circle.setStrokeWidth(1);
 					circle.setStroke(Color.BLACK);
 					currentPosition = null;
-				} else if (desinationPosition == null) {
+				} else if (destinationPosition == null) {
 					Circle circle = (Circle)node;
 					circle.setStrokeWidth(4);
 					circle.setStroke(Color.RED);
-					desinationPosition = node;
-				} else if (node == desinationPosition) {
+					destinationPosition = node;
+				} else if (node == destinationPosition) {
 					Circle circle = (Circle)node;
 					circle.setStrokeWidth(1);
 					circle.setStroke(Color.BLACK);
-					desinationPosition = null;
+					destinationPosition = null;
 				}
 				break;
 			}
