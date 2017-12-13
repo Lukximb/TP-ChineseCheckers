@@ -1,11 +1,13 @@
 package server.lobby;
 
+import javafx.scene.paint.Color;
 import server.board.Coordinates;
 import server.board.IBoard;
 import server.player.Bot;
 import jmx.Player;
 
 public class Lobby implements Runnable{
+    public final Color[] colorPalette = {Color.DEEPPINK, Color.YELLOW, Color.MEDIUMBLUE, Color.LIMEGREEN, Color.FIREBRICK, Color.CYAN};
     public String name;
     public Player admin;
     public Player[] players;
@@ -51,6 +53,7 @@ public class Lobby implements Runnable{
 
     public void addPlayer(Player player, int corner) {
         if(corner < numberOfPlayers) {
+            player.setLobby(this);
             players[corner] = player;
         }
     }
@@ -83,16 +86,19 @@ public class Lobby implements Runnable{
 
         for(int i=0; i<numberOfPlayers; i++) {
             if(numberOfPlayers == 6) {
-//                players[i].setColor();
+                players[i].setColor(colorPalette[i]);
                 putPawnsOnBoard(players[i], i);
             } else if(numberOfPlayers == 4) {
                 if(i%2 == 0) {
+                    players[i].setColor(colorPalette[i*2]);
                     putPawnsOnBoard(players[i], i*2);
                 }
                 else {
+                    players[i].setColor(colorPalette[i*2-1]);
                     putPawnsOnBoard(players[i], i*2-1);
                 }
             } else if(numberOfPlayers == 2) {
+                players[i].setColor(colorPalette[i*3]);
                 putPawnsOnBoard(players[i], i*3);
             }
         }
@@ -146,6 +152,10 @@ public class Lobby implements Runnable{
                 }
             }
         }
+    }
+
+    public IBoard getBoard() {
+        return board;
     }
 
     public void getRoundTime() {

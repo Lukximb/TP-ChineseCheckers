@@ -80,6 +80,8 @@ public class ClientGUIController {
 	@FXML
 	private StackPane game;
 	@FXML
+    private GridPane board;
+	@FXML
 	private ProgressBar turnTimeBar;
 	@FXML
 	private Button moveButton;
@@ -97,6 +99,7 @@ public class ClientGUIController {
 	
 	@FXML
 	void initialize() {
+        board.setStyle("-fx-background-image: url('/client/background.jpg');");
 	}
 
 	//LOGIN
