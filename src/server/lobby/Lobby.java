@@ -23,8 +23,9 @@ public class Lobby implements Runnable{
         this.name = lobbyName;
         this.admin = admin;
         this.numberOfPlayers = numberOfPlayers;
+        roundCorner = 0;
         players = new Player[numberOfPlayers];
-        addPlayer(admin, 0);
+        addPlayer(admin);
     }
 
     @Override
@@ -51,10 +52,11 @@ public class Lobby implements Runnable{
 
     }
 
-    public void addPlayer(Player player, int corner) {
-        if(corner < numberOfPlayers) {
-            player.setLobby(this);
-            players[corner] = player;
+    public void addPlayer(Player player) {
+        if(roundCorner < numberOfPlayers) {
+            player.joinToLobby(this);
+            players[roundCorner] = player;
+            roundCorner++;
         }
     }
 
@@ -69,6 +71,24 @@ public class Lobby implements Runnable{
             if(players[i].equals(player)) {
                 players[i] = null;
                 next = i+1;
+                roundCorner--;
+            }
+        }
+        while(next < numberOfPlayers || players[next] != null) {
+            players[next-1] = players[next];
+            players[next] = null;
+            next++;
+        }
+    }
+
+    public void removePlayer(String playerName) {
+        int i = 0;
+        int next = 0;
+        while(i<numberOfPlayers) {
+            if(players[i].name.equals(playerName)) {
+                players[i] = null;
+                next = i+1;
+                roundCorner--;
             }
         }
         while(next < numberOfPlayers || players[next] != null) {

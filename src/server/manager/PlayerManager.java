@@ -79,4 +79,32 @@ public class PlayerManager implements IPlayerManager {
         }
         return 0;
     }
+
+    public Player getPlayerFromFreeList(String playerName) {
+        for(Player p: playerFreeList) {
+            if(p.name.equals(playerName)) {
+                return p;
+            }
+        }
+        return null;
+    }
+
+    public Player getPlayerFromInGameList(String playerName) {
+        for(Player p: playerInGameList) {
+            if(p.name.equals(playerName)) {
+                return p;
+            }
+        }
+        return null;
+    }
+
+    public void movePlayerToInGameList(Player player) {
+        playerFreeList.remove(player);
+        playerInGameList.add(player);
+    }
+
+    public void movePlayerToFreeList(Player player) {
+        playerInGameList.remove(player);
+        playerFreeList.add(player);
+    }
 }

@@ -30,8 +30,8 @@ public class Player implements PlayerMBean, Serializable{
     }
 
     @Override
-    public void joinToLobby(String lobbyName) {
-
+    public void joinToLobby(Lobby lobby) {
+        this.lobby = lobby;
     }
 
     @Override

@@ -1,5 +1,6 @@
 package server.manager;
 
+import jmx.Player;
 import server.lobby.Lobby;
 
 import java.util.ArrayList;
@@ -61,5 +62,33 @@ public class LobbyManager implements ILobbyManager {
         for(int i=0; i<10; i++) {
             threads[i].start();
         }*/
+    }
+
+    public void addPlayerToLobby(String lobbyName, Player player) {
+        Lobby lobby = null;
+
+        for(Lobby l: waitingLobbyList) {
+            if(l.name.equals(lobbyName)) {
+                lobby = l;
+                break;
+            }
+        }
+        if(lobby != null) {
+            lobby.addPlayer(player);
+        }
+    }
+
+    public void removePlayerFromLobby(String lobbyName, Player player) {
+        Lobby lobby = null;
+
+        for(Lobby l: waitingLobbyList) {
+            if(l.name.equals(lobbyName)) {
+                lobby = l;
+                break;
+            }
+        }
+        if(lobby != null) {
+            lobby.removePlayer(player);
+        }
     }
 }

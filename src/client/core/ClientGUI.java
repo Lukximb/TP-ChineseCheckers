@@ -22,6 +22,7 @@ public class ClientGUI extends Application {
     public int playerInLobby = 0;
     public int rowForPlayerPawn = 0;
     public String lobbyName = "";
+    public String playerName = "";
     public ClientConnection connection;
     public ClientListener clientListener;
 

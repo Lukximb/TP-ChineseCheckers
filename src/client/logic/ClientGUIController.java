@@ -2,41 +2,36 @@ package client.logic;
 
 import client.core.ClientGUI;
 import javafx.application.Platform;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.scene.Node;
 import javafx.scene.control.*;
-<<<<<<< HEAD
-=======
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.input.MouseButton;
->>>>>>> origin/wDevelop
 import javafx.scene.input.MouseEvent;
 import javafx.fxml.FXML;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
-<<<<<<< HEAD
-=======
 import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 import server.board.Coordinates;
->>>>>>> origin/wDevelop
 
 import javax.management.MalformedObjectNameException;
 import javax.management.ObjectName;
 import java.util.ArrayList;
 
 public class ClientGUIController {
-<<<<<<< HEAD
-	ClientGUI client;
-=======
+
+//	ClientGUI client;
+
 	private ClientGUI client;
 	private Node currentPosition;
 	private Node destinationPosition;
 	private ArrayList<Node> jumpPositions;
->>>>>>> origin/wDevelop
+
 
 	//LOGIN---------------------------------------
 	@FXML
@@ -89,6 +84,8 @@ public class ClientGUIController {
 	@FXML
 	private Button removePlayerButton;
 	@FXML
+	private Button addPlayerButton;
+	@FXML
 	private Button easyBotButton;
 	@FXML
 	private Button mediumBotButton;
@@ -121,12 +118,12 @@ public class ClientGUIController {
 	
 	@FXML
 	void initialize() {
-<<<<<<< HEAD
-        board.setStyle("-fx-background-image: url('/client/background.jpg');");
-=======
+
+//        board.setStyle("-fx-background-image: url('/client/background.jpg');");
+
 		game.setStyle("-fx-background-image: url('/client/wood.jpg');");
 		jumpPositions = new ArrayList<>();
->>>>>>> origin/wDevelop
+
 	}
 
 	//LOGIN
@@ -217,6 +214,20 @@ public class ClientGUIController {
 		this.menu.setVisible(true);
 		this.menu.setDisable(false);
 	}
+
+	public void addPlayerButtonOnClick(ActionEvent event) {
+		String playerName = invitePlayerField.getText();
+
+		client.connection.invokeAddPlayerToLobbyMethod(client.manager, "addPlayerToLobby", client.lobbyName, playerName);
+		System.out.println("Add player: " + playerName + " to lobby: " + client.lobbyName);
+	}
+
+	public void removePlayerButtonOnClick(ActionEvent event) {
+		String playerName = invitePlayerField.getText();
+
+		client.connection.invokeRemovePlayerToLobbyMethod(client.manager, "removePlayerFromLobby", client.lobbyName, playerName);
+		System.out.println("Remove player: " + playerName + " from lobby: " + client.lobbyName);
+	}
 	
 	//GAME
 	public void surrenderButtonOnClick(ActionEvent event) {
@@ -244,6 +255,7 @@ public class ClientGUIController {
 			client.connection.invokeCreatePlayerMethod(client.factory, "createPlayer", client.pid, nickNameField.getText());
 			try {
 				client.player = new ObjectName(client.domain+ client.pid +":type=jmx.Player,name=Player" + client.pid);
+				client.playerName = nickNameField.getText();
 			} catch (MalformedObjectNameException e) {
 				e.printStackTrace();
 			}
@@ -262,23 +274,7 @@ public class ClientGUIController {
 		client.playerInLobby = 6;
 	}
 
-<<<<<<< HEAD
-	//TEST
-	public void submitButtonOnClick(ActionEvent event) {
-//		try {
-//			client.p.printStr(this.sendString());
-//			this.outputLabel.setText(client.p.getReply());
-//		} catch (RemoteException e1) {
-//			e1.printStackTrace();
-//		}
-	}
-//
-//	private String sendString() {
-//		String s = inputField.getText();
-//		return s;
-//	}
-	
-=======
+
 	public void doMoveOnClick(ActionEvent event) {
 		Image img = new Image("/client/pawnBlack.png");
 		if (currentPosition != null && destinationPosition != null) {
@@ -401,5 +397,5 @@ public class ClientGUIController {
 			}
 		}
 	}
->>>>>>> origin/wDevelop
+
 }
