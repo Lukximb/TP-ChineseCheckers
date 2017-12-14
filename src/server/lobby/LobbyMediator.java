@@ -29,7 +29,7 @@ public class LobbyMediator {
         clock.endRound();
     }
 
-    public boolean checkMove(Coordinates currentCoordinates, Coordinates newCoordinates) {
-        return rulesManager.checkMove(currentCoordinates, newCoordinates);
+    public boolean checkMove(Coordinates currentCoordinates, Coordinates newCoordinates, int pid) {
+        return rulesManager.checkMove(currentCoordinates, newCoordinates, pid);
     }
 }

@@ -74,7 +74,7 @@ public class Factory extends NotificationBroadcasterSupport implements FactoryMB
 
         server.connection.createMBeanMainObject("jmx.Player", "Player"+pid, String.valueOf(pid), player);
         playerManager.getNewPlayer(player);
-        sendNotification(new Notification(String.valueOf(pid), player, 001100110011, "####hello player created: " + pid));
+        sendNotification(new Notification(String.valueOf(pid), this, 001100110011, "####hello player created: " + pid));
     }
 
     public void deletePlayer(int pid) {
@@ -120,6 +120,7 @@ public class Factory extends NotificationBroadcasterSupport implements FactoryMB
         admin = playerManager.playerFreeList.get(index);
         System.out.println(">> Lobby created");
         Lobby lobby = new Lobby(playerNum, rowNumber, lobbyName, admin);
+        admin.lobby = lobby;
         lobbyManager.waitingLobbyList.add(lobby);
         return null;
     }

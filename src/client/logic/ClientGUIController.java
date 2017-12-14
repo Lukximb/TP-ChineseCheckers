@@ -27,7 +27,9 @@ public class ClientGUIController {
 	private ClientGUI client;
 	private Node currentPosition;
 	private Node destinationPosition;
+	private Node previousNode;
 	private ArrayList<Node> jumpPositions;
+	private boolean destinationSelected;
 
 	//LOGIN---------------------------------------
 	@FXML
@@ -114,6 +116,7 @@ public class ClientGUIController {
 	void initialize() {
 		game.setStyle("-fx-background-image: url('/client/wood.jpg');");
 		jumpPositions = new ArrayList<>();
+		destinationSelected = false;
 	}
 
 	//LOGIN
@@ -251,8 +254,8 @@ public class ClientGUIController {
 		Image img = new Image("/client/pawnBlack.png");
 		if (currentPosition != null && destinationPosition != null) {
 			if (jumpPositions.isEmpty()) {
-				Coordinates cCoordinates = new Coordinates(board.getColumnIndex(currentPosition), board.getRowIndex(currentPosition));
-				Coordinates dCoordinates = new Coordinates(board.getColumnIndex(destinationPosition), board.getRowIndex(destinationPosition));
+				Coordinates cCoordinates = new Coordinates(GridPane.getColumnIndex(currentPosition), GridPane.getRowIndex(currentPosition));
+				Coordinates dCoordinates = new Coordinates(GridPane.getColumnIndex(destinationPosition), GridPane.getRowIndex(destinationPosition));
 				client.connection.invokeMovePlayerMethod(client.player, "move", cCoordinates, dCoordinates);
 
 				Circle circleC = (Circle)currentPosition;
@@ -269,8 +272,8 @@ public class ClientGUIController {
 				destinationPosition = null;
 			} else {
 				//Current --> 1st jump
-				Coordinates cCoordinates = new Coordinates(board.getColumnIndex(currentPosition), board.getRowIndex(currentPosition));
-				Coordinates dCoordinates = new Coordinates(board.getColumnIndex(jumpPositions.get(0)), board.getRowIndex(jumpPositions.get(0)));
+				Coordinates cCoordinates = new Coordinates(GridPane.getColumnIndex(currentPosition), GridPane.getRowIndex(currentPosition));
+				Coordinates dCoordinates = new Coordinates(GridPane.getColumnIndex(jumpPositions.get(0)), GridPane.getRowIndex(jumpPositions.get(0)));
 				client.connection.invokeMovePlayerMethod(client.player, "move", cCoordinates, dCoordinates);
 
 				Circle circleC = (Circle)currentPosition;
@@ -292,8 +295,8 @@ public class ClientGUIController {
 					circleJ1.setFill(new ImagePattern(img));
 					circleJ1.setStroke(Color.BLACK);
 
-					cCoordinates = new Coordinates(board.getColumnIndex(jumpPositions.get(i-1)), board.getRowIndex(jumpPositions.get(i-1)));
-					dCoordinates = new Coordinates(board.getColumnIndex(jumpPositions.get(i)), board.getRowIndex(jumpPositions.get(i)));
+					cCoordinates = new Coordinates(GridPane.getColumnIndex(jumpPositions.get(i-1)), GridPane.getRowIndex(jumpPositions.get(i-1)));
+					dCoordinates = new Coordinates(GridPane.getColumnIndex(jumpPositions.get(i)), GridPane.getRowIndex(jumpPositions.get(i)));
 					client.connection.invokeMovePlayerMethod(client.player, "move", cCoordinates, dCoordinates);
 
 					Circle circleJ2 = (Circle)jumpPositions.get(i);
@@ -309,8 +312,8 @@ public class ClientGUIController {
 				circleJL.setFill(new ImagePattern(img));
 				circleJL.setStroke(Color.BLACK);
 
-				cCoordinates = new Coordinates(board.getColumnIndex(jumpPositions.get(jumpPositions.size()-1)), board.getRowIndex(jumpPositions.get(jumpPositions.size()-1)));
-				dCoordinates = new Coordinates(board.getColumnIndex(destinationPosition), board.getRowIndex(destinationPosition));
+				cCoordinates = new Coordinates(GridPane.getColumnIndex(jumpPositions.get(jumpPositions.size()-1)), GridPane.getRowIndex(jumpPositions.get(jumpPositions.size()-1)));
+				dCoordinates = new Coordinates(GridPane.getColumnIndex(destinationPosition), GridPane.getRowIndex(destinationPosition));
 				client.connection.invokeMovePlayerMethod(client.player, "move", cCoordinates, dCoordinates);
 
 				jumpPositions.clear();
@@ -321,6 +324,7 @@ public class ClientGUIController {
 				circleD.setFill(new ImagePattern(img));
 				circleD.setStroke(Color.BLACK);
 				destinationPosition = null;
+				destinationSelected = false;
 			}
 		}
 	}
@@ -332,41 +336,95 @@ public class ClientGUIController {
 	public void chooseCircleOnClick(MouseEvent event) {
 		ObservableList<Node> childrens = board.getChildren();
 		for (Node node : childrens) {
-			if(board.getRowIndex(node) == GridPane.getRowIndex((Node)event.getTarget()) &&
-					board.getColumnIndex(node) == GridPane.getColumnIndex((Node)event.getTarget())) {
-				if (currentPosition == null && node != destinationPosition) {
-					Circle circle = (Circle)node;
-					circle.setStrokeWidth(4);
-					circle.setStroke(Color.GREEN);
-					currentPosition = node;
-				} else if (node == currentPosition) {
-					Circle circle = (Circle)node;
-					circle.setStrokeWidth(1);
-					circle.setStroke(Color.BLACK);
-					currentPosition = null;
-				} else if (destinationPosition == null && event.getButton() == MouseButton.SECONDARY) {
-					Circle circle = (Circle)node;
-					circle.setStrokeWidth(4);
-					circle.setStroke(Color.RED);
-					destinationPosition = node;
-				} else if (node == destinationPosition && event.getButton() == MouseButton.SECONDARY) {
-					Circle circle = (Circle)node;
-					circle.setStrokeWidth(1);
-					circle.setStroke(Color.BLACK);
-					destinationPosition = null;
-				} else if (node != currentPosition && node != destinationPosition && !jumpPositions.contains(node)) {
-					Circle circle = (Circle)node;
-					circle.setStrokeWidth(4);
-					circle.setStroke(Color.BLUE);
-					jumpPositions.add(node);
-				} else if(node != currentPosition && node != destinationPosition && jumpPositions.contains(node)) {
-					Circle circle = (Circle)node;
-					circle.setStrokeWidth(1);
-					circle.setStroke(Color.BLACK);
-					jumpPositions.remove(node);
+			if(GridPane.getRowIndex(node) == GridPane.getRowIndex((Node)event.getTarget()) &&
+					GridPane.getColumnIndex(node) == GridPane.getColumnIndex((Node)event.getTarget())) {
+				if (currentPosition == null
+						&& node != destinationPosition
+						&& event.getButton() == MouseButton.PRIMARY) {
+					setStartNode(node);
+				} else if (node == currentPosition
+						&& event.getButton() == MouseButton.PRIMARY) {
+					removeStartNode(node);
+				} else if (destinationPosition == null
+						&& currentPosition != null
+						&& event.getButton() == MouseButton.SECONDARY
+						&& !jumpPositions.contains(node)) {
+					Coordinates cCoordinates = new Coordinates(GridPane.getColumnIndex(previousNode), GridPane.getRowIndex(previousNode));
+					Coordinates dCoordinates = new Coordinates(GridPane.getColumnIndex(node), GridPane.getRowIndex(node));
+					client.connection.invokeCheckMoveMethod(client.player, "checkMove", cCoordinates, dCoordinates);
+					setDestinationNode(node);
+				} else if (node == destinationPosition
+						&& event.getButton() == MouseButton.SECONDARY) {
+					removeDestinationNode(node);
+				} else if (!destinationSelected
+						&& node != currentPosition
+						&& node != destinationPosition
+						&& !jumpPositions.contains(node)
+						&& event.getButton() == MouseButton.PRIMARY) {
+					Coordinates cCoordinates = new Coordinates(GridPane.getColumnIndex(previousNode), GridPane.getRowIndex(previousNode));
+					Coordinates dCoordinates = new Coordinates(GridPane.getColumnIndex(node), GridPane.getRowIndex(node));
+					client.connection.invokeCheckMoveMethod(client.player, "checkMove", cCoordinates, dCoordinates);
+					setJumpNode(node);
+				} else if(node != currentPosition
+						&& node != destinationPosition
+						&& jumpPositions.contains(node)
+						&& event.getButton() == MouseButton.PRIMARY) {
+					removeJumpNode(node);
 				}
 				break;
 			}
+		}
+	}
+
+	//Set methods are invoked by notification listener after acceptation received
+	private void setStartNode(Node node) {
+		Circle circle = (Circle)node;
+		circle.setStrokeWidth(4);
+		circle.setStroke(Color.GREEN);
+		currentPosition = node;
+		previousNode = node;
+	}
+
+	public void setDestinationNode(Node node) {
+		destinationSelected = true;
+		Circle circle = (Circle)node;
+		circle.setStrokeWidth(4);
+		circle.setStroke(Color.RED);
+		destinationPosition = node;
+	}
+
+	public void setJumpNode(Node node) {
+		Circle circle = (Circle)node;
+		circle.setStrokeWidth(4);
+		circle.setStroke(Color.BLUE);
+		jumpPositions.add(node);
+		previousNode = node;
+	}
+
+	private void removeStartNode(Node node) {
+		Circle circle = (Circle)node;
+		circle.setStrokeWidth(1);
+		circle.setStroke(Color.BLACK);
+		currentPosition = null;
+	}
+
+	private void removeDestinationNode(Node node) {
+		destinationSelected = false;
+		Circle circle = (Circle)node;
+		circle.setStrokeWidth(1);
+		circle.setStroke(Color.BLACK);
+		destinationPosition = null;
+	}
+
+	private void removeJumpNode(Node node) {
+		Circle circle = (Circle)node;
+		circle.setStrokeWidth(1);
+		circle.setStroke(Color.BLACK);
+		jumpPositions.remove(node);
+		if (!jumpPositions.isEmpty()) {
+			previousNode = jumpPositions.get(jumpPositions.size()-1);
+		} else {
+			previousNode = currentPosition;
 		}
 	}
 }

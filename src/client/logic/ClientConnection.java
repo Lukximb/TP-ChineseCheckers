@@ -102,6 +102,17 @@ public class ClientConnection {
         System.out.println("Method invoked: " + methodName + " on: " + mBeanName.toString());
     }
 
+    public void invokeCheckMoveMethod(ObjectName mBeanName, String methodName, Coordinates currentCoordinates, Coordinates destinationCoordinates) {
+        Object  opParams[] = {currentCoordinates, destinationCoordinates};
+        String  opSig[] = {Coordinates.class.getName(), Coordinates.class.getName()};
+        try {
+            mbsc.invoke(mBeanName, methodName, opParams, opSig);
+        } catch (Exception  e) {
+            e.printStackTrace();
+        }
+        System.out.println("Method invoked: " + methodName + " on: " + mBeanName.toString());
+    }
+
     public void closeConnection() {
         try {
             jmxc.close();

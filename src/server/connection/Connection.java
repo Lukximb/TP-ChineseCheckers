@@ -1,9 +1,5 @@
 package server.connection;
 
-import jmx.Hello;
-import jmx.Factory;
-import jmx.Player;
-
 import javax.management.MBeanServer;
 import javax.management.MBeanServerFactory;
 import javax.management.ObjectName;

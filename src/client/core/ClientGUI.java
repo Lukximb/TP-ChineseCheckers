@@ -66,6 +66,8 @@ public class ClientGUI extends Application {
         loader.setController(controller);
         StackPane stackPane=loader.load();
 
+        clientListener.setGUIController(controller);
+
         Scene scene = new Scene(stackPane);
 
         primaryStage.setScene(scene);

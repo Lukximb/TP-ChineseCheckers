@@ -30,6 +30,11 @@ public class Player implements PlayerMBean, Serializable{
     }
 
     @Override
+    public void checkMove(Coordinates currentCoordinates, Coordinates destinationCoordinates) {
+
+    }
+
+    @Override
     public void joinToLobby(String lobbyName) {
 
     }
