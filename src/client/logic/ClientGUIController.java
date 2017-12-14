@@ -2,6 +2,8 @@ package client.logic;
 
 import client.core.ClientGUI;
 import javafx.application.Platform;
+import javafx.beans.property.ReadOnlyStringWrapper;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.scene.Node;
@@ -24,12 +26,16 @@ import javax.management.ObjectName;
 import java.util.ArrayList;
 
 public class ClientGUIController {
+
+//	ClientGUI client;
+
 	private ClientGUI client;
 	private Node currentPosition;
 	private Node destinationPosition;
 	private Node previousNode;
 	private ArrayList<Node> jumpPositions;
 	private boolean destinationSelected;
+	private ObservableList<String> playersList;
 
 	//LOGIN---------------------------------------
 	@FXML
@@ -76,11 +82,17 @@ public class ClientGUIController {
 	@FXML
 	private StackPane lobby;
 	@FXML
+	private TableView<String> playersInLobbyList;
+	@FXML
+	private TableColumn<String, String> playersInLobbyColumn;
+	@FXML
 	private TextField invitePlayerField;
 	@FXML
 	private Button addBotButton;
 	@FXML
 	private Button removePlayerButton;
+	@FXML
+	private Button addPlayerButton;
 	@FXML
 	private Button easyBotButton;
 	@FXML
@@ -95,6 +107,8 @@ public class ClientGUIController {
 	@FXML
 	private StackPane game;
 	@FXML
+    private GridPane board;
+	@FXML
 	private ProgressBar turnTimeBar;
 	@FXML
 	private Button moveButton;
@@ -104,8 +118,6 @@ public class ClientGUIController {
 	private Button surrenderButton;
 	@FXML
 	private Button sendMsgButton;
-	@FXML
-	private GridPane board;
 	
 	
 	public ClientGUIController(ClientGUI client) {
@@ -114,9 +126,16 @@ public class ClientGUIController {
 	
 	@FXML
 	void initialize() {
+
+//        board.setStyle("-fx-background-image: url('/client/background.jpg');");
+
 		game.setStyle("-fx-background-image: url('/client/wood.jpg');");
 		jumpPositions = new ArrayList<>();
 		destinationSelected = false;
+
+		playersList = FXCollections.observableArrayList();
+		playersInLobbyColumn.setCellValueFactory(param -> new ReadOnlyStringWrapper(param.getValue()));
+		playersInLobbyList.setItems(playersList);
 	}
 
 	//LOGIN
@@ -158,7 +177,12 @@ public class ClientGUIController {
 
 		client.lobbyName = lobbyNameField.getText();
 		client.rowForPlayerPawn = (int)boardSizeSpinner.getValue();
+		System.out.println(client.lobbyName);
+		System.out.println(client.rowForPlayerPawn);
 		client.connection.invokeCreateLobbyMethod(client.factory, "createLobby", client.playerInLobby , client.rowForPlayerPawn, client.lobbyName, client.pid);
+
+		playersList.clear();
+		playersList.add(client.playerName);
 
 		this.lobby.setVisible(true);
 		this.lobby.setDisable(false);
@@ -205,6 +229,22 @@ public class ClientGUIController {
 		this.menu.setVisible(true);
 		this.menu.setDisable(false);
 	}
+
+	public void addPlayerButtonOnClick(ActionEvent event) {
+		String playerName = invitePlayerField.getText();
+
+		client.connection.invokeAddPlayerToLobbyMethod(client.manager, "addPlayerToLobby", client.lobbyName, playerName);
+		System.out.println("Add player: " + playerName + " to lobby: " + client.lobbyName);
+		client.connection.invokeSendPlayersInLobbyList(client.manager, "sendPlayersInLobbyList", client.playerName);
+	}
+
+	public void removePlayerButtonOnClick(ActionEvent event) {
+		String playerName = invitePlayerField.getText();
+
+		client.connection.invokeRemovePlayerToLobbyMethod(client.manager, "removePlayerFromLobby", client.lobbyName, playerName);
+		System.out.println("Remove player: " + playerName + " from lobby: " + client.lobbyName);
+		client.connection.invokeSendPlayersInLobbyList(client.manager, "sendPlayersInLobbyList", client.playerName);
+	}
 	
 	//GAME
 	public void surrenderButtonOnClick(ActionEvent event) {
@@ -232,6 +272,7 @@ public class ClientGUIController {
 			client.connection.invokeCreatePlayerMethod(client.factory, "createPlayer", client.pid, nickNameField.getText());
 			try {
 				client.player = new ObjectName(client.domain+ client.pid +":type=jmx.Player,name=Player" + client.pid);
+				client.playerName = nickNameField.getText();
 			} catch (MalformedObjectNameException e) {
 				e.printStackTrace();
 			}
@@ -249,6 +290,7 @@ public class ClientGUIController {
 	public void setPlayerNumberOn6ButtonOnClick(ActionEvent event) {
 		client.playerInLobby = 6;
 	}
+
 
 	public void doMoveOnClick(ActionEvent event) {
 		Image img = new Image("/client/pawnBlack.png");
@@ -426,5 +468,17 @@ public class ClientGUIController {
 		} else {
 			previousNode = currentPosition;
 		}
+	}
+
+	public void updatePlayersList(String[] list) {
+		playersList.clear();
+		for(String s: list) {
+			playersList.add(s);
+		}
+		playersInLobbyList.setItems(playersList);
+	}
+
+	public void updateLobbyList(String[] list) {
+
 	}
 }

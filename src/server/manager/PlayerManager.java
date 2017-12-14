@@ -1,6 +1,6 @@
 package server.manager;
 
-import javafx.scene.paint.Color;
+import server.lobby.Lobby;
 import server.player.Bot;
 import jmx.Player;
 
@@ -11,7 +11,6 @@ public class PlayerManager implements IPlayerManager {
     public ArrayList<Player> playerInGameList;
     public ArrayList<Bot> botList;
     public String name;
-    public final Color[] colorPalette = {Color.DEEPPINK, Color.YELLOW, Color.MEDIUMBLUE, Color.LIMEGREEN, Color.FIREBRICK, Color.CYAN};
     private static volatile PlayerManager instance;
 
 
@@ -80,5 +79,33 @@ public class PlayerManager implements IPlayerManager {
             }
         }
         return 0;
+    }
+
+    public Player getPlayerFromFreeList(String playerName) {
+        for(Player p: playerFreeList) {
+            if(p.name.equals(playerName)) {
+                return p;
+            }
+        }
+        return null;
+    }
+
+    public Player getPlayerFromInGameList(String playerName) {
+        for(Player p: playerInGameList) {
+            if(p.name.equals(playerName)) {
+                return p;
+            }
+        }
+        return null;
+    }
+
+    public void movePlayerToInGameList(Player player) {
+        playerFreeList.remove(player);
+        playerInGameList.add(player);
+    }
+
+    public void movePlayerToFreeList(Player player) {
+        playerInGameList.remove(player);
+        playerFreeList.add(player);
     }
 }

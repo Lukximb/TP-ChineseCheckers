@@ -102,6 +102,50 @@ public class ClientConnection {
         System.out.println("Method invoked: " + methodName + " on: " + mBeanName.toString());
     }
 
+    public void invokeAddPlayerToLobbyMethod(ObjectName mBeanName, String methodName, String lobbyName, String playerName) {
+        Object  opParams[] = {lobbyName, playerName};
+        String  opSig[] = {String.class.getName(), String.class.getName()};
+        try {
+            mbsc.invoke(mBeanName, methodName, opParams, opSig);
+        } catch (Exception  e) {
+            e.printStackTrace();
+        }
+        System.out.println("Method invoked: " + methodName + " on: " + mBeanName.toString());
+    }
+
+    public void invokeRemovePlayerToLobbyMethod(ObjectName mBeanName, String methodName, String lobbyName, String playerName) {
+        Object  opParams[] = {lobbyName, playerName};
+        String  opSig[] = {String.class.getName(), String.class.getName()};
+        try {
+            mbsc.invoke(mBeanName, methodName, opParams, opSig);
+        } catch (Exception  e) {
+            e.printStackTrace();
+        }
+        System.out.println("Method invoked: " + methodName + " on: " + mBeanName.toString());
+    }
+
+    public void invokeSendPlayersInLobbyList(ObjectName mBeanName, String methodName, String playerName) {
+        Object  opParams[] = {playerName};
+        String  opSig[] = {String.class.getName()};
+        try {
+            mbsc.invoke(mBeanName, methodName, opParams, opSig);
+        } catch (Exception  e) {
+            e.printStackTrace();
+        }
+        System.out.println("Method invoked: " + methodName + " on: " + mBeanName.toString());
+    }
+
+    public void invokeSendWaitingLobbyList(ObjectName mBeanName, String methodName, String playerName) {
+        Object  opParams[] = {playerName};
+        String  opSig[] = {String.class.getName()};
+        try {
+            mbsc.invoke(mBeanName, methodName, opParams, opSig);
+        } catch (Exception  e) {
+            e.printStackTrace();
+        }
+        System.out.println("Method invoked: " + methodName + " on: " + mBeanName.toString());
+    }
+
     public void invokeCheckMoveMethod(ObjectName mBeanName, String methodName, Coordinates currentCoordinates, Coordinates destinationCoordinates) {
         Object  opParams[] = {currentCoordinates, destinationCoordinates};
         String  opSig[] = {Coordinates.class.getName(), Coordinates.class.getName()};

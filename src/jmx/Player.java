@@ -20,6 +20,11 @@ public class Player implements PlayerMBean, Serializable{
     }
 
     @Override
+    public void checkMove(Coordinates currentCoordinates, Coordinates destinationCoordinates) {
+
+    }
+
+    @Override
     public void move(Coordinates currentCoordinates, Coordinates destinationCoordinates) {
         System.out.println(">> Invoke move from player: " + pid);
     }
@@ -30,13 +35,8 @@ public class Player implements PlayerMBean, Serializable{
     }
 
     @Override
-    public void checkMove(Coordinates currentCoordinates, Coordinates destinationCoordinates) {
-
-    }
-
-    @Override
-    public void joinToLobby(String lobbyName) {
-
+    public void joinToLobby(Lobby lobby) {
+        this.lobby = lobby;
     }
 
     @Override
@@ -81,4 +81,13 @@ public class Player implements PlayerMBean, Serializable{
     public Color getColor() {
         return this.color;
     }
+
+    public String getPlayersNames() {
+        String playersList = "";
+        for(Player p: lobby.players) {
+            playersList.concat(","+p.name);
+        }
+        return playersList;
+    }
+
 }

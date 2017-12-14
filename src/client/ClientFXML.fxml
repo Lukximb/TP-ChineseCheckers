@@ -21,7 +21,7 @@
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
-<StackPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<StackPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <StackPane fx:id="playerNickNamePanel" prefHeight="150.0" prefWidth="200.0">
          <children>
@@ -210,9 +210,9 @@
                   <Insets top="30.0" />
                </StackPane.margin>
             </Label>
-            <TableView maxHeight="210.0" maxWidth="200.0" prefHeight="200.0" prefWidth="200.0" StackPane.alignment="TOP_LEFT">
+            <TableView fx:id="playersInLobbyList" maxHeight="210.0" maxWidth="200.0" prefHeight="200.0" prefWidth="200.0" StackPane.alignment="TOP_LEFT">
               <columns>
-                <TableColumn prefWidth="200.0" text="Name" />
+                <TableColumn fx:id="playersInLobbyColumn" prefWidth="200.0" text="Name" />
               </columns>
                <StackPane.margin>
                   <Insets left="75.0" top="150.0" />
@@ -228,9 +228,9 @@
                   <Insets right="75.0" top="350.0" />
                </StackPane.margin>
             </Button>
-            <Button fx:id="removePlayerButton" alignment="CENTER" mnemonicParsing="false" prefHeight="30.0" prefWidth="150.0" text="Remove" textAlignment="CENTER" StackPane.alignment="TOP_RIGHT">
+            <Button fx:id="removePlayerButton" alignment="CENTER" mnemonicParsing="false" onAction="#removePlayerButtonOnClick" prefHeight="30.0" prefWidth="100.0" text="Remove" textAlignment="CENTER" StackPane.alignment="TOP_RIGHT">
                <StackPane.margin>
-                  <Insets right="75.0" top="230.0" />
+                  <Insets right="30.0" top="230.0" />
                </StackPane.margin>
             </Button>
             <ButtonBar buttonMinWidth="80.0" maxHeight="30.0" maxWidth="200.0" prefHeight="40.0" prefWidth="200.0" StackPane.alignment="TOP_RIGHT">
@@ -251,6 +251,11 @@
             <Button fx:id="exitLobbyButton" mnemonicParsing="false" onAction="#exitLobbyButtonOnClick" prefWidth="150.0" text="Exit Lobby" StackPane.alignment="TOP_CENTER">
                <StackPane.margin>
                   <Insets left="200.0" top="550.0" />
+               </StackPane.margin>
+            </Button>
+            <Button fx:id="addPlayerButton" mnemonicParsing="false" onAction="#addPlayerButtonOnClick" prefHeight="30.0" prefWidth="100.0" text="Add" textAlignment="CENTER" StackPane.alignment="TOP_RIGHT">
+               <StackPane.margin>
+                  <Insets right="170.0" top="230.0" />
                </StackPane.margin>
             </Button>
          </children>
@@ -318,7 +323,7 @@
                   <RowConstraints maxHeight="30.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                </rowConstraints>
                <children>
-                  <Circle onMouseClicked="#chooseCircleOnClick" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.rowIndex="0" GridPane.columnIndex="12">
+                  <Circle radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="12">
                      <fill>
                         <RadialGradient centerX="0.5" centerY="0.5" radius="0.5">
                            <stops>
@@ -328,7 +333,7 @@
                         </RadialGradient>
                      </fill>
                   </Circle>
-                  <Circle layoutX="170.0" layoutY="200.0" onMouseClicked="#chooseCircleOnClick" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="13" GridPane.rowIndex="1">
+                  <Circle layoutX="170.0" layoutY="200.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="13" GridPane.rowIndex="1">
                      <fill>
                         <RadialGradient centerX="0.5" centerY="0.5" radius="0.5">
                            <stops>
@@ -338,7 +343,7 @@
                         </RadialGradient>
                      </fill>
                   </Circle>
-                  <Circle layoutX="50.0" layoutY="170.0" onMouseClicked="#chooseCircleOnClick" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="11" GridPane.rowIndex="1">
+                  <Circle layoutX="50.0" layoutY="170.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="11" GridPane.rowIndex="1">
                      <fill>
                         <RadialGradient centerX="0.5" centerY="0.5" radius="0.5">
                            <stops>
@@ -348,7 +353,7 @@
                         </RadialGradient>
                      </fill>
                   </Circle>
-                  <Circle layoutX="410.0" layoutY="170.0" onMouseClicked="#chooseCircleOnClick" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="14" GridPane.rowIndex="2">
+                  <Circle layoutX="410.0" layoutY="170.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="14" GridPane.rowIndex="2">
                      <fill>
                         <RadialGradient centerX="0.5" centerY="0.5" radius="0.5">
                            <stops>
@@ -358,7 +363,7 @@
                         </RadialGradient>
                      </fill>
                   </Circle>
-                  <Circle layoutX="380.0" layoutY="200.0" onMouseClicked="#chooseCircleOnClick" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="12" GridPane.rowIndex="2">
+                  <Circle layoutX="380.0" layoutY="200.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="12" GridPane.rowIndex="2">
                      <fill>
                         <RadialGradient centerX="0.5" centerY="0.5" radius="0.5">
                            <stops>
@@ -368,7 +373,7 @@
                         </RadialGradient>
                      </fill>
                   </Circle>
-                  <Circle layoutX="50.0" layoutY="170.0" onMouseClicked="#chooseCircleOnClick" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="10" GridPane.rowIndex="2">
+                  <Circle layoutX="50.0" layoutY="170.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="10" GridPane.rowIndex="2">
                      <fill>
                         <RadialGradient centerX="0.5" centerY="0.5" radius="0.5">
                            <stops>
@@ -378,7 +383,7 @@
                         </RadialGradient>
                      </fill>
                   </Circle>
-                  <Circle layoutX="410.0" layoutY="170.0" onMouseClicked="#chooseCircleOnClick" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="15" GridPane.rowIndex="3">
+                  <Circle layoutX="410.0" layoutY="170.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="15" GridPane.rowIndex="3">
                      <fill>
                         <RadialGradient centerX="0.5" centerY="0.5" radius="0.5">
                            <stops>
@@ -388,7 +393,7 @@
                         </RadialGradient>
                      </fill>
                   </Circle>
-                  <Circle layoutX="380.0" layoutY="200.0" onMouseClicked="#chooseCircleOnClick" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="13" GridPane.rowIndex="3">
+                  <Circle layoutX="380.0" layoutY="200.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="13" GridPane.rowIndex="3">
                      <fill>
                         <RadialGradient centerX="0.5" centerY="0.5" radius="0.5">
                            <stops>
@@ -398,7 +403,7 @@
                         </RadialGradient>
                      </fill>
                   </Circle>
-                  <Circle layoutX="50.0" layoutY="170.0" onMouseClicked="#chooseCircleOnClick" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="11" GridPane.rowIndex="3">
+                  <Circle layoutX="50.0" layoutY="170.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="11" GridPane.rowIndex="3">
                      <fill>
                         <RadialGradient centerX="0.5" centerY="0.5" radius="0.5">
                            <stops>
@@ -408,7 +413,7 @@
                         </RadialGradient>
                      </fill>
                   </Circle>
-                  <Circle layoutX="50.0" layoutY="170.0" onMouseClicked="#chooseCircleOnClick" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="9" GridPane.rowIndex="3">
+                  <Circle layoutX="50.0" layoutY="170.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="9" GridPane.rowIndex="3">
                      <fill>
                         <RadialGradient centerX="0.5" centerY="0.5" radius="0.5">
                            <stops>
@@ -418,7 +423,7 @@
                         </RadialGradient>
                      </fill>
                   </Circle>
-                  <Circle layoutX="50.0" layoutY="170.0" onMouseClicked="#chooseCircleOnClick" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="24" GridPane.rowIndex="4">
+                  <Circle layoutX="50.0" layoutY="170.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="24" GridPane.rowIndex="4">
                      <fill>
                         <RadialGradient centerX="0.5" centerY="0.5" radius="0.5">
                            <stops>
@@ -428,7 +433,7 @@
                         </RadialGradient>
                      </fill>
                   </Circle>
-                  <Circle layoutX="50.0" layoutY="170.0" onMouseClicked="#chooseCircleOnClick" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="22" GridPane.rowIndex="4">
+                  <Circle layoutX="50.0" layoutY="170.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="22" GridPane.rowIndex="4">
                      <fill>
                         <RadialGradient centerX="0.5" centerY="0.5" radius="0.5">
                            <stops>
@@ -438,7 +443,7 @@
                         </RadialGradient>
                      </fill>
                   </Circle>
-                  <Circle layoutX="410.0" layoutY="170.0" onMouseClicked="#chooseCircleOnClick" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="20" GridPane.rowIndex="4">
+                  <Circle layoutX="410.0" layoutY="170.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="20" GridPane.rowIndex="4">
                      <fill>
                         <RadialGradient centerX="0.5" centerY="0.5" radius="0.5">
                            <stops>
@@ -448,7 +453,7 @@
                         </RadialGradient>
                      </fill>
                   </Circle>
-                  <Circle layoutX="380.0" layoutY="200.0" onMouseClicked="#chooseCircleOnClick" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="18" GridPane.rowIndex="4">
+                  <Circle layoutX="380.0" layoutY="200.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="18" GridPane.rowIndex="4">
                      <fill>
                         <RadialGradient centerX="0.5" centerY="0.5" radius="0.5">
                            <stops>
@@ -458,12 +463,12 @@
                         </RadialGradient>
                      </fill>
                   </Circle>
-                  <Circle fill="WHITE" layoutX="50.0" layoutY="170.0" onMouseClicked="#chooseCircleOnClick" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="16" GridPane.rowIndex="4" />
-                  <Circle fill="WHITE" layoutX="50.0" layoutY="170.0" onMouseClicked="#chooseCircleOnClick" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="14" GridPane.rowIndex="4" />
-                  <Circle fill="WHITE" layoutX="50.0" layoutY="170.0" onMouseClicked="#chooseCircleOnClick" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="12" GridPane.rowIndex="4" />
-                  <Circle fill="WHITE" layoutX="110.0" layoutY="530.0" onMouseClicked="#chooseCircleOnClick" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="10" GridPane.rowIndex="4" />
-                  <Circle fill="WHITE" layoutX="50.0" layoutY="530.0" onMouseClicked="#chooseCircleOnClick" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="8" GridPane.rowIndex="4" />
-                  <Circle layoutX="500.0" layoutY="560.0" onMouseClicked="#chooseCircleOnClick" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="6" GridPane.rowIndex="4">
+                  <Circle fill="WHITE" layoutX="50.0" layoutY="170.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="16" GridPane.rowIndex="4" />
+                  <Circle fill="WHITE" layoutX="50.0" layoutY="170.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="14" GridPane.rowIndex="4" />
+                  <Circle fill="WHITE" layoutX="50.0" layoutY="170.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="12" GridPane.rowIndex="4" />
+                  <Circle fill="WHITE" layoutX="110.0" layoutY="530.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="10" GridPane.rowIndex="4" />
+                  <Circle fill="WHITE" layoutX="50.0" layoutY="530.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="8" GridPane.rowIndex="4" />
+                  <Circle layoutX="500.0" layoutY="560.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="6" GridPane.rowIndex="4">
                      <fill>
                         <RadialGradient centerX="0.5" centerY="0.5" radius="0.5">
                            <stops>
@@ -473,7 +478,7 @@
                         </RadialGradient>
                      </fill>
                   </Circle>
-                  <Circle layoutX="440.0" layoutY="560.0" onMouseClicked="#chooseCircleOnClick" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="4" GridPane.rowIndex="4">
+                  <Circle layoutX="440.0" layoutY="560.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="4" GridPane.rowIndex="4">
                      <fill>
                         <RadialGradient centerX="0.5" centerY="0.5" radius="0.5">
                            <stops>
@@ -483,7 +488,7 @@
                         </RadialGradient>
                      </fill>
                   </Circle>
-                  <Circle layoutX="380.0" layoutY="560.0" onMouseClicked="#chooseCircleOnClick" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="2" GridPane.rowIndex="4">
+                  <Circle layoutX="380.0" layoutY="560.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="2" GridPane.rowIndex="4">
                      <fill>
                         <RadialGradient centerX="0.5" centerY="0.5" radius="0.5">
                            <stops>
@@ -493,7 +498,7 @@
                         </RadialGradient>
                      </fill>
                   </Circle>
-                  <Circle layoutX="320.0" layoutY="560.0" onMouseClicked="#chooseCircleOnClick" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="0" GridPane.rowIndex="4">
+                  <Circle layoutX="320.0" layoutY="560.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.rowIndex="4">
                      <fill>
                         <RadialGradient centerX="0.5" centerY="0.5" radius="0.5">
                            <stops>
@@ -503,7 +508,7 @@
                         </RadialGradient>
                      </fill>
                   </Circle>
-                  <Circle layoutX="470.0" layoutY="590.0" onMouseClicked="#chooseCircleOnClick" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="23" GridPane.rowIndex="5">
+                  <Circle layoutX="470.0" layoutY="590.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="23" GridPane.rowIndex="5">
                      <fill>
                         <RadialGradient centerX="0.5" centerY="0.5" radius="0.5">
                            <stops>
@@ -513,7 +518,7 @@
                         </RadialGradient>
                      </fill>
                   </Circle>
-                  <Circle layoutX="410.0" layoutY="590.0" onMouseClicked="#chooseCircleOnClick" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="21" GridPane.rowIndex="5">
+                  <Circle layoutX="410.0" layoutY="590.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="21" GridPane.rowIndex="5">
                      <fill>
                         <RadialGradient centerX="0.5" centerY="0.5" radius="0.5">
                            <stops>
@@ -523,7 +528,7 @@
                         </RadialGradient>
                      </fill>
                   </Circle>
-                  <Circle layoutX="350.0" layoutY="590.0" onMouseClicked="#chooseCircleOnClick" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="19" GridPane.rowIndex="5">
+                  <Circle layoutX="350.0" layoutY="590.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="19" GridPane.rowIndex="5">
                      <fill>
                         <RadialGradient centerX="0.5" centerY="0.5" radius="0.5">
                            <stops>
@@ -533,13 +538,13 @@
                         </RadialGradient>
                      </fill>
                   </Circle>
-                  <Circle fill="WHITE" layoutX="440.0" layoutY="620.0" onMouseClicked="#chooseCircleOnClick" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="17" GridPane.rowIndex="5" />
-                  <Circle fill="WHITE" layoutX="380.0" layoutY="620.0" onMouseClicked="#chooseCircleOnClick" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="15" GridPane.rowIndex="5" />
-                  <Circle fill="WHITE" layoutX="410.0" layoutY="650.0" onMouseClicked="#chooseCircleOnClick" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="13" GridPane.rowIndex="5" />
-                  <Circle fill="WHITE" layoutX="590.0" layoutY="530.0" onMouseClicked="#chooseCircleOnClick" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="11" GridPane.rowIndex="5" />
-                  <Circle fill="WHITE" layoutX="530.0" layoutY="530.0" onMouseClicked="#chooseCircleOnClick" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="9" GridPane.rowIndex="5" />
-                  <Circle fill="WHITE" layoutX="470.0" layoutY="530.0" onMouseClicked="#chooseCircleOnClick" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="7" GridPane.rowIndex="5" />
-                  <Circle layoutX="410.0" layoutY="530.0" onMouseClicked="#chooseCircleOnClick" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="5" GridPane.rowIndex="5">
+                  <Circle fill="WHITE" layoutX="440.0" layoutY="620.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="17" GridPane.rowIndex="5" />
+                  <Circle fill="WHITE" layoutX="380.0" layoutY="620.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="15" GridPane.rowIndex="5" />
+                  <Circle fill="WHITE" layoutX="410.0" layoutY="650.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="13" GridPane.rowIndex="5" />
+                  <Circle fill="WHITE" layoutX="590.0" layoutY="530.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="11" GridPane.rowIndex="5" />
+                  <Circle fill="WHITE" layoutX="530.0" layoutY="530.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="9" GridPane.rowIndex="5" />
+                  <Circle fill="WHITE" layoutX="470.0" layoutY="530.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="7" GridPane.rowIndex="5" />
+                  <Circle layoutX="410.0" layoutY="530.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="5" GridPane.rowIndex="5">
                      <fill>
                         <RadialGradient centerX="0.5" centerY="0.5" radius="0.5">
                            <stops>
@@ -549,7 +554,7 @@
                         </RadialGradient>
                      </fill>
                   </Circle>
-                  <Circle layoutX="350.0" layoutY="530.0" onMouseClicked="#chooseCircleOnClick" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="3" GridPane.rowIndex="5">
+                  <Circle layoutX="350.0" layoutY="530.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="3" GridPane.rowIndex="5">
                      <fill>
                         <RadialGradient centerX="0.5" centerY="0.5" radius="0.5">
                            <stops>
@@ -559,7 +564,7 @@
                         </RadialGradient>
                      </fill>
                   </Circle>
-                  <Circle layoutX="290.0" layoutY="530.0" onMouseClicked="#chooseCircleOnClick" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="1" GridPane.rowIndex="5">
+                  <Circle layoutX="290.0" layoutY="530.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="1" GridPane.rowIndex="5">
                      <fill>
                         <RadialGradient centerX="0.5" centerY="0.5" radius="0.5">
                            <stops>
@@ -569,7 +574,7 @@
                         </RadialGradient>
                      </fill>
                   </Circle>
-                  <Circle layoutX="230.0" layoutY="530.0" onMouseClicked="#chooseCircleOnClick" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="22" GridPane.rowIndex="6">
+                  <Circle layoutX="230.0" layoutY="530.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="22" GridPane.rowIndex="6">
                      <fill>
                         <RadialGradient centerX="0.5" centerY="0.5" radius="0.5">
                            <stops>
@@ -579,7 +584,7 @@
                         </RadialGradient>
                      </fill>
                   </Circle>
-                  <Circle layoutX="170.0" layoutY="530.0" onMouseClicked="#chooseCircleOnClick" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="20" GridPane.rowIndex="6">
+                  <Circle layoutX="170.0" layoutY="530.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="20" GridPane.rowIndex="6">
                      <fill>
                         <RadialGradient centerX="0.5" centerY="0.5" radius="0.5">
                            <stops>
@@ -589,14 +594,14 @@
                         </RadialGradient>
                      </fill>
                   </Circle>
-                  <Circle fill="WHITE" layoutX="110.0" layoutY="530.0" onMouseClicked="#chooseCircleOnClick" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="18" GridPane.rowIndex="6" />
-                  <Circle fill="WHITE" layoutX="50.0" layoutY="530.0" onMouseClicked="#chooseCircleOnClick" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="16" GridPane.rowIndex="6" />
-                  <Circle fill="WHITE" layoutX="500.0" layoutY="560.0" onMouseClicked="#chooseCircleOnClick" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="14" GridPane.rowIndex="6" />
-                  <Circle fill="WHITE" layoutX="440.0" layoutY="560.0" onMouseClicked="#chooseCircleOnClick" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="12" GridPane.rowIndex="6" />
-                  <Circle fill="WHITE" layoutX="380.0" layoutY="560.0" onMouseClicked="#chooseCircleOnClick" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="10" GridPane.rowIndex="6" />
-                  <Circle fill="WHITE" layoutX="320.0" layoutY="560.0" onMouseClicked="#chooseCircleOnClick" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="8" GridPane.rowIndex="6" />
-                  <Circle fill="WHITE" layoutX="470.0" layoutY="590.0" onMouseClicked="#chooseCircleOnClick" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="6" GridPane.rowIndex="6" />
-                  <Circle layoutX="410.0" layoutY="590.0" onMouseClicked="#chooseCircleOnClick" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="4" GridPane.rowIndex="6">
+                  <Circle fill="WHITE" layoutX="110.0" layoutY="530.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="18" GridPane.rowIndex="6" />
+                  <Circle fill="WHITE" layoutX="50.0" layoutY="530.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="16" GridPane.rowIndex="6" />
+                  <Circle fill="WHITE" layoutX="500.0" layoutY="560.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="14" GridPane.rowIndex="6" />
+                  <Circle fill="WHITE" layoutX="440.0" layoutY="560.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="12" GridPane.rowIndex="6" />
+                  <Circle fill="WHITE" layoutX="380.0" layoutY="560.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="10" GridPane.rowIndex="6" />
+                  <Circle fill="WHITE" layoutX="320.0" layoutY="560.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="8" GridPane.rowIndex="6" />
+                  <Circle fill="WHITE" layoutX="470.0" layoutY="590.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="6" GridPane.rowIndex="6" />
+                  <Circle layoutX="410.0" layoutY="590.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="4" GridPane.rowIndex="6">
                      <fill>
                         <RadialGradient centerX="0.5" centerY="0.5" radius="0.5">
                            <stops>
@@ -606,7 +611,7 @@
                         </RadialGradient>
                      </fill>
                   </Circle>
-                  <Circle layoutX="350.0" layoutY="590.0" onMouseClicked="#chooseCircleOnClick" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="2" GridPane.rowIndex="6">
+                  <Circle layoutX="350.0" layoutY="590.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="2" GridPane.rowIndex="6">
                      <fill>
                         <RadialGradient centerX="0.5" centerY="0.5" radius="0.5">
                            <stops>
@@ -616,7 +621,7 @@
                         </RadialGradient>
                      </fill>
                   </Circle>
-                  <Circle layoutX="440.0" layoutY="620.0" onMouseClicked="#chooseCircleOnClick" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="21" GridPane.rowIndex="7">
+                  <Circle layoutX="440.0" layoutY="620.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="21" GridPane.rowIndex="7">
                      <fill>
                         <RadialGradient centerX="0.5" centerY="0.5" radius="0.5">
                            <stops>
@@ -626,15 +631,15 @@
                         </RadialGradient>
                      </fill>
                   </Circle>
-                  <Circle fill="WHITE" layoutX="380.0" layoutY="620.0" onMouseClicked="#chooseCircleOnClick" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="19" GridPane.rowIndex="7" />
-                  <Circle fill="WHITE" layoutX="410.0" layoutY="650.0" onMouseClicked="#chooseCircleOnClick" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="17" GridPane.rowIndex="7" />
-                  <Circle fill="WHITE" layoutX="140.0" layoutY="500.0" onMouseClicked="#chooseCircleOnClick" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="15" GridPane.rowIndex="7" />
-                  <Circle fill="WHITE" layoutX="80.0" layoutY="500.0" onMouseClicked="#chooseCircleOnClick" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="13" GridPane.rowIndex="7" />
-                  <Circle fill="WHITE" layoutX="770.0" layoutY="530.0" onMouseClicked="#chooseCircleOnClick" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="11" GridPane.rowIndex="7" />
-                  <Circle fill="WHITE" layoutX="710.0" layoutY="530.0" onMouseClicked="#chooseCircleOnClick" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="9" GridPane.rowIndex="7" />
-                  <Circle fill="WHITE" layoutX="650.0" layoutY="530.0" onMouseClicked="#chooseCircleOnClick" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="7" GridPane.rowIndex="7" />
-                  <Circle fill="WHITE" layoutX="590.0" layoutY="530.0" onMouseClicked="#chooseCircleOnClick" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="5" GridPane.rowIndex="7" />
-                  <Circle layoutX="530.0" layoutY="530.0" onMouseClicked="#chooseCircleOnClick" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="3" GridPane.rowIndex="7">
+                  <Circle fill="WHITE" layoutX="380.0" layoutY="620.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="19" GridPane.rowIndex="7" />
+                  <Circle fill="WHITE" layoutX="410.0" layoutY="650.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="17" GridPane.rowIndex="7" />
+                  <Circle fill="WHITE" layoutX="140.0" layoutY="500.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="15" GridPane.rowIndex="7" />
+                  <Circle fill="WHITE" layoutX="80.0" layoutY="500.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="13" GridPane.rowIndex="7" />
+                  <Circle fill="WHITE" layoutX="770.0" layoutY="530.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="11" GridPane.rowIndex="7" />
+                  <Circle fill="WHITE" layoutX="710.0" layoutY="530.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="9" GridPane.rowIndex="7" />
+                  <Circle fill="WHITE" layoutX="650.0" layoutY="530.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="7" GridPane.rowIndex="7" />
+                  <Circle fill="WHITE" layoutX="590.0" layoutY="530.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="5" GridPane.rowIndex="7" />
+                  <Circle layoutX="530.0" layoutY="530.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="3" GridPane.rowIndex="7">
                      <fill>
                         <RadialGradient centerX="0.5" centerY="0.5" radius="0.5">
                            <stops>
@@ -644,16 +649,16 @@
                         </RadialGradient>
                      </fill>
                   </Circle>
-                  <Circle fill="WHITE" layoutX="470.0" layoutY="530.0" onMouseClicked="#chooseCircleOnClick" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="20" GridPane.rowIndex="8" />
-                  <Circle fill="WHITE" layoutX="410.0" layoutY="530.0" onMouseClicked="#chooseCircleOnClick" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="18" GridPane.rowIndex="8" />
-                  <Circle fill="WHITE" layoutX="350.0" layoutY="530.0" onMouseClicked="#chooseCircleOnClick" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="16" GridPane.rowIndex="8" />
-                  <Circle fill="WHITE" layoutX="290.0" layoutY="530.0" onMouseClicked="#chooseCircleOnClick" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="14" GridPane.rowIndex="8" />
-                  <Circle fill="WHITE" layoutX="230.0" layoutY="530.0" onMouseClicked="#chooseCircleOnClick" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="12" GridPane.rowIndex="8" />
-                  <Circle fill="WHITE" layoutX="170.0" layoutY="530.0" onMouseClicked="#chooseCircleOnClick" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="10" GridPane.rowIndex="8" />
-                  <Circle fill="WHITE" layoutX="110.0" layoutY="530.0" onMouseClicked="#chooseCircleOnClick" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="8" GridPane.rowIndex="8" />
-                  <Circle fill="WHITE" layoutX="50.0" layoutY="530.0" onMouseClicked="#chooseCircleOnClick" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="6" GridPane.rowIndex="8" />
-                  <Circle fill="WHITE" layoutX="500.0" layoutY="560.0" onMouseClicked="#chooseCircleOnClick" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="4" GridPane.rowIndex="8" />
-                  <Circle layoutX="440.0" layoutY="560.0" onMouseClicked="#chooseCircleOnClick" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="21" GridPane.rowIndex="9">
+                  <Circle fill="WHITE" layoutX="470.0" layoutY="530.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="20" GridPane.rowIndex="8" />
+                  <Circle fill="WHITE" layoutX="410.0" layoutY="530.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="18" GridPane.rowIndex="8" />
+                  <Circle fill="WHITE" layoutX="350.0" layoutY="530.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="16" GridPane.rowIndex="8" />
+                  <Circle fill="WHITE" layoutX="290.0" layoutY="530.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="14" GridPane.rowIndex="8" />
+                  <Circle fill="WHITE" layoutX="230.0" layoutY="530.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="12" GridPane.rowIndex="8" />
+                  <Circle fill="WHITE" layoutX="170.0" layoutY="530.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="10" GridPane.rowIndex="8" />
+                  <Circle fill="WHITE" layoutX="110.0" layoutY="530.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="8" GridPane.rowIndex="8" />
+                  <Circle fill="WHITE" layoutX="50.0" layoutY="530.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="6" GridPane.rowIndex="8" />
+                  <Circle fill="WHITE" layoutX="500.0" layoutY="560.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="4" GridPane.rowIndex="8" />
+                  <Circle layoutX="440.0" layoutY="560.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="21" GridPane.rowIndex="9">
                      <fill>
                         <RadialGradient centerX="0.4943181818181818" centerY="0.5" radius="0.5">
                            <stops>
@@ -663,15 +668,15 @@
                         </RadialGradient>
                      </fill>
                   </Circle>
-                  <Circle fill="WHITE" layoutX="380.0" layoutY="560.0" onMouseClicked="#chooseCircleOnClick" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="19" GridPane.rowIndex="9" />
-                  <Circle fill="WHITE" layoutX="320.0" layoutY="560.0" onMouseClicked="#chooseCircleOnClick" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="17" GridPane.rowIndex="9" />
-                  <Circle fill="WHITE" layoutX="470.0" layoutY="590.0" onMouseClicked="#chooseCircleOnClick" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="15" GridPane.rowIndex="9" />
-                  <Circle fill="WHITE" layoutX="410.0" layoutY="590.0" onMouseClicked="#chooseCircleOnClick" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="13" GridPane.rowIndex="9" />
-                  <Circle fill="WHITE" layoutX="350.0" layoutY="590.0" onMouseClicked="#chooseCircleOnClick" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="11" GridPane.rowIndex="9" />
-                  <Circle fill="WHITE" layoutX="440.0" layoutY="620.0" onMouseClicked="#chooseCircleOnClick" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="9" GridPane.rowIndex="9" />
-                  <Circle fill="WHITE" layoutX="380.0" layoutY="620.0" onMouseClicked="#chooseCircleOnClick" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="7" GridPane.rowIndex="9" />
-                  <Circle fill="WHITE" layoutX="410.0" layoutY="650.0" onMouseClicked="#chooseCircleOnClick" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="5" GridPane.rowIndex="9" />
-                  <Circle layoutX="410.0" layoutY="290.0" onMouseClicked="#chooseCircleOnClick" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="3" GridPane.rowIndex="9">
+                  <Circle fill="WHITE" layoutX="380.0" layoutY="560.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="19" GridPane.rowIndex="9" />
+                  <Circle fill="WHITE" layoutX="320.0" layoutY="560.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="17" GridPane.rowIndex="9" />
+                  <Circle fill="WHITE" layoutX="470.0" layoutY="590.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="15" GridPane.rowIndex="9" />
+                  <Circle fill="WHITE" layoutX="410.0" layoutY="590.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="13" GridPane.rowIndex="9" />
+                  <Circle fill="WHITE" layoutX="350.0" layoutY="590.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="11" GridPane.rowIndex="9" />
+                  <Circle fill="WHITE" layoutX="440.0" layoutY="620.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="9" GridPane.rowIndex="9" />
+                  <Circle fill="WHITE" layoutX="380.0" layoutY="620.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="7" GridPane.rowIndex="9" />
+                  <Circle fill="WHITE" layoutX="410.0" layoutY="650.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="5" GridPane.rowIndex="9" />
+                  <Circle layoutX="410.0" layoutY="290.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="3" GridPane.rowIndex="9">
                      <fill>
                         <RadialGradient centerX="0.5" centerY="0.5" radius="0.5">
                            <stops>
@@ -681,7 +686,7 @@
                         </RadialGradient>
                      </fill>
                   </Circle>
-                  <Circle layoutX="230.0" layoutY="530.0" onMouseClicked="#chooseCircleOnClick" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="22" GridPane.rowIndex="10">
+                  <Circle layoutX="230.0" layoutY="530.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="22" GridPane.rowIndex="10">
                      <fill>
                         <RadialGradient centerX="0.4943181818181818" centerY="0.5" radius="0.5">
                            <stops>
@@ -691,7 +696,7 @@
                         </RadialGradient>
                      </fill>
                   </Circle>
-                  <Circle layoutX="170.0" layoutY="530.0" onMouseClicked="#chooseCircleOnClick" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="20" GridPane.rowIndex="10">
+                  <Circle layoutX="170.0" layoutY="530.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="20" GridPane.rowIndex="10">
                      <fill>
                         <RadialGradient centerX="0.4943181818181818" centerY="0.5" radius="0.5">
                            <stops>
@@ -701,14 +706,14 @@
                         </RadialGradient>
                      </fill>
                   </Circle>
-                  <Circle fill="WHITE" layoutX="110.0" layoutY="530.0" onMouseClicked="#chooseCircleOnClick" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="18" GridPane.rowIndex="10" />
-                  <Circle fill="WHITE" layoutX="50.0" layoutY="530.0" onMouseClicked="#chooseCircleOnClick" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="16" GridPane.rowIndex="10" />
-                  <Circle fill="WHITE" layoutX="500.0" layoutY="560.0" onMouseClicked="#chooseCircleOnClick" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="14" GridPane.rowIndex="10" />
-                  <Circle fill="WHITE" layoutX="440.0" layoutY="560.0" onMouseClicked="#chooseCircleOnClick" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="12" GridPane.rowIndex="10" />
-                  <Circle fill="WHITE" layoutX="380.0" layoutY="560.0" onMouseClicked="#chooseCircleOnClick" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="10" GridPane.rowIndex="10" />
-                  <Circle fill="WHITE" layoutX="320.0" layoutY="560.0" onMouseClicked="#chooseCircleOnClick" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="8" GridPane.rowIndex="10" />
-                  <Circle fill="WHITE" layoutX="470.0" layoutY="590.0" onMouseClicked="#chooseCircleOnClick" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="6" GridPane.rowIndex="10" />
-                  <Circle layoutX="410.0" layoutY="590.0" onMouseClicked="#chooseCircleOnClick" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="4" GridPane.rowIndex="10">
+                  <Circle fill="WHITE" layoutX="110.0" layoutY="530.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="18" GridPane.rowIndex="10" />
+                  <Circle fill="WHITE" layoutX="50.0" layoutY="530.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="16" GridPane.rowIndex="10" />
+                  <Circle fill="WHITE" layoutX="500.0" layoutY="560.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="14" GridPane.rowIndex="10" />
+                  <Circle fill="WHITE" layoutX="440.0" layoutY="560.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="12" GridPane.rowIndex="10" />
+                  <Circle fill="WHITE" layoutX="380.0" layoutY="560.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="10" GridPane.rowIndex="10" />
+                  <Circle fill="WHITE" layoutX="320.0" layoutY="560.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="8" GridPane.rowIndex="10" />
+                  <Circle fill="WHITE" layoutX="470.0" layoutY="590.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="6" GridPane.rowIndex="10" />
+                  <Circle layoutX="410.0" layoutY="590.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="4" GridPane.rowIndex="10">
                      <fill>
                         <RadialGradient centerX="0.5" centerY="0.5" radius="0.5">
                            <stops>
@@ -718,7 +723,7 @@
                         </RadialGradient>
                      </fill>
                   </Circle>
-                  <Circle layoutX="350.0" layoutY="590.0" onMouseClicked="#chooseCircleOnClick" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="2" GridPane.rowIndex="10">
+                  <Circle layoutX="350.0" layoutY="590.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="2" GridPane.rowIndex="10">
                      <fill>
                         <RadialGradient centerX="0.5" centerY="0.5" radius="0.5">
                            <stops>
@@ -728,7 +733,7 @@
                         </RadialGradient>
                      </fill>
                   </Circle>
-                  <Circle layoutX="440.0" layoutY="620.0" onMouseClicked="#chooseCircleOnClick" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="23" GridPane.rowIndex="11">
+                  <Circle layoutX="440.0" layoutY="620.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="23" GridPane.rowIndex="11">
                      <fill>
                         <RadialGradient centerX="0.4943181818181818" centerY="0.5" radius="0.5">
                            <stops>
@@ -738,7 +743,7 @@
                         </RadialGradient>
                      </fill>
                   </Circle>
-                  <Circle layoutX="380.0" layoutY="620.0" onMouseClicked="#chooseCircleOnClick" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="21" GridPane.rowIndex="11">
+                  <Circle layoutX="380.0" layoutY="620.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="21" GridPane.rowIndex="11">
                      <fill>
                         <RadialGradient centerX="0.4943181818181818" centerY="0.5" radius="0.5">
                            <stops>
@@ -748,7 +753,7 @@
                         </RadialGradient>
                      </fill>
                   </Circle>
-                  <Circle layoutX="410.0" layoutY="650.0" onMouseClicked="#chooseCircleOnClick" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="19" GridPane.rowIndex="11">
+                  <Circle layoutX="410.0" layoutY="650.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="19" GridPane.rowIndex="11">
                      <fill>
                         <RadialGradient centerX="0.4943181818181818" centerY="0.5" radius="0.5">
                            <stops>
@@ -758,13 +763,13 @@
                         </RadialGradient>
                      </fill>
                   </Circle>
-                  <Circle fill="WHITE" layoutX="50.0" layoutY="170.0" onMouseClicked="#chooseCircleOnClick" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="17" GridPane.rowIndex="11" />
-                  <Circle fill="WHITE" layoutX="50.0" layoutY="170.0" onMouseClicked="#chooseCircleOnClick" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="15" GridPane.rowIndex="11" />
-                  <Circle fill="WHITE" layoutX="50.0" layoutY="170.0" onMouseClicked="#chooseCircleOnClick" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="13" GridPane.rowIndex="11" />
-                  <Circle fill="WHITE" layoutX="50.0" layoutY="170.0" onMouseClicked="#chooseCircleOnClick" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="11" GridPane.rowIndex="11" />
-                  <Circle fill="WHITE" layoutX="50.0" layoutY="170.0" onMouseClicked="#chooseCircleOnClick" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="9" GridPane.rowIndex="11" />
-                  <Circle fill="WHITE" layoutX="50.0" layoutY="170.0" onMouseClicked="#chooseCircleOnClick" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="7" GridPane.rowIndex="11" />
-                  <Circle layoutX="50.0" layoutY="170.0" onMouseClicked="#chooseCircleOnClick" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="5" GridPane.rowIndex="11">
+                  <Circle fill="WHITE" layoutX="50.0" layoutY="170.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="17" GridPane.rowIndex="11" />
+                  <Circle fill="WHITE" layoutX="50.0" layoutY="170.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="15" GridPane.rowIndex="11" />
+                  <Circle fill="WHITE" layoutX="50.0" layoutY="170.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="13" GridPane.rowIndex="11" />
+                  <Circle fill="WHITE" layoutX="50.0" layoutY="170.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="11" GridPane.rowIndex="11" />
+                  <Circle fill="WHITE" layoutX="50.0" layoutY="170.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="9" GridPane.rowIndex="11" />
+                  <Circle fill="WHITE" layoutX="50.0" layoutY="170.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="7" GridPane.rowIndex="11" />
+                  <Circle layoutX="50.0" layoutY="170.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="5" GridPane.rowIndex="11">
                      <fill>
                         <RadialGradient centerX="0.5" centerY="0.5" radius="0.5">
                            <stops>
@@ -774,7 +779,7 @@
                         </RadialGradient>
                      </fill>
                   </Circle>
-                  <Circle layoutX="50.0" layoutY="170.0" onMouseClicked="#chooseCircleOnClick" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="3" GridPane.rowIndex="11">
+                  <Circle layoutX="50.0" layoutY="170.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="3" GridPane.rowIndex="11">
                      <fill>
                         <RadialGradient centerX="0.5" centerY="0.5" radius="0.5">
                            <stops>
@@ -784,7 +789,7 @@
                         </RadialGradient>
                      </fill>
                   </Circle>
-                  <Circle layoutX="410.0" layoutY="170.0" onMouseClicked="#chooseCircleOnClick" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="1" GridPane.rowIndex="11">
+                  <Circle layoutX="410.0" layoutY="170.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="1" GridPane.rowIndex="11">
                      <fill>
                         <RadialGradient centerX="0.5" centerY="0.5" radius="0.5">
                            <stops>
@@ -794,7 +799,7 @@
                         </RadialGradient>
                      </fill>
                   </Circle>
-                  <Circle layoutX="380.0" layoutY="200.0" onMouseClicked="#chooseCircleOnClick" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="24" GridPane.rowIndex="12">
+                  <Circle layoutX="380.0" layoutY="200.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="24" GridPane.rowIndex="12">
                      <fill>
                         <RadialGradient centerX="0.4943181818181818" centerY="0.5" radius="0.5">
                            <stops>
@@ -804,7 +809,7 @@
                         </RadialGradient>
                      </fill>
                   </Circle>
-                  <Circle layoutX="50.0" layoutY="170.0" onMouseClicked="#chooseCircleOnClick" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="22" GridPane.rowIndex="12">
+                  <Circle layoutX="50.0" layoutY="170.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="22" GridPane.rowIndex="12">
                      <fill>
                         <RadialGradient centerX="0.4943181818181818" centerY="0.5" radius="0.5">
                            <stops>
@@ -814,7 +819,7 @@
                         </RadialGradient>
                      </fill>
                   </Circle>
-                  <Circle layoutX="50.0" layoutY="170.0" onMouseClicked="#chooseCircleOnClick" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="20" GridPane.rowIndex="12">
+                  <Circle layoutX="50.0" layoutY="170.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="20" GridPane.rowIndex="12">
                      <fill>
                         <RadialGradient centerX="0.4943181818181818" centerY="0.5" radius="0.5">
                            <stops>
@@ -824,7 +829,7 @@
                         </RadialGradient>
                      </fill>
                   </Circle>
-                  <Circle layoutX="50.0" layoutY="170.0" onMouseClicked="#chooseCircleOnClick" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="18" GridPane.rowIndex="12">
+                  <Circle layoutX="50.0" layoutY="170.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="18" GridPane.rowIndex="12">
                      <fill>
                         <RadialGradient centerX="0.4943181818181818" centerY="0.5" radius="0.5">
                            <stops>
@@ -834,12 +839,12 @@
                         </RadialGradient>
                      </fill>
                   </Circle>
-                  <Circle fill="WHITE" layoutX="50.0" layoutY="170.0" onMouseClicked="#chooseCircleOnClick" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="16" GridPane.rowIndex="12" />
-                  <Circle fill="WHITE" layoutX="50.0" layoutY="170.0" onMouseClicked="#chooseCircleOnClick" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="14" GridPane.rowIndex="12" />
-                  <Circle fill="WHITE" layoutX="50.0" layoutY="170.0" onMouseClicked="#chooseCircleOnClick" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="12" GridPane.rowIndex="12" />
-                  <Circle fill="WHITE" layoutX="50.0" layoutY="170.0" onMouseClicked="#chooseCircleOnClick" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="10" GridPane.rowIndex="12" />
-                  <Circle fill="WHITE" layoutX="50.0" layoutY="170.0" onMouseClicked="#chooseCircleOnClick" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="8" GridPane.rowIndex="12" />
-                  <Circle layoutX="50.0" layoutY="170.0" onMouseClicked="#chooseCircleOnClick" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="6" GridPane.rowIndex="12">
+                  <Circle fill="WHITE" layoutX="50.0" layoutY="170.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="16" GridPane.rowIndex="12" />
+                  <Circle fill="WHITE" layoutX="50.0" layoutY="170.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="14" GridPane.rowIndex="12" />
+                  <Circle fill="WHITE" layoutX="50.0" layoutY="170.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="12" GridPane.rowIndex="12" />
+                  <Circle fill="WHITE" layoutX="50.0" layoutY="170.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="10" GridPane.rowIndex="12" />
+                  <Circle fill="WHITE" layoutX="50.0" layoutY="170.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="8" GridPane.rowIndex="12" />
+                  <Circle layoutX="50.0" layoutY="170.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="6" GridPane.rowIndex="12">
                      <fill>
                         <RadialGradient centerX="0.5" centerY="0.5" radius="0.5">
                            <stops>
@@ -849,7 +854,7 @@
                         </RadialGradient>
                      </fill>
                   </Circle>
-                  <Circle layoutX="50.0" layoutY="170.0" onMouseClicked="#chooseCircleOnClick" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="4" GridPane.rowIndex="12">
+                  <Circle layoutX="50.0" layoutY="170.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="4" GridPane.rowIndex="12">
                      <fill>
                         <RadialGradient centerX="0.5" centerY="0.5" radius="0.5">
                            <stops>
@@ -859,7 +864,7 @@
                         </RadialGradient>
                      </fill>
                   </Circle>
-                  <Circle layoutX="50.0" layoutY="170.0" onMouseClicked="#chooseCircleOnClick" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="2" GridPane.rowIndex="12">
+                  <Circle layoutX="50.0" layoutY="170.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="2" GridPane.rowIndex="12">
                      <fill>
                         <RadialGradient centerX="0.5" centerY="0.5" radius="0.5">
                            <stops>
@@ -869,7 +874,7 @@
                         </RadialGradient>
                      </fill>
                   </Circle>
-                  <Circle layoutX="50.0" layoutY="170.0" onMouseClicked="#chooseCircleOnClick" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="0" GridPane.rowIndex="12">
+                  <Circle layoutX="50.0" layoutY="170.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.rowIndex="12">
                      <fill>
                         <RadialGradient centerX="0.5" centerY="0.5" radius="0.5">
                            <stops>
@@ -879,7 +884,7 @@
                         </RadialGradient>
                      </fill>
                   </Circle>
-                  <Circle layoutX="50.0" layoutY="170.0" onMouseClicked="#chooseCircleOnClick" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="15" GridPane.rowIndex="13">
+                  <Circle layoutX="50.0" layoutY="170.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="15" GridPane.rowIndex="13">
                      <fill>
                         <RadialGradient centerX="0.4943181818181818" centerY="0.5" radius="0.5">
                            <stops>
@@ -889,7 +894,7 @@
                         </RadialGradient>
                      </fill>
                   </Circle>
-                  <Circle layoutX="50.0" layoutY="170.0" onMouseClicked="#chooseCircleOnClick" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="13" GridPane.rowIndex="13">
+                  <Circle layoutX="50.0" layoutY="170.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="13" GridPane.rowIndex="13">
                      <fill>
                         <RadialGradient centerX="0.4943181818181818" centerY="0.5" radius="0.5">
                            <stops>
@@ -899,7 +904,7 @@
                         </RadialGradient>
                      </fill>
                   </Circle>
-                  <Circle layoutX="50.0" layoutY="170.0" onMouseClicked="#chooseCircleOnClick" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="11" GridPane.rowIndex="13">
+                  <Circle layoutX="50.0" layoutY="170.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="11" GridPane.rowIndex="13">
                      <fill>
                         <RadialGradient centerX="0.4943181818181818" centerY="0.5" radius="0.5">
                            <stops>
@@ -909,7 +914,7 @@
                         </RadialGradient>
                      </fill>
                   </Circle>
-                  <Circle layoutX="50.0" layoutY="170.0" onMouseClicked="#chooseCircleOnClick" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="9" GridPane.rowIndex="13">
+                  <Circle layoutX="50.0" layoutY="170.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="9" GridPane.rowIndex="13">
                      <fill>
                         <RadialGradient centerX="0.4943181818181818" centerY="0.5" radius="0.5">
                            <stops>
@@ -919,7 +924,7 @@
                         </RadialGradient>
                      </fill>
                   </Circle>
-                  <Circle layoutX="50.0" layoutY="170.0" onMouseClicked="#chooseCircleOnClick" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="14" GridPane.rowIndex="14">
+                  <Circle layoutX="50.0" layoutY="170.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="14" GridPane.rowIndex="14">
                      <fill>
                         <RadialGradient centerX="0.4943181818181818" centerY="0.5" radius="0.5">
                            <stops>
@@ -929,7 +934,7 @@
                         </RadialGradient>
                      </fill>
                   </Circle>
-                  <Circle layoutX="50.0" layoutY="170.0" onMouseClicked="#chooseCircleOnClick" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="12" GridPane.rowIndex="14">
+                  <Circle layoutX="50.0" layoutY="170.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="12" GridPane.rowIndex="14">
                      <fill>
                         <RadialGradient centerX="0.4943181818181818" centerY="0.5" radius="0.5">
                            <stops>
@@ -939,7 +944,7 @@
                         </RadialGradient>
                      </fill>
                   </Circle>
-                  <Circle layoutX="50.0" layoutY="170.0" onMouseClicked="#chooseCircleOnClick" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="10" GridPane.rowIndex="14">
+                  <Circle layoutX="50.0" layoutY="170.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="10" GridPane.rowIndex="14">
                      <fill>
                         <RadialGradient centerX="0.4943181818181818" centerY="0.5" radius="0.5">
                            <stops>
@@ -949,7 +954,7 @@
                         </RadialGradient>
                      </fill>
                   </Circle>
-                  <Circle layoutX="50.0" layoutY="170.0" onMouseClicked="#chooseCircleOnClick" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="13" GridPane.rowIndex="15">
+                  <Circle layoutX="50.0" layoutY="170.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="13" GridPane.rowIndex="15">
                      <fill>
                         <RadialGradient centerX="0.4943181818181818" centerY="0.5" radius="0.5">
                            <stops>
@@ -959,7 +964,7 @@
                         </RadialGradient>
                      </fill>
                   </Circle>
-                  <Circle layoutX="50.0" layoutY="170.0" onMouseClicked="#chooseCircleOnClick" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="11" GridPane.rowIndex="15">
+                  <Circle layoutX="50.0" layoutY="170.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="11" GridPane.rowIndex="15">
                      <fill>
                         <RadialGradient centerX="0.4943181818181818" centerY="0.5" radius="0.5">
                            <stops>
@@ -969,7 +974,7 @@
                         </RadialGradient>
                      </fill>
                   </Circle>
-                  <Circle layoutX="50.0" layoutY="170.0" onMouseClicked="#chooseCircleOnClick" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="12" GridPane.rowIndex="16">
+                  <Circle layoutX="50.0" layoutY="170.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="12" GridPane.rowIndex="16">
                      <fill>
                         <RadialGradient centerX="0.4943181818181818" centerY="0.5" radius="0.5">
                            <stops>
@@ -989,7 +994,7 @@
                   <Insets top="720.0" />
                </StackPane.margin>
             </ListView>
-            <Button fx:id="moveButton" onAction="#doMoveOnClick" mnemonicParsing="false" prefHeight="30.0" prefWidth="150.0" text="Move" StackPane.alignment="TOP_LEFT">
+            <Button fx:id="moveButton" mnemonicParsing="false" onAction="#doMoveOnClick" prefHeight="30.0" prefWidth="150.0" text="Move" StackPane.alignment="TOP_LEFT">
                <StackPane.margin>
                   <Insets left="50.0" top="660.0" />
                </StackPane.margin>

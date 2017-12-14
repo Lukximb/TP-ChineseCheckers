@@ -1,6 +1,7 @@
 package jmx;
 
 import server.board.Coordinates;
+import server.lobby.Lobby;
 import server.player.Dificult;
 
 /**
@@ -24,9 +25,9 @@ public interface PlayerMBean {
 
     /**
      * Adds player to lobby.
-     * @param lobbyName name of lobby which player is joining.
+     * @param lobby name of lobby which player is joining.
      */
-    void joinToLobby(String lobbyName);
+    void joinToLobby(Lobby lobby);
 
     /**
      * Removes player from lobby.
