@@ -210,9 +210,9 @@
                   <Insets top="30.0" />
                </StackPane.margin>
             </Label>
-            <TableView maxHeight="210.0" maxWidth="200.0" prefHeight="200.0" prefWidth="200.0" StackPane.alignment="TOP_LEFT">
+            <TableView fx:id="playersInLobbyList" maxHeight="210.0" maxWidth="200.0" prefHeight="200.0" prefWidth="200.0" StackPane.alignment="TOP_LEFT">
               <columns>
-                <TableColumn prefWidth="200.0" text="Name" />
+                <TableColumn fx:id="playersInLobbyColumn" prefWidth="200.0" text="Name" />
               </columns>
                <StackPane.margin>
                   <Insets left="75.0" top="150.0" />

@@ -91,4 +91,12 @@ public class LobbyManager implements ILobbyManager {
             lobby.removePlayer(player);
         }
     }
+
+    public String getWaitingLobbyList() {
+        String lobbyList = "";
+        for(Lobby l: waitingLobbyList) {
+            lobbyList.concat(","+l.name);
+        }
+        return lobbyList;
+    }
 }

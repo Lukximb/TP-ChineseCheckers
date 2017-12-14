@@ -76,4 +76,13 @@ public class Player implements PlayerMBean, Serializable{
     public Color getColor() {
         return this.color;
     }
+
+    public String getPlayersNames() {
+        String playersList = "";
+        for(Player p: lobby.players) {
+            playersList.concat(","+p.name);
+        }
+        return playersList;
+    }
+
 }

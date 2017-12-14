@@ -2,6 +2,8 @@ package client.logic;
 
 import client.core.ClientGUI;
 import javafx.application.Platform;
+import javafx.beans.property.ReadOnlyStringWrapper;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.scene.Node;
@@ -31,6 +33,7 @@ public class ClientGUIController {
 	private Node currentPosition;
 	private Node destinationPosition;
 	private ArrayList<Node> jumpPositions;
+	private ObservableList<String> playersList;
 
 
 	//LOGIN---------------------------------------
@@ -78,6 +81,10 @@ public class ClientGUIController {
 	@FXML
 	private StackPane lobby;
 	@FXML
+	private TableView<String> playersInLobbyList;
+	@FXML
+	private TableColumn<String, String> playersInLobbyColumn;
+	@FXML
 	private TextField invitePlayerField;
 	@FXML
 	private Button addBotButton;
@@ -124,6 +131,9 @@ public class ClientGUIController {
 		game.setStyle("-fx-background-image: url('/client/wood.jpg');");
 		jumpPositions = new ArrayList<>();
 
+		playersList = FXCollections.observableArrayList();
+		playersInLobbyColumn.setCellValueFactory(param -> new ReadOnlyStringWrapper(param.getValue()));
+		playersInLobbyList.setItems(playersList);
 	}
 
 	//LOGIN
@@ -168,6 +178,9 @@ public class ClientGUIController {
 		System.out.println(client.lobbyName);
 		System.out.println(client.rowForPlayerPawn);
 		client.connection.invokeCreateLobbyMethod(client.factory, "createLobby", client.playerInLobby , client.rowForPlayerPawn, client.lobbyName, client.pid);
+
+		playersList.clear();
+		playersList.add(client.playerName);
 
 		this.lobby.setVisible(true);
 		this.lobby.setDisable(false);
@@ -220,6 +233,7 @@ public class ClientGUIController {
 
 		client.connection.invokeAddPlayerToLobbyMethod(client.manager, "addPlayerToLobby", client.lobbyName, playerName);
 		System.out.println("Add player: " + playerName + " to lobby: " + client.lobbyName);
+		client.connection.invokeSendPlayersInLobbyList(client.manager, "sendPlayersInLobbyList", client.playerName);
 	}
 
 	public void removePlayerButtonOnClick(ActionEvent event) {
@@ -227,6 +241,7 @@ public class ClientGUIController {
 
 		client.connection.invokeRemovePlayerToLobbyMethod(client.manager, "removePlayerFromLobby", client.lobbyName, playerName);
 		System.out.println("Remove player: " + playerName + " from lobby: " + client.lobbyName);
+		client.connection.invokeSendPlayersInLobbyList(client.manager, "sendPlayersInLobbyList", client.playerName);
 	}
 	
 	//GAME
@@ -396,6 +411,18 @@ public class ClientGUIController {
 				break;
 			}
 		}
+	}
+
+	public void updatePlayersList(String[] list) {
+		playersList.clear();
+		for(String s: list) {
+			playersList.add(s);
+		}
+		playersInLobbyList.setItems(playersList);
+	}
+
+	public void updateLobbyList(String[] list) {
+
 	}
 
 }

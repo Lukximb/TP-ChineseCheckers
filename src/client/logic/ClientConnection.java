@@ -124,6 +124,28 @@ public class ClientConnection {
         System.out.println("Method invoked: " + methodName + " on: " + mBeanName.toString());
     }
 
+    public void invokeSendPlayersInLobbyList(ObjectName mBeanName, String methodName, String playerName) {
+        Object  opParams[] = {playerName};
+        String  opSig[] = {String.class.getName()};
+        try {
+            mbsc.invoke(mBeanName, methodName, opParams, opSig);
+        } catch (Exception  e) {
+            e.printStackTrace();
+        }
+        System.out.println("Method invoked: " + methodName + " on: " + mBeanName.toString());
+    }
+
+    public void invokeSendWaitingLobbyList(ObjectName mBeanName, String methodName, String playerName) {
+        Object  opParams[] = {playerName};
+        String  opSig[] = {String.class.getName()};
+        try {
+            mbsc.invoke(mBeanName, methodName, opParams, opSig);
+        } catch (Exception  e) {
+            e.printStackTrace();
+        }
+        System.out.println("Method invoked: " + methodName + " on: " + mBeanName.toString());
+    }
+
     public void closeConnection() {
         try {
             jmxc.close();

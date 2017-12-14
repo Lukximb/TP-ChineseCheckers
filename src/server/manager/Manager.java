@@ -3,6 +3,7 @@ package server.manager;
 import jmx.Player;
 import server.lobby.Lobby;
 
+import javax.management.Notification;
 import javax.management.NotificationBroadcasterSupport;
 
 public class Manager extends NotificationBroadcasterSupport implements ManagerMBean {
@@ -63,5 +64,31 @@ public class Manager extends NotificationBroadcasterSupport implements ManagerMB
         lobbyManager.removePlayerFromLobby(lobbyName, player);
         playerManager.movePlayerToFreeList(player);
         System.out.println("Player " + player.name + " removed from lobby " + player.lobby.name);
+    }
+
+    @Override
+    public void sendPlayersInLobbyList(String playerName) {
+        Player player = null;
+        for(Player p: playerManager.playerInGameList) {
+            if(p.name == playerName) {
+                player = p;
+            }
+        }
+        if(player != null) {
+            String playersNames = player.getPlayersNames();
+            sendNotification(new Notification(String.valueOf(player.pid), player, 001100110011, "P"+playersNames));
+        }
+    }
+
+    @Override
+    public void sendWaitingLobbyList(String playerName) {
+        Player player = null;
+        for(Player p: playerManager.playerInGameList) {
+            if(p.name == playerName) {
+                player = p;
+            }
+        }
+        String waitingLobbyList = lobbyManager.getWaitingLobbyList();
+        sendNotification(new Notification(String.valueOf(player.pid), this, 001100110011, "W"+waitingLobbyList));
     }
 }

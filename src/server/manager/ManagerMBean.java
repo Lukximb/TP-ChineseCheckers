@@ -16,4 +16,8 @@ public interface ManagerMBean {
     void addPlayerToLobby(String lobbyName, String playerName);
 
     void removePlayerFromLobby(String lobbyName, String playerName);
+
+    void sendPlayersInLobbyList(String playerName);
+
+    void sendWaitingLobbyList(String playerName);
 }

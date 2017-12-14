@@ -49,16 +49,6 @@ public class ClientGUI extends Application {
         factory = new ObjectName(domain+"F" +":type=jmx.Factory,name=Factory");
         manager = new ObjectName(domain+"M" +":type=manager.Manager,name=Manager");
 
-        //Create notification listener and notification filter
-        clientListener = new ClientListener();
-        NotificationFilterSupport myFilter = new NotificationFilterSupport();
-        myFilter.disableAllTypes();
-        myFilter.enableType(String.valueOf(pid));
-
-        //Add notification listener
-        connection.mbsc.addNotificationListener(factory, clientListener, myFilter, null);
-        connection.mbsc.addNotificationListener(manager, clientListener, myFilter, null);
-
         //Load GUI
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(this.getClass().getResource("/client/ClientFXML.fxml"));
@@ -71,6 +61,17 @@ public class ClientGUI extends Application {
 
         primaryStage.setScene(scene);
         primaryStage.setTitle("Chinese Checkers");
+
+        //Create notification listener and notification filter
+        clientListener = new ClientListener(controller);
+        NotificationFilterSupport myFilter = new NotificationFilterSupport();
+        myFilter.disableAllTypes();
+        myFilter.enableType(String.valueOf(pid));
+
+        //Add notification listener
+        connection.mbsc.addNotificationListener(factory, clientListener, myFilter, null);
+        connection.mbsc.addNotificationListener(manager, clientListener, myFilter, null);
+
         primaryStage.show();
     }
 
