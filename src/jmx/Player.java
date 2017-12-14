@@ -5,9 +5,11 @@ import server.board.Coordinates;
 import server.lobby.Lobby;
 import server.player.Dificult;
 
+import javax.management.Notification;
+import javax.management.NotificationBroadcasterSupport;
 import java.io.Serializable;
 
-public class Player implements PlayerMBean, Serializable{
+public class Player extends NotificationBroadcasterSupport implements PlayerMBean, Serializable{
     public int pid = 0;
     public String name = "";
     public Lobby lobby = null;
@@ -21,7 +23,9 @@ public class Player implements PlayerMBean, Serializable{
 
     @Override
     public void checkMove(Coordinates currentCoordinates, Coordinates destinationCoordinates) {
-
+        if (lobby.mediator.checkMove(currentCoordinates, destinationCoordinates, pid)) {
+            sendNotification(new Notification(String.valueOf(pid), this, 110011110, "R CorrectMove"));
+        }
     }
 
     @Override

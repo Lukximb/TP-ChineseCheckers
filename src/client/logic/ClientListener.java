@@ -4,35 +4,56 @@ import javax.management.Notification;
 import javax.management.NotificationListener;
 
 public class ClientListener implements NotificationListener {
-    ClientGUIController controller;
+    private ClientGUIController controller;
+    private String move;
+
 
     public ClientListener(ClientGUIController controller) {
         this.controller = controller;
+        controller.setListener(this);
     }
 
     public void handleNotification(Notification notification, Object handback)
     {
-        System.out.println("\nReceived notification:  \n    message: " + notification.getMessage()
-            + "\n    type: " + notification.getType()
-            + "\n    timestamp: " + notification.getTimeStamp());
-
         switch (notification.getMessage().charAt(0)) {
-            case('P'):
-                recivePlayersNames(notification.getMessage().substring(2));
+            case('P')://player
+                System.out.println("\nReceived notification:  \n    message: " + notification.getMessage()
+                        + "\n    type: " + notification.getType());
+                receivePlayersNames(notification.getMessage().substring(2));
                 break;
-            case('W'):
-                reciveLobbyNames(notification.getMessage().substring(2));
+            case('W')://waiting
+                System.out.println("\nReceived notification:  \n    message: " + notification.getMessage()
+                        + "\n    type: " + notification.getType());
+                receiveLobbyNames(notification.getMessage().substring(2));
+                break;
+            case('R')://RulesManager
+                handleRulesManagerResponse(notification.getMessage().substring(2));
                 break;
         }
     }
 
-    public void recivePlayersNames(String message) {
+    private void receivePlayersNames(String message) {
+        System.out.println(message);
         String[] newMessage = message.split(",");
         controller.updatePlayersList(newMessage);
     }
 
-    public void reciveLobbyNames(String message) {
+    private void receiveLobbyNames(String message) {
         String[] newMessage = message.split(",");
         controller.updateLobbyList(newMessage);
+    }
+
+    private void handleRulesManagerResponse(String response) {
+        if (response.equals("CorrectMove")) {
+            if (move.equals("jump")) {
+                controller.setJumpNode();
+            } else if (move.equals("end")) {
+                controller.setDestinationNode();
+            }
+        }
+    }
+
+    public void setMove(String move) {
+        this.move = move;
     }
 }

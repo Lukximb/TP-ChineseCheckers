@@ -15,13 +15,15 @@ public interface FactoryMBean {
 
     void createPlayerManager();
 
-    RulesManager createRulesManager();
+    IRulesManager createRulesManager();
 
     void createPlayer(int pid, String name);
 
     Bot createBot();
 
     Lobby createLobby(int playerNum, int rowNumber, String lobbyName, int adminPid);
+
+    LobbyMediator createLobbyMediator();
 
     Field createField(int n, int m);
 

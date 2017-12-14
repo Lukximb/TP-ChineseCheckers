@@ -10,11 +10,7 @@ public class LobbyMediator {
     private IBoard board;
     private Lobby lobby;
 
-    public LobbyMediator(Lobby lobby) {
-        this.lobby = lobby;
-        //clock = Factory.getInstance().createClock();
-        //rulesManager = Factory.getInstance().createRulesManager();
-        //board = Factory.getInstance().createBoard();
+    public LobbyMediator() {
     }
 
     public long getRoundTime() {
@@ -31,5 +27,17 @@ public class LobbyMediator {
 
     public boolean checkMove(Coordinates currentCoordinates, Coordinates newCoordinates, int pid) {
         return rulesManager.checkMove(currentCoordinates, newCoordinates, pid);
+    }
+
+    public void setLobby(Lobby lobby) {
+        this.lobby = lobby;
+    }
+
+    public void setClock(Clock clock) {
+        this.clock = clock;
+    }
+
+    public void setRulesManager(IRulesManager rulesManager) {
+        this.rulesManager = rulesManager;
     }
 }
