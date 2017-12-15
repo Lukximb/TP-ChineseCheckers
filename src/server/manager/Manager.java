@@ -70,7 +70,7 @@ public class Manager extends NotificationBroadcasterSupport implements ManagerMB
     public void sendPlayersInLobbyList(String playerName) {
         Player player = null;
         for(Player p: playerManager.playerInGameList) {
-            if(p.name == playerName) {
+            if(p.name.equals(playerName)) {
                 player = p;
             }
         }
