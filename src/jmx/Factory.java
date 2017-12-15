@@ -62,8 +62,8 @@ public class Factory extends NotificationBroadcasterSupport implements FactoryMB
     }
 
     @Override
-    public RulesManager createRulesManager() {
-        return null;
+    public IRulesManager createRulesManager() {
+        return new RulesManager();
     }
 
     @Override
@@ -74,7 +74,7 @@ public class Factory extends NotificationBroadcasterSupport implements FactoryMB
 
         server.connection.createMBeanMainObject("jmx.Player", "Player"+pid, String.valueOf(pid), player);
         playerManager.getNewPlayer(player);
-        sendNotification(new Notification(String.valueOf(pid), player, 001100110011, "####hello player created: " + pid));
+        sendNotification(new Notification(String.valueOf(pid), this, 001100110011, "####hello player created: " + pid));
     }
 
     public void deletePlayer(int pid) {
@@ -109,6 +109,7 @@ public class Factory extends NotificationBroadcasterSupport implements FactoryMB
     @Override
     public Lobby createLobby(int playerNum, int rowNumber, String lobbyName, int adminPid) {
         Player admin;
+        LobbyMediator lobbyMediator= createLobbyMediator();
         int value = playerManager.checkPlayerStatus(adminPid);
         int index = 0;
         for(Player p: playerManager.playerFreeList) {
@@ -118,10 +119,21 @@ public class Factory extends NotificationBroadcasterSupport implements FactoryMB
             index++;
         }
         admin = playerManager.playerFreeList.get(index);
-        System.out.println(">> Lobby created");
-        Lobby lobby = new Lobby(playerNum, rowNumber, lobbyName, admin);
+        System.out.println(">> Lobby " + lobbyName + " created");
+        Lobby lobby = new Lobby(playerNum, rowNumber, lobbyName, admin, lobbyMediator);
+        admin.lobby = lobby;
         lobbyManager.waitingLobbyList.add(lobby);
         return null;
+    }
+
+    @Override
+    public LobbyMediator createLobbyMediator(){
+        LobbyMediator mediator = new LobbyMediator();
+        IRulesManager rules = new RulesManager();
+        Clock clock = createClock();
+        mediator.setRulesManager(rules);
+        mediator.setClock(clock);
+        return mediator;
     }
 
     @Override

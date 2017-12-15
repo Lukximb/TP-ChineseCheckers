@@ -24,7 +24,8 @@ public class ClientGUI extends Application {
     public String lobbyName = "";
     public String playerName = "";
     public ClientConnection connection;
-    public ClientListener clientListener;
+    private ClientListener clientListener;
+    private NotificationFilterSupport myFilter;
 
     public ClientGUI() {
     }
@@ -64,7 +65,7 @@ public class ClientGUI extends Application {
 
         //Create notification listener and notification filter
         clientListener = new ClientListener(controller);
-        NotificationFilterSupport myFilter = new NotificationFilterSupport();
+        myFilter = new NotificationFilterSupport();
         myFilter.disableAllTypes();
         myFilter.enableType(String.valueOf(pid));
 
@@ -73,6 +74,14 @@ public class ClientGUI extends Application {
         connection.mbsc.addNotificationListener(manager, clientListener, myFilter, null);
 
         primaryStage.show();
+    }
+
+    public void addNotificationListenerToPlayer() {
+        try {
+            connection.mbsc.addNotificationListener(player, clientListener, myFilter, null);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public static void main(String[] args) {

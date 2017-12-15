@@ -17,8 +17,15 @@ public interface PlayerMBean {
     Coordinates getCurrentPosition();
 
     /**
+     * Checking if move is correct using rulesManager class
+     * @param currentCoordinates
+     * @param destinationCoordinates
+     */
+    void checkMove(Coordinates currentCoordinates, Coordinates destinationCoordinates);
+
+    /**
      * Adds player to lobby.
-     * @param lobbyName name of lobby which player is joining.
+     * @param lobby name of lobby which player is joining.
      */
     void joinToLobby(Lobby lobby);
 

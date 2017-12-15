@@ -36,9 +36,6 @@ public class PlayerManager implements IPlayerManager {
     public void getNewPlayer(Player player) {
         playerFreeList.add(player);
         System.out.println(">> PM added new player to list");
-        for(Player p: playerFreeList){
-            System.out.print(p.pid + " ");
-        }
     }
 
     @Override

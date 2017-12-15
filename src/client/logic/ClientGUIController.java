@@ -10,19 +10,12 @@ import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
-import javafx.scene.image.Image;
-import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.fxml.FXML;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
-import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
-import server.board.Coordinates;
-
-import javax.management.MalformedObjectNameException;
-import javax.management.ObjectName;
 import java.util.ArrayList;
 
 public class ClientGUIController {
@@ -30,11 +23,18 @@ public class ClientGUIController {
 //	ClientGUI client;
 
 	private ClientGUI client;
-	private Node currentPosition;
-	private Node destinationPosition;
-	private ArrayList<Node> jumpPositions;
-	private ObservableList<String> playersList;
+	private BoardUpdate boardUpdate;
+	private PlayerLogic playerLogic;
 
+	public Node currentPosition;
+	public Node destinationPosition;
+	public Node previousNode;
+	public Node waitingNode;
+	public ArrayList<Node> jumpPositions;
+	public boolean destinationSelected;
+
+	private ObservableList<String> playersList;
+	public ClientListener clientListener;
 
 	//LOGIN---------------------------------------
 	@FXML
@@ -42,7 +42,7 @@ public class ClientGUIController {
 	@FXML
 	private Button loginButton;
 	@FXML
-	private TextField nickNameField;
+	public TextField nickNameField;
 
 	//MENU----------------------------------------
 	@FXML
@@ -85,7 +85,7 @@ public class ClientGUIController {
 	@FXML
 	private TableColumn<String, String> playersInLobbyColumn;
 	@FXML
-	private TextField invitePlayerField;
+	public TextField invitePlayerField;
 	@FXML
 	private Button addBotButton;
 	@FXML
@@ -106,7 +106,7 @@ public class ClientGUIController {
 	@FXML
 	private StackPane game;
 	@FXML
-    private GridPane board;
+    public GridPane board;
 	@FXML
 	private ProgressBar turnTimeBar;
 	@FXML
@@ -117,19 +117,23 @@ public class ClientGUIController {
 	private Button surrenderButton;
 	@FXML
 	private Button sendMsgButton;
-	
-	
+
 	public ClientGUIController(ClientGUI client) {
 		this.client = client;
+	}
+
+	public void setListener(ClientListener clientListener) {
+		this.clientListener = clientListener;
 	}
 	
 	@FXML
 	void initialize() {
-
-//        board.setStyle("-fx-background-image: url('/client/background.jpg');");
+		boardUpdate = new BoardUpdate(this, client);
+		playerLogic = new PlayerLogic(this, client);
 
 		game.setStyle("-fx-background-image: url('/client/wood.jpg');");
 		jumpPositions = new ArrayList<>();
+		destinationSelected = false;
 
 		playersList = FXCollections.observableArrayList();
 		playersInLobbyColumn.setCellValueFactory(param -> new ReadOnlyStringWrapper(param.getValue()));
@@ -141,7 +145,7 @@ public class ClientGUIController {
 		this.playerNickNamePanel.setVisible(false);
 		this.playerNickNamePanel.setDisable(true);
 
-		createPlayer();
+		playerLogic.createPlayer();
 
 		this.menu.setVisible(true);
 		this.menu.setDisable(false);
@@ -175,8 +179,6 @@ public class ClientGUIController {
 
 		client.lobbyName = lobbyNameField.getText();
 		client.rowForPlayerPawn = (int)boardSizeSpinner.getValue();
-		System.out.println(client.lobbyName);
-		System.out.println(client.rowForPlayerPawn);
 		client.connection.invokeCreateLobbyMethod(client.factory, "createLobby", client.playerInLobby , client.rowForPlayerPawn, client.lobbyName, client.pid);
 
 		playersList.clear();
@@ -229,19 +231,11 @@ public class ClientGUIController {
 	}
 
 	public void addPlayerButtonOnClick(ActionEvent event) {
-		String playerName = invitePlayerField.getText();
-
-		client.connection.invokeAddPlayerToLobbyMethod(client.manager, "addPlayerToLobby", client.lobbyName, playerName);
-		System.out.println("Add player: " + playerName + " to lobby: " + client.lobbyName);
-		client.connection.invokeSendPlayersInLobbyList(client.manager, "sendPlayersInLobbyList", client.playerName);
+		playerLogic.addPlayerButtonOnClick(event);
 	}
 
 	public void removePlayerButtonOnClick(ActionEvent event) {
-		String playerName = invitePlayerField.getText();
-
-		client.connection.invokeRemovePlayerToLobbyMethod(client.manager, "removePlayerFromLobby", client.lobbyName, playerName);
-		System.out.println("Remove player: " + playerName + " from lobby: " + client.lobbyName);
-		client.connection.invokeSendPlayersInLobbyList(client.manager, "sendPlayersInLobbyList", client.playerName);
+		playerLogic.removePlayerButtonOnClick(event);
 	}
 	
 	//GAME
@@ -252,33 +246,13 @@ public class ClientGUIController {
 		this.menu.setVisible(true);
 		this.menu.setDisable(false);
 	}
-	
-    public void fieldsHandleTest(MouseEvent event) {
-		System.out.println("mouse click detected! "+ event.getSource());
-    }
-
-    public void boardClick(MouseEvent event) {
-		if (event.getButton() == MouseButton.SECONDARY) {
-			System.out.println("Right button clicked");
-		}
-		System.out.println("Row: " + GridPane.getRowIndex((Node)event.getTarget())
-				+ "\nColumn: " + GridPane.getColumnIndex((Node)event.getTarget()));
-	}
-
-	public void createPlayer() {
-		if (client.player == null) {
-			client.connection.invokeCreatePlayerMethod(client.factory, "createPlayer", client.pid, nickNameField.getText());
-			try {
-				client.player = new ObjectName(client.domain+ client.pid +":type=jmx.Player,name=Player" + client.pid);
-				client.playerName = nickNameField.getText();
-			} catch (MalformedObjectNameException e) {
-				e.printStackTrace();
-			}
-		}
-	}
 
 	public void setPlayerNumberOn2ButtonOnClick(ActionEvent event) {
 		client.playerInLobby = 2;
+	}
+
+	public void setPlayerNumberOn3ButtonOnClick(ActionEvent event) {
+		client.playerInLobby = 3;
 	}
 
 	public void setPlayerNumberOn4ButtonOnClick(ActionEvent event) {
@@ -291,125 +265,62 @@ public class ClientGUIController {
 
 
 	public void doMoveOnClick(ActionEvent event) {
-		Image img = new Image("/client/pawnBlack.png");
-		if (currentPosition != null && destinationPosition != null) {
-			if (jumpPositions.isEmpty()) {
-				Coordinates cCoordinates = new Coordinates(board.getColumnIndex(currentPosition), board.getRowIndex(currentPosition));
-				Coordinates dCoordinates = new Coordinates(board.getColumnIndex(destinationPosition), board.getRowIndex(destinationPosition));
-				client.connection.invokeMovePlayerMethod(client.player, "move", cCoordinates, dCoordinates);
-
-				Circle circleC = (Circle)currentPosition;
-				circleC.setStrokeWidth(1);
-				circleC.setStroke(Color.BLACK);
-				circleC.setFill(Color.WHITE);
-				currentPosition = null;
-
-				Circle circleD = (Circle)destinationPosition;
-				circleD.setStrokeWidth(1);
-				circleD.setFill(Color.TRANSPARENT);
-				circleD.setFill(new ImagePattern(img));
-				circleD.setStroke(Color.BLACK);
-				destinationPosition = null;
-			} else {
-				//Current --> 1st jump
-				Coordinates cCoordinates = new Coordinates(board.getColumnIndex(currentPosition), board.getRowIndex(currentPosition));
-				Coordinates dCoordinates = new Coordinates(board.getColumnIndex(jumpPositions.get(0)), board.getRowIndex(jumpPositions.get(0)));
-				client.connection.invokeMovePlayerMethod(client.player, "move", cCoordinates, dCoordinates);
-
-				Circle circleC = (Circle)currentPosition;
-				circleC.setStrokeWidth(1);
-				circleC.setStroke(Color.BLACK);
-				circleC.setFill(Color.WHITE);
-				currentPosition = null;
-
-				Circle circleJ = (Circle)jumpPositions.get(0);
-				circleJ.setStrokeWidth(1);
-				circleJ.setFill(Color.TRANSPARENT);
-				circleJ.setFill(new ImagePattern(img));
-				circleJ.setStroke(Color.BLACK);
-
-				for (int i = 1; i < jumpPositions.size(); i++) {
-					Circle circleJ1 = (Circle)jumpPositions.get(i-1);
-					circleJ1.setStrokeWidth(1);
-					circleJ1.setFill(Color.TRANSPARENT);
-					circleJ1.setFill(new ImagePattern(img));
-					circleJ1.setStroke(Color.BLACK);
-
-					cCoordinates = new Coordinates(board.getColumnIndex(jumpPositions.get(i-1)), board.getRowIndex(jumpPositions.get(i-1)));
-					dCoordinates = new Coordinates(board.getColumnIndex(jumpPositions.get(i)), board.getRowIndex(jumpPositions.get(i)));
-					client.connection.invokeMovePlayerMethod(client.player, "move", cCoordinates, dCoordinates);
-
-					Circle circleJ2 = (Circle)jumpPositions.get(i);
-					circleJ2.setStrokeWidth(1);
-					circleJ2.setFill(Color.TRANSPARENT);
-					circleJ2.setFill(new ImagePattern(img));
-					circleJ2.setStroke(Color.BLACK);
-				}
-
-				Circle circleJL = (Circle)jumpPositions.get(jumpPositions.size()-1);
-				circleJL.setStrokeWidth(1);
-				circleJL.setFill(Color.TRANSPARENT);
-				circleJL.setFill(new ImagePattern(img));
-				circleJL.setStroke(Color.BLACK);
-
-				cCoordinates = new Coordinates(board.getColumnIndex(jumpPositions.get(jumpPositions.size()-1)), board.getRowIndex(jumpPositions.get(jumpPositions.size()-1)));
-				dCoordinates = new Coordinates(board.getColumnIndex(destinationPosition), board.getRowIndex(destinationPosition));
-				client.connection.invokeMovePlayerMethod(client.player, "move", cCoordinates, dCoordinates);
-
-				jumpPositions.clear();
-
-				Circle circleD = (Circle)destinationPosition;
-				circleD.setStrokeWidth(1);
-				circleD.setFill(Color.TRANSPARENT);
-				circleD.setFill(new ImagePattern(img));
-				circleD.setStroke(Color.BLACK);
-				destinationPosition = null;
-			}
-		}
-	}
-
-	//TEST
-	public void submitButtonOnClick(ActionEvent event) {
+		boardUpdate.doMoveOnClick(event);
 	}
 
 	public void chooseCircleOnClick(MouseEvent event) {
-		ObservableList<Node> childrens = board.getChildren();
-		for (Node node : childrens) {
-			if(board.getRowIndex(node) == GridPane.getRowIndex((Node)event.getTarget()) &&
-					board.getColumnIndex(node) == GridPane.getColumnIndex((Node)event.getTarget())) {
-				if (currentPosition == null && node != destinationPosition) {
-					Circle circle = (Circle)node;
-					circle.setStrokeWidth(4);
-					circle.setStroke(Color.GREEN);
-					currentPosition = node;
-				} else if (node == currentPosition) {
-					Circle circle = (Circle)node;
-					circle.setStrokeWidth(1);
-					circle.setStroke(Color.BLACK);
-					currentPosition = null;
-				} else if (destinationPosition == null && event.getButton() == MouseButton.SECONDARY) {
-					Circle circle = (Circle)node;
-					circle.setStrokeWidth(4);
-					circle.setStroke(Color.RED);
-					destinationPosition = node;
-				} else if (node == destinationPosition && event.getButton() == MouseButton.SECONDARY) {
-					Circle circle = (Circle)node;
-					circle.setStrokeWidth(1);
-					circle.setStroke(Color.BLACK);
-					destinationPosition = null;
-				} else if (node != currentPosition && node != destinationPosition && !jumpPositions.contains(node)) {
-					Circle circle = (Circle)node;
-					circle.setStrokeWidth(4);
-					circle.setStroke(Color.BLUE);
-					jumpPositions.add(node);
-				} else if(node != currentPosition && node != destinationPosition && jumpPositions.contains(node)) {
-					Circle circle = (Circle)node;
-					circle.setStrokeWidth(1);
-					circle.setStroke(Color.BLACK);
-					jumpPositions.remove(node);
-				}
-				break;
-			}
+		boardUpdate.chooseCircleOnClick(event);
+	}
+
+	//Set methods are invoked by notification listener after acceptation received
+	public void setStartNode(Node node) {
+		Circle circle = (Circle)node;
+		circle.setStrokeWidth(4);
+		circle.setStroke(Color.GREEN);
+		currentPosition = node;
+		previousNode = node;
+	}
+
+	public void setDestinationNode() {
+		destinationSelected = true;
+		Circle circle = (Circle)waitingNode;
+		circle.setStrokeWidth(4);
+		circle.setStroke(Color.RED);
+		destinationPosition = waitingNode;
+	}
+
+	public void setJumpNode() {
+		Circle circle = (Circle)waitingNode;
+		circle.setStrokeWidth(4);
+		circle.setStroke(Color.BLUE);
+		jumpPositions.add(waitingNode);
+		previousNode = waitingNode;
+	}
+
+	public void removeStartNode(Node node) {
+		Circle circle = (Circle)node;
+		circle.setStrokeWidth(1);
+		circle.setStroke(Color.BLACK);
+		currentPosition = null;
+	}
+
+	public void removeDestinationNode(Node node) {
+		destinationSelected = false;
+		Circle circle = (Circle)node;
+		circle.setStrokeWidth(1);
+		circle.setStroke(Color.BLACK);
+		destinationPosition = null;
+	}
+
+	public void removeJumpNode(Node node) {
+		Circle circle = (Circle)node;
+		circle.setStrokeWidth(1);
+		circle.setStroke(Color.BLACK);
+		jumpPositions.remove(node);
+		if (!jumpPositions.isEmpty()) {
+			previousNode = jumpPositions.get(jumpPositions.size()-1);
+		} else {
+			previousNode = currentPosition;
 		}
 	}
 
@@ -425,4 +336,19 @@ public class ClientGUIController {
 
 	}
 
+
+	//TEST
+	public void submitButtonOnClick(ActionEvent event) {
+	}
+
+	public void fieldsHandleTest(MouseEvent event) {
+		//System.out.println("mouse click detected! "+ event.getSource());
+	}
+
+    public void boardClick(MouseEvent event) {
+		/*if (event.getButton() == MouseButton.SECONDARY) {
+		}
+		System.out.println("Row: " + GridPane.getRowIndex((Node)event.getTarget())
+				+ "\nColumn: " + GridPane.getColumnIndex((Node)event.getTarget()));*/
+	}
 }

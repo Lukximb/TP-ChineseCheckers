@@ -5,8 +5,8 @@ import jmx.Player;
 
 public class RulesManager implements IRulesManager {
     @Override
-    public boolean checkMove(Coordinates currentCoordinates, Coordinates newCoordinates) {
-        return false;
+    public boolean checkMove(Coordinates currentCoordinates, Coordinates newCoordinates, int pid) {
+        return true;
     }
 
     @Override

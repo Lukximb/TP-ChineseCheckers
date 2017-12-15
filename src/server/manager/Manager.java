@@ -69,6 +69,7 @@ public class Manager extends NotificationBroadcasterSupport implements ManagerMB
     @Override
     public void sendPlayersInLobbyList(String playerName) {
         Player player = null;
+        if(playerManager.playerInGameList==null) System.out.println("Null pM");
         for(Player p: playerManager.playerInGameList) {
             if(p.name.equals(playerName)) {
                 player = p;
