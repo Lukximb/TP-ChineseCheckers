@@ -3,6 +3,7 @@ package client.logic;
 import client.core.ClientGUI;
 import javafx.application.Platform;
 import javafx.beans.property.ReadOnlyStringWrapper;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -34,6 +35,7 @@ public class ClientGUIController {
 	public boolean destinationSelected;
 
 	private ObservableList<String> playersList;
+	private ObservableList<String> lobbyList;
 	public ClientListener clientListener;
 
 	//LOGIN---------------------------------------
@@ -71,6 +73,10 @@ public class ClientGUIController {
 	@FXML
 	private Button cancelCreateLobbyButton;
 	//JOIN LOBBY----------------------------------
+    @FXML
+    private TableView<String> lobbyListTable;
+    @FXML
+    private TableColumn<String, String> lobbyListColumn;
 	@FXML
 	private StackPane joinLobby;
 	@FXML
@@ -138,6 +144,10 @@ public class ClientGUIController {
 		playersList = FXCollections.observableArrayList();
 		playersInLobbyColumn.setCellValueFactory(param -> new ReadOnlyStringWrapper(param.getValue()));
 		playersInLobbyList.setItems(playersList);
+
+        lobbyList = FXCollections.observableArrayList();
+        lobbyListColumn.setCellValueFactory(param -> new ReadOnlyStringWrapper(param.getValue()));
+        lobbyListTable.setItems(lobbyList);
 	}
 
 	//LOGIN
@@ -168,6 +178,8 @@ public class ClientGUIController {
 		this.menu.setVisible(false);
 		this.menu.setDisable(true);
 
+        client.connection.invokeSendWaitingLobbyList(client.manager, "sendWaitingLobbyList", client.playerName);
+
 		this.joinLobby.setVisible(true);
 		this.joinLobby.setDisable(false);
 		
@@ -181,8 +193,7 @@ public class ClientGUIController {
 		client.rowForPlayerPawn = (int)boardSizeSpinner.getValue();
 		client.connection.invokeCreateLobbyMethod(client.factory, "createLobby", client.playerInLobby , client.rowForPlayerPawn, client.lobbyName, client.pid);
 
-		playersList.clear();
-		playersList.add(client.playerName);
+		client.connection.invokeSendPlayersInLobbyList(client.manager, "sendPlayersInLobbyList", client.playerName);
 
 		this.lobby.setVisible(true);
 		this.lobby.setDisable(false);
@@ -200,6 +211,13 @@ public class ClientGUIController {
 	public void joinLobbyButtonOnClick(ActionEvent event) {
 		this.joinLobby.setVisible(false);
 		this.joinLobby.setDisable(true);
+
+        String lobbyName;
+        lobbyName = lobbyListTable.getSelectionModel().getSelectedItem();
+        client.connection.invokeAddPlayerToLobbyMethod(client.manager, "addPlayerToLobby", lobbyName, client.playerName);
+        System.out.println("Player: " + client.playerName + "joined to lobby: " + lobbyName);
+        client.connection.invokeSendPlayersInLobbyList(client.manager, "sendPlayersInLobbyList", client.playerName);
+        client.lobbyName = lobbyName;
 		
 		this.lobby.setVisible(true);
 		this.lobby.setDisable(false);
@@ -326,14 +344,17 @@ public class ClientGUIController {
 
 	public void updatePlayersList(String[] list) {
 		playersList.clear();
-		for(String s: list) {
-			playersList.add(s);
-		}
+//		for(String s: list) {
+//			playersList.add(s);
+//		}
+        playersList.addAll(list);
 		playersInLobbyList.setItems(playersList);
 	}
 
 	public void updateLobbyList(String[] list) {
-
+        lobbyList.clear();
+        lobbyList.addAll(list);
+        lobbyListTable.setItems(lobbyList);
 	}
 
 

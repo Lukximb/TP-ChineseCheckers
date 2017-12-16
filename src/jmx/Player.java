@@ -89,7 +89,7 @@ public class Player extends NotificationBroadcasterSupport implements PlayerMBea
     public String getPlayersNames() {
         String playersList = "";
         for(Player p: lobby.players) {
-            playersList.concat(","+p.name);
+            playersList = playersList.concat(","+p.name);
         }
         return playersList;
     }

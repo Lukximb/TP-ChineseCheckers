@@ -17,8 +17,8 @@ public class ClientConnection {
 
     public ClientConnection() {
         try {
-            url = new JMXServiceURL("service:jmx:rmi://25.0.246.243:44445/jndi/rmi://25.0.246.243:44444/jmxrmi");
-//            url = new JMXServiceURL("service:jmx:rmi://25.71.242.160:44445/jndi/rmi://25.71.242.160:44444/jmxrmi");
+//            url = new JMXServiceURL("service:jmx:rmi://25.0.246.243:44445/jndi/rmi://25.0.246.243:44444/jmxrmi");
+            url = new JMXServiceURL("service:jmx:rmi://25.71.242.160:44445/jndi/rmi://25.71.242.160:44444/jmxrmi");
             jmxc = JMXConnectorFactory.connect(url, null);
             mbsc = jmxc.getMBeanServerConnection();
             domain = mbsc.getDefaultDomain();

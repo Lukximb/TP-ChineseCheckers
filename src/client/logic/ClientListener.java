@@ -15,6 +15,7 @@ public class ClientListener implements NotificationListener {
 
     public void handleNotification(Notification notification, Object handback)
     {
+
         switch (notification.getMessage().charAt(0)) {
             case('P')://player
                 System.out.println("\nReceived notification:  \n    message: " + notification.getMessage()
@@ -29,6 +30,9 @@ public class ClientListener implements NotificationListener {
             case('R')://RulesManager
                 handleRulesManagerResponse(notification.getMessage().substring(2));
                 break;
+            default:
+                System.out.println("\nReceived notification:  \n    message: " + notification.getMessage()
+                        + "\n    type: " + notification.getType());
         }
     }
 
