@@ -2,11 +2,12 @@ package server.core;
 
 import java.io.IOException;
 
+import jmx.Factory;
 import server.connection.Connection;
 import server.manager.Manager;
 
 public class Server {
-    private Connection connection = null;
+    public Connection connection = null;
     public Manager manager = null;
     public Factory factory = null;
 
@@ -15,15 +16,16 @@ public class Server {
         getConnection();
         getManager();
 
-        connection.createMBeanObject("jmx.Hello", "h1", 1/*PID*/);
         connection.createConnectorServer();
-        connection.registryMBeanObject("h1");
+
+        connection.createMBeanMainObject("jmx.Factory", "Factory", "F", factory);
+        connection.createMBeanMainObject("manager.Manager", "Manager", "M", manager);
 
         System.out.println(">> server is running...");
     }
 
     private void getFactory() {
-        factory = Factory.getInstance();
+        factory = Factory.getInstance(this);
     }
 
     private void getConnection() {

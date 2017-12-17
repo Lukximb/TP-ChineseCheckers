@@ -10,4 +10,6 @@ public interface ILobbyManager {
     void setLobbyAsWaiting(Lobby lobby);
 
     void setLobbyAsRunning(Lobby lobby);
+
+    void runLobby(Lobby lobby);
 }

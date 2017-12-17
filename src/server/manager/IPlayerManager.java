@@ -1,9 +1,10 @@
 package server.manager;
 
+import jmx.Player;
 import server.player.*;
 
 public interface IPlayerManager {
-    void getNewPlayer(int pid);
+    void getNewPlayer(Player player);
 
     void addPlayerToInGameList(Player player);
 
@@ -14,4 +15,6 @@ public interface IPlayerManager {
     void removePlayerFromFreeList(Player player);
 
     void killBot(Bot bot);
+
+    int checkPlayerStatus(int pid);
 }

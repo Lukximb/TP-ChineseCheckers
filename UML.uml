@@ -2039,7 +2039,7 @@
 <XPD:OBJ name="OwnedViews[43]" type="UMLRealizationView" guid="zgxRegDGkUKFIkfCnKeFgwAA">
 <XPD:ATTR name="LineColor" type="string">clMaroon</XPD:ATTR>
 <XPD:ATTR name="FillColor" type="string">$00B9FFFF</XPD:ATTR>
-<XPD:ATTR name="Points" type="Points">1018,376;1064,377</XPD:ATTR>
+<XPD:ATTR name="Points" type="Points">1018,367;1060,363</XPD:ATTR>
 <XPD:REF name="Model">trZ3DmOfZU66CMoO+H5jUgAA</XPD:REF>
 <XPD:REF name="Head">9UeZqqkaDkab+TdxNcx75AAA</XPD:REF>
 <XPD:REF name="Tail">0oEAHWGC8E+3mLMLrHFqMAAA</XPD:REF>
@@ -2270,18 +2270,18 @@ Singleton
 <XPD:OBJ name="OwnedViews[59]" type="UMLClassView" guid="9UeZqqkaDkab+TdxNcx75AAA">
 <XPD:ATTR name="LineColor" type="string">clMaroon</XPD:ATTR>
 <XPD:ATTR name="FillColor" type="string">$00FFA953</XPD:ATTR>
-<XPD:ATTR name="Left" type="integer">1064</XPD:ATTR>
-<XPD:ATTR name="Top" type="integer">300</XPD:ATTR>
+<XPD:ATTR name="Left" type="integer">1060</XPD:ATTR>
+<XPD:ATTR name="Top" type="integer">264</XPD:ATTR>
 <XPD:ATTR name="Width" type="integer">263</XPD:ATTR>
-<XPD:ATTR name="Height" type="integer">160</XPD:ATTR>
+<XPD:ATTR name="Height" type="integer">173</XPD:ATTR>
 <XPD:REF name="Model">7Yn79nXuIEGj63rsE5BpmwAA</XPD:REF>
 <XPD:OBJ name="NameCompartment" type="UMLNameCompartmentView" guid="CcVvBBxOPkuK76QgotiTaQAA">
 <XPD:OBJ name="NameLabel" type="LabelView" guid="UktmZBOo1Ei7jbRCnd2EpQAA">
 <XPD:ATTR name="FontStyle" type="integer">1</XPD:ATTR>
-<XPD:ATTR name="Text" type="string">&lt;&lt;Interface&lt;&lt; IPlayerManager</XPD:ATTR>
+<XPD:ATTR name="Text" type="string">IPlayerManager</XPD:ATTR>
 </XPD:OBJ>
 <XPD:OBJ name="StereotypeLabel" type="LabelView" guid="47xZo5TWUkCywEyXfYos+gAA">
-<XPD:ATTR name="Visible" type="boolean">False</XPD:ATTR>
+<XPD:ATTR name="Text" type="string">&lt;&lt;Interface&gt;&gt;</XPD:ATTR>
 </XPD:OBJ>
 <XPD:OBJ name="PropertyLabel" type="LabelView" guid="qo3+k4S+XkmFvvcQEMYobAAA">
 <XPD:ATTR name="Visible" type="boolean">False</XPD:ATTR>
@@ -5103,7 +5103,8 @@ must be added on other class
 </XPD:OBJ>
 </XPD:OBJ>
 <XPD:OBJ name="OwnedElements[48]" type="UMLClass" guid="7Yn79nXuIEGj63rsE5BpmwAA">
-<XPD:ATTR name="Name" type="string">&lt;&lt;Interface&lt;&lt; IPlayerManager</XPD:ATTR>
+<XPD:ATTR name="Name" type="string">IPlayerManager</XPD:ATTR>
+<XPD:ATTR name="StereotypeName" type="string">Interface</XPD:ATTR>
 <XPD:REF name="Namespace">kSZgNN2e3k2bguvEad3TzQAA</XPD:REF>
 <XPD:ATTR name="#Views" type="integer">4</XPD:ATTR>
 <XPD:REF name="Views[0]">9UeZqqkaDkab+TdxNcx75AAA</XPD:REF>

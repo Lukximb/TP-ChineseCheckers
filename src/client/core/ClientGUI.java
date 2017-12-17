@@ -1,39 +1,56 @@
 package client.core;
 
-import client.logic.ClientGUIController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
+import javax.management.NotificationFilterSupport;
 import javax.management.ObjectName;
+import java.lang.management.ManagementFactory;
 
 import client.logic.*;
-import org.junit.jupiter.api.Test;
 
 @SuppressWarnings("restriction")
 public class ClientGUI extends Application {
 
-    String domain = null;
+    public String domain = null;
+    public ObjectName factory = null;
+    public ObjectName player = null;
+    public ObjectName manager = null;
+    public int pid = 0;
+    public int playerInLobby = 0;
+    public int rowForPlayerPawn = 0;
+    public String lobbyName = "";
+    public String playerName = "";
+    public ClientConnection connection;
+    private ClientListener clientListener;
+    private NotificationFilterSupport myFilter;
 
     public ClientGUI() {
     }
-
 
     @Override
     public void init() {
     }
 
     @Override
-    public void start(Stage primaryStage) throws Exception {
-        ClientConnection connection = new ClientConnection();
-        domain = connection.getDomain();
-        ObjectName mBeanName=
-                new ObjectName(domain+"1" +":type=jmx.Hello,name=h2");
-        connection.createNewMBean(mBeanName);
-        connection.invokeMethod(mBeanName, "sayHello");
+    public void stop() {
+        connection.invokeMethod(factory, "deletePlayer", pid);
         connection.closeConnection();
+    }
 
+    @Override
+    public void start(Stage primaryStage) throws Exception {
+        pid = Integer.parseInt(ManagementFactory.getRuntimeMXBean().getName().split("@")[0]);
+        connection = new ClientConnection();
+        domain = connection.getDomain();
+
+        //Get factory and manager from registry
+        factory = new ObjectName(domain+"F" +":type=jmx.Factory,name=Factory");
+        manager = new ObjectName(domain+"M" +":type=manager.Manager,name=Manager");
+
+        //Load GUI
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(this.getClass().getResource("/client/ClientFXML.fxml"));
 
@@ -45,7 +62,26 @@ public class ClientGUI extends Application {
 
         primaryStage.setScene(scene);
         primaryStage.setTitle("Chinese Checkers");
+
+        //Create notification listener and notification filter
+        clientListener = new ClientListener(controller);
+        myFilter = new NotificationFilterSupport();
+        myFilter.disableAllTypes();
+        myFilter.enableType(String.valueOf(pid));
+
+        //Add notification listener
+        connection.mbsc.addNotificationListener(factory, clientListener, myFilter, null);
+        connection.mbsc.addNotificationListener(manager, clientListener, myFilter, null);
+
         primaryStage.show();
+    }
+
+    public void addNotificationListenerToPlayer() {
+        try {
+            connection.mbsc.addNotificationListener(player, clientListener, myFilter, null);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public static void main(String[] args) {
