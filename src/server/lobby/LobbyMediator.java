@@ -1,5 +1,6 @@
 package server.lobby;
 
+import client.logic.MoveType;
 import server.board.Coordinates;
 import server.board.IBoard;
 import jmx.Factory;
@@ -25,8 +26,8 @@ public class LobbyMediator {
         clock.endRound();
     }
 
-    public boolean checkMove(Coordinates currentCoordinates, Coordinates newCoordinates, int pid) {
-        return rulesManager.checkMove(currentCoordinates, newCoordinates, pid);
+    public boolean checkMove(Coordinates currentCoordinates, Coordinates newCoordinates, int pid, MoveType moveType) {
+        return rulesManager.checkMove(currentCoordinates, newCoordinates, pid, moveType);
     }
 
     public void setLobby(Lobby lobby) {

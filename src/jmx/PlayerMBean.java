@@ -1,5 +1,6 @@
 package jmx;
 
+import client.logic.MoveType;
 import server.board.Coordinates;
 import server.lobby.Lobby;
 import server.player.Dificult;
@@ -21,7 +22,7 @@ public interface PlayerMBean {
      * @param currentCoordinates
      * @param destinationCoordinates
      */
-    void checkMove(Coordinates currentCoordinates, Coordinates destinationCoordinates);
+    void checkMove(Coordinates currentCoordinates, Coordinates destinationCoordinates, MoveType moveType);
 
     /**
      * Adds player to lobby.
