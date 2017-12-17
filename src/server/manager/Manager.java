@@ -53,17 +53,25 @@ public class Manager extends NotificationBroadcasterSupport implements ManagerMB
     @Override
     public void addPlayerToLobby(String lobbyName, String playerName) {
         Player player = playerManager.getPlayerFromFreeList(playerName);
-        lobbyManager.addPlayerToLobby(lobbyName, player);
-        playerManager.movePlayerToInGameList(player);
-        System.out.println("Player " + player.name + " in lobby " + player.lobby.name);
+        if(player != null) {
+            lobbyManager.addPlayerToLobby(lobbyName, player);
+            playerManager.movePlayerToInGameList(player);
+            System.out.println("Player " + player.name + " in lobby " + player.lobby.name);
+        } else {
+            System.out.println("Error, can't add player: " + playerName);
+        }
     }
 
     @Override
     public void removePlayerFromLobby(String lobbyName, String playerName) {
         Player player = playerManager.getPlayerFromInGameList(playerName);
-        lobbyManager.removePlayerFromLobby(lobbyName, player);
-        playerManager.movePlayerToFreeList(player);
-        System.out.println("Player " + player.name + " removed from lobby " + player.lobby.name);
+        if(player != null) {
+            lobbyManager.removePlayerFromLobby(lobbyName, player);
+            playerManager.movePlayerToFreeList(player);
+            System.out.println("Player " + player.name + " removed from lobby " + player.lobby.name);
+        } else {
+            System.out.println("Error, can't remove player: " + playerName);
+        }
     }
 
     @Override
@@ -71,13 +79,17 @@ public class Manager extends NotificationBroadcasterSupport implements ManagerMB
         Player player = null;
         if(playerManager.playerInGameList==null) System.out.println("Null pM");
         for(Player p: playerManager.playerInGameList) {
-            if(p.name == playerName) {
+            if(p.name.equals(playerName)) {
                 player = p;
             }
         }
         if(player != null) {
+            System.out.println("Player is not NULL");
             String playersNames = player.getPlayersNames();
-            sendNotification(new Notification(String.valueOf(player.pid), player, 001100110011, "P"+playersNames));
+            sendNotification(new Notification(String.valueOf(player.pid), this, 001100101010, "P"+playersNames));
+        }
+        else {
+            System.out.println("Player is NULL");
         }
     }
 
@@ -85,11 +97,17 @@ public class Manager extends NotificationBroadcasterSupport implements ManagerMB
     public void sendWaitingLobbyList(String playerName) {
         Player player = null;
         for(Player p: playerManager.playerInGameList) {
-            if(p.name == playerName) {
+            if(p.name.equals(playerName)) {
                 player = p;
             }
         }
-        String waitingLobbyList = lobbyManager.getWaitingLobbyList();
-        sendNotification(new Notification(String.valueOf(player.pid), this, 001100110011, "W"+waitingLobbyList));
+        if(player != null) {
+            System.out.println("Player is not NULL");
+            String waitingLobbyList = lobbyManager.getWaitingLobbyList();
+            sendNotification(new Notification(String.valueOf(player.pid), this, 001100110001, "W" + waitingLobbyList));
+        }
+        else {
+            System.out.println("Player is NULL");
+        }
     }
 }

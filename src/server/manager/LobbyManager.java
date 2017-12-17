@@ -95,7 +95,7 @@ public class LobbyManager implements ILobbyManager {
     public String getWaitingLobbyList() {
         String lobbyList = "";
         for(Lobby l: waitingLobbyList) {
-            lobbyList.concat(","+l.name);
+            lobbyList = lobbyList.concat((","+l.name));
         }
         return lobbyList;
     }
