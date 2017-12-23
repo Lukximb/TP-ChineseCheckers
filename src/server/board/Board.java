@@ -1,8 +1,8 @@
 package server.board;
 
 public class Board implements IBoard {
-    private int n = 0;
-    private int m = 0;
+    private int n;
+    private int m;
     public Field[][] fieldList = null;
 
     public Board(int n, int m) {
@@ -13,7 +13,7 @@ public class Board implements IBoard {
         fillFieldList();
     }
 
-    private void fillFieldList() {
+    public void fillFieldList() {
         int x=n-m;
         for(int i=x; i<n; i++) {
             for(int j=0; j<2*m-1; j++) {
@@ -25,7 +25,7 @@ public class Board implements IBoard {
                     }
                     else {
                         if(j%2 == 1) {
-                            fieldList[i][j-1] = new Field(new Coordinates(i, j-1));
+                            fieldList[i][j] = new Field(new Coordinates(i, j));
                         }
                     }
                 }
@@ -43,8 +43,8 @@ public class Board implements IBoard {
                     }
                     else {
                         if(j%2 == 1) {
-                            if(fieldList[i][j-1] == null) {
-                                fieldList[i][j-1] = new Field(new Coordinates(i, j-1));
+                            if(fieldList[i][j] == null) {
+                                fieldList[i][j] = new Field(new Coordinates(i, j));
                             }
                         }
                     }
@@ -61,5 +61,15 @@ public class Board implements IBoard {
     @Override
     public Field getField(Coordinates coordinates) {
         return fieldList[coordinates.getX()][coordinates.getY()];
+    }
+
+    @Override
+    public int getN() {
+        return n;
+    }
+
+    @Override
+    public int getM() {
+        return m;
     }
 }

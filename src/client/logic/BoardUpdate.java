@@ -12,17 +12,27 @@ import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 import server.board.Coordinates;
+import java.util.ArrayList;
 
 public class BoardUpdate {
     private ClientGUIController controller;
     private ClientGUI client;
+    private MoveType moveType;
+    private MoveType prevMoveType;
+    private boolean correctMove;
+    private ArrayList<Coordinates> pawns;
+    private int corner = 0;
 
     public BoardUpdate(ClientGUIController controller, ClientGUI client) {
         this.controller = controller;
         this.client = client;
+        moveType = MoveType.EMPTY;
+        prevMoveType = MoveType.EMPTY;
+        correctMove = false;
+        pawns = new ArrayList<>();
     }
     public void doMoveOnClick(ActionEvent event) {
-        Image img = new Image("/client/pawnBlack.png");
+        Image img = new Image("/client/pawnGreen.png");
         if (controller.currentPosition != null && controller.destinationPosition != null) {
             if (controller.jumpPositions.isEmpty()) {
                 Coordinates cCoordinates =
@@ -45,6 +55,7 @@ public class BoardUpdate {
                 circleD.setFill(new ImagePattern(img));
                 circleD.setStroke(Color.BLACK);
                 controller.destinationPosition = null;
+                controller.destinationSelected = false;
             } else {
                 //Current --> 1st jump
                 Coordinates cCoordinates =
@@ -111,6 +122,9 @@ public class BoardUpdate {
                 controller.destinationPosition = null;
                 controller.destinationSelected = false;
             }
+            moveType = MoveType.EMPTY;
+            prevMoveType = MoveType.EMPTY;
+            correctMove = false;
         }
     }
 
@@ -141,15 +155,29 @@ public class BoardUpdate {
                     Coordinates dCoordinates =
                             new Coordinates(GridPane.getColumnIndex(node),
                                     GridPane.getRowIndex(node));
+                    checkMoveType(cCoordinates,dCoordinates);
 
-                    controller.waitingNode = node;
-                    controller.clientListener.setMove("end");
-                    client.connection.invokeCheckMoveMethod(client.player, "checkMove", cCoordinates, dCoordinates);
-
+                    if (correctMove) {
+                        controller.waitingNode = node;
+                        controller.clientListener.setMove("end");
+                        client.connection.invokeCheckMoveMethod(client.player, "checkMove", cCoordinates, dCoordinates, moveType);
+                    }
                 } else if (node == controller.destinationPosition
                         && event.getButton() == MouseButton.SECONDARY) {
 
                     controller.removeDestinationNode(node);
+                    if (moveType == MoveType.SINGLE && correctMove) {
+                        moveType = MoveType.EMPTY;
+                    } else if (moveType == MoveType.SINGLE && prevMoveType == MoveType.EMPTY) {
+                        moveType = MoveType.EMPTY;
+                        prevMoveType = MoveType.EMPTY;
+                        correctMove = true;
+                    } else if (prevMoveType == MoveType.JUMP) {
+                        moveType = MoveType.JUMP;
+                    } else {
+                        moveType = MoveType.EMPTY;
+                    }
+
 
                 } else if (!controller.destinationSelected
                         && node != controller.currentPosition
@@ -163,21 +191,66 @@ public class BoardUpdate {
                     Coordinates dCoordinates =
                             new Coordinates(GridPane.getColumnIndex(node),
                                     GridPane.getRowIndex(node));
+                    checkMoveType(cCoordinates,dCoordinates);
 
-                    controller.waitingNode = node;
-                    controller.clientListener.setMove("jump");
-                    client.connection.invokeCheckMoveMethod(client.player, "checkMove", cCoordinates, dCoordinates);
-
+                    if (correctMove && moveType == MoveType.JUMP) {
+                        controller.waitingNode = node;
+                        controller.clientListener.setMove("jump");
+                        client.connection.invokeCheckMoveMethod(client.player, "checkMove", cCoordinates, dCoordinates, moveType);
+                    } else if (correctMove && moveType == MoveType.SINGLE) {
+                        controller.waitingNode = node;
+                        controller.clientListener.setMove("end");
+                        client.connection.invokeCheckMoveMethod(client.player, "checkMove", cCoordinates, dCoordinates, moveType);
+                    }
                 } else if(node != controller.currentPosition
                         && node != controller.destinationPosition
                         && controller.jumpPositions.contains(node)
                         && event.getButton() == MouseButton.PRIMARY) {
 
                     controller.removeJumpNode(node);
+                    if (moveType == MoveType.SINGLE && correctMove) {
+                        moveType = MoveType.EMPTY;
+                    } else if (moveType == MoveType.SINGLE && prevMoveType == MoveType.EMPTY) {
+                        moveType = MoveType.EMPTY;
+                        prevMoveType = MoveType.EMPTY;
+                        correctMove = true;
+                    } else if (prevMoveType == MoveType.JUMP) {
+                        moveType = MoveType.JUMP;
+                    } else {
+                        moveType = MoveType.EMPTY;
+                    }
+
 
                 }
                 break;
             }
+        }
+    }
+
+    private void checkMoveType (Coordinates cCoordinates, Coordinates dCoordinates) {
+        int cX = cCoordinates.getX();
+        int cY = cCoordinates.getY();
+        int dX = dCoordinates.getX();
+        int dY = dCoordinates.getY();
+
+        if (Math.abs(cX - dX) == 2 && Math.abs(cY - dY) == 0 && moveType == MoveType.EMPTY) {
+            prevMoveType = moveType;
+            moveType = MoveType.SINGLE;
+            correctMove = true;
+        } else if (Math.abs(cX - dX) == 1 && Math.abs(cY - dY) == 1 && moveType == MoveType.EMPTY) {
+            prevMoveType = moveType;
+            moveType = MoveType.SINGLE;
+            correctMove = true;
+        } else if (Math.abs(cX - dX) == 4 && Math.abs(cY - dY) == 0 && moveType != MoveType.SINGLE) {
+            prevMoveType = moveType;
+            moveType = MoveType.JUMP;
+            correctMove = true;
+        } else if (Math.abs(cX - dX) == 2 && Math.abs(cY - dY) == 2 && moveType != MoveType.SINGLE) {
+            prevMoveType = moveType;
+            moveType = MoveType.JUMP;
+            correctMove = true;
+        } else {
+            correctMove = false;
         }
     }
 }

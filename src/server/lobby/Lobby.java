@@ -2,6 +2,7 @@ package server.lobby;
 
 import javafx.scene.paint.Color;
 import server.board.Coordinates;
+import server.board.Field;
 import server.board.IBoard;
 import server.player.Bot;
 import jmx.Player;
@@ -17,6 +18,7 @@ public class Lobby implements Runnable{
     public int roundCorner;
     public LobbyMediator mediator;
     public Chat chat;
+    public int rowNumber;
 
     public Lobby(int playerNum, int rowNumber, String lobbyName, Player admin, LobbyMediator mediator) {
         this.mediator = mediator;
@@ -24,7 +26,7 @@ public class Lobby implements Runnable{
         numberOfPlayers = playerNum;
         this.name = lobbyName;
         this.admin = admin;
-        this.numberOfPlayers = numberOfPlayers;
+        this.rowNumber = rowNumber;
         roundCorner = 0;
         players = new Player[numberOfPlayers];
         addPlayer(admin);
@@ -108,10 +110,12 @@ public class Lobby implements Runnable{
         for(int i=0; i<numberOfPlayers; i++) {
             if(numberOfPlayers == 6) {
                 players[i].setColor(colorPalette[i]);
+                System.out.println("i= " + i);
                 putPawnsOnBoard(players[i], i);
             } else if(numberOfPlayers == 4) {
                 if(i%2 == 0) {
                     players[i].setColor(colorPalette[i*2]);
+                    System.out.println("i= " + i);
                     putPawnsOnBoard(players[i], i*2);
                 }
                 else {
@@ -120,13 +124,16 @@ public class Lobby implements Runnable{
                 }
             } else if(numberOfPlayers == 2) {
                 players[i].setColor(colorPalette[i*3]);
+                System.out.println("i= " + i);
                 putPawnsOnBoard(players[i], i*3);
             }
         }
     }
 
     public void putPawnsOnBoard(Player player, int corner) {
-        int rows = board.n - board.m;
+        int bN = board.getN();
+        int bM = board.getM();
+        int rows = bN - bM;
         int n, m;
         if(corner == 0) {
             n = 3 * rows + 1;
@@ -147,28 +154,33 @@ public class Lobby implements Runnable{
             n = 3 * rows;
             m = 4 * rows + 2;
         } else {
+            System.out.println("ELSE");
             return;
         }
         if(corner == 0 || corner == 2 || corner == 4) {
             for(int i=0; i<rows; i++) {
-                for(int j=0; j<rows; j++) {
+                for(int j=0; j<rows-i; j++) {
+                    System.out.println("SetPlayerOnField");
                     if(i%2 == 0) {
-                        board.getField(new Coordinates(n+i, m+2*j)).setPlayerOn(player);
+                        Field f = board.getField(new Coordinates(n+i, m+2*j+i));
+                        f.setPlayerOn(player);
                     }
                     else {
-                        board.getField(new Coordinates(n+i, m+2*j-1)).setPlayerOn(player);
+                        Field f = board.getField(new Coordinates(n+i, m+2*j+i));
+                        f.setPlayerOn(player);
                     }
                 }
             }
         }
         else {
             for(int i=0; i<rows; i++) {
-                for(int j=0; j<rows; j++) {
+                for(int j=0; j<rows-i; j++) {
+                    System.out.println("SetPlayerOnField");
                     if(i%2 == 0) {
-                        board.getField(new Coordinates(n-i, m+2*j)).setPlayerOn(player);
+                        board.getField(new Coordinates(n-i, m+2*j+i)).setPlayerOn(player);
                     }
                     else {
-                        board.getField(new Coordinates(n-i, m+2*j-1)).setPlayerOn(player);
+                        board.getField(new Coordinates(n-i, m+2*j+i)).setPlayerOn(player);
                     }
                 }
             }

@@ -102,6 +102,18 @@ public class ClientConnection {
         System.out.println("Method invoked: " + methodName + " on: " + mBeanName.toString());
     }
 
+    public void invokeInvitePlayerToLobbyMethod(ObjectName mBeanName, String methodName, String lobbyName,
+                                                String playerName, String invitedPlayerName) {
+        Object  opParams[] = {lobbyName, playerName, invitedPlayerName};
+        String  opSig[] = {String.class.getName(), String.class.getName(), String.class.getName()};
+        try {
+            mbsc.invoke(mBeanName, methodName, opParams, opSig);
+        } catch (Exception  e) {
+            e.printStackTrace();
+        }
+        System.out.println("Method invoked: " + methodName + " on: " + mBeanName.toString());
+    }
+
     public void invokeAddPlayerToLobbyMethod(ObjectName mBeanName, String methodName, String lobbyName, String playerName) {
         Object  opParams[] = {lobbyName, playerName};
         String  opSig[] = {String.class.getName(), String.class.getName()};
@@ -146,11 +158,20 @@ public class ClientConnection {
         System.out.println("Method invoked: " + methodName + " on: " + mBeanName.toString());
     }
 
-    public void invokeCheckMoveMethod(ObjectName mBeanName, String methodName, Coordinates currentCoordinates, Coordinates destinationCoordinates) {
-        Object  opParams[] = {currentCoordinates, destinationCoordinates};
-        String  opSig[] = {Coordinates.class.getName(), Coordinates.class.getName()};
+    public void invokeCheckMoveMethod(ObjectName mBeanName, String methodName, Coordinates currentCoordinates, Coordinates destinationCoordinates, MoveType moveType) {
+        Object  opParams[] = {currentCoordinates, destinationCoordinates, moveType};
+        String  opSig[] = {Coordinates.class.getName(), Coordinates.class.getName(), MoveType.class.getName()};
         try {
             mbsc.invoke(mBeanName, methodName, opParams, opSig);
+        } catch (Exception  e) {
+            e.printStackTrace();
+        }
+        System.out.println("Method invoked: " + methodName + " on: " + mBeanName.toString());
+    }
+
+    public void invokeStartGameMethod(ObjectName mBeanName, String methodName) {
+        try {
+            mbsc.invoke(mBeanName, methodName, null, null);
         } catch (Exception  e) {
             e.printStackTrace();
         }

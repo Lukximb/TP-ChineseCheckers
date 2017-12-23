@@ -1,5 +1,6 @@
 package jmx;
 
+import client.logic.MoveType;
 import javafx.scene.paint.Color;
 import server.board.Coordinates;
 import server.lobby.Lobby;
@@ -22,8 +23,15 @@ public class Player extends NotificationBroadcasterSupport implements PlayerMBea
     }
 
     @Override
-    public void checkMove(Coordinates currentCoordinates, Coordinates destinationCoordinates) {
-        if (lobby.mediator.checkMove(currentCoordinates, destinationCoordinates, pid)) {
+    public void startGame(){
+        lobby.startGame();
+        int size = lobby.rowNumber;
+        sendNotification(new Notification(String.valueOf(pid), this, 110011110, "S,StartGame," + size));
+    }
+
+    @Override
+    public void checkMove(Coordinates currentCoordinates, Coordinates destinationCoordinates, MoveType moveType) {
+        if (lobby.mediator.checkMove(currentCoordinates, destinationCoordinates, pid, moveType)) {
             sendNotification(new Notification(String.valueOf(pid), this, 110011110, "R CorrectMove"));
         }
     }
@@ -89,6 +97,9 @@ public class Player extends NotificationBroadcasterSupport implements PlayerMBea
     public String getPlayersNames() {
         String playersList = "";
         for(Player p: lobby.players) {
+            if (p == null) {
+                continue;
+            }
             playersList = playersList.concat(","+p.name);
         }
         return playersList;

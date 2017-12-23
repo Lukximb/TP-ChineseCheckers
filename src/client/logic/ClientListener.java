@@ -15,24 +15,51 @@ public class ClientListener implements NotificationListener {
 
     public void handleNotification(Notification notification, Object handback)
     {
+        System.out.println("\nReceived notification:  \n    message: " + notification.getMessage()
+                + "\n    type: " + notification.getType());
 
         switch (notification.getMessage().charAt(0)) {
             case('P')://player
-                System.out.println("\nReceived notification:  \n    message: " + notification.getMessage()
-                        + "\n    type: " + notification.getType());
                 receivePlayersNames(notification.getMessage().substring(2));
                 break;
-            case('W')://waiting
-                System.out.println("\nReceived notification:  \n    message: " + notification.getMessage()
-                        + "\n    type: " + notification.getType());
+            case('W'):
                 receiveLobbyNames(notification.getMessage().substring(2));
                 break;
             case('R')://RulesManager
                 handleRulesManagerResponse(notification.getMessage().substring(2));
                 break;
+            case('I')://InvitePopUp
+                String[] newMessage = notification.getMessage().substring(2).split(",");
+                controller.showInvitation(newMessage);
+                break;
+            case('A')://Accept Invitation
+                String[] acceptation = notification.getMessage().substring(2).split(",");
+                controller.client.connection.invokeSendPlayersInLobbyList(controller.client.manager,
+                        "sendPlayersInLobbyList", controller.client.playerName);
+                break;
+            case('S')://Start Game
+                String[] args = notification.getMessage().substring(2).split(",");
+                if(args[1].equals("2")) {
+                    controller.board4.setVisible(false);
+                    controller.board4.setDisable(true);
+                    controller.board2.setVisible(true);
+                    controller.board2.setDisable(false);
+                    controller.board = controller.board2;
+                } else if(args[1].equals("3")) {
+                    controller.board4.setVisible(false);
+                    controller.board4.setDisable(true);
+                    controller.board3.setVisible(true);
+                    controller.board3.setDisable(false);
+                    controller.board = controller.board3;
+                } else if(args[1].equals("4")) {
+                    controller.board4.setVisible(true);
+                    controller.board4.setDisable(false);
+                    controller.board = controller.board4;
+                } else {
+                    controller.board = controller.board4;
+                }
+                break;
             default:
-                System.out.println("\nReceived notification:  \n    message: " + notification.getMessage()
-                        + "\n    type: " + notification.getType());
         }
     }
 
