@@ -38,6 +38,7 @@ public class ClientGUIController {
 	private ObservableList<String> playersList;
 	private ObservableList<String> lobbyList;
 	public ClientListener clientListener;
+	public GridPane board;
 
 	//LOGIN---------------------------------------
 	@FXML
@@ -85,7 +86,9 @@ public class ClientGUIController {
 	@FXML
 	private Button cancelJoinLobbyButton;
 	@FXML
-	private Button joinLobbyButton;	
+	private Button joinLobbyButton;
+	@FXML
+    private Button refreshLobbyListButton;
 	//LOBBY---------------------------------------
 	@FXML
 	private StackPane lobby;
@@ -111,11 +114,17 @@ public class ClientGUIController {
 	private Button readyButton;
 	@FXML
 	private Button exitLobbyButton;
+	@FXML
+    private Button refreshPlayersListButton;
 	//GAME----------------------------------------
 	@FXML
 	private StackPane game;
 	@FXML
-    public GridPane board;
+    public GridPane board4;
+    @FXML
+    public GridPane board3;
+    @FXML
+    public GridPane board2;
 	@FXML
 	private ProgressBar turnTimeBar;
 	@FXML
@@ -160,6 +169,7 @@ public class ClientGUIController {
         lobbyList = FXCollections.observableArrayList();
         lobbyListColumn.setCellValueFactory(param -> new ReadOnlyStringWrapper(param.getValue()));
         lobbyListTable.setItems(lobbyList);
+        board = board4;
 	}
 
 	//LOGIN
@@ -235,6 +245,10 @@ public class ClientGUIController {
 		this.lobby.setVisible(true);
 		this.lobby.setDisable(false);
 	}
+
+	public void refreshLobbyListOnClick(ActionEvent event) {
+        client.connection.invokeSendWaitingLobbyList(client.manager, "sendWaitingLobbyList", client.playerName);
+    }
 	
 	public void cancelJoinLobbyButtonOnClick(ActionEvent event) {
 		this.joinLobby.setVisible(false);
@@ -262,6 +276,10 @@ public class ClientGUIController {
 		this.menu.setVisible(true);
 		this.menu.setDisable(false);
 	}
+
+	public void refreshPlayersListButtonOnClick(ActionEvent event) {
+        client.connection.invokeSendPlayersInLobbyList(client.manager, "sendPlayersInLobbyList", client.playerName);
+    }
 
 	public void addPlayerButtonOnClick(ActionEvent event) {
 		playerLogic.addPlayerButtonOnClick(event);
@@ -316,6 +334,8 @@ public class ClientGUIController {
 		this.joinLobby.setDisable(true);
 		this.createLobby.setVisible(false);
 		this.createLobby.setDisable(true);
+
+//        client.connection.invokeAddPlayerToLobbyMethod(client.manager, "addPlayerToLobby", lobbyName, client.playerName);
 
 		this.lobby.setVisible(true);
 		this.lobby.setDisable(false);

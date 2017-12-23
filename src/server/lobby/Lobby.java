@@ -18,6 +18,7 @@ public class Lobby implements Runnable{
     public int roundCorner;
     public LobbyMediator mediator;
     public Chat chat;
+    public int rowNumber;
 
     public Lobby(int playerNum, int rowNumber, String lobbyName, Player admin, LobbyMediator mediator) {
         this.mediator = mediator;
@@ -25,7 +26,7 @@ public class Lobby implements Runnable{
         numberOfPlayers = playerNum;
         this.name = lobbyName;
         this.admin = admin;
-        this.numberOfPlayers = numberOfPlayers;
+        this.rowNumber = rowNumber;
         roundCorner = 0;
         players = new Player[numberOfPlayers];
         addPlayer(admin);
@@ -158,14 +159,14 @@ public class Lobby implements Runnable{
         }
         if(corner == 0 || corner == 2 || corner == 4) {
             for(int i=0; i<rows; i++) {
-                for(int j=0; j<rows; j++) {
+                for(int j=0; j<rows-i; j++) {
                     System.out.println("SetPlayerOnField");
                     if(i%2 == 0) {
-                        Field f = board.getField(new Coordinates(n+i, m+2*j));
+                        Field f = board.getField(new Coordinates(n+i, m+2*j+i));
                         f.setPlayerOn(player);
                     }
                     else {
-                        Field f = board.getField(new Coordinates(n+i, m+2*j-1));
+                        Field f = board.getField(new Coordinates(n+i, m+2*j+i));
                         f.setPlayerOn(player);
                     }
                 }
@@ -173,13 +174,13 @@ public class Lobby implements Runnable{
         }
         else {
             for(int i=0; i<rows; i++) {
-                for(int j=0; j<rows; j++) {
+                for(int j=0; j<rows-i; j++) {
                     System.out.println("SetPlayerOnField");
                     if(i%2 == 0) {
-                        board.getField(new Coordinates(n-i, m+2*j)).setPlayerOn(player);
+                        board.getField(new Coordinates(n-i, m+2*j+i)).setPlayerOn(player);
                     }
                     else {
-                        board.getField(new Coordinates(n-i, m+2*j-1)).setPlayerOn(player);
+                        board.getField(new Coordinates(n-i, m+2*j+i)).setPlayerOn(player);
                     }
                 }
             }

@@ -99,8 +99,8 @@ public class Manager extends NotificationBroadcasterSupport implements ManagerMB
         if(player != null) {
             System.out.println("Player is not NULL");
             String playersNames = player.getPlayersNames();
-            sendNotification(new Notification(String.valueOf(player.lobby), this,
-                    001100101010, "P"+playersNames));
+            sendNotification(new Notification(String.valueOf(player.pid), this,
+                    001100101010, "P" + playersNames));
         }
         else {
             System.out.println("Player is NULL");
@@ -110,7 +110,7 @@ public class Manager extends NotificationBroadcasterSupport implements ManagerMB
     @Override
     public void sendWaitingLobbyList(String playerName) {
         Player player = null;
-        for(Player p: playerManager.playerInGameList) {
+        for(Player p: playerManager.playerFreeList) {
             if(p.name.equals(playerName)) {
                 player = p;
             }

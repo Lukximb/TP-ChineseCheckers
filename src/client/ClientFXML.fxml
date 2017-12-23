@@ -25,7 +25,7 @@
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
-<StackPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<StackPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <StackPane fx:id="playerNickNamePanel" prefHeight="150.0" prefWidth="200.0">
          <children>
@@ -39,7 +39,7 @@
                   <Insets left="75.0" right="75.0" top="400.0" />
                </StackPane.margin>
             </TextField>
-            <Label alignment="CENTER" prefHeight="322.0" prefWidth="487.0" text="Cihnese Ckeckers" textAlignment="CENTER" textFill="#e21d1d" wrapText="true" StackPane.alignment="TOP_CENTER">
+            <Label alignment="CENTER" prefHeight="322.0" prefWidth="487.0" text="Chinese Checkers" textAlignment="CENTER" textFill="#e21d1d" wrapText="true" StackPane.alignment="TOP_CENTER">
                <font>
                   <Font name="Jokerman" size="69.0" />
                </font>
@@ -150,7 +150,7 @@
             </Button>
             <Button fx:id="joinLobbyButton" mnemonicParsing="false" onAction="#joinLobbyButtonOnClick" prefHeight="30.0" prefWidth="150.0" text="Join" textAlignment="CENTER" StackPane.alignment="TOP_CENTER">
                <StackPane.margin>
-                  <Insets top="530.0" />
+                  <Insets left="200.0" top="530.0" />
                </StackPane.margin>
             </Button>
             <Label alignment="CENTER" prefHeight="50.0" prefWidth="300.0" text="Join to Lobby" textAlignment="CENTER" StackPane.alignment="TOP_CENTER">
@@ -169,6 +169,11 @@
                   <Insets bottom="300.0" left="75.0" right="75.0" top="120.0" />
                </StackPane.margin>
             </TableView>
+            <Button fx:id="refreshLobbyListButton" mnemonicParsing="false" onAction="#refreshLobbyListOnClick" prefHeight="30.0" prefWidth="150.0" text="Refresh" StackPane.alignment="TOP_CENTER">
+               <StackPane.margin>
+                  <Insets right="200.0" top="530.0" />
+               </StackPane.margin>
+            </Button>
          </children>
       </StackPane>
       <StackPane fx:id="lobby" disable="true" prefHeight="150.0" prefWidth="200.0" visible="false">
@@ -229,6 +234,11 @@
                   <Insets right="170.0" top="230.0" />
                </StackPane.margin>
             </Button>
+            <Button fx:id="refreshPlayersListButton" mnemonicParsing="false" onAction="#refreshPlayersListButtonOnClick" prefHeight="30.0" prefWidth="150.0" text="Refresh" StackPane.alignment="CENTER_LEFT">
+               <StackPane.margin>
+                  <Insets left="100.0" />
+               </StackPane.margin>
+            </Button>
          </children>
       </StackPane>
       <StackPane fx:id="game" disable="true" prefHeight="150.0" prefWidth="200.0" visible="false">
@@ -246,7 +256,7 @@
                   <Insets top="100.0" />
                </StackPane.margin>
             </ProgressBar>
-            <GridPane fx:id="board" alignment="CENTER" maxHeight="510.0" maxWidth="520.0" onMouseClicked="#boardClick" prefHeight="510.0" prefWidth="510.0" StackPane.alignment="TOP_CENTER">
+            <GridPane fx:id="board4" alignment="CENTER" maxHeight="510.0" maxWidth="520.0" onMouseClicked="#boardClick" prefHeight="510.0" prefWidth="510.0" StackPane.alignment="TOP_CENTER">
                <columnConstraints>
                   <ColumnConstraints hgrow="SOMETIMES" maxWidth="20.0" minWidth="10.0" prefWidth="20.0" />
                   <ColumnConstraints hgrow="SOMETIMES" maxWidth="20.0" minWidth="10.0" prefWidth="20.0" />
@@ -946,6 +956,678 @@
                      </fill>
                   </Circle>
                   <Circle layoutX="50.0" layoutY="170.0" onMouseClicked="#chooseCircleOnClick" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="12" GridPane.rowIndex="16">
+                     <fill>
+                        <RadialGradient centerX="0.4943181818181818" centerY="0.5" radius="0.5">
+                           <stops>
+                              <Stop color="MAGENTA" />
+                              <Stop color="WHITE" offset="1.0" />
+                           </stops>
+                        </RadialGradient>
+                     </fill>
+                  </Circle>
+               </children>
+               <StackPane.margin>
+                  <Insets top="135.0" />
+               </StackPane.margin>
+            </GridPane>
+            <GridPane fx:id="board3" alignment="CENTER" disable="true" layoutX="50.0" layoutY="145.0" maxHeight="510.0" maxWidth="520.0" onMouseClicked="#boardClick" prefHeight="510.0" prefWidth="510.0" visible="false" StackPane.alignment="TOP_CENTER">
+               <columnConstraints>
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="20.0" minWidth="10.0" prefWidth="20.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="20.0" minWidth="10.0" prefWidth="20.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="20.0" minWidth="10.0" prefWidth="20.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="20.0" minWidth="10.0" prefWidth="20.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="20.0" minWidth="10.0" prefWidth="20.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="20.0" minWidth="10.0" prefWidth="20.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="20.0" minWidth="10.0" prefWidth="20.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="20.0" minWidth="10.0" prefWidth="20.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="20.0" minWidth="10.0" prefWidth="20.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="20.0" minWidth="10.0" prefWidth="20.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="20.0" minWidth="10.0" prefWidth="20.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="20.0" minWidth="10.0" prefWidth="20.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="20.0" minWidth="10.0" prefWidth="20.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="20.0" minWidth="10.0" prefWidth="20.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="20.0" minWidth="10.0" prefWidth="20.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="20.0" minWidth="10.0" prefWidth="20.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="20.0" minWidth="10.0" prefWidth="20.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="20.0" minWidth="10.0" prefWidth="20.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="20.0" minWidth="10.0" prefWidth="20.0" />
+               </columnConstraints>
+               <rowConstraints>
+                  <RowConstraints maxHeight="30.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="30.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="30.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="30.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="30.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="30.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="30.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="30.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="30.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="30.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="30.0" minHeight="10.0" prefHeight="20.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="30.0" minHeight="10.0" prefHeight="20.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="30.0" minHeight="10.0" prefHeight="20.0" vgrow="SOMETIMES" />
+               </rowConstraints>
+               <StackPane.margin>
+                  <Insets top="135.0" />
+               </StackPane.margin>
+               <children>
+                  <Circle fill="WHITE" onMouseClicked="#chooseCircleOnClick" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="8" GridPane.rowIndex="9" />
+                  <Circle onMouseClicked="#chooseCircleOnClick" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="7" GridPane.rowIndex="2">
+                     <fill>
+                        <RadialGradient centerX="0.5" centerY="0.5" radius="0.5">
+                           <stops>
+                              <Stop color="LIME" />
+                              <Stop color="WHITE" offset="1.0" />
+                           </stops>
+                        </RadialGradient>
+                     </fill>
+                  </Circle>
+                  <Circle onMouseClicked="#chooseCircleOnClick" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="10" GridPane.rowIndex="1">
+                     <fill>
+                        <RadialGradient centerX="0.5" centerY="0.5" radius="0.5">
+                           <stops>
+                              <Stop color="LIME" />
+                              <Stop color="WHITE" offset="1.0" />
+                           </stops>
+                        </RadialGradient>
+                     </fill>
+                  </Circle>
+                  <Circle onMouseClicked="#chooseCircleOnClick" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="9">
+                     <fill>
+                        <RadialGradient centerX="0.5" centerY="0.5" radius="0.5">
+                           <stops>
+                              <Stop color="LIME" />
+                              <Stop color="WHITE" offset="1.0" />
+                           </stops>
+                        </RadialGradient>
+                     </fill>
+                  </Circle>
+                  <Circle onMouseClicked="#chooseCircleOnClick" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="8" GridPane.rowIndex="1">
+                     <fill>
+                        <RadialGradient centerX="0.5" centerY="0.5" radius="0.5">
+                           <stops>
+                              <Stop color="LIME" />
+                              <Stop color="WHITE" offset="1.0" />
+                           </stops>
+                        </RadialGradient>
+                     </fill>
+                  </Circle>
+                  <Circle onMouseClicked="#chooseCircleOnClick" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="9" GridPane.rowIndex="2">
+                     <fill>
+                        <RadialGradient centerX="0.5" centerY="0.5" radius="0.5">
+                           <stops>
+                              <Stop color="LIME" />
+                              <Stop color="WHITE" offset="1.0" />
+                           </stops>
+                        </RadialGradient>
+                     </fill>
+                  </Circle>
+                  <Circle onMouseClicked="#chooseCircleOnClick" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="11" GridPane.rowIndex="2">
+                     <fill>
+                        <RadialGradient centerX="0.5" centerY="0.5" radius="0.5">
+                           <stops>
+                              <Stop color="LIME" />
+                              <Stop color="WHITE" offset="1.0" />
+                           </stops>
+                        </RadialGradient>
+                     </fill>
+                  </Circle>
+                  <Circle fill="WHITE" onMouseClicked="#chooseCircleOnClick" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="6" GridPane.rowIndex="9" />
+                  <Circle fill="WHITE" onMouseClicked="#chooseCircleOnClick" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="11" GridPane.rowIndex="8" />
+                  <Circle fill="WHITE" onMouseClicked="#chooseCircleOnClick" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="9" GridPane.rowIndex="8" />
+                  <Circle fill="WHITE" onMouseClicked="#chooseCircleOnClick" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="7" GridPane.rowIndex="8" />
+                  <Circle fill="WHITE" onMouseClicked="#chooseCircleOnClick" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="12" GridPane.rowIndex="7" />
+                  <Circle fill="WHITE" onMouseClicked="#chooseCircleOnClick" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="10" GridPane.rowIndex="7" />
+                  <Circle fill="WHITE" onMouseClicked="#chooseCircleOnClick" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="8" GridPane.rowIndex="7" />
+                  <Circle fill="WHITE" onMouseClicked="#chooseCircleOnClick" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="6" GridPane.rowIndex="7" />
+                  <Circle fill="WHITE" onMouseClicked="#chooseCircleOnClick" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="11" GridPane.rowIndex="6" />
+                  <Circle fill="WHITE" onMouseClicked="#chooseCircleOnClick" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="9" GridPane.rowIndex="6" />
+                  <Circle fill="WHITE" onMouseClicked="#chooseCircleOnClick" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="7" GridPane.rowIndex="6" />
+                  <Circle fill="WHITE" onMouseClicked="#chooseCircleOnClick" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="6" GridPane.rowIndex="5" />
+                  <Circle fill="WHITE" onMouseClicked="#chooseCircleOnClick" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="12" GridPane.rowIndex="5" />
+                  <Circle fill="WHITE" onMouseClicked="#chooseCircleOnClick" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="10" GridPane.rowIndex="5" />
+                  <Circle fill="WHITE" onMouseClicked="#chooseCircleOnClick" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="8" GridPane.rowIndex="5" />
+                  <Circle fill="WHITE" onMouseClicked="#chooseCircleOnClick" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="11" GridPane.rowIndex="4" />
+                  <Circle fill="WHITE" onMouseClicked="#chooseCircleOnClick" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="9" GridPane.rowIndex="4" />
+                  <Circle fill="WHITE" onMouseClicked="#chooseCircleOnClick" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="7" GridPane.rowIndex="4" />
+                  <Circle fill="WHITE" onMouseClicked="#chooseCircleOnClick" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="12" GridPane.rowIndex="3" />
+                  <Circle fill="WHITE" onMouseClicked="#chooseCircleOnClick" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="10" GridPane.rowIndex="3" />
+                  <Circle fill="WHITE" onMouseClicked="#chooseCircleOnClick" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="8" GridPane.rowIndex="3" />
+                  <Circle fill="WHITE" onMouseClicked="#chooseCircleOnClick" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="6" GridPane.rowIndex="3" />
+                  <Circle fill="WHITE" onMouseClicked="#chooseCircleOnClick" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="12" GridPane.rowIndex="9" />
+                  <Circle fill="WHITE" onMouseClicked="#chooseCircleOnClick" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="10" GridPane.rowIndex="9" />
+                  <Circle onMouseClicked="#chooseCircleOnClick" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="11" GridPane.rowIndex="10">
+                     <fill>
+                        <RadialGradient centerX="0.4943181818181818" centerY="0.5" radius="0.5">
+                           <stops>
+                              <Stop color="MAGENTA" />
+                              <Stop color="WHITE" offset="1.0" />
+                           </stops>
+                        </RadialGradient>
+                     </fill>
+                  </Circle>
+                  <Circle onMouseClicked="#chooseCircleOnClick" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="9" GridPane.rowIndex="10">
+                     <fill>
+                        <RadialGradient centerX="0.4943181818181818" centerY="0.5" radius="0.5">
+                           <stops>
+                              <Stop color="MAGENTA" />
+                              <Stop color="WHITE" offset="1.0" />
+                           </stops>
+                        </RadialGradient>
+                     </fill>
+                  </Circle>
+                  <Circle onMouseClicked="#chooseCircleOnClick" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="7" GridPane.rowIndex="10">
+                     <fill>
+                        <RadialGradient centerX="0.4943181818181818" centerY="0.5" radius="0.5">
+                           <stops>
+                              <Stop color="MAGENTA" />
+                              <Stop color="WHITE" offset="1.0" />
+                           </stops>
+                        </RadialGradient>
+                     </fill>
+                  </Circle>
+                  <Circle onMouseClicked="#chooseCircleOnClick" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="10" GridPane.rowIndex="11">
+                     <fill>
+                        <RadialGradient centerX="0.4943181818181818" centerY="0.5" radius="0.5">
+                           <stops>
+                              <Stop color="MAGENTA" />
+                              <Stop color="WHITE" offset="1.0" />
+                           </stops>
+                        </RadialGradient>
+                     </fill>
+                  </Circle>
+                  <Circle onMouseClicked="#chooseCircleOnClick" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="8" GridPane.rowIndex="11">
+                     <fill>
+                        <RadialGradient centerX="0.4943181818181818" centerY="0.5" radius="0.5">
+                           <stops>
+                              <Stop color="MAGENTA" />
+                              <Stop color="WHITE" offset="1.0" />
+                           </stops>
+                        </RadialGradient>
+                     </fill>
+                  </Circle>
+                  <Circle onMouseClicked="#chooseCircleOnClick" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="9" GridPane.rowIndex="12">
+                     <fill>
+                        <RadialGradient centerX="0.4943181818181818" centerY="0.5" radius="0.5">
+                           <stops>
+                              <Stop color="MAGENTA" />
+                              <Stop color="WHITE" offset="1.0" />
+                           </stops>
+                        </RadialGradient>
+                     </fill>
+                  </Circle>
+                  <Circle fill="WHITE" onMouseClicked="#chooseCircleOnClick" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="13" GridPane.rowIndex="8" />
+                  <Circle fill="WHITE" onMouseClicked="#chooseCircleOnClick" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="14" GridPane.rowIndex="5" />
+                  <Circle fill="WHITE" onMouseClicked="#chooseCircleOnClick" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="13" GridPane.rowIndex="4" />
+                  <Circle fill="WHITE" onMouseClicked="#chooseCircleOnClick" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="5" GridPane.rowIndex="6" />
+                  <Circle fill="WHITE" onMouseClicked="#chooseCircleOnClick" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="3" GridPane.rowIndex="6" />
+                  <Circle fill="WHITE" onMouseClicked="#chooseCircleOnClick" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="4" GridPane.rowIndex="7" />
+                  <Circle fill="WHITE" onMouseClicked="#chooseCircleOnClick" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="5" GridPane.rowIndex="8" />
+                  <Circle fill="WHITE" onMouseClicked="#chooseCircleOnClick" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="4" GridPane.rowIndex="5" />
+                  <Circle fill="WHITE" onMouseClicked="#chooseCircleOnClick" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="5" GridPane.rowIndex="4" />
+                  <Circle fill="WHITE" onMouseClicked="#chooseCircleOnClick" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="14" GridPane.rowIndex="7" />
+                  <Circle fill="WHITE" onMouseClicked="#chooseCircleOnClick" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="15" GridPane.rowIndex="6" />
+                  <Circle fill="WHITE" onMouseClicked="#chooseCircleOnClick" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="13" GridPane.rowIndex="6" />
+                  <Circle onMouseClicked="#chooseCircleOnClick" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="2" GridPane.rowIndex="7">
+                     <fill>
+                        <RadialGradient centerX="0.5" centerY="0.5" radius="0.5">
+                           <stops>
+                              <Stop color="YELLOW" />
+                              <Stop color="WHITE" offset="1.0" />
+                           </stops>
+                        </RadialGradient>
+                     </fill>
+                  </Circle>
+                  <Circle onMouseClicked="#chooseCircleOnClick" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="3" GridPane.rowIndex="8">
+                     <fill>
+                        <RadialGradient centerX="0.5" centerY="0.5" radius="0.5">
+                           <stops>
+                              <Stop color="YELLOW" />
+                              <Stop color="WHITE" offset="1.0" />
+                           </stops>
+                        </RadialGradient>
+                     </fill>
+                  </Circle>
+                  <Circle onMouseClicked="#chooseCircleOnClick" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="1" GridPane.rowIndex="8">
+                     <fill>
+                        <RadialGradient centerX="0.5" centerY="0.5" radius="0.5">
+                           <stops>
+                              <Stop color="YELLOW" />
+                              <Stop color="WHITE" offset="1.0" />
+                           </stops>
+                        </RadialGradient>
+                     </fill>
+                  </Circle>
+                  <Circle onMouseClicked="#chooseCircleOnClick" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.rowIndex="9">
+                     <fill>
+                        <RadialGradient centerX="0.5" centerY="0.5" radius="0.5">
+                           <stops>
+                              <Stop color="YELLOW" />
+                              <Stop color="WHITE" offset="1.0" />
+                           </stops>
+                        </RadialGradient>
+                     </fill>
+                  </Circle>
+                  <Circle onMouseClicked="#chooseCircleOnClick" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="2" GridPane.rowIndex="9">
+                     <fill>
+                        <RadialGradient centerX="0.5" centerY="0.5" radius="0.5">
+                           <stops>
+                              <Stop color="YELLOW" />
+                              <Stop color="WHITE" offset="1.0" />
+                           </stops>
+                        </RadialGradient>
+                     </fill>
+                  </Circle>
+                  <Circle onMouseClicked="#chooseCircleOnClick" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="4" GridPane.rowIndex="9">
+                     <fill>
+                        <RadialGradient centerX="0.5" centerY="0.5" radius="0.5">
+                           <stops>
+                              <Stop color="YELLOW" />
+                              <Stop color="WHITE" offset="1.0" />
+                           </stops>
+                        </RadialGradient>
+                     </fill>
+                  </Circle>
+                  <Circle onMouseClicked="#chooseCircleOnClick" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="16" GridPane.rowIndex="7">
+                     <fill>
+                        <RadialGradient centerX="0.4943181818181818" centerY="0.5" radius="0.5">
+                           <stops>
+                              <Stop color="#00ffe1" />
+                              <Stop color="WHITE" offset="1.0" />
+                           </stops>
+                        </RadialGradient>
+                     </fill>
+                  </Circle>
+                  <Circle onMouseClicked="#chooseCircleOnClick" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="17" GridPane.rowIndex="8">
+                     <fill>
+                        <RadialGradient centerX="0.4943181818181818" centerY="0.5" radius="0.5">
+                           <stops>
+                              <Stop color="#00ffe1" />
+                              <Stop color="WHITE" offset="1.0" />
+                           </stops>
+                        </RadialGradient>
+                     </fill>
+                  </Circle>
+                  <Circle onMouseClicked="#chooseCircleOnClick" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="15" GridPane.rowIndex="8">
+                     <fill>
+                        <RadialGradient centerX="0.4943181818181818" centerY="0.5" radius="0.5">
+                           <stops>
+                              <Stop color="#00ffe1" />
+                              <Stop color="WHITE" offset="1.0" />
+                           </stops>
+                        </RadialGradient>
+                     </fill>
+                  </Circle>
+                  <Circle onMouseClicked="#chooseCircleOnClick" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="18" GridPane.rowIndex="9">
+                     <fill>
+                        <RadialGradient centerX="0.4943181818181818" centerY="0.5" radius="0.5">
+                           <stops>
+                              <Stop color="#00ffe1" />
+                              <Stop color="WHITE" offset="1.0" />
+                           </stops>
+                        </RadialGradient>
+                     </fill>
+                  </Circle>
+                  <Circle onMouseClicked="#chooseCircleOnClick" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="16" GridPane.rowIndex="9">
+                     <fill>
+                        <RadialGradient centerX="0.4943181818181818" centerY="0.5" radius="0.5">
+                           <stops>
+                              <Stop color="#00ffe1" />
+                              <Stop color="WHITE" offset="1.0" />
+                           </stops>
+                        </RadialGradient>
+                     </fill>
+                  </Circle>
+                  <Circle onMouseClicked="#chooseCircleOnClick" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="14" GridPane.rowIndex="9">
+                     <fill>
+                        <RadialGradient centerX="0.4943181818181818" centerY="0.5" radius="0.5">
+                           <stops>
+                              <Stop color="#00ffe1" />
+                              <Stop color="WHITE" offset="1.0" />
+                           </stops>
+                        </RadialGradient>
+                     </fill>
+                  </Circle>
+                  <Circle onMouseClicked="#chooseCircleOnClick" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="18" GridPane.rowIndex="3">
+                     <fill>
+                        <RadialGradient centerX="0.5" centerY="0.5" radius="0.5">
+                           <stops>
+                              <Stop color="RED" />
+                              <Stop color="WHITE" offset="1.0" />
+                           </stops>
+                        </RadialGradient>
+                     </fill>
+                  </Circle>
+                  <Circle onMouseClicked="#chooseCircleOnClick" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="16" GridPane.rowIndex="3">
+                     <fill>
+                        <RadialGradient centerX="0.5" centerY="0.5" radius="0.5">
+                           <stops>
+                              <Stop color="RED" />
+                              <Stop color="WHITE" offset="1.0" />
+                           </stops>
+                        </RadialGradient>
+                     </fill>
+                  </Circle>
+                  <Circle onMouseClicked="#chooseCircleOnClick" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="14" GridPane.rowIndex="3">
+                     <fill>
+                        <RadialGradient centerX="0.5" centerY="0.5" radius="0.5">
+                           <stops>
+                              <Stop color="RED" />
+                              <Stop color="WHITE" offset="1.0" />
+                           </stops>
+                        </RadialGradient>
+                     </fill>
+                  </Circle>
+                  <Circle onMouseClicked="#chooseCircleOnClick" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="17" GridPane.rowIndex="4">
+                     <fill>
+                        <RadialGradient centerX="0.5" centerY="0.5" radius="0.5">
+                           <stops>
+                              <Stop color="RED" />
+                              <Stop color="WHITE" offset="1.0" />
+                           </stops>
+                        </RadialGradient>
+                     </fill>
+                  </Circle>
+                  <Circle onMouseClicked="#chooseCircleOnClick" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="15" GridPane.rowIndex="4">
+                     <fill>
+                        <RadialGradient centerX="0.5" centerY="0.5" radius="0.5">
+                           <stops>
+                              <Stop color="RED" />
+                              <Stop color="WHITE" offset="1.0" />
+                           </stops>
+                        </RadialGradient>
+                     </fill>
+                  </Circle>
+                  <Circle onMouseClicked="#chooseCircleOnClick" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="16" GridPane.rowIndex="5">
+                     <fill>
+                        <RadialGradient centerX="0.5" centerY="0.5" radius="0.5">
+                           <stops>
+                              <Stop color="RED" />
+                              <Stop color="WHITE" offset="1.0" />
+                           </stops>
+                        </RadialGradient>
+                     </fill>
+                  </Circle>
+                  <Circle onMouseClicked="#chooseCircleOnClick" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="2" GridPane.rowIndex="5">
+                     <fill>
+                        <RadialGradient centerX="0.5" centerY="0.5" radius="0.5">
+                           <stops>
+                              <Stop color="BLUE" />
+                              <Stop color="WHITE" offset="1.0" />
+                           </stops>
+                        </RadialGradient>
+                     </fill>
+                  </Circle>
+                  <Circle onMouseClicked="#chooseCircleOnClick" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="3" GridPane.rowIndex="4">
+                     <fill>
+                        <RadialGradient centerX="0.5" centerY="0.5" radius="0.5">
+                           <stops>
+                              <Stop color="BLUE" />
+                              <Stop color="WHITE" offset="1.0" />
+                           </stops>
+                        </RadialGradient>
+                     </fill>
+                  </Circle>
+                  <Circle onMouseClicked="#chooseCircleOnClick" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="1" GridPane.rowIndex="4">
+                     <fill>
+                        <RadialGradient centerX="0.5" centerY="0.5" radius="0.5">
+                           <stops>
+                              <Stop color="BLUE" />
+                              <Stop color="WHITE" offset="1.0" />
+                           </stops>
+                        </RadialGradient>
+                     </fill>
+                  </Circle>
+                  <Circle onMouseClicked="#chooseCircleOnClick" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.rowIndex="3">
+                     <fill>
+                        <RadialGradient centerX="0.5" centerY="0.5" radius="0.5">
+                           <stops>
+                              <Stop color="BLUE" />
+                              <Stop color="WHITE" offset="1.0" />
+                           </stops>
+                        </RadialGradient>
+                     </fill>
+                  </Circle>
+                  <Circle onMouseClicked="#chooseCircleOnClick" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="2" GridPane.rowIndex="3">
+                     <fill>
+                        <RadialGradient centerX="0.5" centerY="0.5" radius="0.5">
+                           <stops>
+                              <Stop color="BLUE" />
+                              <Stop color="WHITE" offset="1.0" />
+                           </stops>
+                        </RadialGradient>
+                     </fill>
+                  </Circle>
+                  <Circle onMouseClicked="#chooseCircleOnClick" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="4" GridPane.rowIndex="3">
+                     <fill>
+                        <RadialGradient centerX="0.5" centerY="0.5" radius="0.5">
+                           <stops>
+                              <Stop color="BLUE" />
+                              <Stop color="WHITE" offset="1.0" />
+                           </stops>
+                        </RadialGradient>
+                     </fill>
+                  </Circle>
+               </children>
+            </GridPane>
+            <GridPane fx:id="board2" alignment="CENTER" disable="true" layoutX="50.0" layoutY="145.0" maxHeight="510.0" maxWidth="520.0" onMouseClicked="#boardClick" prefHeight="510.0" prefWidth="510.0" visible="false" StackPane.alignment="TOP_CENTER">
+               <columnConstraints>
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="20.0" minWidth="10.0" prefWidth="20.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="20.0" minWidth="10.0" prefWidth="20.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="20.0" minWidth="10.0" prefWidth="20.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="20.0" minWidth="10.0" prefWidth="20.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="20.0" minWidth="10.0" prefWidth="20.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="20.0" minWidth="10.0" prefWidth="20.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="20.0" minWidth="10.0" prefWidth="20.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="20.0" minWidth="10.0" prefWidth="20.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="20.0" minWidth="10.0" prefWidth="20.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="20.0" minWidth="10.0" prefWidth="20.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="20.0" minWidth="10.0" prefWidth="20.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="20.0" minWidth="10.0" prefWidth="20.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="20.0" minWidth="10.0" prefWidth="20.0" />
+               </columnConstraints>
+               <rowConstraints>
+                  <RowConstraints maxHeight="30.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="30.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="30.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="30.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="30.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="30.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="30.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="30.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="30.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+               </rowConstraints>
+               <children>
+                  <Circle onMouseClicked="#chooseCircleOnClick" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="7" GridPane.rowIndex="1">
+                     <fill>
+                        <RadialGradient centerX="0.5" centerY="0.5" radius="0.5">
+                           <stops>
+                              <Stop color="LIME" />
+                              <Stop color="WHITE" offset="1.0" />
+                           </stops>
+                        </RadialGradient>
+                     </fill>
+                  </Circle>
+                  <Circle onMouseClicked="#chooseCircleOnClick" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="6">
+                     <fill>
+                        <RadialGradient centerX="0.5" centerY="0.5" radius="0.5">
+                           <stops>
+                              <Stop color="LIME" />
+                              <Stop color="WHITE" offset="1.0" />
+                           </stops>
+                        </RadialGradient>
+                     </fill>
+                  </Circle>
+                  <Circle onMouseClicked="#chooseCircleOnClick" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="5" GridPane.rowIndex="1">
+                     <fill>
+                        <RadialGradient centerX="0.5" centerY="0.5" radius="0.5">
+                           <stops>
+                              <Stop color="LIME" />
+                              <Stop color="WHITE" offset="1.0" />
+                           </stops>
+                        </RadialGradient>
+                     </fill>
+                  </Circle>
+                  <Circle fill="WHITE" onMouseClicked="#chooseCircleOnClick" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="5" GridPane.rowIndex="3" />
+                  <Circle fill="WHITE" onMouseClicked="#chooseCircleOnClick" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="3" GridPane.rowIndex="3" />
+                  <Circle fill="WHITE" onMouseClicked="#chooseCircleOnClick" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="9" GridPane.rowIndex="3" />
+                  <Circle fill="WHITE" onMouseClicked="#chooseCircleOnClick" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="8" GridPane.rowIndex="6" />
+                  <Circle fill="WHITE" onMouseClicked="#chooseCircleOnClick" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="6" GridPane.rowIndex="6" />
+                  <Circle fill="WHITE" onMouseClicked="#chooseCircleOnClick" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="7" GridPane.rowIndex="5" />
+                  <Circle fill="WHITE" onMouseClicked="#chooseCircleOnClick" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="5" GridPane.rowIndex="5" />
+                  <Circle fill="WHITE" onMouseClicked="#chooseCircleOnClick" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="8" GridPane.rowIndex="4" />
+                  <Circle fill="WHITE" onMouseClicked="#chooseCircleOnClick" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="6" GridPane.rowIndex="4" />
+                  <Circle fill="WHITE" onMouseClicked="#chooseCircleOnClick" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="4" GridPane.rowIndex="4" />
+                  <Circle fill="WHITE" onMouseClicked="#chooseCircleOnClick" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="4" GridPane.rowIndex="2" />
+                  <Circle fill="WHITE" onMouseClicked="#chooseCircleOnClick" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="8" GridPane.rowIndex="2" />
+                  <Circle fill="WHITE" onMouseClicked="#chooseCircleOnClick" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="6" GridPane.rowIndex="2" />
+                  <Circle fill="WHITE" onMouseClicked="#chooseCircleOnClick" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="9" GridPane.rowIndex="5" />
+                  <Circle fill="WHITE" onMouseClicked="#chooseCircleOnClick" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="4" GridPane.rowIndex="6" />
+                  <Circle fill="WHITE" onMouseClicked="#chooseCircleOnClick" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="3" GridPane.rowIndex="5" />
+                  <Circle fill="WHITE" onMouseClicked="#chooseCircleOnClick" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="7" GridPane.rowIndex="3" />
+                  <Circle fill="WHITE" onMouseClicked="#chooseCircleOnClick" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="2" GridPane.rowIndex="4" />
+                  <Circle fill="WHITE" onMouseClicked="#chooseCircleOnClick" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="10" GridPane.rowIndex="4" />
+                  <Circle onMouseClicked="#chooseCircleOnClick" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.rowIndex="6">
+                     <fill>
+                        <RadialGradient centerX="0.5" centerY="0.5" radius="0.5">
+                           <stops>
+                              <Stop color="YELLOW" />
+                              <Stop color="WHITE" offset="1.0" />
+                           </stops>
+                        </RadialGradient>
+                     </fill>
+                  </Circle>
+                  <Circle onMouseClicked="#chooseCircleOnClick" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="2" GridPane.rowIndex="6">
+                     <fill>
+                        <RadialGradient centerX="0.5" centerY="0.5" radius="0.5">
+                           <stops>
+                              <Stop color="YELLOW" />
+                              <Stop color="WHITE" offset="1.0" />
+                           </stops>
+                        </RadialGradient>
+                     </fill>
+                  </Circle>
+                  <Circle onMouseClicked="#chooseCircleOnClick" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="11" GridPane.rowIndex="5">
+                     <fill>
+                        <RadialGradient centerX="0.4943181818181818" centerY="0.5" radius="0.5">
+                           <stops>
+                              <Stop color="#00ffe1" />
+                              <Stop color="WHITE" offset="1.0" />
+                           </stops>
+                        </RadialGradient>
+                     </fill>
+                  </Circle>
+                  <Circle onMouseClicked="#chooseCircleOnClick" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="10" GridPane.rowIndex="6">
+                     <fill>
+                        <RadialGradient centerX="0.4943181818181818" centerY="0.5" radius="0.5">
+                           <stops>
+                              <Stop color="#00ffe1" />
+                              <Stop color="WHITE" offset="1.0" />
+                           </stops>
+                        </RadialGradient>
+                     </fill>
+                  </Circle>
+                  <Circle onMouseClicked="#chooseCircleOnClick" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="12" GridPane.rowIndex="2">
+                     <fill>
+                        <RadialGradient centerX="0.5" centerY="0.5" radius="0.5">
+                           <stops>
+                              <Stop color="RED" />
+                              <Stop color="WHITE" offset="1.0" />
+                           </stops>
+                        </RadialGradient>
+                     </fill>
+                  </Circle>
+                  <Circle onMouseClicked="#chooseCircleOnClick" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="10" GridPane.rowIndex="2">
+                     <fill>
+                        <RadialGradient centerX="0.5" centerY="0.5" radius="0.5">
+                           <stops>
+                              <Stop color="RED" />
+                              <Stop color="WHITE" offset="1.0" />
+                           </stops>
+                        </RadialGradient>
+                     </fill>
+                  </Circle>
+                  <Circle onMouseClicked="#chooseCircleOnClick" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="11" GridPane.rowIndex="3">
+                     <fill>
+                        <RadialGradient centerX="0.5" centerY="0.5" radius="0.5">
+                           <stops>
+                              <Stop color="RED" />
+                              <Stop color="WHITE" offset="1.0" />
+                           </stops>
+                        </RadialGradient>
+                     </fill>
+                  </Circle>
+                  <Circle onMouseClicked="#chooseCircleOnClick" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.rowIndex="2">
+                     <fill>
+                        <RadialGradient centerX="0.5" centerY="0.5" radius="0.5">
+                           <stops>
+                              <Stop color="BLUE" />
+                              <Stop color="WHITE" offset="1.0" />
+                           </stops>
+                        </RadialGradient>
+                     </fill>
+                  </Circle>
+                  <Circle onMouseClicked="#chooseCircleOnClick" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="2" GridPane.rowIndex="2">
+                     <fill>
+                        <RadialGradient centerX="0.5" centerY="0.5" radius="0.5">
+                           <stops>
+                              <Stop color="BLUE" />
+                              <Stop color="WHITE" offset="1.0" />
+                           </stops>
+                        </RadialGradient>
+                     </fill>
+                  </Circle>
+                  <Circle onMouseClicked="#chooseCircleOnClick" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                     <fill>
+                        <RadialGradient centerX="0.5" centerY="0.5" radius="0.5">
+                           <stops>
+                              <Stop color="BLUE" />
+                              <Stop color="WHITE" offset="1.0" />
+                           </stops>
+                        </RadialGradient>
+                     </fill>
+                  </Circle>
+                  <Circle onMouseClicked="#chooseCircleOnClick" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="12" GridPane.rowIndex="6">
+                     <fill>
+                        <RadialGradient centerX="0.4943181818181818" centerY="0.5" radius="0.5">
+                           <stops>
+                              <Stop color="#00ffe1" />
+                              <Stop color="WHITE" offset="1.0" />
+                           </stops>
+                        </RadialGradient>
+                     </fill>
+                  </Circle>
+                  <Circle onMouseClicked="#chooseCircleOnClick" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="1" GridPane.rowIndex="5">
+                     <fill>
+                        <RadialGradient centerX="0.5" centerY="0.5" radius="0.5">
+                           <stops>
+                              <Stop color="YELLOW" />
+                              <Stop color="WHITE" offset="1.0" />
+                           </stops>
+                        </RadialGradient>
+                     </fill>
+                  </Circle>
+                  <Circle onMouseClicked="#chooseCircleOnClick" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="6" GridPane.rowIndex="8">
+                     <fill>
+                        <RadialGradient centerX="0.4943181818181818" centerY="0.5" radius="0.5">
+                           <stops>
+                              <Stop color="MAGENTA" />
+                              <Stop color="WHITE" offset="1.0" />
+                           </stops>
+                        </RadialGradient>
+                     </fill>
+                  </Circle>
+                  <Circle onMouseClicked="#chooseCircleOnClick" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="7" GridPane.rowIndex="7">
+                     <fill>
+                        <RadialGradient centerX="0.4943181818181818" centerY="0.5" radius="0.5">
+                           <stops>
+                              <Stop color="MAGENTA" />
+                              <Stop color="WHITE" offset="1.0" />
+                           </stops>
+                        </RadialGradient>
+                     </fill>
+                  </Circle>
+                  <Circle onMouseClicked="#chooseCircleOnClick" radius="15.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="5" GridPane.rowIndex="7">
                      <fill>
                         <RadialGradient centerX="0.4943181818181818" centerY="0.5" radius="0.5">
                            <stops>

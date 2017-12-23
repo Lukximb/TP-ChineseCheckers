@@ -25,7 +25,8 @@ public class Player extends NotificationBroadcasterSupport implements PlayerMBea
     @Override
     public void startGame(){
         lobby.startGame();
-        sendNotification(new Notification(String.valueOf(lobby.name), this, 110011110, "S StartGame"));
+        int size = lobby.rowNumber;
+        sendNotification(new Notification(String.valueOf(pid), this, 110011110, "S,StartGame," + size));
     }
 
     @Override
