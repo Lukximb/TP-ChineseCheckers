@@ -17,8 +17,8 @@ public class ClientConnection {
 
     public ClientConnection() {
         try {
-//            url = new JMXServiceURL("service:jmx:rmi://25.0.246.243:44445/jndi/rmi://25.0.246.243:44444/jmxrmi");
-            url = new JMXServiceURL("service:jmx:rmi://25.71.242.160:44445/jndi/rmi://25.71.242.160:44444/jmxrmi");
+            url = new JMXServiceURL("service:jmx:rmi://25.0.246.243:44445/jndi/rmi://25.0.246.243:44444/jmxrmi");
+//            url = new JMXServiceURL("service:jmx:rmi://25.71.242.160:44445/jndi/rmi://25.71.242.160:44444/jmxrmi");
             jmxc = JMXConnectorFactory.connect(url, null);
             mbsc = jmxc.getMBeanServerConnection();
             domain = mbsc.getDefaultDomain();
@@ -102,6 +102,18 @@ public class ClientConnection {
         System.out.println("Method invoked: " + methodName + " on: " + mBeanName.toString());
     }
 
+    public void invokeInvitePlayerToLobbyMethod(ObjectName mBeanName, String methodName, String lobbyName,
+                                                String playerName, String invitedPlayerName) {
+        Object  opParams[] = {lobbyName, playerName, invitedPlayerName};
+        String  opSig[] = {String.class.getName(), String.class.getName(), String.class.getName()};
+        try {
+            mbsc.invoke(mBeanName, methodName, opParams, opSig);
+        } catch (Exception  e) {
+            e.printStackTrace();
+        }
+        System.out.println("Method invoked: " + methodName + " on: " + mBeanName.toString());
+    }
+
     public void invokeAddPlayerToLobbyMethod(ObjectName mBeanName, String methodName, String lobbyName, String playerName) {
         Object  opParams[] = {lobbyName, playerName};
         String  opSig[] = {String.class.getName(), String.class.getName()};
@@ -151,6 +163,15 @@ public class ClientConnection {
         String  opSig[] = {Coordinates.class.getName(), Coordinates.class.getName(), MoveType.class.getName()};
         try {
             mbsc.invoke(mBeanName, methodName, opParams, opSig);
+        } catch (Exception  e) {
+            e.printStackTrace();
+        }
+        System.out.println("Method invoked: " + methodName + " on: " + mBeanName.toString());
+    }
+
+    public void invokeStartGameMethod(ObjectName mBeanName, String methodName) {
+        try {
+            mbsc.invoke(mBeanName, methodName, null, null);
         } catch (Exception  e) {
             e.printStackTrace();
         }

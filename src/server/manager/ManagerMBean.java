@@ -13,6 +13,8 @@ public interface ManagerMBean {
 
     void setLobbyManager(LobbyManager lobbyManager);
 
+    void InvitePlayer(String lobbyName, String playerName, String invitedPlayerName);
+
     void addPlayerToLobby(String lobbyName, String playerName);
 
     void removePlayerFromLobby(String lobbyName, String playerName);

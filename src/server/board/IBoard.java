@@ -24,6 +24,12 @@ public interface IBoard {
      */
     void executeMove(Coordinates currentCoordinates, Coordinates newCoordinates);
 
+    void fillFieldList();
+
+    int getN();
+
+    int getM();
+
     /**
      * Returns field with specified coordinates.
      * @param coordinates field's coordinates

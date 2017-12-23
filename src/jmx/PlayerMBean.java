@@ -30,6 +30,8 @@ public interface PlayerMBean {
      */
     void joinToLobby(Lobby lobby);
 
+    void startGame();
+
     /**
      * Removes player from lobby.
      */

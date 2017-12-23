@@ -11,6 +11,7 @@ import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.fxml.FXML;
 import javafx.scene.layout.GridPane;
@@ -23,7 +24,7 @@ public class ClientGUIController {
 
 //	ClientGUI client;
 
-	private ClientGUI client;
+	public ClientGUI client;
 	private BoardUpdate boardUpdate;
 	private PlayerLogic playerLogic;
 
@@ -62,6 +63,8 @@ public class ClientGUIController {
 	private TextField lobbyNameField;
 	@FXML
 	private Button player2Button;
+	@FXML
+	private Button player3Button;
 	@FXML
 	private Button player4Button;
 	@FXML
@@ -123,6 +126,15 @@ public class ClientGUIController {
 	private Button surrenderButton;
 	@FXML
 	private Button sendMsgButton;
+	//POPUP-INVITE--------------------------------------
+	@FXML
+	private StackPane invitePopUp;
+	@FXML
+	private Button invitePopButtonAccept;
+	@FXML
+	private Button invitePopButtonDecline;
+	@FXML
+	private Label popUpPlayerNick;
 
 	public ClientGUIController(ClientGUI client) {
 		this.client = client;
@@ -190,10 +202,11 @@ public class ClientGUIController {
 		this.createLobby.setDisable(true);
 
 		client.lobbyName = lobbyNameField.getText();
-		client.rowForPlayerPawn = (int)boardSizeSpinner.getValue();
-		client.connection.invokeCreateLobbyMethod(client.factory, "createLobby", client.playerInLobby , client.rowForPlayerPawn, client.lobbyName, client.pid);
-
+		client.rowOfPawn = (int)boardSizeSpinner.getValue();
+		client.connection.invokeCreateLobbyMethod(client.factory, "createLobby", client.playerInLobby ,
+				client.rowOfPawn, client.lobbyName, client.pid);
 		client.connection.invokeSendPlayersInLobbyList(client.manager, "sendPlayersInLobbyList", client.playerName);
+		client.addNotificationListenerToLobby();
 
 		this.lobby.setVisible(true);
 		this.lobby.setDisable(false);
@@ -235,6 +248,8 @@ public class ClientGUIController {
 	public void readyButtonOnClick(ActionEvent event) {
 		this.lobby.setVisible(false);
 		this.lobby.setDisable(true);
+
+		client.connection.invokeStartGameMethod(client.player, "startGame");
 		
 		this.game.setVisible(true);
 		this.game.setDisable(false);
@@ -288,6 +303,28 @@ public class ClientGUIController {
 
 	public void chooseCircleOnClick(MouseEvent event) {
 		boardUpdate.chooseCircleOnClick(event);
+	}
+
+	public void acceptInviteOnClick(ActionEvent event) {
+		playerLogic.addPlayerToLobby();
+		client.addNotificationListenerToLobby();
+		this.invitePopUp.setVisible(false);
+		this.invitePopUp.setDisable(true);
+		this.menu.setVisible(false);
+		this.menu.setDisable(true);
+		this.joinLobby.setVisible(false);
+		this.joinLobby.setDisable(true);
+		this.createLobby.setVisible(false);
+		this.createLobby.setDisable(true);
+
+		this.lobby.setVisible(true);
+		this.lobby.setDisable(false);
+	}
+
+	public void declineInviteOnClick(ActionEvent event) {
+		client.lobbyName = "";
+		this.invitePopUp.setVisible(false);
+		this.invitePopUp.setDisable(true);
 	}
 
 	//Set methods are invoked by notification listener after acceptation received
@@ -347,14 +384,29 @@ public class ClientGUIController {
 //		for(String s: list) {
 //			playersList.add(s);
 //		}
-        playersList.addAll(list);
+		playersList.addAll(list);
 		playersInLobbyList.setItems(playersList);
 	}
 
 	public void updateLobbyList(String[] list) {
         lobbyList.clear();
-        lobbyList.addAll(list);
+//		for(String s: list) {
+//			lobbyList.add(s);
+//		}
+		try {
+			lobbyList.addAll(list);
+		} catch (Exception e) {}
+        //lobbyList.addAll(list);
         lobbyListTable.setItems(lobbyList);
+	}
+
+	public void showInvitation(String[] PlayerAndLobbyName) {
+		invitePopUp.setStyle("-fx-background-image: url('/client/popupBackground.png');");
+		this.popUpPlayerNick.setText(PlayerAndLobbyName[0]);
+		this.invitePopUp.setVisible(true);
+		this.invitePopUp.setDisable(false);
+		client.lobbyName = PlayerAndLobbyName[1];
+		System.out.println("\nReceived notification:  " + PlayerAndLobbyName[0]);
 	}
 
 

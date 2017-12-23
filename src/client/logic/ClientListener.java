@@ -22,13 +22,22 @@ public class ClientListener implements NotificationListener {
                         + "\n    type: " + notification.getType());
                 receivePlayersNames(notification.getMessage().substring(2));
                 break;
-            case('W')://waiting
+            case('W'):
                 System.out.println("\nReceived notification:  \n    message: " + notification.getMessage()
                         + "\n    type: " + notification.getType());
                 receiveLobbyNames(notification.getMessage().substring(2));
                 break;
             case('R')://RulesManager
                 handleRulesManagerResponse(notification.getMessage().substring(2));
+                break;
+            case('I')://InvitePopUp
+                String[] newMessage = notification.getMessage().substring(2).split(",");
+                controller.showInvitation(newMessage);
+                break;
+            case('A')://Accept Invitation
+                String[] acceptation = notification.getMessage().substring(2).split(",");
+                controller.client.connection.invokeSendPlayersInLobbyList(controller.client.manager,
+                        "sendPlayersInLobbyList", controller.client.playerName);
                 break;
             default:
                 System.out.println("\nReceived notification:  \n    message: " + notification.getMessage()

@@ -12,6 +12,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 import server.board.Coordinates;
+import java.util.ArrayList;
 
 public class BoardUpdate {
     private ClientGUIController controller;
@@ -19,6 +20,8 @@ public class BoardUpdate {
     private MoveType moveType;
     private MoveType prevMoveType;
     private boolean correctMove;
+    private ArrayList<Coordinates> pawns;
+    private int corner = 0;
 
     public BoardUpdate(ClientGUIController controller, ClientGUI client) {
         this.controller = controller;
@@ -26,9 +29,10 @@ public class BoardUpdate {
         moveType = MoveType.EMPTY;
         prevMoveType = MoveType.EMPTY;
         correctMove = false;
+        pawns = new ArrayList<>();
     }
     public void doMoveOnClick(ActionEvent event) {
-        Image img = new Image("/client/pawnBlack.png");
+        Image img = new Image("/client/pawnGreen.png");
         if (controller.currentPosition != null && controller.destinationPosition != null) {
             if (controller.jumpPositions.isEmpty()) {
                 Coordinates cCoordinates =

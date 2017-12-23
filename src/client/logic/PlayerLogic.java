@@ -10,30 +10,32 @@ public class PlayerLogic {
     private ClientGUIController controller;
     private ClientGUI client;
 
+    private String invitedPlayerName;
+
     public PlayerLogic(ClientGUIController controller, ClientGUI client) {
         this.controller = controller;
         this.client = client;
     }
 
     public void addPlayerButtonOnClick(ActionEvent event) {
-        String playerName = controller.invitePlayerField.getText();
-
-        client.connection.invokeAddPlayerToLobbyMethod(client.manager, "addPlayerToLobby", client.lobbyName, playerName);
-        System.out.println("Add player: " + playerName + " to lobby: " + client.lobbyName);
-        client.connection.invokeSendPlayersInLobbyList(client.manager, "sendPlayersInLobbyList", client.playerName);
+        invitedPlayerName = controller.invitePlayerField.getText();
+        client.connection.invokeInvitePlayerToLobbyMethod(client.manager,
+                "InvitePlayer", client.lobbyName, controller.client.playerName, invitedPlayerName);
     }
 
     public void removePlayerButtonOnClick(ActionEvent event) {
         String playerName = controller.invitePlayerField.getText();
 
-        client.connection.invokeRemovePlayerToLobbyMethod(client.manager, "removePlayerFromLobby", client.lobbyName, playerName);
+        client.connection.invokeRemovePlayerToLobbyMethod(client.manager,
+                "removePlayerFromLobby", client.lobbyName, playerName);
         System.out.println("Remove player: " + playerName + " from lobby: " + client.lobbyName);
         client.connection.invokeSendPlayersInLobbyList(client.manager, "sendPlayersInLobbyList", client.playerName);
     }
 
     public void createPlayer() {
         if (client.player == null) {
-            client.connection.invokeCreatePlayerMethod(client.factory, "createPlayer", client.pid, controller.nickNameField.getText());
+            client.connection.invokeCreatePlayerMethod(client.factory,
+                    "createPlayer", client.pid, controller.nickNameField.getText());
             try {
                 client.player = new ObjectName(client.domain+ client.pid +":type=jmx.Player,name=Player" + client.pid);
                 client.addNotificationListenerToPlayer();
@@ -42,5 +44,11 @@ public class PlayerLogic {
                 e.printStackTrace();
             }
         }
+    }
+
+    public void addPlayerToLobby() {
+        client.connection.invokeAddPlayerToLobbyMethod(client.manager,
+                "addPlayerToLobby", client.lobbyName, client.playerName);
+        System.out.println("Add player: " + invitedPlayerName + " to lobby: " + client.lobbyName);
     }
 }

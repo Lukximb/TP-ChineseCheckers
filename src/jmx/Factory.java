@@ -119,8 +119,11 @@ public class Factory extends NotificationBroadcasterSupport implements FactoryMB
             index++;
         }
         admin = playerManager.playerFreeList.get(index);
+        playerManager.playerFreeList.remove(index);
+        playerManager.playerInGameList.add(admin);
         System.out.println(">> Lobby " + lobbyName + " created");
         Lobby lobby = new Lobby(playerNum, rowNumber, lobbyName, admin, lobbyMediator);
+        lobby.board = createBoard(4*rowNumber+1, 3*rowNumber+1);
         admin.lobby = lobby;
         lobbyManager.waitingLobbyList.add(lobby);
         return null;
@@ -144,7 +147,7 @@ public class Factory extends NotificationBroadcasterSupport implements FactoryMB
 
     @Override
     public Board createBoard(int n, int m) {
-        return null;
+        return new Board(n, m);
     }
 
     @Override
