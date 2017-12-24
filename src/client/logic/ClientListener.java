@@ -15,9 +15,6 @@ public class ClientListener implements NotificationListener {
 
     public void handleNotification(Notification notification, Object handback)
     {
-//        System.out.println("\nReceived notification:  \n    message: " + notification.getMessage()
-//                + "\n    type: " + notification.getType());
-
         switch (notification.getMessage().charAt(0)) {
             case('P')://player
                 receivePlayersNames(notification.getMessage().substring(2));
@@ -38,21 +35,18 @@ public class ClientListener implements NotificationListener {
                         "sendPlayersInLobbyList", controller.client.playerName);
                 break;
             case('S')://Start Game
-                System.out.println("STARTGAME");
                 String[] args = notification.getMessage().substring(2).split(",");
                 hendleStartGame(args);
                 break;
             case('C')://Corner
                 int corner = Integer.parseInt(notification.getMessage().substring(2));
                 controller.boardUpdate.setCorner(corner);
-                System.out.println("CORNER= "+corner);
                 break;
             default:
         }
     }
 
     private void receivePlayersNames(String message) {
-        //System.out.println(message);
         String[] newMessage = message.split(",");
         controller.updatePlayersList(newMessage);
     }
@@ -75,13 +69,23 @@ public class ClientListener implements NotificationListener {
     }
 
     private void hendleStartGame(String[] args) {
+        int rowNumber = Integer.parseInt(args[1]);
+        int numberOfPlayers = Integer.parseInt(args[2]);
         if(args[1].equals("2")) {
+            controller.lobby.setVisible(false);
+            controller.lobby.setDisable(true);
+            controller.game.setVisible(true);
+            controller.game.setDisable(false);
             controller.board4.setVisible(false);
             controller.board4.setDisable(true);
             controller.board2.setVisible(true);
             controller.board2.setDisable(false);
             controller.board = controller.board2;
         } else if(args[1].equals("3")) {
+            controller.lobby.setVisible(false);
+            controller.lobby.setDisable(true);
+            controller.game.setVisible(true);
+            controller.game.setDisable(false);
             controller.board4.setVisible(false);
             controller.board4.setDisable(true);
             controller.board3.setVisible(true);
@@ -98,6 +102,7 @@ public class ClientListener implements NotificationListener {
         } else {
             controller.board = controller.board4;
         }
+        controller.boardUpdate.createPawnList(rowNumber, numberOfPlayers);
     }
 
     public void setMove(String move) {

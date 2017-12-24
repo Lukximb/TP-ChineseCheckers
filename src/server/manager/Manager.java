@@ -139,6 +139,7 @@ public class Manager extends NotificationBroadcasterSupport implements ManagerMB
             }
         }
         lobby.startGame();
-        sendNotification(new Notification(String.valueOf(lobby.name), this, 110011110, "S,StartGame," + lobby.rowNumber));
+        sendNotification(new Notification(String.valueOf(lobby.name), this, 110011110,
+                "S,StartGame," + lobby.rowNumber + "," + lobby.numberOfPlayers));
     }
 }

@@ -126,12 +126,10 @@ public class Lobby implements Runnable{
         for(int i=0; i<numberOfPlayers; i++) {
             if(numberOfPlayers == 6) {
                 players[i].setColor(colorPalette[i]);
-                System.out.println("i= " + i);
                 putPawnsOnBoard(players[i], i);
             } else if(numberOfPlayers == 4) {
                 if(i%2 == 0) {
                     players[i].setColor(colorPalette[i*2]);
-                    System.out.println("i= " + i);
                     putPawnsOnBoard(players[i], i*2);
                 }
                 else {
@@ -140,7 +138,6 @@ public class Lobby implements Runnable{
                 }
             } else if(numberOfPlayers == 2) {
                 players[i].setColor(colorPalette[i*3]);
-                System.out.println("i= " + i);
                 putPawnsOnBoard(players[i], i*3);
             }
         }
@@ -170,13 +167,11 @@ public class Lobby implements Runnable{
             n = 3 * rows;
             m = 4 * rows + 2;
         } else {
-            System.out.println("ELSE");
             return;
         }
         if(corner == 0 || corner == 2 || corner == 4) {
             for(int i=0; i<rows; i++) {
                 for(int j=0; j<rows-i; j++) {
-                    System.out.println("SetPlayerOnField");
                     if(i%2 == 0) {
                         Field f = board.getField(new Coordinates(n+i, m+2*j+i));
                         f.setPlayerOn(player);
@@ -191,7 +186,6 @@ public class Lobby implements Runnable{
         else {
             for(int i=0; i<rows; i++) {
                 for(int j=0; j<rows-i; j++) {
-                    System.out.println("SetPlayerOnField");
                     if(i%2 == 0) {
                         board.getField(new Coordinates(n-i, m+2*j+i)).setPlayerOn(player);
                     }

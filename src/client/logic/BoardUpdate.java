@@ -12,6 +12,8 @@ import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 import server.board.Coordinates;
+
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class BoardUpdate {
@@ -21,7 +23,10 @@ public class BoardUpdate {
     private MoveType prevMoveType;
     private boolean correctMove;
     private ArrayList<Coordinates> pawns;
+    private ArrayList<Integer> enemyCorner;
     private int corner = 0;
+    private int numberOfPlayers;
+    private Image img;
 
     public BoardUpdate(ClientGUIController controller, ClientGUI client) {
         this.controller = controller;
@@ -30,15 +35,128 @@ public class BoardUpdate {
         prevMoveType = MoveType.EMPTY;
         correctMove = false;
         pawns = new ArrayList<>();
+        enemyCorner = new ArrayList<>();
     }
 
     public void setCorner(int corner) {
         this.corner = corner;
-        System.out.println("Setting corner");
+    }
+
+    private void setEnemyCorner() {
+        if(numberOfPlayers == 2) {
+            enemyCorner.add(0);
+            enemyCorner.add(3);
+            int index = 0;
+            for (int i: enemyCorner) {
+                if (i == corner) {
+                    enemyCorner.remove(index);
+                }
+                index++;
+            }
+        } else if(numberOfPlayers == 3) {
+            enemyCorner.add(0);
+            enemyCorner.add(2);
+            enemyCorner.add(4);
+            enemyCorner.remove(corner);
+        } else if(numberOfPlayers == 4) {
+            enemyCorner.add(0);
+            enemyCorner.add(1);
+            enemyCorner.add(3);
+            enemyCorner.add(4);
+            enemyCorner.remove(corner);
+        } else if(numberOfPlayers == 6) {
+            for (int i = 0; i < 6; i++) {
+                enemyCorner.add(i);
+            }
+            enemyCorner.remove(corner);
+        }
+    }
+
+    public void createPawnList(int rows, int numberOfPlayers) {
+        this.numberOfPlayers  = numberOfPlayers;
+        //setEnemyCorner();
+        int n = 0, m = 0;
+        if(corner == 0) {
+            n = 3 * rows + 1;
+            m = 2 * rows + 1;
+        } else if(corner == 1) {
+            n = 3 * rows;
+            m = 0;
+        } else if(corner == 2) {
+            n = rows;
+            m = 0;
+        } else if(corner == 3) {
+            n = rows - 1;
+            m = 2 * rows + 1;
+        } else if(corner == 4) {
+            n = rows;
+            m = 4 * rows + 2;
+        } else if(corner == 5) {
+            n = 3 * rows;
+            m = 4 * rows + 2;
+        }
+        if(corner == 0 || corner == 2 || corner == 4) {
+            for(int i=0; i<rows; i++) {
+                for(int j=0; j<rows-i; j++) {
+                    if(i%2 == 0) {
+                        pawns.add(new Coordinates(n+i, m+2*j+i));
+                    }
+                    else {
+                        pawns.add(new Coordinates(n+i, m+2*j+i));
+                    }
+                }
+            }
+        }
+        else {
+            for(int i=0; i<rows; i++) {
+                for(int j=0; j<rows-i; j++) {
+                    if(i%2 == 0) {
+                        pawns.add(new Coordinates(n-i, m+2*j+i));
+                    }
+                    else {
+                        pawns.add(new Coordinates(n-i, m+2*j+i));
+                    }
+                }
+            }
+        }
+
+        setPawnColor();
+        drawPawns();
+    }
+
+    private void setPawnColor() {
+        if (corner == 0) {
+            img = new Image("/client/pawnPink.png");
+        } else if (corner == 1) {
+            img = new Image("/client/pawnYellow.png");
+        } else if (corner == 2) {
+            img = new Image("/client/pawnBlue.png");
+        } else if (corner == 3) {
+            img = new Image("/client/pawnGreen.png");
+        } else if (corner == 4) {
+            img = new Image("/client/pawnRed.png");
+        } else if (corner == 5) {
+            img = new Image("/client/pawnLightBlue.png");
+        }
+    }
+
+    private void drawPawns() {
+        ObservableList<Node> childrens = controller.board.getChildren();
+        int i = 0;
+        while (i < pawns.size()) {
+            for (Node node : childrens) {
+                if(GridPane.getRowIndex(node) == pawns.get(i).getX() &&
+                        GridPane.getColumnIndex(node) == pawns.get(i).getY()) {
+                    Circle circle = (Circle)node;
+                    circle.setFill(Color.TRANSPARENT);
+                    circle.setFill(new ImagePattern(img));
+                    i++;
+                }
+            }
+        }
     }
 
     public void doMoveOnClick(ActionEvent event) {
-        Image img = new Image("/client/pawnGreen.png");
         if (controller.currentPosition != null && controller.destinationPosition != null) {
             if (controller.jumpPositions.isEmpty()) {
                 Coordinates cCoordinates =

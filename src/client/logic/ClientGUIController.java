@@ -439,7 +439,7 @@ public class ClientGUIController {
 	}
 
     public void boardClick(MouseEvent event) {
-		System.out.println("Row: " + GridPane.getRowIndex((Node)event.getTarget())
-				+ "\nColumn: " + GridPane.getColumnIndex((Node)event.getTarget()));
+//		System.out.println("Row: " + GridPane.getRowIndex((Node)event.getTarget())
+//				+ "\nColumn: " + GridPane.getColumnIndex((Node)event.getTarget()));
 	}
 }
