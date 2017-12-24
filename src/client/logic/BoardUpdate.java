@@ -50,6 +50,7 @@ public class BoardUpdate {
             for (int i: enemyCorner) {
                 if (i == corner) {
                     enemyCorner.remove(index);
+                    break;
                 }
                 index++;
             }
@@ -57,24 +58,38 @@ public class BoardUpdate {
             enemyCorner.add(0);
             enemyCorner.add(2);
             enemyCorner.add(4);
-            enemyCorner.remove(corner);
+            int index = 0;
+            for (int i: enemyCorner) {
+                if (i == corner) {
+                    enemyCorner.remove(index);
+                    break;
+                }
+                index++;
+            }
         } else if(numberOfPlayers == 4) {
             enemyCorner.add(0);
             enemyCorner.add(1);
             enemyCorner.add(3);
             enemyCorner.add(4);
-            enemyCorner.remove(corner);
+            int index = 0;
+            for (int i: enemyCorner) {
+                if (i == corner) {
+                    enemyCorner.remove(index);
+                    break;
+                }
+                index++;
+            }
         } else if(numberOfPlayers == 6) {
             for (int i = 0; i < 6; i++) {
-                enemyCorner.add(i);
+                if ( i != corner) {
+                    enemyCorner.add(i);
+                }
             }
-            enemyCorner.remove(corner);
         }
     }
 
     public void createPawnList(int rows, int numberOfPlayers) {
         this.numberOfPlayers  = numberOfPlayers;
-        //setEnemyCorner();
         int n = 0, m = 0;
         if(corner == 0) {
             n = 3 * rows + 1;
@@ -122,6 +137,7 @@ public class BoardUpdate {
 
         setPawnColor();
         drawPawns();
+        setEnemyCorner();
     }
 
     private void setPawnColor() {
@@ -167,6 +183,17 @@ public class BoardUpdate {
                                 GridPane.getColumnIndex(controller.destinationPosition));
                 client.connection.invokeMovePlayerMethod(client.player, "move", cCoordinates, dCoordinates);
 
+                int index = 0;
+                for (Coordinates c : pawns) {
+                    if (c.getX() == GridPane.getRowIndex(controller.currentPosition) &&
+                            c.getY() == GridPane.getColumnIndex(controller.currentPosition)) {
+                        pawns.remove(index);
+                        break;
+                    }
+                    index++;
+                }
+                pawns.add(dCoordinates);
+
                 Circle circleC = (Circle)controller.currentPosition;
                 circleC.setStrokeWidth(1);
                 circleC.setStroke(Color.BLACK);
@@ -189,6 +216,17 @@ public class BoardUpdate {
                         new Coordinates(GridPane.getRowIndex(controller.jumpPositions.get(0)),
                                 GridPane.getColumnIndex(controller.jumpPositions.get(0)));
                 client.connection.invokeMovePlayerMethod(client.player, "move", cCoordinates, dCoordinates);
+
+                int index = 0;
+                for (Coordinates c : pawns) {
+                    if (c.getX() == GridPane.getRowIndex(controller.currentPosition) &&
+                            c.getY() == GridPane.getColumnIndex(controller.currentPosition)) {
+                        pawns.remove(index);
+                        break;
+                    }
+                    index++;
+                }
+                pawns.add(dCoordinates);
 
                 Circle circleC = (Circle)controller.currentPosition;
                 circleC.setStrokeWidth(1);
@@ -261,8 +299,9 @@ public class BoardUpdate {
                         && node != controller.destinationPosition
                         && event.getButton() == MouseButton.PRIMARY) {
 
-                    controller.setStartNode(node);
-
+                    if (checkStartPosition(GridPane.getRowIndex(node), GridPane.getColumnIndex(node))) {
+                        controller.setStartNode(node);
+                    }
                 } else if (node == controller.currentPosition
                         && event.getButton() == MouseButton.PRIMARY) {
 
@@ -378,5 +417,16 @@ public class BoardUpdate {
 
     public void setMoveTypeAsEmpty() {
         this.moveType = MoveType.EMPTY;
+    }
+
+    private boolean checkStartPosition(int x, int y) {
+        boolean correctCoordinates = false;
+        for (Coordinates c : pawns) {
+            if (c.getX() == x && c.getY() == y) {
+                correctCoordinates = true;
+                break;
+            }
+        }
+        return correctCoordinates;
     }
 }

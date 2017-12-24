@@ -32,29 +32,29 @@ public class RulesManager implements IRulesManager {
 
             if (Math.abs(cX - dX) == 2 && Math.abs(cY - dY) == 2 && emptyDestination) {
                 if (cX < dX && cY < dY) {
-                    if (mediator.getField(new Coordinates(dX-1, dY-1)).getPlayerOn() == null) {
+                    if (mediator.getField(new Coordinates(dX-1, dY-1)).getPlayerOn() != null) {
                         correctMove = true;
                     }
                 } else if (cX < dX && cY > dY) {
-                    if (mediator.getField(new Coordinates(dX-1, dY+1)).getPlayerOn() == null) {
+                    if (mediator.getField(new Coordinates(dX-1, dY+1)).getPlayerOn() != null) {
                         correctMove = true;
                     }
                 } else if (cX > dX && cY < dY) {
-                    if (mediator.getField(new Coordinates(dX+1, dY-1)).getPlayerOn() == null) {
+                    if (mediator.getField(new Coordinates(dX+1, dY-1)).getPlayerOn() != null) {
                         correctMove = true;
                     }
                 } else if (cX > dX && cY > dY) {
-                    if (mediator.getField(new Coordinates(dX+1, dY+1)).getPlayerOn() == null) {
+                    if (mediator.getField(new Coordinates(dX+1, dY+1)).getPlayerOn() != null) {
                         correctMove = true;
                     }
                 }
             } else if (Math.abs(cX - dX) == 0 && Math.abs(cY - dY) == 4 && emptyDestination) {
                 if (cY < dY) {
-                    if (mediator.getField(new Coordinates(dX, dY-2)).getPlayerOn() == null) {
+                    if (mediator.getField(new Coordinates(dX, dY-2)).getPlayerOn() != null) {
                         correctMove = true;
                     }
                 } else {
-                    if (mediator.getField(new Coordinates(dX, dY+2)).getPlayerOn() == null) {
+                    if (mediator.getField(new Coordinates(dX, dY+2)).getPlayerOn() != null) {
                         correctMove = true;
                     }
                 }
