@@ -26,4 +26,5 @@ public class Field {
     public void setPlayerOn(Player playerOn) {
         this.playerOn = playerOn;
     }
+
 }

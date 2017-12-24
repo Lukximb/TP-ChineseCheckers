@@ -19,6 +19,7 @@ public class Lobby implements Runnable{
     public LobbyMediator mediator;
     public Chat chat;
     public int rowNumber;
+    public int playerCorner;
 
     public Lobby(int playerNum, int rowNumber, String lobbyName, Player admin, LobbyMediator mediator) {
         this.mediator = mediator;
@@ -28,6 +29,7 @@ public class Lobby implements Runnable{
         this.admin = admin;
         this.rowNumber = rowNumber;
         roundCorner = 0;
+        playerCorner = 0;
         players = new Player[numberOfPlayers];
         addPlayer(admin);
     }
@@ -47,6 +49,7 @@ public class Lobby implements Runnable{
 
     public void startGame() {
         initPlayersOnBoard();
+        mediator.setBoard(board);
         round = players[0];
         roundCorner = 0;
     }
@@ -57,9 +60,22 @@ public class Lobby implements Runnable{
 
     public void addPlayer(Player player) {
         if(roundCorner < numberOfPlayers) {
-            player.joinToLobby(this);
+            player.joinToLobby(this, playerCorner);
             players[roundCorner] = player;
             roundCorner++;
+            if (numberOfPlayers == 2) {
+                playerCorner += 3;
+            } else if (numberOfPlayers == 3) {
+                playerCorner += 2;
+            } else if (numberOfPlayers == 4) {
+                if (roundCorner == 1 || roundCorner == 3) {
+                    playerCorner += 1;
+                } else if (roundCorner == 2) {
+                    playerCorner += 2;
+                }
+            } else if (numberOfPlayers == 6) {
+                playerCorner += 1;
+            }
         }
     }
 

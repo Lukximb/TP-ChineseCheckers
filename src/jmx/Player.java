@@ -4,17 +4,18 @@ import client.logic.MoveType;
 import javafx.scene.paint.Color;
 import server.board.Coordinates;
 import server.lobby.Lobby;
-import server.player.Dificult;
+import server.player.Difficult;
 
 import javax.management.Notification;
 import javax.management.NotificationBroadcasterSupport;
 import java.io.Serializable;
 
 public class Player extends NotificationBroadcasterSupport implements PlayerMBean, Serializable{
-    public int pid = 0;
-    public String name = "";
-    public Lobby lobby = null;
-    Color color = null;
+    public int pid;
+    public String name;
+    public Lobby lobby;
+    public Color color;
+    public int corner;
 
     public Player(int pid, String name){
         this.pid = pid;
@@ -23,16 +24,11 @@ public class Player extends NotificationBroadcasterSupport implements PlayerMBea
     }
 
     @Override
-    public void startGame(){
-        lobby.startGame();
-        int size = lobby.rowNumber;
-        sendNotification(new Notification(String.valueOf(pid), this, 110011110, "S,StartGame," + size));
-    }
-
-    @Override
     public void checkMove(Coordinates currentCoordinates, Coordinates destinationCoordinates, MoveType moveType) {
-        if (lobby.mediator.checkMove(currentCoordinates, destinationCoordinates, pid, moveType)) {
+        if (lobby.mediator.checkMove(currentCoordinates, destinationCoordinates, pid, moveType) == true) {
             sendNotification(new Notification(String.valueOf(pid), this, 110011110, "R CorrectMove"));
+        } else {
+            sendNotification(new Notification(String.valueOf(pid), this, 110011110, "R IncorrectMove"));
         }
     }
 
@@ -47,8 +43,10 @@ public class Player extends NotificationBroadcasterSupport implements PlayerMBea
     }
 
     @Override
-    public void joinToLobby(Lobby lobby) {
+    public void joinToLobby(Lobby lobby, int corner) {
         this.lobby = lobby;
+        this.corner = corner;
+        sendNotification(new Notification(String.valueOf(pid), this, 110011110, "C " + corner));
     }
 
     @Override
@@ -62,7 +60,7 @@ public class Player extends NotificationBroadcasterSupport implements PlayerMBea
     }
 
     @Override
-    public void addBot(Dificult dificultLevel) {
+    public void addBot(Difficult difficultLevel) {
 
     }
 

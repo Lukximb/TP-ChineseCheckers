@@ -124,6 +124,7 @@ public class Factory extends NotificationBroadcasterSupport implements FactoryMB
         System.out.println(">> Lobby " + lobbyName + " created");
         Lobby lobby = new Lobby(playerNum, rowNumber, lobbyName, admin, lobbyMediator);
         lobby.board = createBoard(4*rowNumber+1, 3*rowNumber+1);
+        lobbyMediator.setBoard(lobby.board);
         admin.lobby = lobby;
         lobbyManager.waitingLobbyList.add(lobby);
         return null;

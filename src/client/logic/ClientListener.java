@@ -15,8 +15,8 @@ public class ClientListener implements NotificationListener {
 
     public void handleNotification(Notification notification, Object handback)
     {
-        System.out.println("\nReceived notification:  \n    message: " + notification.getMessage()
-                + "\n    type: " + notification.getType());
+//        System.out.println("\nReceived notification:  \n    message: " + notification.getMessage()
+//                + "\n    type: " + notification.getType());
 
         switch (notification.getMessage().charAt(0)) {
             case('P')://player
@@ -38,33 +38,21 @@ public class ClientListener implements NotificationListener {
                         "sendPlayersInLobbyList", controller.client.playerName);
                 break;
             case('S')://Start Game
+                System.out.println("STARTGAME");
                 String[] args = notification.getMessage().substring(2).split(",");
-                if(args[1].equals("2")) {
-                    controller.board4.setVisible(false);
-                    controller.board4.setDisable(true);
-                    controller.board2.setVisible(true);
-                    controller.board2.setDisable(false);
-                    controller.board = controller.board2;
-                } else if(args[1].equals("3")) {
-                    controller.board4.setVisible(false);
-                    controller.board4.setDisable(true);
-                    controller.board3.setVisible(true);
-                    controller.board3.setDisable(false);
-                    controller.board = controller.board3;
-                } else if(args[1].equals("4")) {
-                    controller.board4.setVisible(true);
-                    controller.board4.setDisable(false);
-                    controller.board = controller.board4;
-                } else {
-                    controller.board = controller.board4;
-                }
+                hendleStartGame(args);
+                break;
+            case('C')://Corner
+                int corner = Integer.parseInt(notification.getMessage().substring(2));
+                controller.boardUpdate.setCorner(corner);
+                System.out.println("CORNER= "+corner);
                 break;
             default:
         }
     }
 
     private void receivePlayersNames(String message) {
-        System.out.println(message);
+        //System.out.println(message);
         String[] newMessage = message.split(",");
         controller.updatePlayersList(newMessage);
     }
@@ -81,6 +69,34 @@ public class ClientListener implements NotificationListener {
             } else if (move.equals("end")) {
                 controller.setDestinationNode();
             }
+        }else if (response.equals("IncorrectMove")) {
+            controller.boardUpdate.setMoveTypeAsEmpty();
+        }
+    }
+
+    private void hendleStartGame(String[] args) {
+        if(args[1].equals("2")) {
+            controller.board4.setVisible(false);
+            controller.board4.setDisable(true);
+            controller.board2.setVisible(true);
+            controller.board2.setDisable(false);
+            controller.board = controller.board2;
+        } else if(args[1].equals("3")) {
+            controller.board4.setVisible(false);
+            controller.board4.setDisable(true);
+            controller.board3.setVisible(true);
+            controller.board3.setDisable(false);
+            controller.board = controller.board3;
+        } else if(args[1].equals("4")) {
+            controller.lobby.setVisible(false);
+            controller.lobby.setDisable(true);
+            controller.game.setVisible(true);
+            controller.game.setDisable(false);
+            controller.board4.setVisible(true);
+            controller.board4.setDisable(false);
+            controller.board = controller.board4;
+        } else {
+            controller.board = controller.board4;
         }
     }
 

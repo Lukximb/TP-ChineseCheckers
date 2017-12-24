@@ -1,6 +1,6 @@
 package server.player;
 
-public enum Dificult {
+public enum Difficult {
     EASY,
     MEDIUM,
     HARD

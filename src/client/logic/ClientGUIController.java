@@ -25,7 +25,7 @@ public class ClientGUIController {
 //	ClientGUI client;
 
 	public ClientGUI client;
-	private BoardUpdate boardUpdate;
+	public BoardUpdate boardUpdate;
 	private PlayerLogic playerLogic;
 
 	public Node currentPosition;
@@ -91,7 +91,7 @@ public class ClientGUIController {
     private Button refreshLobbyListButton;
 	//LOBBY---------------------------------------
 	@FXML
-	private StackPane lobby;
+	public StackPane lobby;
 	@FXML
 	private TableView<String> playersInLobbyList;
 	@FXML
@@ -118,7 +118,7 @@ public class ClientGUIController {
     private Button refreshPlayersListButton;
 	//GAME----------------------------------------
 	@FXML
-	private StackPane game;
+	public StackPane game;
 	@FXML
     public GridPane board4;
     @FXML
@@ -217,6 +217,7 @@ public class ClientGUIController {
 				client.rowOfPawn, client.lobbyName, client.pid);
 		client.connection.invokeSendPlayersInLobbyList(client.manager, "sendPlayersInLobbyList", client.playerName);
 		client.addNotificationListenerToLobby();
+		boardUpdate.setCorner(0);
 
 		this.lobby.setVisible(true);
 		this.lobby.setDisable(false);
@@ -263,7 +264,8 @@ public class ClientGUIController {
 		this.lobby.setVisible(false);
 		this.lobby.setDisable(true);
 
-		client.connection.invokeStartGameMethod(client.player, "startGame");
+		//client.connection.invokeStartGameMethod(client.player, "startGame");
+		client.connection.invokeStartGameMethod(client.manager, "startGame", client.lobbyName);
 		
 		this.game.setVisible(true);
 		this.game.setDisable(false);
@@ -324,8 +326,8 @@ public class ClientGUIController {
 	}
 
 	public void acceptInviteOnClick(ActionEvent event) {
+        client.addNotificationListenerToLobby();
 		playerLogic.addPlayerToLobby();
-		client.addNotificationListenerToLobby();
 		this.invitePopUp.setVisible(false);
 		this.invitePopUp.setDisable(true);
 		this.menu.setVisible(false);
@@ -400,23 +402,22 @@ public class ClientGUIController {
 	}
 
 	public void updatePlayersList(String[] list) {
-		playersList.clear();
+		//playersList.clear();
 //		for(String s: list) {
 //			playersList.add(s);
 //		}
-		playersList.addAll(list);
+		playersList.setAll(list);
+		//playersList.addAll(list);
 		playersInLobbyList.setItems(playersList);
 	}
 
 	public void updateLobbyList(String[] list) {
-        lobbyList.clear();
+        //lobbyList.clear();
 //		for(String s: list) {
 //			lobbyList.add(s);
 //		}
-		try {
-			lobbyList.addAll(list);
-		} catch (Exception e) {}
-        //lobbyList.addAll(list);
+		//lobbyList.addAll(list);
+        lobbyList.setAll(list);
         lobbyListTable.setItems(lobbyList);
 	}
 
@@ -426,7 +427,6 @@ public class ClientGUIController {
 		this.invitePopUp.setVisible(true);
 		this.invitePopUp.setDisable(false);
 		client.lobbyName = PlayerAndLobbyName[1];
-		System.out.println("\nReceived notification:  " + PlayerAndLobbyName[0]);
 	}
 
 
@@ -439,7 +439,7 @@ public class ClientGUIController {
 	}
 
     public void boardClick(MouseEvent event) {
-		//System.out.println("Row: " + GridPane.getRowIndex((Node)event.getTarget())
-		//		+ "\nColumn: " + GridPane.getColumnIndex((Node)event.getTarget()));
+		System.out.println("Row: " + GridPane.getRowIndex((Node)event.getTarget())
+				+ "\nColumn: " + GridPane.getColumnIndex((Node)event.getTarget()));
 	}
 }

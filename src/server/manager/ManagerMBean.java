@@ -22,4 +22,6 @@ public interface ManagerMBean {
     void sendPlayersInLobbyList(String playerName);
 
     void sendWaitingLobbyList(String playerName);
+
+    void startGame(String lobbyName);
 }

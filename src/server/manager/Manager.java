@@ -56,6 +56,7 @@ public class Manager extends NotificationBroadcasterSupport implements ManagerMB
         for(Player p: playerManager.playerFreeList) {
             if(p.name.equals(invitedPlayerName)) {
                 player = p;
+                break;
             }
         }
         sendNotification(new Notification(String.valueOf(player.pid), this,
@@ -94,6 +95,7 @@ public class Manager extends NotificationBroadcasterSupport implements ManagerMB
         for(Player p: playerManager.playerInGameList) {
             if(p.name.equals(playerName)) {
                 player = p;
+                break;
             }
         }
         if(player != null) {
@@ -113,6 +115,7 @@ public class Manager extends NotificationBroadcasterSupport implements ManagerMB
         for(Player p: playerManager.playerFreeList) {
             if(p.name.equals(playerName)) {
                 player = p;
+                break;
             }
         }
         if(player != null) {
@@ -124,5 +127,18 @@ public class Manager extends NotificationBroadcasterSupport implements ManagerMB
         else {
             System.out.println("Player is NULL");
         }
+    }
+
+    @Override
+    public void startGame(String lobbyName) {
+        Lobby lobby = null;
+        for(Lobby l: lobbyManager.waitingLobbyList) {
+            if(l.name.equals(lobbyName)) {
+                lobby = l;
+                break;
+            }
+        }
+        lobby.startGame();
+        sendNotification(new Notification(String.valueOf(lobby.name), this, 110011110, "S,StartGame," + lobby.rowNumber));
     }
 }

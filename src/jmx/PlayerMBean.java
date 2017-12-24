@@ -3,7 +3,7 @@ package jmx;
 import client.logic.MoveType;
 import server.board.Coordinates;
 import server.lobby.Lobby;
-import server.player.Dificult;
+import server.player.Difficult;
 
 /**
  * Intefrace which is implemented by Player class.
@@ -28,9 +28,7 @@ public interface PlayerMBean {
      * Adds player to lobby.
      * @param lobby name of lobby which player is joining.
      */
-    void joinToLobby(Lobby lobby);
-
-    void startGame();
+    void joinToLobby(Lobby lobby, int corner);
 
     /**
      * Removes player from lobby.
@@ -45,9 +43,9 @@ public interface PlayerMBean {
 
     /**
      * Adds new bot to lobby.
-     * @param dificultLevel bot's difficulty.
+     * @param difficultLevel bot's difficulty.
      */
-    void addBot(Dificult dificultLevel);
+    void addBot(Difficult difficultLevel);
 
     /**
      * Pass the move.

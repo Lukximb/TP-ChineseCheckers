@@ -3,7 +3,7 @@ package server.player;
 import server.board.Coordinates;
 
 public class Bot implements IBot{
-    private Dificult dificultLevel = Dificult.MEDIUM;
+    private Difficult difficultLevel = Difficult.MEDIUM;
 
     public Bot() {
 

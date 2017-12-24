@@ -1,7 +1,9 @@
 package server.lobby;
 
 import client.logic.MoveType;
+import jmx.Player;
 import server.board.Coordinates;
+import server.board.Field;
 import server.board.IBoard;
 import jmx.Factory;
 
@@ -18,8 +20,17 @@ public class LobbyMediator {
         return clock.getRoundTime();
     }
 
+    public void setBoard(IBoard board) {
+        this.board = board;
+    }
+
     public void startRound() {
         clock.startRound();
+    }
+
+    public Field getField(Coordinates coordinates) {
+        Field field = board.getField(coordinates);
+        return field;
     }
 
     public void endRound() {

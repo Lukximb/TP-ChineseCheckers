@@ -31,16 +31,22 @@ public class BoardUpdate {
         correctMove = false;
         pawns = new ArrayList<>();
     }
+
+    public void setCorner(int corner) {
+        this.corner = corner;
+        System.out.println("Setting corner");
+    }
+
     public void doMoveOnClick(ActionEvent event) {
         Image img = new Image("/client/pawnGreen.png");
         if (controller.currentPosition != null && controller.destinationPosition != null) {
             if (controller.jumpPositions.isEmpty()) {
                 Coordinates cCoordinates =
-                        new Coordinates(GridPane.getColumnIndex(controller.currentPosition),
-                                GridPane.getRowIndex(controller.currentPosition));
+                        new Coordinates(GridPane.getRowIndex(controller.currentPosition),
+                                GridPane.getColumnIndex(controller.currentPosition));
                 Coordinates dCoordinates =
-                        new Coordinates(GridPane.getColumnIndex(controller.destinationPosition),
-                                GridPane.getRowIndex(controller.destinationPosition));
+                        new Coordinates(GridPane.getRowIndex(controller.destinationPosition),
+                                GridPane.getColumnIndex(controller.destinationPosition));
                 client.connection.invokeMovePlayerMethod(client.player, "move", cCoordinates, dCoordinates);
 
                 Circle circleC = (Circle)controller.currentPosition;
@@ -59,11 +65,11 @@ public class BoardUpdate {
             } else {
                 //Current --> 1st jump
                 Coordinates cCoordinates =
-                        new Coordinates(GridPane.getColumnIndex(controller.currentPosition),
-                                GridPane.getRowIndex(controller.currentPosition));
+                        new Coordinates(GridPane.getRowIndex(controller.currentPosition),
+                                GridPane.getColumnIndex(controller.currentPosition));
                 Coordinates dCoordinates =
-                        new Coordinates(GridPane.getColumnIndex(controller.jumpPositions.get(0)),
-                                GridPane.getRowIndex(controller.jumpPositions.get(0)));
+                        new Coordinates(GridPane.getRowIndex(controller.jumpPositions.get(0)),
+                                GridPane.getColumnIndex(controller.jumpPositions.get(0)));
                 client.connection.invokeMovePlayerMethod(client.player, "move", cCoordinates, dCoordinates);
 
                 Circle circleC = (Circle)controller.currentPosition;
@@ -85,11 +91,11 @@ public class BoardUpdate {
                     circleJ1.setStroke(Color.BLACK);
 
                     cCoordinates =
-                            new Coordinates(GridPane.getColumnIndex(controller.jumpPositions.get(i-1)),
-                                    GridPane.getRowIndex(controller.jumpPositions.get(i-1)));
+                            new Coordinates(GridPane.getRowIndex(controller.jumpPositions.get(i-1)),
+                                    GridPane.getColumnIndex(controller.jumpPositions.get(i-1)));
                     dCoordinates =
-                            new Coordinates(GridPane.getColumnIndex(controller.jumpPositions.get(i)),
-                                    GridPane.getRowIndex(controller.jumpPositions.get(i)));
+                            new Coordinates(GridPane.getRowIndex(controller.jumpPositions.get(i)),
+                                    GridPane.getColumnIndex(controller.jumpPositions.get(i)));
                     client.connection.invokeMovePlayerMethod(client.player, "move", cCoordinates, dCoordinates);
 
                     Circle circleJ2 = (Circle)controller.jumpPositions.get(i);
@@ -105,11 +111,11 @@ public class BoardUpdate {
                 circleJL.setStroke(Color.BLACK);
 
                 cCoordinates =
-                        new Coordinates(GridPane.getColumnIndex(controller.jumpPositions.get(controller.jumpPositions.size()-1)),
-                                GridPane.getRowIndex(controller.jumpPositions.get(controller.jumpPositions.size()-1)));
+                        new Coordinates(GridPane.getRowIndex(controller.jumpPositions.get(controller.jumpPositions.size()-1)),
+                                GridPane.getColumnIndex(controller.jumpPositions.get(controller.jumpPositions.size()-1)));
                 dCoordinates =
-                        new Coordinates(GridPane.getColumnIndex(controller.destinationPosition),
-                                GridPane.getRowIndex(controller.destinationPosition));
+                        new Coordinates(GridPane.getRowIndex(controller.destinationPosition),
+                                GridPane.getColumnIndex(controller.destinationPosition));
                 client.connection.invokeMovePlayerMethod(client.player, "move", cCoordinates, dCoordinates);
 
                 controller.jumpPositions.clear();
@@ -150,11 +156,11 @@ public class BoardUpdate {
                         && !controller.jumpPositions.contains(node)) {
 
                     Coordinates cCoordinates =
-                            new Coordinates(GridPane.getColumnIndex(controller.previousNode),
-                                    GridPane.getRowIndex(controller.previousNode));
+                            new Coordinates(GridPane.getRowIndex(controller.previousNode),
+                                    GridPane.getColumnIndex(controller.previousNode));
                     Coordinates dCoordinates =
-                            new Coordinates(GridPane.getColumnIndex(node),
-                                    GridPane.getRowIndex(node));
+                            new Coordinates(GridPane.getRowIndex(node),
+                                    GridPane.getColumnIndex(node));
                     checkMoveType(cCoordinates,dCoordinates);
 
                     if (correctMove) {
@@ -186,11 +192,11 @@ public class BoardUpdate {
                         && event.getButton() == MouseButton.PRIMARY) {
 
                     Coordinates cCoordinates =
-                            new Coordinates(GridPane.getColumnIndex(controller.previousNode),
-                                    GridPane.getRowIndex(controller.previousNode));
+                            new Coordinates(GridPane.getRowIndex(controller.previousNode),
+                                    GridPane.getColumnIndex(controller.previousNode));
                     Coordinates dCoordinates =
-                            new Coordinates(GridPane.getColumnIndex(node),
-                                    GridPane.getRowIndex(node));
+                            new Coordinates(GridPane.getRowIndex(node),
+                                    GridPane.getColumnIndex(node));
                     checkMoveType(cCoordinates,dCoordinates);
 
                     if (correctMove && moveType == MoveType.JUMP) {
@@ -219,8 +225,6 @@ public class BoardUpdate {
                     } else {
                         moveType = MoveType.EMPTY;
                     }
-
-
                 }
                 break;
             }
@@ -233,7 +237,7 @@ public class BoardUpdate {
         int dX = dCoordinates.getX();
         int dY = dCoordinates.getY();
 
-        if (Math.abs(cX - dX) == 2 && Math.abs(cY - dY) == 0 && moveType == MoveType.EMPTY) {
+        if (Math.abs(cX - dX) == 0 && Math.abs(cY - dY) == 2 && moveType == MoveType.EMPTY) {
             prevMoveType = moveType;
             moveType = MoveType.SINGLE;
             correctMove = true;
@@ -241,16 +245,20 @@ public class BoardUpdate {
             prevMoveType = moveType;
             moveType = MoveType.SINGLE;
             correctMove = true;
-        } else if (Math.abs(cX - dX) == 4 && Math.abs(cY - dY) == 0 && moveType != MoveType.SINGLE) {
+        } else if (Math.abs(cX - dX) == 2 && Math.abs(cY - dY) == 2 && moveType != MoveType.SINGLE) {
             prevMoveType = moveType;
             moveType = MoveType.JUMP;
             correctMove = true;
-        } else if (Math.abs(cX - dX) == 2 && Math.abs(cY - dY) == 2 && moveType != MoveType.SINGLE) {
+        } else if (Math.abs(cX - dX) == 0 && Math.abs(cY - dY) == 4 && moveType != MoveType.SINGLE) {
             prevMoveType = moveType;
             moveType = MoveType.JUMP;
             correctMove = true;
         } else {
             correctMove = false;
         }
+    }
+
+    public void setMoveTypeAsEmpty() {
+        this.moveType = MoveType.EMPTY;
     }
 }

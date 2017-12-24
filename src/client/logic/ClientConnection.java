@@ -17,8 +17,8 @@ public class ClientConnection {
 
     public ClientConnection() {
         try {
-//            url = new JMXServiceURL("service:jmx:rmi://25.0.246.243:44445/jndi/rmi://25.0.246.243:44444/jmxrmi");
-            url = new JMXServiceURL("service:jmx:rmi://25.71.242.160:44445/jndi/rmi://25.71.242.160:44444/jmxrmi");
+            url = new JMXServiceURL("service:jmx:rmi://25.0.246.243:44445/jndi/rmi://25.0.246.243:44444/jmxrmi");
+//            url = new JMXServiceURL("service:jmx:rmi://25.71.242.160:44445/jndi/rmi://25.71.242.160:44444/jmxrmi");
             jmxc = JMXConnectorFactory.connect(url, null);
             mbsc = jmxc.getMBeanServerConnection();
             domain = mbsc.getDefaultDomain();
@@ -158,7 +158,8 @@ public class ClientConnection {
         System.out.println("Method invoked: " + methodName + " on: " + mBeanName.toString());
     }
 
-    public void invokeCheckMoveMethod(ObjectName mBeanName, String methodName, Coordinates currentCoordinates, Coordinates destinationCoordinates, MoveType moveType) {
+    public void invokeCheckMoveMethod(ObjectName mBeanName, String methodName, Coordinates currentCoordinates,
+                                      Coordinates destinationCoordinates, MoveType moveType) {
         Object  opParams[] = {currentCoordinates, destinationCoordinates, moveType};
         String  opSig[] = {Coordinates.class.getName(), Coordinates.class.getName(), MoveType.class.getName()};
         try {
@@ -169,9 +170,11 @@ public class ClientConnection {
         System.out.println("Method invoked: " + methodName + " on: " + mBeanName.toString());
     }
 
-    public void invokeStartGameMethod(ObjectName mBeanName, String methodName) {
+    public void invokeStartGameMethod(ObjectName mBeanName, String methodName, String lobbyName) {
+        Object  opParams[] = {lobbyName};
+        String  opSig[] = {String.class.getName()};
         try {
-            mbsc.invoke(mBeanName, methodName, null, null);
+            mbsc.invoke(mBeanName, methodName, opParams, opSig);
         } catch (Exception  e) {
             e.printStackTrace();
         }

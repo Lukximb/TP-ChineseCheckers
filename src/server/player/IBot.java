@@ -3,7 +3,7 @@ package server.player;
 import server.board.Coordinates;
 
 public interface IBot {
-    Dificult dificultLevel = Dificult.MEDIUM;
+    Difficult DIFFICULT_LEVEL = Difficult.MEDIUM;
 
     void move(Coordinates coordinates);
 
