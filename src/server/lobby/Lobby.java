@@ -136,6 +136,9 @@ public class Lobby implements Runnable{
                     players[i].setColor(colorPalette[i*2-1]);
                     putPawnsOnBoard(players[i], i*2-1);
                 }
+            } else if(numberOfPlayers == 3) {
+                players[i].setColor(colorPalette[i*2]);
+                putPawnsOnBoard(players[i], i*2);
             } else if(numberOfPlayers == 2) {
                 players[i].setColor(colorPalette[i*3]);
                 putPawnsOnBoard(players[i], i*3);
