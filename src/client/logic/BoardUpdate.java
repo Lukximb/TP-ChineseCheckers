@@ -26,7 +26,10 @@ public class BoardUpdate {
     private ArrayList<Integer> enemyCorner;
     private int corner = 0;
     private int numberOfPlayers;
+    private int rows;
     private Image img;
+    private Image[] enemyImg;
+    private ArrayList<ArrayList<Coordinates>> enemyCoordinates;
     private Coordinates cCoordinates;
     private Coordinates dCoordinates;
 
@@ -42,6 +45,114 @@ public class BoardUpdate {
 
     public void setCorner(int corner) {
         this.corner = corner;
+    }
+
+    public void createPawnList(int rows, int numberOfPlayers) {
+        this.rows = rows;
+        this.numberOfPlayers  = numberOfPlayers;
+
+        pawns = fillPawnList(rows, corner);
+        System.out.println("END      FILLING MY PAWN" );
+        img = setPawnColor(corner);
+        System.out.println("END      SETTING MY IMAGE" );
+
+
+        setEnemyCorner();
+
+        drawPawns();
+        System.out.println("END      DRAWING MY PAWNS" );
+
+    }
+
+    private ArrayList<Coordinates> fillPawnList(int rows, int corn) {
+        ArrayList<Coordinates> pawn = new ArrayList<>();
+        int n = 0, m = 0;
+        if(corn == 0) {
+            n = 3 * rows + 1;
+            m = 2 * rows + 1;
+        } else if(corn == 1) {
+            n = 3 * rows;
+            m = 0;
+        } else if(corn == 2) {
+            n = rows;
+            m = 0;
+        } else if(corn == 3) {
+            n = rows - 1;
+            m = 2 * rows + 1;
+        } else if(corn == 4) {
+            n = rows;
+            m = 4 * rows + 2;
+        } else if(corn == 5) {
+            n = 3 * rows;
+            m = 4 * rows + 2;
+        }
+        if(corn == 0 || corn == 2 || corn == 4) {
+            for(int i=0; i<rows; i++) {
+                for(int j=0; j<rows-i; j++) {
+                    if(i%2 == 0) {
+                        pawn.add(new Coordinates(n+i, m+2*j+i));
+                    }
+                    else {
+                        pawn.add(new Coordinates(n+i, m+2*j+i));
+                    }
+                }
+            }
+        }
+        else {
+            for(int i=0; i<rows; i++) {
+                for(int j=0; j<rows-i; j++) {
+                    if(i%2 == 0) {
+                        pawn.add(new Coordinates(n-i, m+2*j+i));
+                    }
+                    else {
+                        pawn.add(new Coordinates(n-i, m+2*j+i));
+                    }
+                }
+            }
+        }
+        return pawn;
+    }
+
+    private Image setPawnColor(int cor) {
+        if (cor == 0) {
+            return new Image("/client/pawnPink.png");
+        } else if (cor == 1) {
+            return new Image("/client/pawnYellow.png");
+        } else if (cor == 2) {
+            return new Image("/client/pawnBlue.png");
+        } else if (cor == 3) {
+            return new Image("/client/pawnGreen.png");
+        } else if (cor == 4) {
+            return new Image("/client/pawnRed.png");
+        } else if (cor == 5) {
+            return new Image("/client/pawnLightBlue.png");
+        } else {
+            return null;
+        }
+    }
+
+    private void drawPawns() {
+        ObservableList<Node> childrens = controller.board.getChildren();
+        for (Node node : childrens) {
+            for (Coordinates cPawns : pawns) {
+                if(GridPane.getRowIndex(node) == cPawns.getX() &&
+                        GridPane.getColumnIndex(node) == cPawns.getY()) {
+                    Circle circle = (Circle)node;
+                    circle.setFill(Color.TRANSPARENT);
+                    circle.setFill(new ImagePattern(img));
+                }
+            }
+            for (int c: enemyCorner) {
+                for (Coordinates cEnemPawn : enemyCoordinates.get(c)) {
+                    if(GridPane.getRowIndex(node) == cEnemPawn.getX() &&
+                            GridPane.getColumnIndex(node) == cEnemPawn.getY()) {
+                        Circle circle = (Circle)node;
+                        circle.setFill(Color.TRANSPARENT);
+                        circle.setFill(new ImagePattern(enemyImg[c]));
+                    }
+                }
+            }
+        }
     }
 
     private void setEnemyCorner() {
@@ -88,89 +199,20 @@ public class BoardUpdate {
                 }
             }
         }
-    }
+        enemyImg = new Image[6];
+        enemyCoordinates = new ArrayList<ArrayList<Coordinates>>(6);
 
-    public void createPawnList(int rows, int numberOfPlayers) {
-        this.numberOfPlayers  = numberOfPlayers;
-        int n = 0, m = 0;
-        if(corner == 0) {
-            n = 3 * rows + 1;
-            m = 2 * rows + 1;
-        } else if(corner == 1) {
-            n = 3 * rows;
-            m = 0;
-        } else if(corner == 2) {
-            n = rows;
-            m = 0;
-        } else if(corner == 3) {
-            n = rows - 1;
-            m = 2 * rows + 1;
-        } else if(corner == 4) {
-            n = rows;
-            m = 4 * rows + 2;
-        } else if(corner == 5) {
-            n = 3 * rows;
-            m = 4 * rows + 2;
-        }
-        if(corner == 0 || corner == 2 || corner == 4) {
-            for(int i=0; i<rows; i++) {
-                for(int j=0; j<rows-i; j++) {
-                    if(i%2 == 0) {
-                        pawns.add(new Coordinates(n+i, m+2*j+i));
-                    }
-                    else {
-                        pawns.add(new Coordinates(n+i, m+2*j+i));
-                    }
-                }
-            }
-        }
-        else {
-            for(int i=0; i<rows; i++) {
-                for(int j=0; j<rows-i; j++) {
-                    if(i%2 == 0) {
-                        pawns.add(new Coordinates(n-i, m+2*j+i));
-                    }
-                    else {
-                        pawns.add(new Coordinates(n-i, m+2*j+i));
-                    }
-                }
-            }
+        for ( int k = 0; k < 6; k++) {
+            ArrayList<Coordinates> a = new ArrayList<>();
+            enemyCoordinates.add(a);
         }
 
-        setPawnColor();
-        drawPawns();
-        setEnemyCorner();
-    }
-
-    private void setPawnColor() {
-        if (corner == 0) {
-            img = new Image("/client/pawnPink.png");
-        } else if (corner == 1) {
-            img = new Image("/client/pawnYellow.png");
-        } else if (corner == 2) {
-            img = new Image("/client/pawnBlue.png");
-        } else if (corner == 3) {
-            img = new Image("/client/pawnGreen.png");
-        } else if (corner == 4) {
-            img = new Image("/client/pawnRed.png");
-        } else if (corner == 5) {
-            img = new Image("/client/pawnLightBlue.png");
-        }
-    }
-
-    private void drawPawns() {
-        ObservableList<Node> childrens = controller.board.getChildren();
-        int i = 0;
-        while (i < pawns.size()) {
-            for (Node node : childrens) {
-                if(GridPane.getRowIndex(node) == pawns.get(i).getX() &&
-                        GridPane.getColumnIndex(node) == pawns.get(i).getY()) {
-                    Circle circle = (Circle)node;
-                    circle.setFill(Color.TRANSPARENT);
-                    circle.setFill(new ImagePattern(img));
-                    i++;
-                }
-            }
+        for (Integer i : enemyCorner) {
+            enemyImg[i] = setPawnColor(i);
+            ArrayList<Coordinates> enemyPawn = new ArrayList<>();
+            enemyPawn = fillPawnList(rows, i);
+            enemyCoordinates.set(i, enemyPawn);
+            System.out.println("enemy: " + i);
         }
     }
 

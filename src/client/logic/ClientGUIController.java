@@ -211,6 +211,10 @@ public class ClientGUIController {
 		this.createLobby.setVisible(false);
 		this.createLobby.setDisable(true);
 
+		if (client.playerInLobby == 0) {
+			client.playerInLobby = 2;
+		}
+
 		client.lobbyName = lobbyNameField.getText();
 		client.rowOfPawn = (int)boardSizeSpinner.getValue();
 		client.connection.invokeCreateLobbyMethod(client.factory, "createLobby", client.playerInLobby ,

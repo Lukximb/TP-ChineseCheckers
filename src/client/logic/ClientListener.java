@@ -88,6 +88,7 @@ public class ClientListener implements NotificationListener {
             controller.board2.setVisible(true);
             controller.board2.setDisable(false);
             controller.board = controller.board2;
+            controller.boardUpdate.createPawnList(rowNumber, numberOfPlayers);
         } else if(args[1].equals("3")) {
             controller.lobby.setVisible(false);
             controller.lobby.setDisable(true);
@@ -98,6 +99,7 @@ public class ClientListener implements NotificationListener {
             controller.board3.setVisible(true);
             controller.board3.setDisable(false);
             controller.board = controller.board3;
+            controller.boardUpdate.createPawnList(rowNumber, numberOfPlayers);
         } else if(args[1].equals("4")) {
             controller.lobby.setVisible(false);
             controller.lobby.setDisable(true);
@@ -106,10 +108,11 @@ public class ClientListener implements NotificationListener {
             controller.board4.setVisible(true);
             controller.board4.setDisable(false);
             controller.board = controller.board4;
+            controller.boardUpdate.createPawnList(rowNumber, numberOfPlayers);
         } else {
             controller.board = controller.board4;
+            controller.boardUpdate.createPawnList(rowNumber, numberOfPlayers);
         }
-        controller.boardUpdate.createPawnList(rowNumber, numberOfPlayers);
     }
 
     public void setMove(String move) {
