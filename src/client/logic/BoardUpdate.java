@@ -27,6 +27,8 @@ public class BoardUpdate {
     private int corner = 0;
     private int numberOfPlayers;
     private Image img;
+    private Coordinates cCoordinates;
+    private Coordinates dCoordinates;
 
     public BoardUpdate(ClientGUIController controller, ClientGUI client) {
         this.controller = controller;
@@ -175,12 +177,13 @@ public class BoardUpdate {
     public void doMoveOnClick(ActionEvent event) {
         if (controller.currentPosition != null && controller.destinationPosition != null) {
             if (controller.jumpPositions.isEmpty()) {
-                Coordinates cCoordinates =
+                cCoordinates =
                         new Coordinates(GridPane.getRowIndex(controller.currentPosition),
                                 GridPane.getColumnIndex(controller.currentPosition));
-                Coordinates dCoordinates =
+                dCoordinates =
                         new Coordinates(GridPane.getRowIndex(controller.destinationPosition),
                                 GridPane.getColumnIndex(controller.destinationPosition));
+
                 client.connection.invokeMovePlayerMethod(client.player, "move", cCoordinates, dCoordinates);
 
                 int index = 0;
@@ -209,10 +212,10 @@ public class BoardUpdate {
                 controller.destinationSelected = false;
             } else {
                 //Current --> 1st jump
-                Coordinates cCoordinates =
+                cCoordinates =
                         new Coordinates(GridPane.getRowIndex(controller.currentPosition),
                                 GridPane.getColumnIndex(controller.currentPosition));
-                Coordinates dCoordinates =
+                dCoordinates =
                         new Coordinates(GridPane.getRowIndex(controller.jumpPositions.get(0)),
                                 GridPane.getColumnIndex(controller.jumpPositions.get(0)));
                 client.connection.invokeMovePlayerMethod(client.player, "move", cCoordinates, dCoordinates);
@@ -259,6 +262,17 @@ public class BoardUpdate {
                     circleJ2.setFill(Color.TRANSPARENT);
                     circleJ2.setFill(new ImagePattern(img));
                     circleJ2.setStroke(Color.BLACK);
+
+                    index = 0;
+                    for (Coordinates c : pawns) {
+                        if (c.getX() == GridPane.getRowIndex(controller.jumpPositions.get(i-1)) &&
+                                c.getY() == GridPane.getColumnIndex(controller.jumpPositions.get(i-1))) {
+                            pawns.remove(index);
+                            break;
+                        }
+                        index++;
+                    }
+                    pawns.add(dCoordinates);
                 }
 
                 Circle circleJL = (Circle)controller.jumpPositions.get(controller.jumpPositions.size()-1);
@@ -273,6 +287,17 @@ public class BoardUpdate {
                         new Coordinates(GridPane.getRowIndex(controller.destinationPosition),
                                 GridPane.getColumnIndex(controller.destinationPosition));
                 client.connection.invokeMovePlayerMethod(client.player, "move", cCoordinates, dCoordinates);
+
+                index = 0;
+                for (Coordinates c : pawns) {
+                    if (c.getX() == GridPane.getRowIndex(controller.jumpPositions.get(controller.jumpPositions.size()-1)) &&
+                            c.getY() == GridPane.getColumnIndex(controller.jumpPositions.get(controller.jumpPositions.size()-1))) {
+                        pawns.remove(index);
+                        break;
+                    }
+                    index++;
+                }
+                pawns.add(dCoordinates);
 
                 controller.jumpPositions.clear();
 
@@ -398,7 +423,7 @@ public class BoardUpdate {
             prevMoveType = moveType;
             moveType = MoveType.SINGLE;
             correctMove = true;
-        } else if (Math.abs(cX - dX) == 1 && Math.abs(cY - dY) == 1 && moveType == MoveType.EMPTY) {
+        } else if (Math.abs(cX - dX) == 1 && Math.abs(cY - dY) == 1 && moveType == MoveType.EMPTY && prevMoveType != MoveType.JUMP) {
             prevMoveType = moveType;
             moveType = MoveType.SINGLE;
             correctMove = true;
@@ -417,6 +442,10 @@ public class BoardUpdate {
 
     public void setMoveTypeAsEmpty() {
         this.moveType = MoveType.EMPTY;
+    }
+
+    public int getCorner() {
+        return corner;
     }
 
     private boolean checkStartPosition(int x, int y) {

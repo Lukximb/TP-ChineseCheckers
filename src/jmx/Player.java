@@ -34,7 +34,10 @@ public class Player extends NotificationBroadcasterSupport implements PlayerMBea
 
     @Override
     public void move(Coordinates currentCoordinates, Coordinates destinationCoordinates) {
-        System.out.println(">> Invoke move from player: " + pid);
+        if (lobby.mediator.move(this, currentCoordinates, destinationCoordinates)) {
+            sendNotification(new Notification(String.valueOf(lobby), this, 110011110, "E," + corner + "," + currentCoordinates.getX()
+                    + "," + currentCoordinates.getY() + "," + destinationCoordinates.getX() + "," + destinationCoordinates.getY()));
+        }
     }
 
     @Override

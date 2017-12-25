@@ -42,6 +42,13 @@ public class ClientListener implements NotificationListener {
                 int corner = Integer.parseInt(notification.getMessage().substring(2));
                 controller.boardUpdate.setCorner(corner);
                 break;
+            case('E')://Executed other player move
+                String[] arg = notification.getMessage().substring(2).split(",");
+                if (!arg[1].equals(controller.boardUpdate.getCorner())) {
+                    System.out.println("EEEEEEEEEE");
+                    //TODO
+                }
+                break;
             default:
         }
     }

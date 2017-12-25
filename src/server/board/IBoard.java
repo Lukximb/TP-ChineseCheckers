@@ -1,5 +1,7 @@
 package server.board;
 
+import jmx.Player;
+
 /**
  * Interface which is implemented by Board class.
  */
@@ -22,7 +24,7 @@ public interface IBoard {
      * @param currentCoordinates current player position
      * @param newCoordinates new player position
      */
-    void executeMove(Coordinates currentCoordinates, Coordinates newCoordinates);
+    boolean executeMove(Player player, Coordinates currentCoordinates, Coordinates newCoordinates);
 
     void fillFieldList();
 

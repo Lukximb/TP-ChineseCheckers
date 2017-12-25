@@ -1,5 +1,7 @@
 package server.board;
 
+import jmx.Player;
+
 public class Board implements IBoard {
     private int n;
     private int m;
@@ -54,8 +56,17 @@ public class Board implements IBoard {
     }
 
     @Override
-    public void executeMove(Coordinates currentCoordinates, Coordinates newCoordinates) {
-
+    public boolean executeMove(Player player, Coordinates currentCoordinates, Coordinates newCoordinates) {
+        boolean isPlayerOnCurrent = getField(currentCoordinates).getPlayerOn().equals(player);
+        boolean isPlayerOnDest = getField(newCoordinates).getPlayerOn() == null;
+        System.out.print("");
+        if (isPlayerOnCurrent && isPlayerOnDest) {
+            getField(currentCoordinates).setPlayerOn(null);
+            getField(newCoordinates).setPlayerOn(player);
+            return true;
+        } else {
+            return false;
+        }
     }
 
     @Override

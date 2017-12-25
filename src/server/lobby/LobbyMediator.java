@@ -41,6 +41,10 @@ public class LobbyMediator {
         return rulesManager.checkMove(currentCoordinates, newCoordinates, pid, moveType);
     }
 
+    public boolean move(Player player, Coordinates currentCoordinates, Coordinates newCoordinates) {
+        return board.executeMove(player, currentCoordinates, newCoordinates);
+    }
+
     public void setLobby(Lobby lobby) {
         this.lobby = lobby;
     }
