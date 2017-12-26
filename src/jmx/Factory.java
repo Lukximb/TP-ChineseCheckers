@@ -107,7 +107,7 @@ public class Factory extends NotificationBroadcasterSupport implements FactoryMB
     }
 
     @Override
-    public Lobby createLobby(int playerNum, int rowNumber, String lobbyName, int adminPid) {
+    public void createLobby(int playerNum, int rowNumber, String lobbyName, int adminPid) {
         Player admin;
         LobbyMediator lobbyMediator= createLobbyMediator();
         int value = playerManager.checkPlayerStatus(adminPid);
@@ -127,7 +127,7 @@ public class Factory extends NotificationBroadcasterSupport implements FactoryMB
         lobbyMediator.setBoard(lobby.board);
         admin.lobby = lobby;
         lobbyManager.waitingLobbyList.add(lobby);
-        return null;
+        server.connection.createMBeanMainObject("lobby.Lobby", lobby.name, "L", lobby);
     }
 
     @Override

@@ -6,15 +6,19 @@ import javax.management.NotificationListener;
 public class ClientListener implements NotificationListener {
     private ClientGUIController controller;
     private String move;
+    private int corner;
 
 
     public ClientListener(ClientGUIController controller) {
         this.controller = controller;
         controller.setListener(this);
+        corner = -1;
     }
 
     public void handleNotification(Notification notification, Object handback)
     {
+//        System.out.println("Receive notification: " + notification.getMessage());
+        System.out.println("Notifiaction: " + notification.getMessage().charAt(0) + " " + notification.getMessage().charAt(2));
         switch (notification.getMessage().charAt(0)) {
             case('P')://player
                 receivePlayersNames(notification.getMessage().substring(2));
@@ -39,14 +43,22 @@ public class ClientListener implements NotificationListener {
                 hendleStartGame(args);
                 break;
             case('C')://Corner
-                int corner = Integer.parseInt(notification.getMessage().substring(2));
-                controller.boardUpdate.setCorner(corner);
+                int c = Integer.parseInt(notification.getMessage().substring(2));
+                controller.boardUpdate.setCorner(c);
+                this.corner = c;
                 break;
-            case('E')://Executed other player move
+            case ('E')://Executed other player move
+                System.out.println(">>Receive notification: " + notification.getMessage());
                 String[] arg = notification.getMessage().substring(2).split(",");
-                if (!arg[1].equals(controller.boardUpdate.getCorner())) {
-                    System.out.println("EEEEEEEEEE");
-                    //TODO
+                System.out.println("corner: " + corner);
+                int cor = Integer.parseInt(arg[0]);
+                if (cor != corner) {
+                    int cX = Integer.parseInt(arg[1]);
+                    int cY = Integer.parseInt(arg[2]);
+                    int dX = Integer.parseInt(arg[3]);
+                    int dY = Integer.parseInt(arg[4]);
+                    System.out.println("moveEnemyPawn: " + cor + " " + cX + " " + cY + " " + dX + " " + dY);
+                    controller.boardUpdate.moveEnemyPawn(cor, cX, cY, dX, dY);
                 }
                 break;
             default:
@@ -117,5 +129,9 @@ public class ClientListener implements NotificationListener {
 
     public void setMove(String move) {
         this.move = move;
+    }
+
+    public void setCorner(int corner) {
+        this.corner = corner;
     }
 }

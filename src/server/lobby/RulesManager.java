@@ -10,7 +10,7 @@ public class RulesManager implements IRulesManager {
     @Override
     public boolean checkMove(Coordinates currentCoordinates, Coordinates newCoordinates, int pid, MoveType moveType) {
         if (moveType == MoveType.SINGLE) {
-            System.out.println("Check move for single");
+            //System.out.println("Check move for single");
             if (mediator.getField(newCoordinates).getPlayerOn() == null) {
                 return true;
             } else {
@@ -23,7 +23,7 @@ public class RulesManager implements IRulesManager {
             int dY = newCoordinates.getY();
             boolean emptyDestination = false;
             boolean correctMove = false;
-            System.out.println("Check move for jump");
+            //System.out.println("Check move for jump");
             if (mediator.getField(newCoordinates).getPlayerOn() == null) {
                 emptyDestination = true;
             } else {

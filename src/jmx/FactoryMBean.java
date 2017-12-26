@@ -21,7 +21,7 @@ public interface FactoryMBean {
 
     Bot createBot();
 
-    Lobby createLobby(int playerNum, int rowNumber, String lobbyName, int adminPid);
+    void createLobby(int playerNum, int rowNumber, String lobbyName, int adminPid);
 
     LobbyMediator createLobbyMediator();
 

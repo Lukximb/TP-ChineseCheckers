@@ -3,7 +3,6 @@ package client.logic;
 import client.core.ClientGUI;
 import javafx.application.Platform;
 import javafx.beans.property.ReadOnlyStringWrapper;
-import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -11,13 +10,15 @@ import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
-import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.fxml.FXML;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
+
+import javax.management.MalformedObjectNameException;
+import javax.management.ObjectName;
 import java.util.ArrayList;
 
 public class ClientGUIController {
@@ -152,13 +153,13 @@ public class ClientGUIController {
 	public void setListener(ClientListener clientListener) {
 		this.clientListener = clientListener;
 	}
-	
+
 	@FXML
 	void initialize() {
 		boardUpdate = new BoardUpdate(this, client);
 		playerLogic = new PlayerLogic(this, client);
 
-		game.setStyle("-fx-background-image: url('/client/wood.jpg');");
+		game.setStyle("-fx-background-image: url('/client/wood-background.jpeg');");
 		jumpPositions = new ArrayList<>();
 		destinationSelected = false;
 
@@ -220,8 +221,14 @@ public class ClientGUIController {
 		client.connection.invokeCreateLobbyMethod(client.factory, "createLobby", client.playerInLobby ,
 				client.rowOfPawn, client.lobbyName, client.pid);
 		client.connection.invokeSendPlayersInLobbyList(client.manager, "sendPlayersInLobbyList", client.playerName);
-		client.addNotificationListenerToLobby();
 		boardUpdate.setCorner(0);
+		clientListener.setCorner(0);
+		try {
+			client.lobbyObject = new ObjectName(client.domain+"L" +":type=lobby.Lobby,name=" + client.lobbyName);
+			client.addNotificationListenerToLobby();
+		} catch (MalformedObjectNameException e) {
+			e.printStackTrace();
+		}
 
 		this.lobby.setVisible(true);
 		this.lobby.setDisable(false);
@@ -330,8 +337,14 @@ public class ClientGUIController {
 	}
 
 	public void acceptInviteOnClick(ActionEvent event) {
+		try {
+			client.lobbyObject = new ObjectName(client.domain+"L" +":type=lobby.Lobby,name=" + client.lobbyName);
+		} catch (MalformedObjectNameException e) {
+			e.printStackTrace();
+		}
         client.addNotificationListenerToLobby();
 		playerLogic.addPlayerToLobby();
+
 		this.invitePopUp.setVisible(false);
 		this.invitePopUp.setDisable(true);
 		this.menu.setVisible(false);
@@ -340,8 +353,6 @@ public class ClientGUIController {
 		this.joinLobby.setDisable(true);
 		this.createLobby.setVisible(false);
 		this.createLobby.setDisable(true);
-
-//        client.connection.invokeAddPlayerToLobbyMethod(client.manager, "addPlayerToLobby", lobbyName, client.playerName);
 
 		this.lobby.setVisible(true);
 		this.lobby.setDisable(false);

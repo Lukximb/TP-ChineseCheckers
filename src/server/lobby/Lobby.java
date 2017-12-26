@@ -7,7 +7,10 @@ import server.board.IBoard;
 import server.player.Bot;
 import jmx.Player;
 
-public class Lobby implements Runnable{
+import javax.management.Notification;
+import javax.management.NotificationBroadcasterSupport;
+
+public class Lobby extends NotificationBroadcasterSupport implements Runnable, LobbyMBean{
     public final Color[] colorPalette = {Color.DEEPPINK, Color.YELLOW, Color.MEDIUMBLUE, Color.LIMEGREEN, Color.FIREBRICK, Color.CYAN};
     public String name;
     public Player admin;
@@ -47,6 +50,7 @@ public class Lobby implements Runnable{
         }
     }
 
+    @Override
     public void startGame() {
         initPlayersOnBoard();
         mediator.setBoard(board);
@@ -54,10 +58,12 @@ public class Lobby implements Runnable{
         roundCorner = 0;
     }
 
+    @Override
     public void endGame() {
 
     }
 
+    @Override
     public void addPlayer(Player player) {
         if(roundCorner < numberOfPlayers) {
             player.joinToLobby(this, playerCorner);
@@ -79,10 +85,18 @@ public class Lobby implements Runnable{
         }
     }
 
+    @Override
     public void addBot(Bot bot) {
 
     }
 
+    @Override
+    public void sendMoveNotification(String message) {
+        System.out.println("Notify for: " + name);
+        sendNotification(new Notification(String.valueOf(name), this, 110011110, message));
+    }
+
+    @Override
     public void removePlayer(Player player) {
         int i = 0;
         int next = 0;
@@ -100,6 +114,7 @@ public class Lobby implements Runnable{
         }
     }
 
+    @Override
     public void removePlayer(String playerName) {
         int i = 0;
         int next = 0;
@@ -117,10 +132,12 @@ public class Lobby implements Runnable{
         }
     }
 
+    @Override
     public void removeBot(Bot bot) {
 
     }
 
+    @Override
     public void initPlayersOnBoard() {
 
         for(int i=0; i<numberOfPlayers; i++) {
@@ -146,6 +163,7 @@ public class Lobby implements Runnable{
         }
     }
 
+    @Override
     public void putPawnsOnBoard(Player player, int corner) {
         int bN = board.getN();
         int bM = board.getM();
@@ -200,14 +218,17 @@ public class Lobby implements Runnable{
         }
     }
 
+    @Override
     public IBoard getBoard() {
         return board;
     }
 
+    @Override
     public void getRoundTime() {
         mediator.getRoundTime();
     }
 
+    @Override
     public void nextRound() {
         roundCorner++;
         if(roundCorner == numberOfPlayers) {
@@ -218,6 +239,7 @@ public class Lobby implements Runnable{
 
     }
 
+    @Override
     public void printMessage(Player player, String message) {
         chat.printMessage(player, message);
     }

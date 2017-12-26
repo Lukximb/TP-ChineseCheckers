@@ -52,16 +52,9 @@ public class BoardUpdate {
         this.numberOfPlayers  = numberOfPlayers;
 
         pawns = fillPawnList(rows, corner);
-        System.out.println("END      FILLING MY PAWN" );
         img = setPawnColor(corner);
-        System.out.println("END      SETTING MY IMAGE" );
-
-
         setEnemyCorner();
-
         drawPawns();
-        System.out.println("END      DRAWING MY PAWNS" );
-
     }
 
     private ArrayList<Coordinates> fillPawnList(int rows, int corn) {
@@ -214,6 +207,33 @@ public class BoardUpdate {
             enemyCoordinates.set(i, enemyPawn);
             System.out.println("enemy: " + i);
         }
+    }
+
+    public void moveEnemyPawn(int corner, int cX, int cY, int dX, int dY) {
+        for (Coordinates c : enemyCoordinates.get(corner)) {
+            if (c.getX() == cX && c.getY() == cY) {
+                enemyCoordinates.get(corner).remove(c);
+                enemyCoordinates.get(corner).add(new Coordinates(dX, dY));
+                break;
+            }
+        }
+
+        ObservableList<Node> childrens = controller.board.getChildren();
+
+        for (Node node : childrens) {
+            if(GridPane.getRowIndex(node) == cX &&
+                    GridPane.getColumnIndex(node) == cY) {
+                Circle circle = (Circle)node;
+                circle.setFill(Color.WHITE);
+            }
+            if(GridPane.getRowIndex(node) == dX &&
+                    GridPane.getColumnIndex(node) == dY) {
+                Circle circle = (Circle)node;
+                circle.setFill(Color.TRANSPARENT);
+                circle.setFill(new ImagePattern(enemyImg[corner]));
+            }
+        }
+
     }
 
     public void doMoveOnClick(ActionEvent event) {

@@ -12,6 +12,7 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.ColorAdjust?>
 <?import javafx.scene.effect.Glow?>
 <?import javafx.scene.effect.Light.Distant?>
 <?import javafx.scene.effect.Lighting?>
@@ -25,7 +26,7 @@
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
-<StackPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
+<StackPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <StackPane fx:id="playerNickNamePanel" prefHeight="150.0" prefWidth="200.0">
          <children>
@@ -243,13 +244,16 @@
       </StackPane>
       <StackPane fx:id="game" disable="true" prefHeight="150.0" prefWidth="200.0" visible="false">
          <children>
-            <Label alignment="CENTER" prefHeight="50.0" prefWidth="300.0" text="Game" textAlignment="CENTER" StackPane.alignment="TOP_CENTER">
+            <Label alignment="CENTER" prefHeight="50.0" prefWidth="300.0" text="Game" textAlignment="CENTER" textFill="#ff6614" StackPane.alignment="TOP_CENTER">
                <font>
                   <Font name="Jokerman" size="36.0" />
                </font>
                <StackPane.margin>
                   <Insets top="30.0" />
                </StackPane.margin>
+               <effect>
+                  <ColorAdjust brightness="0.17" contrast="0.05" hue="0.1" saturation="1.0" />
+               </effect>
             </Label>
             <ProgressBar fx:id="turnTimeBar" prefWidth="200.0" progress="0.0" StackPane.alignment="TOP_CENTER">
                <StackPane.margin>
