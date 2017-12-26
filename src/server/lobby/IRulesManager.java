@@ -1,8 +1,8 @@
 package server.lobby;
 
 import client.logic.MoveType;
-import server.board.Coordinates;
 import jmx.Player;
+import server.board.Coordinates;
 
 public interface IRulesManager {
     boolean checkMove(Coordinates currentCoordinates, Coordinates newCoordinates, int pid, MoveType moveType);

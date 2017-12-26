@@ -1,11 +1,15 @@
 package jmx;
 
-import server.board.*;
+import server.board.Board;
+import server.board.Coordinates;
+import server.board.Field;
 import server.connection.Connection;
 import server.core.Server;
 import server.lobby.*;
-import server.manager.*;
-import server.player.*;
+import server.manager.LobbyManager;
+import server.manager.Manager;
+import server.manager.PlayerManager;
+import server.player.Bot;
 
 import javax.management.Notification;
 import javax.management.NotificationBroadcasterSupport;

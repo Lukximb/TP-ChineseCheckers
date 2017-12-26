@@ -1,11 +1,11 @@
 package server.lobby;
 
 import javafx.scene.paint.Color;
+import jmx.Player;
 import server.board.Coordinates;
 import server.board.Field;
 import server.board.IBoard;
 import server.player.Bot;
-import jmx.Player;
 
 import javax.management.Notification;
 import javax.management.NotificationBroadcasterSupport;

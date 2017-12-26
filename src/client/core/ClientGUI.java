@@ -1,15 +1,17 @@
 package client.core;
 
+import client.logic.ClientConnection;
+import client.logic.ClientGUIController;
+import client.logic.ClientListener;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
+
 import javax.management.NotificationFilterSupport;
 import javax.management.ObjectName;
 import java.lang.management.ManagementFactory;
-
-import client.logic.*;
 
 @SuppressWarnings("restriction")
 public class ClientGUI extends Application {

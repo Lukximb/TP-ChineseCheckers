@@ -5,7 +5,6 @@ import jmx.Player;
 import server.board.Coordinates;
 import server.board.Field;
 import server.board.IBoard;
-import jmx.Factory;
 
 public class LobbyMediator {
     private Clock clock;

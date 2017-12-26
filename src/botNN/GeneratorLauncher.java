@@ -1,4 +1,4 @@
-package generator;
+package botNN;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -21,7 +21,7 @@ public class GeneratorLauncher extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
         FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(this.getClass().getResource("/generator/dataBoardGenerator.fxml"));
+        loader.setLocation(this.getClass().getResource("dataExample.txt"));
 
         Controller controller = new Controller();
         loader.setController(controller);

@@ -1,4 +1,4 @@
-package generator;
+package botNN;
 
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -11,7 +11,7 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 
-import java.io.*;
+import java.io.FileWriter;
 import java.util.ArrayList;
 
 public class Controller {

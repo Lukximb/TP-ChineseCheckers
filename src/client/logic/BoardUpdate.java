@@ -13,7 +13,6 @@ import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 import server.board.Coordinates;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class BoardUpdate {

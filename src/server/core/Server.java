@@ -1,10 +1,10 @@
 package server.core;
 
-import java.io.IOException;
-
 import jmx.Factory;
 import server.connection.Connection;
 import server.manager.Manager;
+
+import java.io.IOException;
 
 public class Server {
     public Connection connection = null;
