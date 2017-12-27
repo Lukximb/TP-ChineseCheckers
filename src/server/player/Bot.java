@@ -2,10 +2,11 @@ package server.player;
 
 import client.logic.MoveType;
 import server.board.Coordinates;
+import server.lobby.Lobby;
 
 import java.util.ArrayList;
 
-public class Bot{
+public class Bot implements PlayerTemplate{
     private Difficult difficultLevel;
     private MoveType moveType;
     private MoveType prevMoveType;
@@ -30,29 +31,13 @@ public class Bot{
         moveLogic = new CommonMoveLogic();
     }
 
-    public void move(Coordinates coordinates) {
+    private void move() {
 
     }
 
-    private boolean checkMove() {
-        return false;
-    }
 
-    public Coordinates getCurrentPosition() {
-        return null;
-    }
-
-    public void pass() {
-
-    }
-
-    public void surrender() {
-
-    }
-
-    public void setCorner(int corner) {
-        this.corner = corner;
-        enemyCorner = (corner + 3) % 6;
+    public boolean checkMove() {
+        return true;
     }
 
     public void start(int rows, int numberOfPlayers) {
@@ -61,5 +46,31 @@ public class Bot{
 
         pawns = moveLogic.fillPawnList(rows, corner);
         destinationPawns = moveLogic.fillPawnList(rows, enemyCorner);
+    }
+
+    @Override
+    public void joinToLobby(Lobby lobby, int corner) {
+        this.corner = corner;
+        enemyCorner = (corner + 3) % 6;
+    }
+
+    @Override
+    public void exitFromLobby() {
+
+    }
+
+    @Override
+    public void pass() {
+
+    }
+
+    @Override
+    public void sendMessage(String message) {
+
+    }
+
+    @Override
+    public void yourTurn() {
+        move();
     }
 }

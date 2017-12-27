@@ -1,10 +1,10 @@
-package jmx;
+package server.core;
 
+import server.player.Player;
 import server.board.Board;
 import server.board.Coordinates;
 import server.board.Field;
 import server.connection.Connection;
-import server.core.Server;
 import server.lobby.*;
 import server.manager.LobbyManager;
 import server.manager.Manager;
@@ -76,7 +76,7 @@ public class Factory extends NotificationBroadcasterSupport implements FactoryMB
         Player player = new Player(pid, name);
 
 
-        server.connection.createMBeanMainObject("jmx.Player", "Player"+pid, String.valueOf(pid), player);
+        server.connection.createMBeanMainObject("server.player.Player", "Player"+pid, String.valueOf(pid), player);
         playerManager.getNewPlayer(player);
         sendNotification(new Notification(String.valueOf(pid), this, 001100110011, "####hello player created: " + pid));
     }

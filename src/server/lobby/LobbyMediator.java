@@ -1,7 +1,7 @@
 package server.lobby;
 
 import client.logic.MoveType;
-import jmx.Player;
+import server.player.Player;
 import server.board.Coordinates;
 import server.board.Field;
 import server.board.IBoard;

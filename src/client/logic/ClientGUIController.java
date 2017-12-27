@@ -14,6 +14,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
+import server.player.Difficult;
 
 import javax.management.MalformedObjectNameException;
 import javax.management.ObjectName;
@@ -38,6 +39,8 @@ public class ClientGUIController {
 	private ObservableList<String> lobbyList;
 	public ClientListener clientListener;
 	public GridPane board;
+
+	private Difficult botDifficult;
 
 	//LOGIN---------------------------------------
 	@FXML
@@ -279,6 +282,10 @@ public class ClientGUIController {
 		this.game.setVisible(true);
 		this.game.setDisable(false);
 	}
+
+	public void addBotButtonOnClick(ActionEvent event) {
+		client.connection.invokeAddBotMethod(client.player, "addBot", botDifficult);
+	}
 	
 	public void exitLobbyButtonOnClick(ActionEvent event) {
 		this.lobby.setVisible(false);
@@ -323,6 +330,19 @@ public class ClientGUIController {
 
 	public void setPlayerNumberOn6ButtonOnClick(ActionEvent event) {
 		client.playerInLobby = 6;
+	}
+
+
+	public void setBotDifficultEASYButtonOnClick(ActionEvent event) {
+		botDifficult = Difficult.EASY;
+	}
+
+	public void setBotDifficultMEDIUMButtonOnClick(ActionEvent event) {
+		botDifficult = Difficult.MEDIUM;
+	}
+
+	public void setBotDifficultHARDButtonOnClick(ActionEvent event) {
+		botDifficult = Difficult.HARD;
 	}
 
 

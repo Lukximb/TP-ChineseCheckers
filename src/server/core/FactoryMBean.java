@@ -1,4 +1,4 @@
-package jmx;
+package server.core;
 
 import server.board.Board;
 import server.board.Coordinates;

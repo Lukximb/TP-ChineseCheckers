@@ -1,4 +1,4 @@
-package jmx;
+package server.player;
 
 import client.logic.MoveType;
 import server.board.Coordinates;
@@ -8,7 +8,7 @@ import server.player.Difficult;
 /**
  * Intefrace which is implemented by Player class.
  */
-public interface PlayerMBean {
+public interface PlayerMBean extends PlayerTemplate{
     /**
      * Moves player.
      * @param currentCoordinates, destinationCoordinates
@@ -25,17 +25,6 @@ public interface PlayerMBean {
     void checkMove(Coordinates currentCoordinates, Coordinates destinationCoordinates, MoveType moveType);
 
     /**
-     * Adds player to lobby.
-     * @param lobby name of lobby which player is joining.
-     */
-    void joinToLobby(Lobby lobby, int corner);
-
-    /**
-     * Removes player from lobby.
-     */
-    void exitFromLobby();
-
-    /**
      * Creates lobby.
      * @param lobbyName name of new Lobby.
      */
@@ -48,11 +37,6 @@ public interface PlayerMBean {
     void addBot(Difficult difficultLevel);
 
     /**
-     * Pass the move.
-     */
-    void pass();
-
-    /**
      * Surrender game.
      */
     void surrender();
@@ -62,10 +46,4 @@ public interface PlayerMBean {
      * @return pid value
      */
     int getPid();
-
-    /**
-     * Sends message.
-     * @param message contents of message
-     */
-    void sendMessage(String message);
 }

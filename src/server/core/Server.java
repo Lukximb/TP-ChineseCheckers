@@ -1,6 +1,5 @@
 package server.core;
 
-import jmx.Factory;
 import server.connection.Connection;
 import server.manager.Manager;
 
@@ -18,7 +17,7 @@ public class Server {
 
         connection.createConnectorServer();
 
-        connection.createMBeanMainObject("jmx.Factory", "Factory", "F", factory);
+        connection.createMBeanMainObject("server.core.Factory", "Factory", "F", factory);
         connection.createMBeanMainObject("manager.Manager", "Manager", "M", manager);
 
         System.out.println(">> server is running...");

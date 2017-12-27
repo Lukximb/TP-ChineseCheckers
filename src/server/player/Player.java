@@ -1,10 +1,9 @@
-package jmx;
+package server.player;
 
 import client.logic.MoveType;
 import javafx.scene.paint.Color;
 import server.board.Coordinates;
 import server.lobby.Lobby;
-import server.player.Difficult;
 
 import javax.management.Notification;
 import javax.management.NotificationBroadcasterSupport;
@@ -66,7 +65,8 @@ public class Player extends NotificationBroadcasterSupport implements PlayerMBea
 
     @Override
     public void addBot(Difficult difficultLevel) {
-
+        Bot bot = new Bot(difficultLevel);
+        lobby.addBot(bot);
     }
 
     @Override
@@ -86,6 +86,11 @@ public class Player extends NotificationBroadcasterSupport implements PlayerMBea
 
     @Override
     public void sendMessage(String message) {
+
+    }
+
+    @Override
+    public void yourTurn() {
 
     }
 

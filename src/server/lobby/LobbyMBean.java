@@ -1,6 +1,6 @@
 package server.lobby;
 
-import jmx.Player;
+import server.player.Player;
 import server.board.IBoard;
 import server.player.Bot;
 

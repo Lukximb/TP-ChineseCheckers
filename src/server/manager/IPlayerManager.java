@@ -1,6 +1,6 @@
 package server.manager;
 
-import jmx.Player;
+import server.player.Player;
 import server.player.Bot;
 
 public interface IPlayerManager {

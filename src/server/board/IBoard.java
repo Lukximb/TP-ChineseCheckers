@@ -1,6 +1,6 @@
 package server.board;
 
-import jmx.Player;
+import server.player.Player;
 
 /**
  * Interface which is implemented by Board class.

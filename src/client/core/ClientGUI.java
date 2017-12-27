@@ -52,7 +52,7 @@ public class ClientGUI extends Application {
         domain = connection.getDomain();
 
         //Get factory and manager from registry
-        factory = new ObjectName(domain+"F" +":type=jmx.Factory,name=Factory");
+        factory = new ObjectName(domain+"F" +":type=server.core.Factory,name=Factory");
         manager = new ObjectName(domain+"M" +":type=manager.Manager,name=Manager");
 
         //Load GUI

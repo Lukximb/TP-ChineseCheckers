@@ -2,6 +2,7 @@ package client.logic;
 
 
 import server.board.Coordinates;
+import server.player.Difficult;
 
 import javax.management.MBeanServerConnection;
 import javax.management.ObjectName;
@@ -173,6 +174,17 @@ public class ClientConnection {
     public void invokeStartGameMethod(ObjectName mBeanName, String methodName, String lobbyName) {
         Object  opParams[] = {lobbyName};
         String  opSig[] = {String.class.getName()};
+        try {
+            mbsc.invoke(mBeanName, methodName, opParams, opSig);
+        } catch (Exception  e) {
+            e.printStackTrace();
+        }
+        System.out.println(methodName);
+    }
+
+    public void invokeAddBotMethod(ObjectName mBeanName, String methodName, Difficult botDifficult) {
+        Object  opParams[] = {botDifficult};
+        String  opSig[] = {Difficult.class.getName()};
         try {
             mbsc.invoke(mBeanName, methodName, opParams, opSig);
         } catch (Exception  e) {

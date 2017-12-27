@@ -1,6 +1,6 @@
 package server.manager;
 
-import jmx.Player;
+import server.player.Player;
 
 public interface ManagerMBean {
     Player getPlayer(int pid);

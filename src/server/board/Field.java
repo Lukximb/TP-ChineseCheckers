@@ -1,6 +1,6 @@
 package server.board;
 
-import jmx.Player;
+import server.player.Player;
 
 public class Field {
     private Coordinates coordinates;
