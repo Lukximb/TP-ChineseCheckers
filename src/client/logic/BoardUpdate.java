@@ -12,6 +12,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 import server.board.Coordinates;
+import server.player.CommonMoveLogic;
 
 import java.util.ArrayList;
 
@@ -31,6 +32,7 @@ public class BoardUpdate {
     private ArrayList<ArrayList<Coordinates>> enemyCoordinates;
     private Coordinates cCoordinates;
     private Coordinates dCoordinates;
+    private CommonMoveLogic moveLogic;
 
     public BoardUpdate(ClientGUIController controller, ClientGUI client) {
         this.controller = controller;
@@ -40,6 +42,7 @@ public class BoardUpdate {
         correctMove = false;
         pawns = new ArrayList<>();
         enemyCorner = new ArrayList<>();
+        moveLogic = new CommonMoveLogic();
     }
 
     public void setCorner(int corner) {
@@ -50,59 +53,10 @@ public class BoardUpdate {
         this.rows = rows;
         this.numberOfPlayers  = numberOfPlayers;
 
-        pawns = fillPawnList(rows, corner);
+        pawns = moveLogic.fillPawnList(rows, corner);
         img = setPawnColor(corner);
         setEnemyCorner();
         drawPawns();
-    }
-
-    private ArrayList<Coordinates> fillPawnList(int rows, int corn) {
-        ArrayList<Coordinates> pawn = new ArrayList<>();
-        int n = 0, m = 0;
-        if(corn == 0) {
-            n = 3 * rows + 1;
-            m = 2 * rows + 1;
-        } else if(corn == 1) {
-            n = 3 * rows;
-            m = 0;
-        } else if(corn == 2) {
-            n = rows;
-            m = 0;
-        } else if(corn == 3) {
-            n = rows - 1;
-            m = 2 * rows + 1;
-        } else if(corn == 4) {
-            n = rows;
-            m = 4 * rows + 2;
-        } else if(corn == 5) {
-            n = 3 * rows;
-            m = 4 * rows + 2;
-        }
-        if(corn == 0 || corn == 2 || corn == 4) {
-            for(int i=0; i<rows; i++) {
-                for(int j=0; j<rows-i; j++) {
-                    if(i%2 == 0) {
-                        pawn.add(new Coordinates(n+i, m+2*j+i));
-                    }
-                    else {
-                        pawn.add(new Coordinates(n+i, m+2*j+i));
-                    }
-                }
-            }
-        }
-        else {
-            for(int i=0; i<rows; i++) {
-                for(int j=0; j<rows-i; j++) {
-                    if(i%2 == 0) {
-                        pawn.add(new Coordinates(n-i, m+2*j+i));
-                    }
-                    else {
-                        pawn.add(new Coordinates(n-i, m+2*j+i));
-                    }
-                }
-            }
-        }
-        return pawn;
     }
 
     private Image setPawnColor(int cor) {
@@ -202,7 +156,7 @@ public class BoardUpdate {
         for (Integer i : enemyCorner) {
             enemyImg[i] = setPawnColor(i);
             ArrayList<Coordinates> enemyPawn = new ArrayList<>();
-            enemyPawn = fillPawnList(rows, i);
+            enemyPawn = moveLogic.fillPawnList(rows, i);
             enemyCoordinates.set(i, enemyPawn);
             System.out.println("enemy: " + i);
         }
@@ -379,13 +333,13 @@ public class BoardUpdate {
     public void chooseCircleOnClick(MouseEvent event) {
         ObservableList<Node> childrens = controller.board.getChildren();
         for (Node node : childrens) {
-            if(GridPane.getRowIndex(node) == GridPane.getRowIndex((Node)event.getTarget()) &&
-                    GridPane.getColumnIndex(node) == GridPane.getColumnIndex((Node)event.getTarget())) {
+            if (GridPane.getRowIndex(node) == GridPane.getRowIndex((Node) event.getTarget()) &&
+                    GridPane.getColumnIndex(node) == GridPane.getColumnIndex((Node) event.getTarget())) {
                 if (controller.currentPosition == null
                         && node != controller.destinationPosition
                         && event.getButton() == MouseButton.PRIMARY) {
 
-                    if (checkStartPosition(GridPane.getRowIndex(node), GridPane.getColumnIndex(node))) {
+                    if (moveLogic.checkStartPosition(pawns, GridPane.getRowIndex(node), GridPane.getColumnIndex(node))) {
                         controller.setStartNode(node);
                     }
                 } else if (node == controller.currentPosition
@@ -404,7 +358,9 @@ public class BoardUpdate {
                     Coordinates dCoordinates =
                             new Coordinates(GridPane.getRowIndex(node),
                                     GridPane.getColumnIndex(node));
-                    checkMoveType(cCoordinates,dCoordinates);
+                    correctMove = moveLogic.checkMoveType(moveType, prevMoveType, cCoordinates, dCoordinates);
+                    moveType = moveLogic.getMoveType();
+                    prevMoveType = moveLogic.getPrevMoveType();
 
                     if (correctMove) {
                         controller.waitingNode = node;
@@ -440,7 +396,9 @@ public class BoardUpdate {
                     Coordinates dCoordinates =
                             new Coordinates(GridPane.getRowIndex(node),
                                     GridPane.getColumnIndex(node));
-                    checkMoveType(cCoordinates,dCoordinates);
+                    correctMove = moveLogic.checkMoveType(moveType, prevMoveType, cCoordinates, dCoordinates);
+                    moveType = moveLogic.getMoveType();
+                    prevMoveType = moveLogic.getPrevMoveType();
 
                     if (correctMove && moveType == MoveType.JUMP) {
                         controller.waitingNode = node;
@@ -451,7 +409,7 @@ public class BoardUpdate {
                         controller.clientListener.setMove("end");
                         client.connection.invokeCheckMoveMethod(client.player, "checkMove", cCoordinates, dCoordinates, moveType);
                     }
-                } else if(node != controller.currentPosition
+                } else if (node != controller.currentPosition
                         && node != controller.destinationPosition
                         && controller.jumpPositions.contains(node)
                         && event.getButton() == MouseButton.PRIMARY) {
@@ -474,49 +432,7 @@ public class BoardUpdate {
         }
     }
 
-    private void checkMoveType (Coordinates cCoordinates, Coordinates dCoordinates) {
-        int cX = cCoordinates.getX();
-        int cY = cCoordinates.getY();
-        int dX = dCoordinates.getX();
-        int dY = dCoordinates.getY();
-
-        if (Math.abs(cX - dX) == 0 && Math.abs(cY - dY) == 2 && moveType == MoveType.EMPTY) {
-            prevMoveType = moveType;
-            moveType = MoveType.SINGLE;
-            correctMove = true;
-        } else if (Math.abs(cX - dX) == 1 && Math.abs(cY - dY) == 1 && moveType == MoveType.EMPTY && prevMoveType != MoveType.JUMP) {
-            prevMoveType = moveType;
-            moveType = MoveType.SINGLE;
-            correctMove = true;
-        } else if (Math.abs(cX - dX) == 2 && Math.abs(cY - dY) == 2 && moveType != MoveType.SINGLE) {
-            prevMoveType = moveType;
-            moveType = MoveType.JUMP;
-            correctMove = true;
-        } else if (Math.abs(cX - dX) == 0 && Math.abs(cY - dY) == 4 && moveType != MoveType.SINGLE) {
-            prevMoveType = moveType;
-            moveType = MoveType.JUMP;
-            correctMove = true;
-        } else {
-            correctMove = false;
-        }
-    }
-
     public void setMoveTypeAsEmpty() {
         this.moveType = MoveType.EMPTY;
-    }
-
-    public int getCorner() {
-        return corner;
-    }
-
-    private boolean checkStartPosition(int x, int y) {
-        boolean correctCoordinates = false;
-        for (Coordinates c : pawns) {
-            if (c.getX() == x && c.getY() == y) {
-                correctCoordinates = true;
-                break;
-            }
-        }
-        return correctCoordinates;
     }
 }

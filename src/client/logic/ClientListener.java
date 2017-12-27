@@ -18,7 +18,7 @@ public class ClientListener implements NotificationListener {
     public void handleNotification(Notification notification, Object handback)
     {
 //        System.out.println("Receive notification: " + notification.getMessage());
-        System.out.println("Notifiaction: " + notification.getMessage().charAt(0) + " " + notification.getMessage().charAt(2));
+//        System.out.println("Notifiaction: " + notification.getMessage().charAt(0) + " " + notification.getMessage().charAt(2));
         switch (notification.getMessage().charAt(0)) {
             case('P')://player
                 receivePlayersNames(notification.getMessage().substring(2));
@@ -48,16 +48,14 @@ public class ClientListener implements NotificationListener {
                 this.corner = c;
                 break;
             case ('E')://Executed other player move
-                System.out.println(">>Receive notification: " + notification.getMessage());
                 String[] arg = notification.getMessage().substring(2).split(",");
-                System.out.println("corner: " + corner);
                 int cor = Integer.parseInt(arg[0]);
                 if (cor != corner) {
                     int cX = Integer.parseInt(arg[1]);
                     int cY = Integer.parseInt(arg[2]);
                     int dX = Integer.parseInt(arg[3]);
                     int dY = Integer.parseInt(arg[4]);
-                    System.out.println("moveEnemyPawn: " + cor + " " + cX + " " + cY + " " + dX + " " + dY);
+//                    System.out.println("moveEnemyPawn: " + cor + " " + cX + " " + cY + " " + dX + " " + dY);
                     controller.boardUpdate.moveEnemyPawn(cor, cX, cY, dX, dY);
                 }
                 break;
