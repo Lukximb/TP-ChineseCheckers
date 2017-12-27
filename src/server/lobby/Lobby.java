@@ -59,6 +59,7 @@ public class Lobby extends NotificationBroadcasterSupport implements Runnable, L
         roundCorner = 0;
         sendNotification(new Notification(String.valueOf(name), this, 110011110,
                 "S,StartGame," + rowNumber + "," + numberOfPlayers));
+        mediator.startRound();
     }
 
     @Override
@@ -239,7 +240,31 @@ public class Lobby extends NotificationBroadcasterSupport implements Runnable, L
         }
         round = players[roundCorner];
         mediator.startRound();
+    }
 
+    public int getRoundCornerValue() {
+        if(numberOfPlayers == 6) {
+            return roundCorner;
+        } else if(numberOfPlayers == 4) {
+            if(roundCorner%2 == 0) {
+                return roundCorner*2;
+            }
+            else {
+                return roundCorner*2-1;
+            }
+        } else if(numberOfPlayers == 3) {
+            return roundCorner*2;
+        } else if(numberOfPlayers == 2) {
+            return roundCorner*3;
+        }
+        return -1;
+    }
+
+    @Override
+    public void sendTurnNotification() {
+        String message = "T,";
+        message = message.concat(Integer.toString(getRoundCornerValue()));
+        sendNotification(new Notification(String.valueOf(name), this, 1100110000, message));
     }
 
     @Override

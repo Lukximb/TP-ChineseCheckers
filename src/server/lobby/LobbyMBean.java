@@ -34,4 +34,6 @@ public interface LobbyMBean {
 
     void printMessage(PlayerTemplate player, String message);
 
+    void sendTurnNotification();
+
 }
