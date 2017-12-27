@@ -26,7 +26,7 @@
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
-<StackPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<StackPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <StackPane fx:id="playerNickNamePanel" prefHeight="150.0" prefWidth="200.0">
          <children>
@@ -1671,6 +1671,14 @@
                   <Insets top="660.0" />
                </StackPane.margin>
             </Button>
+            <Label fx:id="turnLabel" text="Your Turn" textFill="#00b200" StackPane.alignment="TOP_RIGHT">
+               <StackPane.margin>
+                  <Insets right="30.0" top="50.0" />
+               </StackPane.margin>
+               <font>
+                  <Font size="30.0" />
+               </font>
+            </Label>
          </children>
       </StackPane>
       <StackPane fx:id="invitePopUp" disable="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="150.0" minWidth="200.0" opacity="0.75" prefHeight="150.0" prefWidth="200.0" visible="false" StackPane.alignment="TOP_RIGHT">

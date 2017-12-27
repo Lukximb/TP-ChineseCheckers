@@ -24,6 +24,7 @@ public class LobbyMediator {
     }
 
     public void startRound() {
+        lobby.sendTurnNotification();
         clock.startRound();
     }
 
@@ -44,12 +45,20 @@ public class LobbyMediator {
         return board.executeMove(player, currentCoordinates, newCoordinates);
     }
 
+    public void endOfTime() {
+        lobby.nextRound();
+    }
+
     public void setLobby(Lobby lobby) {
         this.lobby = lobby;
     }
 
     public void setClock(Clock clock) {
-        this.clock = clock;
+        if(this.clock == null) {
+            this.clock = clock;
+            clock.setMediator(this);
+            new Thread(clock).start();
+        }
     }
 
     public void setRulesManager(IRulesManager rulesManager) {

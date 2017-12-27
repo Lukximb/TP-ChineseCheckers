@@ -36,6 +36,8 @@ public class Player extends NotificationBroadcasterSupport implements PlayerMBea
         if (lobby.mediator.move(this, currentCoordinates, destinationCoordinates)) {
             lobby.sendMoveNotification("E," + corner + ","
                     + currentCoordinates.getX() + "," + currentCoordinates.getY() + "," + destinationCoordinates.getX() + "," + destinationCoordinates.getY());
+//            lobby.sendTurnNotification();
+            lobby.nextRound();
 
         }
     }

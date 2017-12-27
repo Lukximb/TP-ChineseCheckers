@@ -137,6 +137,8 @@ public class ClientGUIController {
 	private Button surrenderButton;
 	@FXML
 	private Button sendMsgButton;
+	@FXML
+	private Label turnLabel;
 	//POPUP-INVITE--------------------------------------
 	@FXML
 	private StackPane invitePopUp;
@@ -460,6 +462,10 @@ public class ClientGUIController {
 		this.invitePopUp.setVisible(true);
 		this.invitePopUp.setDisable(false);
 		client.lobbyName = PlayerAndLobbyName[1];
+	}
+
+	public void showTurnLabel(boolean show) {
+		turnLabel.setVisible(show);
 	}
 
 
