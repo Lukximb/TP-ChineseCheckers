@@ -2,6 +2,7 @@ package client.logic;
 
 
 import server.board.Coordinates;
+import server.player.Difficult;
 
 import javax.management.MBeanServerConnection;
 import javax.management.ObjectName;
@@ -17,8 +18,8 @@ public class ClientConnection {
 
     public ClientConnection() {
         try {
-//            url = new JMXServiceURL("service:jmx:rmi://25.0.246.243:44445/jndi/rmi://25.0.246.243:44444/jmxrmi");
-            url = new JMXServiceURL("service:jmx:rmi://25.71.242.160:44445/jndi/rmi://25.71.242.160:44444/jmxrmi");
+            url = new JMXServiceURL("service:jmx:rmi://25.0.246.243:44445/jndi/rmi://25.0.246.243:44444/jmxrmi");
+//            url = new JMXServiceURL("service:jmx:rmi://25.71.242.160:44445/jndi/rmi://25.71.242.160:44444/jmxrmi");
             jmxc = JMXConnectorFactory.connect(url, null);
             mbsc = jmxc.getMBeanServerConnection();
             domain = mbsc.getDefaultDomain();
@@ -51,7 +52,7 @@ public class ClientConnection {
         } catch (Exception  e) {
             e.printStackTrace();
         }
-        System.out.println("Method invoked: " + methodName + " on: " + mBeanName.toString());
+        System.out.println(methodName);
     }
 
     public void invokeMethod(ObjectName mBeanName, String methodName, int num) {
@@ -62,7 +63,7 @@ public class ClientConnection {
         } catch (Exception  e) {
             e.printStackTrace();
         }
-        System.out.println("Method invoked: " + methodName + " on: " + mBeanName.toString());
+        System.out.println(methodName);
     }
 
     //========================== END OF INVOKE METHOD TEMPLATE ================================
@@ -77,7 +78,7 @@ public class ClientConnection {
         } catch (Exception  e) {
             e.printStackTrace();
         }
-        System.out.println("Method invoked: " + methodName + " on: " + mBeanName.toString());
+        System.out.println(methodName);
     }
 
     public void invokeCreatePlayerMethod(ObjectName mBeanName, String methodName, int pid, String name) {
@@ -88,7 +89,7 @@ public class ClientConnection {
         } catch (Exception  e) {
             e.printStackTrace();
         }
-        System.out.println("Method invoked: " + methodName + " on: " + mBeanName.toString());
+        System.out.println(methodName);
     }
 
     public void invokeMovePlayerMethod(ObjectName mBeanName, String methodName, Coordinates currentCoordinates, Coordinates destinationCoordinates) {
@@ -99,7 +100,7 @@ public class ClientConnection {
         } catch (Exception  e) {
             e.printStackTrace();
         }
-        System.out.println("Method invoked: " + methodName + " on: " + mBeanName.toString());
+        //System.out.println(methodName);
     }
 
     public void invokeInvitePlayerToLobbyMethod(ObjectName mBeanName, String methodName, String lobbyName,
@@ -111,7 +112,7 @@ public class ClientConnection {
         } catch (Exception  e) {
             e.printStackTrace();
         }
-        System.out.println("Method invoked: " + methodName + " on: " + mBeanName.toString());
+        System.out.println(methodName);
     }
 
     public void invokeAddPlayerToLobbyMethod(ObjectName mBeanName, String methodName, String lobbyName, String playerName) {
@@ -122,7 +123,7 @@ public class ClientConnection {
         } catch (Exception  e) {
             e.printStackTrace();
         }
-        System.out.println("Method invoked: " + methodName + " on: " + mBeanName.toString());
+        System.out.println(methodName);
     }
 
     public void invokeRemovePlayerToLobbyMethod(ObjectName mBeanName, String methodName, String lobbyName, String playerName) {
@@ -133,7 +134,7 @@ public class ClientConnection {
         } catch (Exception  e) {
             e.printStackTrace();
         }
-        System.out.println("Method invoked: " + methodName + " on: " + mBeanName.toString());
+        System.out.println(methodName);
     }
 
     public void invokeSendPlayersInLobbyList(ObjectName mBeanName, String methodName, String playerName) {
@@ -144,7 +145,7 @@ public class ClientConnection {
         } catch (Exception  e) {
             e.printStackTrace();
         }
-        System.out.println("Method invoked: " + methodName + " on: " + mBeanName.toString());
+        System.out.println(methodName);
     }
 
     public void invokeSendWaitingLobbyList(ObjectName mBeanName, String methodName, String playerName) {
@@ -155,10 +156,11 @@ public class ClientConnection {
         } catch (Exception  e) {
             e.printStackTrace();
         }
-        System.out.println("Method invoked: " + methodName + " on: " + mBeanName.toString());
+        System.out.println(methodName);
     }
 
-    public void invokeCheckMoveMethod(ObjectName mBeanName, String methodName, Coordinates currentCoordinates, Coordinates destinationCoordinates, MoveType moveType) {
+    public void invokeCheckMoveMethod(ObjectName mBeanName, String methodName, Coordinates currentCoordinates,
+                                      Coordinates destinationCoordinates, MoveType moveType) {
         Object  opParams[] = {currentCoordinates, destinationCoordinates, moveType};
         String  opSig[] = {Coordinates.class.getName(), Coordinates.class.getName(), MoveType.class.getName()};
         try {
@@ -166,16 +168,29 @@ public class ClientConnection {
         } catch (Exception  e) {
             e.printStackTrace();
         }
-        System.out.println("Method invoked: " + methodName + " on: " + mBeanName.toString());
+        //System.out.println(methodName);
     }
 
-    public void invokeStartGameMethod(ObjectName mBeanName, String methodName) {
+    public void invokeStartGameMethod(ObjectName mBeanName, String methodName, String lobbyName) {
+        Object  opParams[] = {lobbyName};
+        String  opSig[] = {String.class.getName()};
         try {
-            mbsc.invoke(mBeanName, methodName, null, null);
+            mbsc.invoke(mBeanName, methodName, opParams, opSig);
         } catch (Exception  e) {
             e.printStackTrace();
         }
-        System.out.println("Method invoked: " + methodName + " on: " + mBeanName.toString());
+        System.out.println(methodName);
+    }
+
+    public void invokeAddBotMethod(ObjectName mBeanName, String methodName, Difficult botDifficult) {
+        Object  opParams[] = {botDifficult};
+        String  opSig[] = {Difficult.class.getName()};
+        try {
+            mbsc.invoke(mBeanName, methodName, opParams, opSig);
+        } catch (Exception  e) {
+            e.printStackTrace();
+        }
+        System.out.println(methodName);
     }
 
     public void closeConnection() {

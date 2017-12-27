@@ -1,10 +1,15 @@
-package jmx;
+package server.core;
 
+import server.board.Board;
+import server.board.Coordinates;
+import server.board.Field;
 import server.connection.Connection;
-import server.lobby.*;
-import server.manager.*;
-import server.player.*;
-import server.board.*;
+import server.lobby.Chat;
+import server.lobby.Clock;
+import server.lobby.IRulesManager;
+import server.lobby.LobbyMediator;
+import server.manager.Manager;
+import server.player.Bot;
 
 public interface FactoryMBean {
     Connection createConnection();
@@ -21,7 +26,7 @@ public interface FactoryMBean {
 
     Bot createBot();
 
-    Lobby createLobby(int playerNum, int rowNumber, String lobbyName, int adminPid);
+    void createLobby(int playerNum, int rowNumber, String lobbyName, int adminPid);
 
     LobbyMediator createLobbyMediator();
 

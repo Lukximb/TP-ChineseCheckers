@@ -1,6 +1,6 @@
 package server.manager;
 
-import jmx.Player;
+import server.player.Player;
 
 public interface ManagerMBean {
     Player getPlayer(int pid);
@@ -22,4 +22,6 @@ public interface ManagerMBean {
     void sendPlayersInLobbyList(String playerName);
 
     void sendWaitingLobbyList(String playerName);
+
+    void startGame(String lobbyName);
 }

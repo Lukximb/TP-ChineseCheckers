@@ -1,6 +1,6 @@
 package server.board;
 
-import jmx.Player;
+import server.player.Player;
 
 public class Field {
     private Coordinates coordinates;
@@ -26,4 +26,5 @@ public class Field {
     public void setPlayerOn(Player playerOn) {
         this.playerOn = playerOn;
     }
+
 }

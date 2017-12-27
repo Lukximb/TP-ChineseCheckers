@@ -1,9 +1,10 @@
 package server.lobby;
 
 import client.logic.MoveType;
+import server.player.Player;
 import server.board.Coordinates;
+import server.board.Field;
 import server.board.IBoard;
-import jmx.Factory;
 
 public class LobbyMediator {
     private Clock clock;
@@ -18,8 +19,17 @@ public class LobbyMediator {
         return clock.getRoundTime();
     }
 
+    public void setBoard(IBoard board) {
+        this.board = board;
+    }
+
     public void startRound() {
         clock.startRound();
+    }
+
+    public Field getField(Coordinates coordinates) {
+        Field field = board.getField(coordinates);
+        return field;
     }
 
     public void endRound() {
@@ -28,6 +38,10 @@ public class LobbyMediator {
 
     public boolean checkMove(Coordinates currentCoordinates, Coordinates newCoordinates, int pid, MoveType moveType) {
         return rulesManager.checkMove(currentCoordinates, newCoordinates, pid, moveType);
+    }
+
+    public boolean move(Player player, Coordinates currentCoordinates, Coordinates newCoordinates) {
+        return board.executeMove(player, currentCoordinates, newCoordinates);
     }
 
     public void setLobby(Lobby lobby) {

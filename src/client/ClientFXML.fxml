@@ -12,6 +12,7 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.ColorAdjust?>
 <?import javafx.scene.effect.Glow?>
 <?import javafx.scene.effect.Light.Distant?>
 <?import javafx.scene.effect.Lighting?>
@@ -25,7 +26,7 @@
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
-<StackPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
+<StackPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <StackPane fx:id="playerNickNamePanel" prefHeight="150.0" prefWidth="200.0">
          <children>
@@ -199,7 +200,7 @@
                   <Insets right="50.0" top="175.0" />
                </StackPane.margin>
             </TextField>
-            <Button fx:id="addBotButton" alignment="CENTER" mnemonicParsing="false" prefHeight="30.0" prefWidth="150.0" text="Add BOT" textAlignment="CENTER" StackPane.alignment="TOP_RIGHT">
+            <Button fx:id="addBotButton" alignment="CENTER" mnemonicParsing="false" onAction="#addBotButtonOnClick" prefHeight="30.0" prefWidth="150.0" text="Add BOT" textAlignment="CENTER" StackPane.alignment="TOP_RIGHT">
                <StackPane.margin>
                   <Insets right="75.0" top="350.0" />
                </StackPane.margin>
@@ -211,9 +212,9 @@
             </Button>
             <ButtonBar buttonMinWidth="80.0" maxHeight="30.0" maxWidth="200.0" prefHeight="40.0" prefWidth="200.0" StackPane.alignment="TOP_RIGHT">
               <buttons>
-                <Button fx:id="easyBotButton" mnemonicParsing="false" text="Easy" />
-                  <Button fx:id="mediumBotButton" layoutX="535.0" layoutY="395.0" mnemonicParsing="false" text="Medium" />
-                  <Button fx:id="hardBotButton" layoutX="450.0" layoutY="395.0" mnemonicParsing="false" text="Hard" />
+                <Button fx:id="easyBotButton" mnemonicParsing="false" onAction="#setBotDifficultEASYButtonOnClick" text="Easy" />
+                  <Button fx:id="mediumBotButton" layoutX="535.0" layoutY="395.0" mnemonicParsing="false" onAction="#setBotDifficultMEDIUMButtonOnClick" text="Medium" />
+                  <Button fx:id="hardBotButton" layoutX="450.0" layoutY="395.0" mnemonicParsing="false" onAction="#setBotDifficultHARDButtonOnClick" text="Hard" />
               </buttons>
                <StackPane.margin>
                   <Insets right="25.0" top="300.0" />
@@ -243,13 +244,16 @@
       </StackPane>
       <StackPane fx:id="game" disable="true" prefHeight="150.0" prefWidth="200.0" visible="false">
          <children>
-            <Label alignment="CENTER" prefHeight="50.0" prefWidth="300.0" text="Game" textAlignment="CENTER" StackPane.alignment="TOP_CENTER">
+            <Label alignment="CENTER" prefHeight="50.0" prefWidth="300.0" text="Game" textAlignment="CENTER" textFill="#ff6614" StackPane.alignment="TOP_CENTER">
                <font>
                   <Font name="Jokerman" size="36.0" />
                </font>
                <StackPane.margin>
                   <Insets top="30.0" />
                </StackPane.margin>
+               <effect>
+                  <ColorAdjust brightness="0.17" contrast="0.05" hue="0.1" saturation="1.0" />
+               </effect>
             </Label>
             <ProgressBar fx:id="turnTimeBar" prefWidth="200.0" progress="0.0" StackPane.alignment="TOP_CENTER">
                <StackPane.margin>

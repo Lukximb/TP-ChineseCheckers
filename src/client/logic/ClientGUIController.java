@@ -3,21 +3,21 @@ package client.logic;
 import client.core.ClientGUI;
 import javafx.application.Platform;
 import javafx.beans.property.ReadOnlyStringWrapper;
-import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.*;
-import javafx.scene.control.Button;
-import javafx.scene.control.TextField;
-import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
-import javafx.fxml.FXML;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
+import server.player.Difficult;
+
+import javax.management.MalformedObjectNameException;
+import javax.management.ObjectName;
 import java.util.ArrayList;
 
 public class ClientGUIController {
@@ -25,7 +25,7 @@ public class ClientGUIController {
 //	ClientGUI client;
 
 	public ClientGUI client;
-	private BoardUpdate boardUpdate;
+	public BoardUpdate boardUpdate;
 	private PlayerLogic playerLogic;
 
 	public Node currentPosition;
@@ -39,6 +39,8 @@ public class ClientGUIController {
 	private ObservableList<String> lobbyList;
 	public ClientListener clientListener;
 	public GridPane board;
+
+	private Difficult botDifficult;
 
 	//LOGIN---------------------------------------
 	@FXML
@@ -91,7 +93,7 @@ public class ClientGUIController {
     private Button refreshLobbyListButton;
 	//LOBBY---------------------------------------
 	@FXML
-	private StackPane lobby;
+	public StackPane lobby;
 	@FXML
 	private TableView<String> playersInLobbyList;
 	@FXML
@@ -118,7 +120,7 @@ public class ClientGUIController {
     private Button refreshPlayersListButton;
 	//GAME----------------------------------------
 	@FXML
-	private StackPane game;
+	public StackPane game;
 	@FXML
     public GridPane board4;
     @FXML
@@ -152,13 +154,13 @@ public class ClientGUIController {
 	public void setListener(ClientListener clientListener) {
 		this.clientListener = clientListener;
 	}
-	
+
 	@FXML
 	void initialize() {
 		boardUpdate = new BoardUpdate(this, client);
 		playerLogic = new PlayerLogic(this, client);
 
-		game.setStyle("-fx-background-image: url('/client/wood.jpg');");
+		game.setStyle("-fx-background-image: url('/client/wood-background.jpeg');");
 		jumpPositions = new ArrayList<>();
 		destinationSelected = false;
 
@@ -211,12 +213,23 @@ public class ClientGUIController {
 		this.createLobby.setVisible(false);
 		this.createLobby.setDisable(true);
 
+		if (client.playerInLobby == 0) {
+			client.playerInLobby = 2;
+		}
+
 		client.lobbyName = lobbyNameField.getText();
 		client.rowOfPawn = (int)boardSizeSpinner.getValue();
 		client.connection.invokeCreateLobbyMethod(client.factory, "createLobby", client.playerInLobby ,
 				client.rowOfPawn, client.lobbyName, client.pid);
 		client.connection.invokeSendPlayersInLobbyList(client.manager, "sendPlayersInLobbyList", client.playerName);
-		client.addNotificationListenerToLobby();
+		boardUpdate.setCorner(0);
+		clientListener.setCorner(0);
+		try {
+			client.lobbyObject = new ObjectName(client.domain+"L" +":type=lobby.Lobby,name=" + client.lobbyName);
+			client.addNotificationListenerToLobby();
+		} catch (MalformedObjectNameException e) {
+			e.printStackTrace();
+		}
 
 		this.lobby.setVisible(true);
 		this.lobby.setDisable(false);
@@ -263,10 +276,15 @@ public class ClientGUIController {
 		this.lobby.setVisible(false);
 		this.lobby.setDisable(true);
 
-		client.connection.invokeStartGameMethod(client.player, "startGame");
+		//client.connection.invokeStartGameMethod(client.player, "startGame");
+		client.connection.invokeStartGameMethod(client.manager, "startGame", client.lobbyName);
 		
 		this.game.setVisible(true);
 		this.game.setDisable(false);
+	}
+
+	public void addBotButtonOnClick(ActionEvent event) {
+		client.connection.invokeAddBotMethod(client.player, "addBot", botDifficult);
 	}
 	
 	public void exitLobbyButtonOnClick(ActionEvent event) {
@@ -315,6 +333,19 @@ public class ClientGUIController {
 	}
 
 
+	public void setBotDifficultEASYButtonOnClick(ActionEvent event) {
+		botDifficult = Difficult.EASY;
+	}
+
+	public void setBotDifficultMEDIUMButtonOnClick(ActionEvent event) {
+		botDifficult = Difficult.MEDIUM;
+	}
+
+	public void setBotDifficultHARDButtonOnClick(ActionEvent event) {
+		botDifficult = Difficult.HARD;
+	}
+
+
 	public void doMoveOnClick(ActionEvent event) {
 		boardUpdate.doMoveOnClick(event);
 	}
@@ -324,8 +355,14 @@ public class ClientGUIController {
 	}
 
 	public void acceptInviteOnClick(ActionEvent event) {
+		try {
+			client.lobbyObject = new ObjectName(client.domain+"L" +":type=lobby.Lobby,name=" + client.lobbyName);
+		} catch (MalformedObjectNameException e) {
+			e.printStackTrace();
+		}
+        client.addNotificationListenerToLobby();
 		playerLogic.addPlayerToLobby();
-		client.addNotificationListenerToLobby();
+
 		this.invitePopUp.setVisible(false);
 		this.invitePopUp.setDisable(true);
 		this.menu.setVisible(false);
@@ -334,8 +371,6 @@ public class ClientGUIController {
 		this.joinLobby.setDisable(true);
 		this.createLobby.setVisible(false);
 		this.createLobby.setDisable(true);
-
-//        client.connection.invokeAddPlayerToLobbyMethod(client.manager, "addPlayerToLobby", lobbyName, client.playerName);
 
 		this.lobby.setVisible(true);
 		this.lobby.setDisable(false);
@@ -400,23 +435,22 @@ public class ClientGUIController {
 	}
 
 	public void updatePlayersList(String[] list) {
-		playersList.clear();
+		//playersList.clear();
 //		for(String s: list) {
 //			playersList.add(s);
 //		}
-		playersList.addAll(list);
+		playersList.setAll(list);
+		//playersList.addAll(list);
 		playersInLobbyList.setItems(playersList);
 	}
 
 	public void updateLobbyList(String[] list) {
-        lobbyList.clear();
+        //lobbyList.clear();
 //		for(String s: list) {
 //			lobbyList.add(s);
 //		}
-		try {
-			lobbyList.addAll(list);
-		} catch (Exception e) {}
-        //lobbyList.addAll(list);
+		//lobbyList.addAll(list);
+        lobbyList.setAll(list);
         lobbyListTable.setItems(lobbyList);
 	}
 
@@ -426,7 +460,6 @@ public class ClientGUIController {
 		this.invitePopUp.setVisible(true);
 		this.invitePopUp.setDisable(false);
 		client.lobbyName = PlayerAndLobbyName[1];
-		System.out.println("\nReceived notification:  " + PlayerAndLobbyName[0]);
 	}
 
 
@@ -439,7 +472,7 @@ public class ClientGUIController {
 	}
 
     public void boardClick(MouseEvent event) {
-		//System.out.println("Row: " + GridPane.getRowIndex((Node)event.getTarget())
-		//		+ "\nColumn: " + GridPane.getColumnIndex((Node)event.getTarget()));
+//		System.out.println("Row: " + GridPane.getRowIndex((Node)event.getTarget())
+//				+ "\nColumn: " + GridPane.getColumnIndex((Node)event.getTarget()));
 	}
 }
