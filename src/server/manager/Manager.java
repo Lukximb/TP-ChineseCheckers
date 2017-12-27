@@ -1,6 +1,6 @@
 package server.manager;
 
-import jmx.Player;
+import server.player.Player;
 import server.lobby.Lobby;
 
 import javax.management.Notification;
@@ -56,6 +56,7 @@ public class Manager extends NotificationBroadcasterSupport implements ManagerMB
         for(Player p: playerManager.playerFreeList) {
             if(p.name.equals(invitedPlayerName)) {
                 player = p;
+                break;
             }
         }
         sendNotification(new Notification(String.valueOf(player.pid), this,
@@ -94,6 +95,7 @@ public class Manager extends NotificationBroadcasterSupport implements ManagerMB
         for(Player p: playerManager.playerInGameList) {
             if(p.name.equals(playerName)) {
                 player = p;
+                break;
             }
         }
         if(player != null) {
@@ -113,6 +115,7 @@ public class Manager extends NotificationBroadcasterSupport implements ManagerMB
         for(Player p: playerManager.playerFreeList) {
             if(p.name.equals(playerName)) {
                 player = p;
+                break;
             }
         }
         if(player != null) {
@@ -123,6 +126,22 @@ public class Manager extends NotificationBroadcasterSupport implements ManagerMB
         }
         else {
             System.out.println("Player is NULL");
+        }
+    }
+
+    @Override
+    public void startGame(String lobbyName) {
+        Lobby lobby = null;
+        for(Lobby l: lobbyManager.waitingLobbyList) {
+            if(l.name.equals(lobbyName)) {
+                lobby = l;
+                break;
+            }
+        }
+        lobby.startGame();
+        for (Player p : lobby.players) {
+            sendNotification(new Notification(String.valueOf(p.pid), this, 110011110,
+                    "S,StartGame," + lobby.rowNumber + "," + lobby.numberOfPlayers));
         }
     }
 }

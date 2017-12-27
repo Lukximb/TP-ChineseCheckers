@@ -1,11 +1,15 @@
-package jmx;
+package server.core;
 
-import server.board.*;
+import server.player.Player;
+import server.board.Board;
+import server.board.Coordinates;
+import server.board.Field;
 import server.connection.Connection;
-import server.core.Server;
 import server.lobby.*;
-import server.manager.*;
-import server.player.*;
+import server.manager.LobbyManager;
+import server.manager.Manager;
+import server.manager.PlayerManager;
+import server.player.Bot;
 
 import javax.management.Notification;
 import javax.management.NotificationBroadcasterSupport;
@@ -72,7 +76,7 @@ public class Factory extends NotificationBroadcasterSupport implements FactoryMB
         Player player = new Player(pid, name);
 
 
-        server.connection.createMBeanMainObject("jmx.Player", "Player"+pid, String.valueOf(pid), player);
+        server.connection.createMBeanMainObject("server.player.Player", "Player"+pid, String.valueOf(pid), player);
         playerManager.getNewPlayer(player);
         sendNotification(new Notification(String.valueOf(pid), this, 001100110011, "####hello player created: " + pid));
     }
@@ -107,7 +111,7 @@ public class Factory extends NotificationBroadcasterSupport implements FactoryMB
     }
 
     @Override
-    public Lobby createLobby(int playerNum, int rowNumber, String lobbyName, int adminPid) {
+    public void createLobby(int playerNum, int rowNumber, String lobbyName, int adminPid) {
         Player admin;
         LobbyMediator lobbyMediator= createLobbyMediator();
         int value = playerManager.checkPlayerStatus(adminPid);
@@ -124,9 +128,10 @@ public class Factory extends NotificationBroadcasterSupport implements FactoryMB
         System.out.println(">> Lobby " + lobbyName + " created");
         Lobby lobby = new Lobby(playerNum, rowNumber, lobbyName, admin, lobbyMediator);
         lobby.board = createBoard(4*rowNumber+1, 3*rowNumber+1);
+        lobbyMediator.setBoard(lobby.board);
         admin.lobby = lobby;
         lobbyManager.waitingLobbyList.add(lobby);
-        return null;
+        server.connection.createMBeanMainObject("lobby.Lobby", lobby.name, "L", lobby);
     }
 
     @Override

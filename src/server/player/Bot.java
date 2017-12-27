@@ -1,22 +1,62 @@
 package server.player;
 
+import client.logic.MoveType;
 import server.board.Coordinates;
+import server.lobby.Lobby;
 
-public class Bot implements IBot{
-    private Dificult dificultLevel = Dificult.MEDIUM;
+import java.util.ArrayList;
 
-    public Bot() {
+public class Bot implements PlayerTemplate{
+    private Difficult difficultLevel;
+    private MoveType moveType;
+    private MoveType prevMoveType;
+    private boolean correctMove;
+    private ArrayList<Coordinates> pawns;
+    private ArrayList<Coordinates> destinationPawns;
+    private int corner;
+    private int enemyCorner;
+    private int numberOfPlayers;
+    private int rows;
+    private Coordinates cCoordinates;
+    private Coordinates dCoordinates;
+    private CommonMoveLogic moveLogic;
+
+    public Bot(Difficult difficultLevel) {
+        this.difficultLevel = difficultLevel;
+        moveType = MoveType.EMPTY;
+        prevMoveType = MoveType.EMPTY;
+        correctMove = false;
+        pawns = new ArrayList<>();
+        destinationPawns = new ArrayList<>();
+        moveLogic = new CommonMoveLogic();
+    }
+
+    private void move() {
 
     }
 
-    @Override
-    public void move(Coordinates coordinates) {
 
+    public boolean checkMove() {
+        return true;
+    }
+
+    public void start(int rows, int numberOfPlayers) {
+        this.rows = rows;
+        this.numberOfPlayers  = numberOfPlayers;
+
+        pawns = moveLogic.fillPawnList(rows, corner);
+        destinationPawns = moveLogic.fillPawnList(rows, enemyCorner);
     }
 
     @Override
-    public Coordinates getCurrentPosition() {
-        return null;
+    public void joinToLobby(Lobby lobby, int corner) {
+        this.corner = corner;
+        enemyCorner = (corner + 3) % 6;
+    }
+
+    @Override
+    public void exitFromLobby() {
+
     }
 
     @Override
@@ -25,7 +65,12 @@ public class Bot implements IBot{
     }
 
     @Override
-    public void surrender() {
+    public void sendMessage(String message) {
 
+    }
+
+    @Override
+    public void yourTurn() {
+        move();
     }
 }

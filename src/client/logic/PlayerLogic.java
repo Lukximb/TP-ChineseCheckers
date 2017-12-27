@@ -37,7 +37,7 @@ public class PlayerLogic {
             client.connection.invokeCreatePlayerMethod(client.factory,
                     "createPlayer", client.pid, controller.nickNameField.getText());
             try {
-                client.player = new ObjectName(client.domain+ client.pid +":type=jmx.Player,name=Player" + client.pid);
+                client.player = new ObjectName(client.domain+ client.pid +":type=server.player.Player,name=Player" + client.pid);
                 client.addNotificationListenerToPlayer();
                 client.playerName = controller.nickNameField.getText();
             } catch (MalformedObjectNameException e) {

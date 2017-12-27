@@ -1,0 +1,27 @@
+<component name="ArtifactManager">
+  <artifact type="javafx" name="ChineseCheckers">
+    <output-path>$USER_HOME$/Desktop/jarTP</output-path>
+    <properties id="ant-postprocessing">
+      <options enabled="true" />
+    </properties>
+    <properties id="ant-preprocessing">
+      <options enabled="true" />
+    </properties>
+    <properties id="javafx-properties">
+      <options>
+        <option name="appClass" value="client.core.ClientGUI" />
+        <option name="description" value="" />
+        <option name="htmlPlaceholderId" value="" />
+        <option name="nativeBundle" value="all" />
+        <option name="title" value="Chinese Checkers" />
+        <option name="vendor" value="" />
+        <option name="version" value="9.0.1" />
+      </options>
+    </properties>
+    <root id="root">
+      <element id="archive" name="NewTP.jar">
+        <element id="module-output" name="NewTP" />
+      </element>
+    </root>
+  </artifact>
+</component>

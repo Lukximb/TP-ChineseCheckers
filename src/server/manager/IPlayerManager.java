@@ -1,7 +1,7 @@
 package server.manager;
 
-import jmx.Player;
-import server.player.*;
+import server.player.Player;
+import server.player.Bot;
 
 public interface IPlayerManager {
     void getNewPlayer(Player player);
