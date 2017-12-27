@@ -254,6 +254,12 @@ public class ClientGUIController {
         System.out.println("Player: " + client.playerName + "joined to lobby: " + lobbyName);
         client.connection.invokeSendPlayersInLobbyList(client.manager, "sendPlayersInLobbyList", client.playerName);
         client.lobbyName = lobbyName;
+		try {
+			client.lobbyObject = new ObjectName(client.domain+"L" +":type=lobby.Lobby,name=" + client.lobbyName);
+		} catch (MalformedObjectNameException e) {
+			e.printStackTrace();
+		}
+		client.addNotificationListenerToLobby();
 		
 		this.lobby.setVisible(true);
 		this.lobby.setDisable(false);

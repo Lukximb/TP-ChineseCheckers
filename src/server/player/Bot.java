@@ -1,6 +1,7 @@
 package server.player;
 
 import client.logic.MoveType;
+import javafx.scene.paint.Color;
 import server.board.Coordinates;
 import server.lobby.Lobby;
 
@@ -72,5 +73,10 @@ public class Bot implements PlayerTemplate{
     @Override
     public void yourTurn() {
         move();
+    }
+
+    @Override
+    public void setColor(Color color) {
+
     }
 }

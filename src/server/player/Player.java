@@ -94,6 +94,7 @@ public class Player extends NotificationBroadcasterSupport implements PlayerMBea
 
     }
 
+    @Override
     public void setColor(Color color) {
         this.color = color;
     }
@@ -104,7 +105,7 @@ public class Player extends NotificationBroadcasterSupport implements PlayerMBea
 
     public String getPlayersNames() {
         String playersList = "";
-        for(Player p: lobby.players) {
+        for(PlayerTemplate p: lobby.players) {
             if (p == null) {
                 continue;
             }
