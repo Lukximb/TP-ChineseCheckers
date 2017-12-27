@@ -15,6 +15,7 @@ public class Player extends NotificationBroadcasterSupport implements PlayerMBea
     public Lobby lobby;
     public Color color;
     public int corner;
+    private int enemyCorner;
 
     public Player(int pid, String name){
         this.pid = pid;
@@ -36,6 +37,8 @@ public class Player extends NotificationBroadcasterSupport implements PlayerMBea
         if (lobby.mediator.move(this, currentCoordinates, destinationCoordinates)) {
             lobby.sendMoveNotification("E," + corner + ","
                     + currentCoordinates.getX() + "," + currentCoordinates.getY() + "," + destinationCoordinates.getX() + "," + destinationCoordinates.getY());
+//            lobby.sendTurnNotification();
+            lobby.nextRound();
 
         }
     }
@@ -94,6 +97,7 @@ public class Player extends NotificationBroadcasterSupport implements PlayerMBea
 
     }
 
+    @Override
     public void setColor(Color color) {
         this.color = color;
     }
@@ -104,13 +108,18 @@ public class Player extends NotificationBroadcasterSupport implements PlayerMBea
 
     public String getPlayersNames() {
         String playersList = "";
-        for(Player p: lobby.players) {
+        for(PlayerTemplate p: lobby.players) {
             if (p == null) {
                 continue;
             }
-            playersList = playersList.concat(","+p.name);
+            playersList = playersList.concat("," + p.getName());
         }
         return playersList;
+    }
+
+    @Override
+    public String getName() {
+        return name;
     }
 
 }

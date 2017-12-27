@@ -25,12 +25,14 @@ public class ClientGUI extends Application {
     public int playerInLobby = 0;
     public int rowOfPawn = 0;
     public int corner = 0;
+    public boolean isYourTurn = false;
     public String lobbyName = "";
     public String playerName = "";
     public ClientConnection connection;
     private ClientListener clientListener;
     private NotificationFilterSupport myFilter;
     private ClientGUIController controller;
+
 
     public ClientGUI() {
     }

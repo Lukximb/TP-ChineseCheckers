@@ -193,6 +193,17 @@ public class ClientConnection {
         System.out.println(methodName);
     }
 
+//    public void invokeCheckRoundMethod(ObjectName mBeanName, String methodName) {
+//        Object  opParams[] = null;
+//        String  opSig[] = null;
+//        try {
+//            mbsc.invoke(mBeanName, methodName, opParams, opSig);
+//        } catch (Exception  e) {
+//            e.printStackTrace();
+//        }
+//        System.out.println(methodName);
+//    }
+
     public void closeConnection() {
         try {
             jmxc.close();

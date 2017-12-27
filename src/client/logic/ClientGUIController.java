@@ -137,6 +137,8 @@ public class ClientGUIController {
 	private Button surrenderButton;
 	@FXML
 	private Button sendMsgButton;
+	@FXML
+	private Label turnLabel;
 	//POPUP-INVITE--------------------------------------
 	@FXML
 	private StackPane invitePopUp;
@@ -254,6 +256,12 @@ public class ClientGUIController {
         System.out.println("Player: " + client.playerName + "joined to lobby: " + lobbyName);
         client.connection.invokeSendPlayersInLobbyList(client.manager, "sendPlayersInLobbyList", client.playerName);
         client.lobbyName = lobbyName;
+		try {
+			client.lobbyObject = new ObjectName(client.domain+"L" +":type=lobby.Lobby,name=" + client.lobbyName);
+		} catch (MalformedObjectNameException e) {
+			e.printStackTrace();
+		}
+		client.addNotificationListenerToLobby();
 		
 		this.lobby.setVisible(true);
 		this.lobby.setDisable(false);
@@ -460,6 +468,10 @@ public class ClientGUIController {
 		this.invitePopUp.setVisible(true);
 		this.invitePopUp.setDisable(false);
 		client.lobbyName = PlayerAndLobbyName[1];
+	}
+
+	public void showTurnLabel(boolean show) {
+		turnLabel.setVisible(show);
 	}
 
 

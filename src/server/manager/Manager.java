@@ -2,6 +2,7 @@ package server.manager;
 
 import server.player.Player;
 import server.lobby.Lobby;
+import server.player.PlayerTemplate;
 
 import javax.management.Notification;
 import javax.management.NotificationBroadcasterSupport;
@@ -26,7 +27,7 @@ public class Manager extends NotificationBroadcasterSupport implements ManagerMB
     }
 
     @Override
-    public Player getPlayer(int pid) {
+    public PlayerTemplate getPlayer(int pid) {
         return null;
     }
 
@@ -139,9 +140,5 @@ public class Manager extends NotificationBroadcasterSupport implements ManagerMB
             }
         }
         lobby.startGame();
-        for (Player p : lobby.players) {
-            sendNotification(new Notification(String.valueOf(p.pid), this, 110011110,
-                    "S,StartGame," + lobby.rowNumber + "," + lobby.numberOfPlayers));
-        }
     }
 }

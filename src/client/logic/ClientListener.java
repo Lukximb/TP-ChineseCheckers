@@ -17,7 +17,7 @@ public class ClientListener implements NotificationListener {
 
     public void handleNotification(Notification notification, Object handback)
     {
-//        System.out.println("Receive notification: " + notification.getMessage());
+        System.out.println("Receive notification: " + notification.getMessage());
 //        System.out.println("Notifiaction: " + notification.getMessage().charAt(0) + " " + notification.getMessage().charAt(2));
         switch (notification.getMessage().charAt(0)) {
             case('P')://player
@@ -57,6 +57,17 @@ public class ClientListener implements NotificationListener {
                     int dY = Integer.parseInt(arg[4]);
 //                    System.out.println("moveEnemyPawn: " + cor + " " + cX + " " + cY + " " + dX + " " + dY);
                     controller.boardUpdate.moveEnemyPawn(cor, cX, cY, dX, dY);
+                }
+                break;
+            case('T')://is player's turn
+                String[] turn = notification.getMessage().substring(2).split(",");
+                if(Integer.parseInt(turn[0]) == corner) {
+                    controller.client.isYourTurn = true;
+                    controller.showTurnLabel(controller.client.isYourTurn);
+                }
+                else {
+                    controller.client.isYourTurn = false;
+                    controller.showTurnLabel(controller.client.isYourTurn);
                 }
                 break;
             default:

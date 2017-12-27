@@ -3,11 +3,12 @@ package server.lobby;
 import server.player.Player;
 import server.board.IBoard;
 import server.player.Bot;
+import server.player.PlayerTemplate;
 
 public interface LobbyMBean {
     void startGame();
 
-    void addPlayer(Player player);
+    void addPlayer(PlayerTemplate player);
 
     void endGame();
 
@@ -15,7 +16,7 @@ public interface LobbyMBean {
 
     void sendMoveNotification(String message);
 
-    void removePlayer(Player player);
+    void removePlayer(PlayerTemplate player);
 
     void removePlayer(String playerName);
 
@@ -23,7 +24,7 @@ public interface LobbyMBean {
 
     void initPlayersOnBoard();
 
-    void putPawnsOnBoard(Player player, int corner);
+    void putPawnsOnBoard(PlayerTemplate player, int corner);
 
     IBoard getBoard();
 
@@ -31,6 +32,8 @@ public interface LobbyMBean {
 
     void nextRound();
 
-    void printMessage(Player player, String message);
+    void printMessage(PlayerTemplate player, String message);
+
+    void sendTurnNotification();
 
 }
