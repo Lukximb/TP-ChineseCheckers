@@ -8,6 +8,7 @@ public interface PlayerTemplate {
     String name = "";
     Lobby lobby = null;
     Color color = null;
+    int corner = -1;
     /**
      * Adds player to lobby.
      * @param lobby name of lobby which player is joining.
@@ -40,4 +41,14 @@ public interface PlayerTemplate {
      * Set player pawn color
      */
     void setColor(Color color);
+
+    /**
+     * Find player by name in lobbys' player list
+     * @return name
+     */
+    String getPlayersNames();
+
+    String getName();
+
+    int getPid();
 }

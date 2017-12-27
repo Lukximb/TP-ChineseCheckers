@@ -27,7 +27,7 @@ public class Manager extends NotificationBroadcasterSupport implements ManagerMB
     }
 
     @Override
-    public Player getPlayer(int pid) {
+    public PlayerTemplate getPlayer(int pid) {
         return null;
     }
 
@@ -140,9 +140,5 @@ public class Manager extends NotificationBroadcasterSupport implements ManagerMB
             }
         }
         lobby.startGame();
-        for (PlayerTemplate p : lobby.players) {
-            sendNotification(new Notification(String.valueOf(p.pid), this, 110011110,
-                    "S,StartGame," + lobby.rowNumber + "," + lobby.numberOfPlayers));
-        }
     }
 }

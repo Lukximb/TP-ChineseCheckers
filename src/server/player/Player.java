@@ -15,6 +15,7 @@ public class Player extends NotificationBroadcasterSupport implements PlayerMBea
     public Lobby lobby;
     public Color color;
     public int corner;
+    private int enemyCorner;
 
     public Player(int pid, String name){
         this.pid = pid;
@@ -109,9 +110,14 @@ public class Player extends NotificationBroadcasterSupport implements PlayerMBea
             if (p == null) {
                 continue;
             }
-            playersList = playersList.concat(","+p.name);
+            playersList = playersList.concat("," + p.getName());
         }
         return playersList;
+    }
+
+    @Override
+    public String getName() {
+        return name;
     }
 
 }

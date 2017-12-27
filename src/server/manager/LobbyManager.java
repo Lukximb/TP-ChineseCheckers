@@ -2,6 +2,7 @@ package server.manager;
 
 import server.player.Player;
 import server.lobby.Lobby;
+import server.player.PlayerTemplate;
 
 import java.util.ArrayList;
 
@@ -64,7 +65,7 @@ public class LobbyManager implements ILobbyManager {
         }*/
     }
 
-    public void addPlayerToLobby(String lobbyName, Player player) {
+    public void addPlayerToLobby(String lobbyName, PlayerTemplate player) {
         Lobby lobby = null;
 
         for(Lobby l: waitingLobbyList) {
@@ -78,7 +79,7 @@ public class LobbyManager implements ILobbyManager {
         }
     }
 
-    public void removePlayerFromLobby(String lobbyName, Player player) {
+    public void removePlayerFromLobby(String lobbyName, PlayerTemplate player) {
         Lobby lobby = null;
 
         for(Lobby l: waitingLobbyList) {

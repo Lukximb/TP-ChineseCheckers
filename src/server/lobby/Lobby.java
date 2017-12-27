@@ -57,6 +57,8 @@ public class Lobby extends NotificationBroadcasterSupport implements Runnable, L
         mediator.setBoard(board);
         round = players[0];
         roundCorner = 0;
+        sendNotification(new Notification(String.valueOf(name), this, 110011110,
+                "S,StartGame," + rowNumber + "," + numberOfPlayers));
     }
 
     @Override
