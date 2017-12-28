@@ -34,7 +34,7 @@ public class Lobby extends NotificationBroadcasterSupport implements Runnable, L
         this.rowNumber = rowNumber;
         roundCorner = 0;
         playerCorner = 0;
-        players = new Player[numberOfPlayers];
+        players = new PlayerTemplate[numberOfPlayers];
         addPlayer(admin);
     }
 
@@ -90,7 +90,10 @@ public class Lobby extends NotificationBroadcasterSupport implements Runnable, L
     }
 
     @Override
-    public void addBot(Bot bot) {
+    public void addBot(PlayerTemplate bot) {
+        addPlayer(bot);
+        sendNotification(new Notification(String.valueOf(name), this,
+                001100101010, "B"));
 
     }
 
@@ -239,6 +242,9 @@ public class Lobby extends NotificationBroadcasterSupport implements Runnable, L
             roundCorner = 0;
         }
         round = players[roundCorner];
+        if (players[roundCorner].isBot()) {
+            players[roundCorner].yourTurn();
+        }
         mediator.startRound();
     }
 

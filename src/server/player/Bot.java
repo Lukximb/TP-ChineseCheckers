@@ -37,8 +37,9 @@ public class Bot implements PlayerTemplate{
         moveLogic = new CommonMoveLogic();
     }
 
-    private void move() {
-
+    public void move() {
+        System.out.println("move from " +name);
+        lobby.nextRound();
     }
 
 
@@ -56,7 +57,7 @@ public class Bot implements PlayerTemplate{
 
     @Override
     public void joinToLobby(Lobby lobby, int corner) {
-        name = lobby.name + corner;
+        name = "Bot " + lobby.name + String.valueOf(corner);
         this.corner = corner;
         enemyCorner = (corner + 3) % 6;
     }
@@ -103,5 +104,10 @@ public class Bot implements PlayerTemplate{
     @Override
     public int getPid() {
         return -1;
+    }
+
+    @Override
+    public boolean isBot() {
+        return true;
     }
 }

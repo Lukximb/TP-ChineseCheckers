@@ -38,6 +38,10 @@ public class ClientListener implements NotificationListener {
                 controller.client.connection.invokeSendPlayersInLobbyList(controller.client.manager,
                         "sendPlayersInLobbyList", controller.client.playerName);
                 break;
+            case('B')://Add bot
+                controller.client.connection.invokeSendPlayersInLobbyList(controller.client.manager,
+                        "sendPlayersInLobbyList", controller.client.playerName);
+                break;
             case('S')://Start Game
                 String[] args = notification.getMessage().substring(2).split(",");
                 hendleStartGame(args);

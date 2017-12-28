@@ -94,7 +94,7 @@ public class Player extends NotificationBroadcasterSupport implements PlayerMBea
 
     @Override
     public void yourTurn() {
-
+        //DO NOTHING
     }
 
     @Override
@@ -122,4 +122,8 @@ public class Player extends NotificationBroadcasterSupport implements PlayerMBea
         return name;
     }
 
+    @Override
+    public boolean isBot() {
+        return false;
+    }
 }
