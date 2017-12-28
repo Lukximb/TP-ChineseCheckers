@@ -36,10 +36,13 @@ public class Player extends NotificationBroadcasterSupport implements PlayerMBea
         if (lobby.mediator.move(this, currentCoordinates, destinationCoordinates)) {
             lobby.sendMoveNotification("E," + corner + ","
                     + currentCoordinates.getX() + "," + currentCoordinates.getY() + "," + destinationCoordinates.getX() + "," + destinationCoordinates.getY());
-//            lobby.sendTurnNotification();
-            lobby.nextRound();
 
         }
+    }
+
+    @Override
+    public void nextRound() {
+        lobby.nextRound();
     }
 
 
@@ -57,7 +60,13 @@ public class Player extends NotificationBroadcasterSupport implements PlayerMBea
 
     @Override
     public void exitFromLobby() {
-
+        lobby.removePlayer(this);
+        if(lobby.isEmpty()) {
+            //TODO
+            //removing lobby if is empty
+            //lobbyManager.removeLobby(lobby);
+        }
+        lobby = null;
     }
 
     @Override
@@ -73,7 +82,7 @@ public class Player extends NotificationBroadcasterSupport implements PlayerMBea
 
     @Override
     public void pass() {
-
+        lobby.nextRound();
     }
 
     @Override
@@ -88,7 +97,7 @@ public class Player extends NotificationBroadcasterSupport implements PlayerMBea
 
     @Override
     public void sendMessage(String message) {
-
+        sendNotification(new Notification(String.valueOf(lobby.name), lobby, 100011001, "M#" + name + "#" + message));
     }
 
     @Override

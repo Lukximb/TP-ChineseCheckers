@@ -46,4 +46,10 @@ public interface PlayerMBean extends PlayerTemplate{
      * @return pid value
      */
     int getPid();
+
+    /**
+     * Ends player's turn in game.
+     */
+    void nextRound();
+
 }

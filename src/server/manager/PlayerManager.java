@@ -103,5 +103,6 @@ public class PlayerManager implements IPlayerManager {
     public void movePlayerToFreeList(Player player) {
         playerInGameList.remove(player);
         playerFreeList.add(player);
+        player.lobby = null;
     }
 }

@@ -193,16 +193,49 @@ public class ClientConnection {
         System.out.println(methodName);
     }
 
-//    public void invokeCheckRoundMethod(ObjectName mBeanName, String methodName) {
-//        Object  opParams[] = null;
-//        String  opSig[] = null;
-//        try {
-//            mbsc.invoke(mBeanName, methodName, opParams, opSig);
-//        } catch (Exception  e) {
-//            e.printStackTrace();
-//        }
-//        System.out.println(methodName);
-//    }
+    public void invokePassMethod(ObjectName mBeanName, String methodName) {
+        Object  opParams[] = null;
+        String  opSig[] = null;
+        try {
+            mbsc.invoke(mBeanName, methodName, opParams, opSig);
+        } catch (Exception  e) {
+            e.printStackTrace();
+        }
+        System.out.println(methodName);
+    }
+
+    public void invokeSendMessageMethod(ObjectName mBeanName, String methodName, String message) {
+        Object  opParams[] = {message};
+        String  opSig[] = {String.class.getName()};
+        try {
+            mbsc.invoke(mBeanName, methodName, opParams, opSig);
+        } catch (Exception  e) {
+            e.printStackTrace();
+        }
+        System.out.println(methodName);
+    }
+
+    public void invokeNextRoundMethod(ObjectName mBeanName, String methodName) {
+        Object  opParams[] = null;
+        String  opSig[] = null;
+        try {
+            mbsc.invoke(mBeanName, methodName, opParams, opSig);
+        } catch (Exception  e) {
+            e.printStackTrace();
+        }
+        System.out.println(methodName);
+    }
+
+    public void invokeExitFromLobbyMethod(ObjectName mBeanName, String methodName) {
+        Object  opParams[] = null;
+        String  opSig[] = null;
+        try {
+            mbsc.invoke(mBeanName, methodName, opParams, opSig);
+        } catch (Exception  e) {
+            e.printStackTrace();
+        }
+        System.out.println(methodName);
+    }
 
     public void closeConnection() {
         try {

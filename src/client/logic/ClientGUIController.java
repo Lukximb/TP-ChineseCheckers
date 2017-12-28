@@ -139,6 +139,10 @@ public class ClientGUIController {
 	private Button sendMsgButton;
 	@FXML
 	private Label turnLabel;
+	@FXML
+	private Label chatMessageBox;
+	@FXML
+	private TextField messageTextField;
 	//POPUP-INVITE--------------------------------------
 	@FXML
 	private StackPane invitePopUp;
@@ -292,6 +296,10 @@ public class ClientGUIController {
 	public void exitLobbyButtonOnClick(ActionEvent event) {
 		this.lobby.setVisible(false);
 		this.lobby.setDisable(true);
+
+//		client.connection.invokeExitFromLobbyMethod(client.player, "exitFromLobby");
+		client.connection.invokeRemovePlayerToLobbyMethod(client.manager, "removePlayerFromLobby", client.playerName, client.lobbyName);
+		client.lobbyName = "";
 		
 		this.menu.setVisible(true);
 		this.menu.setDisable(false);
@@ -313,9 +321,29 @@ public class ClientGUIController {
 	public void surrenderButtonOnClick(ActionEvent event) {
 		this.game.setVisible(false);
 		this.game.setDisable(true);
-		
+
+//		client.connection.invokeExitFromLobbyMethod(client.player, "exitFromLobby");
+		client.connection.invokeRemovePlayerToLobbyMethod(client.manager, "removePlayerFromGame", client.playerName, client.lobbyName);
+		client.lobbyName = "";
+
 		this.menu.setVisible(true);
 		this.menu.setDisable(false);
+	}
+
+	public void passButtonOnClick(ActionEvent event) {
+		if (boardUpdate.checkRound()) {
+			client.connection.invokePassMethod(client.player, "pass");
+		}
+	}
+
+	public void sendMsgButtonOnClick(ActionEvent event) {
+		String message = messageTextField.getText();
+		messageTextField.clear();
+		client.connection.invokeSendMessageMethod(client.player, "sendMessage", message);
+	}
+
+	public void addMessage(String message) {
+		chatMessageBox.setText(message);
 	}
 
 	public void setPlayerNumberOn2ButtonOnClick(ActionEvent event) {

@@ -91,6 +91,17 @@ public class Lobby extends NotificationBroadcasterSupport implements Runnable, L
 
     }
 
+    public boolean isEmpty() {
+        boolean empty = true;
+            for(Player p : players) {
+                if(p != null) {
+                    empty = false;
+                    break;
+                }
+            }
+        return empty;
+    }
+
     @Override
     public void sendMoveNotification(String message) {
         System.out.println("Notify for: " + name);

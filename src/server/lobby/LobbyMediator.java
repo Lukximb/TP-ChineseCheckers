@@ -8,6 +8,7 @@ import server.board.IBoard;
 
 public class LobbyMediator {
     private Clock clock;
+    private Thread clockThread;
     private IRulesManager rulesManager;
     private IBoard board;
     private Lobby lobby;
@@ -57,7 +58,9 @@ public class LobbyMediator {
         if(this.clock == null) {
             this.clock = clock;
             clock.setMediator(this);
-            new Thread(clock).start();
+
+            clockThread = new Thread(clock, "Clock");
+            clockThread.start();
         }
     }
 

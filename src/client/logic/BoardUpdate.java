@@ -333,107 +333,111 @@ public class BoardUpdate {
                 prevMoveType = MoveType.EMPTY;
                 correctMove = false;
             }
+
+            client.connection.invokeNextRoundMethod(client.player, "nextRound");
         }
     }
 
     public void chooseCircleOnClick(MouseEvent event) {
-        ObservableList<Node> childrens = controller.board.getChildren();
-        for (Node node : childrens) {
-            if (GridPane.getRowIndex(node) == GridPane.getRowIndex((Node) event.getTarget()) &&
-                    GridPane.getColumnIndex(node) == GridPane.getColumnIndex((Node) event.getTarget())) {
-                if (controller.currentPosition == null
-                        && node != controller.destinationPosition
-                        && event.getButton() == MouseButton.PRIMARY) {
+        if (checkRound()) {
+            ObservableList<Node> childrens = controller.board.getChildren();
+            for (Node node : childrens) {
+                if (GridPane.getRowIndex(node) == GridPane.getRowIndex((Node) event.getTarget()) &&
+                        GridPane.getColumnIndex(node) == GridPane.getColumnIndex((Node) event.getTarget())) {
+                    if (controller.currentPosition == null
+                            && node != controller.destinationPosition
+                            && event.getButton() == MouseButton.PRIMARY) {
 
-                    if (moveLogic.checkStartPosition(pawns, GridPane.getRowIndex(node), GridPane.getColumnIndex(node))) {
-                        controller.setStartNode(node);
+                        if (moveLogic.checkStartPosition(pawns, GridPane.getRowIndex(node), GridPane.getColumnIndex(node))) {
+                            controller.setStartNode(node);
+                        }
+                    } else if (node == controller.currentPosition
+                            && event.getButton() == MouseButton.PRIMARY) {
+
+                        controller.removeStartNode(node);
+
+                    } else if (controller.destinationPosition == null
+                            && controller.currentPosition != null
+                            && event.getButton() == MouseButton.SECONDARY
+                            && !controller.jumpPositions.contains(node)) {
+
+                        Coordinates cCoordinates =
+                                new Coordinates(GridPane.getRowIndex(controller.previousNode),
+                                        GridPane.getColumnIndex(controller.previousNode));
+                        Coordinates dCoordinates =
+                                new Coordinates(GridPane.getRowIndex(node),
+                                        GridPane.getColumnIndex(node));
+                        correctMove = moveLogic.checkMoveType(moveType, prevMoveType, cCoordinates, dCoordinates);
+                        moveType = moveLogic.getMoveType();
+                        prevMoveType = moveLogic.getPrevMoveType();
+
+                        if (correctMove) {
+                            controller.waitingNode = node;
+                            controller.clientListener.setMove("end");
+                            client.connection.invokeCheckMoveMethod(client.player, "checkMove", cCoordinates, dCoordinates, moveType);
+                        }
+                    } else if (node == controller.destinationPosition
+                            && event.getButton() == MouseButton.SECONDARY) {
+
+                        controller.removeDestinationNode(node);
+                        if (moveType == MoveType.SINGLE && correctMove) {
+                            moveType = MoveType.EMPTY;
+                        } else if (moveType == MoveType.SINGLE && prevMoveType == MoveType.EMPTY) {
+                            moveType = MoveType.EMPTY;
+                            prevMoveType = MoveType.EMPTY;
+                            correctMove = true;
+                        } else if (prevMoveType == MoveType.JUMP) {
+                            moveType = MoveType.JUMP;
+                        } else {
+                            moveType = MoveType.EMPTY;
+                        }
+
+
+                    } else if (!controller.destinationSelected
+                            && node != controller.currentPosition
+                            && node != controller.destinationPosition
+                            && !controller.jumpPositions.contains(node)
+                            && event.getButton() == MouseButton.PRIMARY) {
+
+                        Coordinates cCoordinates =
+                                new Coordinates(GridPane.getRowIndex(controller.previousNode),
+                                        GridPane.getColumnIndex(controller.previousNode));
+                        Coordinates dCoordinates =
+                                new Coordinates(GridPane.getRowIndex(node),
+                                        GridPane.getColumnIndex(node));
+                        correctMove = moveLogic.checkMoveType(moveType, prevMoveType, cCoordinates, dCoordinates);
+                        moveType = moveLogic.getMoveType();
+                        prevMoveType = moveLogic.getPrevMoveType();
+
+                        if (correctMove && moveType == MoveType.JUMP) {
+                            controller.waitingNode = node;
+                            controller.clientListener.setMove("jump");
+                            client.connection.invokeCheckMoveMethod(client.player, "checkMove", cCoordinates, dCoordinates, moveType);
+                        } else if (correctMove && moveType == MoveType.SINGLE) {
+                            controller.waitingNode = node;
+                            controller.clientListener.setMove("end");
+                            client.connection.invokeCheckMoveMethod(client.player, "checkMove", cCoordinates, dCoordinates, moveType);
+                        }
+                    } else if (node != controller.currentPosition
+                            && node != controller.destinationPosition
+                            && controller.jumpPositions.contains(node)
+                            && event.getButton() == MouseButton.PRIMARY) {
+
+                        controller.removeJumpNode(node);
+                        if (moveType == MoveType.SINGLE && correctMove) {
+                            moveType = MoveType.EMPTY;
+                        } else if (moveType == MoveType.SINGLE && prevMoveType == MoveType.EMPTY) {
+                            moveType = MoveType.EMPTY;
+                            prevMoveType = MoveType.EMPTY;
+                            correctMove = true;
+                        } else if (prevMoveType == MoveType.JUMP) {
+                            moveType = MoveType.JUMP;
+                        } else {
+                            moveType = MoveType.EMPTY;
+                        }
                     }
-                } else if (node == controller.currentPosition
-                        && event.getButton() == MouseButton.PRIMARY) {
-
-                    controller.removeStartNode(node);
-
-                } else if (controller.destinationPosition == null
-                        && controller.currentPosition != null
-                        && event.getButton() == MouseButton.SECONDARY
-                        && !controller.jumpPositions.contains(node)) {
-
-                    Coordinates cCoordinates =
-                            new Coordinates(GridPane.getRowIndex(controller.previousNode),
-                                    GridPane.getColumnIndex(controller.previousNode));
-                    Coordinates dCoordinates =
-                            new Coordinates(GridPane.getRowIndex(node),
-                                    GridPane.getColumnIndex(node));
-                    correctMove = moveLogic.checkMoveType(moveType, prevMoveType, cCoordinates, dCoordinates);
-                    moveType = moveLogic.getMoveType();
-                    prevMoveType = moveLogic.getPrevMoveType();
-
-                    if (correctMove) {
-                        controller.waitingNode = node;
-                        controller.clientListener.setMove("end");
-                        client.connection.invokeCheckMoveMethod(client.player, "checkMove", cCoordinates, dCoordinates, moveType);
-                    }
-                } else if (node == controller.destinationPosition
-                        && event.getButton() == MouseButton.SECONDARY) {
-
-                    controller.removeDestinationNode(node);
-                    if (moveType == MoveType.SINGLE && correctMove) {
-                        moveType = MoveType.EMPTY;
-                    } else if (moveType == MoveType.SINGLE && prevMoveType == MoveType.EMPTY) {
-                        moveType = MoveType.EMPTY;
-                        prevMoveType = MoveType.EMPTY;
-                        correctMove = true;
-                    } else if (prevMoveType == MoveType.JUMP) {
-                        moveType = MoveType.JUMP;
-                    } else {
-                        moveType = MoveType.EMPTY;
-                    }
-
-
-                } else if (!controller.destinationSelected
-                        && node != controller.currentPosition
-                        && node != controller.destinationPosition
-                        && !controller.jumpPositions.contains(node)
-                        && event.getButton() == MouseButton.PRIMARY) {
-
-                    Coordinates cCoordinates =
-                            new Coordinates(GridPane.getRowIndex(controller.previousNode),
-                                    GridPane.getColumnIndex(controller.previousNode));
-                    Coordinates dCoordinates =
-                            new Coordinates(GridPane.getRowIndex(node),
-                                    GridPane.getColumnIndex(node));
-                    correctMove = moveLogic.checkMoveType(moveType, prevMoveType, cCoordinates, dCoordinates);
-                    moveType = moveLogic.getMoveType();
-                    prevMoveType = moveLogic.getPrevMoveType();
-
-                    if (correctMove && moveType == MoveType.JUMP) {
-                        controller.waitingNode = node;
-                        controller.clientListener.setMove("jump");
-                        client.connection.invokeCheckMoveMethod(client.player, "checkMove", cCoordinates, dCoordinates, moveType);
-                    } else if (correctMove && moveType == MoveType.SINGLE) {
-                        controller.waitingNode = node;
-                        controller.clientListener.setMove("end");
-                        client.connection.invokeCheckMoveMethod(client.player, "checkMove", cCoordinates, dCoordinates, moveType);
-                    }
-                } else if (node != controller.currentPosition
-                        && node != controller.destinationPosition
-                        && controller.jumpPositions.contains(node)
-                        && event.getButton() == MouseButton.PRIMARY) {
-
-                    controller.removeJumpNode(node);
-                    if (moveType == MoveType.SINGLE && correctMove) {
-                        moveType = MoveType.EMPTY;
-                    } else if (moveType == MoveType.SINGLE && prevMoveType == MoveType.EMPTY) {
-                        moveType = MoveType.EMPTY;
-                        prevMoveType = MoveType.EMPTY;
-                        correctMove = true;
-                    } else if (prevMoveType == MoveType.JUMP) {
-                        moveType = MoveType.JUMP;
-                    } else {
-                        moveType = MoveType.EMPTY;
-                    }
+                    break;
                 }
-                break;
             }
         }
     }
