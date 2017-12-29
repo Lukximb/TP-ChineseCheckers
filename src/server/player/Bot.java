@@ -1,19 +1,25 @@
 package server.player;
 
 import client.logic.MoveType;
+import javafx.scene.paint.Color;
 import server.board.Coordinates;
 import server.lobby.Lobby;
 
 import java.util.ArrayList;
 
 public class Bot implements PlayerTemplate{
+    public int pid;
+    public String name;
+    public Lobby lobby;
+    public Color color;
+    public int corner;
+
     private Difficult difficultLevel;
     private MoveType moveType;
     private MoveType prevMoveType;
     private boolean correctMove;
     private ArrayList<Coordinates> pawns;
     private ArrayList<Coordinates> destinationPawns;
-    private int corner;
     private int enemyCorner;
     private int numberOfPlayers;
     private int rows;
@@ -50,6 +56,7 @@ public class Bot implements PlayerTemplate{
 
     @Override
     public void joinToLobby(Lobby lobby, int corner) {
+        name = lobby.name + corner;
         this.corner = corner;
         enemyCorner = (corner + 3) % 6;
     }
@@ -72,5 +79,29 @@ public class Bot implements PlayerTemplate{
     @Override
     public void yourTurn() {
         move();
+    }
+
+    @Override
+    public void setColor(Color color) {
+
+    }
+
+    @Override
+    public String getPlayersNames() {
+        return null;
+    }
+
+    @Override
+    public String getName() {
+        return name;
+    }
+
+    /**
+     * Bot doesn't have pid, so return -1
+     * @return -1
+     */
+    @Override
+    public int getPid() {
+        return -1;
     }
 }

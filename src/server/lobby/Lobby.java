@@ -6,6 +6,7 @@ import server.board.Coordinates;
 import server.board.Field;
 import server.board.IBoard;
 import server.player.Bot;
+import server.player.PlayerTemplate;
 
 import javax.management.Notification;
 import javax.management.NotificationBroadcasterSupport;
@@ -13,18 +14,18 @@ import javax.management.NotificationBroadcasterSupport;
 public class Lobby extends NotificationBroadcasterSupport implements Runnable, LobbyMBean{
     public final Color[] colorPalette = {Color.DEEPPINK, Color.YELLOW, Color.MEDIUMBLUE, Color.LIMEGREEN, Color.FIREBRICK, Color.CYAN};
     public String name;
-    public Player admin;
-    public Player[] players;
+    public PlayerTemplate admin;
+    public PlayerTemplate[] players;
     public IBoard board;
     public int numberOfPlayers;
-    public Player round;
+    public PlayerTemplate round;
     public int roundCorner;
     public LobbyMediator mediator;
     public Chat chat;
     public int rowNumber;
     public int playerCorner;
 
-    public Lobby(int playerNum, int rowNumber, String lobbyName, Player admin, LobbyMediator mediator) {
+    public Lobby(int playerNum, int rowNumber, String lobbyName, PlayerTemplate admin, LobbyMediator mediator) {
         this.mediator = mediator;
         mediator.setLobby(this);
         numberOfPlayers = playerNum;
@@ -56,6 +57,8 @@ public class Lobby extends NotificationBroadcasterSupport implements Runnable, L
         mediator.setBoard(board);
         round = players[0];
         roundCorner = 0;
+        sendNotification(new Notification(String.valueOf(name), this, 110011110,
+                "S,StartGame," + rowNumber + "," + numberOfPlayers));
         mediator.startRound();
     }
 
@@ -65,7 +68,7 @@ public class Lobby extends NotificationBroadcasterSupport implements Runnable, L
     }
 
     @Override
-    public void addPlayer(Player player) {
+    public void addPlayer(PlayerTemplate player) {
         if(roundCorner < numberOfPlayers) {
             player.joinToLobby(this, playerCorner);
             players[roundCorner] = player;
@@ -109,7 +112,7 @@ public class Lobby extends NotificationBroadcasterSupport implements Runnable, L
     }
 
     @Override
-    public void removePlayer(Player player) {
+    public void removePlayer(PlayerTemplate player) {
         int i = 0;
         int next = 0;
         while(i<numberOfPlayers) {
@@ -181,7 +184,7 @@ public class Lobby extends NotificationBroadcasterSupport implements Runnable, L
     }
 
     @Override
-    public void putPawnsOnBoard(Player player, int corner) {
+    public void putPawnsOnBoard(PlayerTemplate player, int corner) {
         int bN = board.getN();
         int bM = board.getM();
         int rows = bN - bM;
@@ -329,7 +332,7 @@ public class Lobby extends NotificationBroadcasterSupport implements Runnable, L
     }
 
     @Override
-    public void printMessage(Player player, String message) {
+    public void printMessage(PlayerTemplate player, String message) {
         chat.printMessage(player, message);
     }
 }

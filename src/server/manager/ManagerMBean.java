@@ -1,9 +1,9 @@
 package server.manager;
 
-import server.player.Player;
+import server.player.PlayerTemplate;
 
 public interface ManagerMBean {
-    Player getPlayer(int pid);
+    PlayerTemplate getPlayer(int pid);
 
     void setPlayerAsFree(int pid);
 

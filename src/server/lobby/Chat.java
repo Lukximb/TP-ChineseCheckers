@@ -1,13 +1,13 @@
 package server.lobby;
 
-import server.player.Player;
+import server.player.PlayerTemplate;
 
 public class Chat {
     public Chat() {
 
     }
 
-    public void printMessage(Player player, String message) {
+    public void printMessage(PlayerTemplate player, String message) {
 
     }
 }

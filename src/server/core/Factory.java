@@ -10,6 +10,7 @@ import server.manager.LobbyManager;
 import server.manager.Manager;
 import server.manager.PlayerManager;
 import server.player.Bot;
+import server.player.PlayerTemplate;
 
 import javax.management.Notification;
 import javax.management.NotificationBroadcasterSupport;

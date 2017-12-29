@@ -1,10 +1,11 @@
 package server.board;
 
 import server.player.Player;
+import server.player.PlayerTemplate;
 
 public class Field {
     private Coordinates coordinates;
-    private Player playerOn = null;
+    private PlayerTemplate playerOn = null;
 
     public Field(Coordinates coordinates) {
         this.coordinates = coordinates;
@@ -19,11 +20,11 @@ public class Field {
         this.coordinates = coordinates;
     }
 
-    public Player getPlayerOn() {
+    public PlayerTemplate getPlayerOn() {
         return playerOn;
     }
 
-    public void setPlayerOn(Player playerOn) {
+    public void setPlayerOn(PlayerTemplate playerOn) {
         this.playerOn = playerOn;
     }
 
