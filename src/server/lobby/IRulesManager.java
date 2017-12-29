@@ -5,7 +5,7 @@ import server.player.Player;
 import server.board.Coordinates;
 
 public interface IRulesManager {
-    boolean checkMove(Coordinates currentCoordinates, Coordinates newCoordinates, int pid, MoveType moveType);
+    boolean checkMove(Coordinates currentCoordinates, Coordinates newCoordinates, MoveType moveType);
 
     Player checkWinner();
 

@@ -1,6 +1,7 @@
 package server.board;
 
 import server.player.Player;
+import server.player.PlayerTemplate;
 
 /**
  * Interface which is implemented by Board class.
@@ -24,7 +25,7 @@ public interface IBoard {
      * @param currentCoordinates current player position
      * @param newCoordinates new player position
      */
-    boolean executeMove(Player player, Coordinates currentCoordinates, Coordinates newCoordinates);
+    boolean executeMove(PlayerTemplate player, Coordinates currentCoordinates, Coordinates newCoordinates);
 
     void fillFieldList();
 

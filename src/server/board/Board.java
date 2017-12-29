@@ -1,6 +1,7 @@
 package server.board;
 
 import server.player.Player;
+import server.player.PlayerTemplate;
 
 public class Board implements IBoard {
     private int n;
@@ -56,7 +57,7 @@ public class Board implements IBoard {
     }
 
     @Override
-    public boolean executeMove(Player player, Coordinates currentCoordinates, Coordinates newCoordinates) {
+    public boolean executeMove(PlayerTemplate player, Coordinates currentCoordinates, Coordinates newCoordinates) {
         boolean isPlayerOnCurrent = getField(currentCoordinates).getPlayerOn().equals(player);
         boolean isPlayerOnDest = getField(newCoordinates).getPlayerOn() == null;
         System.out.print("");

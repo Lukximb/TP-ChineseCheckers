@@ -59,6 +59,11 @@ public class Lobby extends NotificationBroadcasterSupport implements Runnable, L
         roundCorner = 0;
         sendNotification(new Notification(String.valueOf(name), this, 110011110,
                 "S,StartGame," + rowNumber + "," + numberOfPlayers));
+        for (PlayerTemplate p : players) {
+            if (p.isBot()) {
+                p.start(rowNumber, numberOfPlayers);
+            }
+        }
         mediator.startRound();
     }
 
