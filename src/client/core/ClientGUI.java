@@ -43,6 +43,9 @@ public class ClientGUI extends Application {
 
     @Override
     public void stop() {
+//        connection.invokeExitFromLobbyMethod(player, "exitFromLobby");
+        connection.invokeRemovePlayerToLobbyMethod(manager, "removePlayerFromLobby", playerName, lobbyName);
+        lobbyName = "";
         connection.invokeMethod(factory, "deletePlayer", pid);
         connection.closeConnection();
     }

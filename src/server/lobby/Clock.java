@@ -31,7 +31,7 @@ public class Clock implements Runnable{
 
 
     public boolean checkTime() {
-        if(currentRoundTime >= 30) {
+        if(getRoundTime() >= 30) {
             return false;
         }
         return true;

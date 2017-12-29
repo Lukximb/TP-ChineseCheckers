@@ -33,18 +33,27 @@ public class LobbyManager implements ILobbyManager {
     }
 
     @Override
-    public void removeLobby() {
-
+    public void removeLobby(Lobby lobby) {
+        setLobbyAsWaiting(lobby);
+        waitingLobbyList.remove(lobby);
+        //TODO
+        //usuwanie lobby z rejestru
     }
 
     @Override
     public void setLobbyAsWaiting(Lobby lobby) {
-
+        if(runningLobbyList.contains(lobby)) {
+            runningLobbyList.remove(lobby);
+            waitingLobbyList.add(lobby);
+        }
     }
 
     @Override
     public void setLobbyAsRunning(Lobby lobby) {
-
+        if(waitingLobbyList.contains(lobby)) {
+            waitingLobbyList.remove(lobby);
+            runningLobbyList.add(lobby);
+        }
     }
 
     @Override
@@ -90,6 +99,26 @@ public class LobbyManager implements ILobbyManager {
         }
         if(lobby != null) {
             lobby.removePlayer(player);
+            if(lobby.isEmpty()) {
+                removeLobby(lobby);
+            }
+        }
+    }
+
+    public void removePlayerFromGame(String lobbyName, Player player) {
+        Lobby lobby = null;
+
+        for(Lobby l: runningLobbyList) {
+            if(l.name.equals(lobbyName)) {
+                lobby = l;
+                break;
+            }
+        }
+        if(lobby != null) {
+            lobby.removePlayer(player);
+            if(lobby.isEmpty()) {
+                removeLobby(lobby);
+            }
         }
     }
 

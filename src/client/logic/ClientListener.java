@@ -74,6 +74,11 @@ public class ClientListener implements NotificationListener {
                     controller.showTurnLabel(controller.client.isYourTurn);
                 }
                 break;
+            case('M')://Message
+                String[] message = notification.getMessage().substring(2).split("#");
+                String line = message[0] + ": " + message[1];
+                controller.addMessage(line);
+                break;
             default:
         }
     }
