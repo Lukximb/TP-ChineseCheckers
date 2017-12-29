@@ -67,10 +67,12 @@ public class RulesManager implements IRulesManager {
 
     @Override
     public Player checkWinner(Player player) {
-        if(player.currentCoordinates.containsAll(player.destinationCoordinates)) {
-            return player;
+        for(Coordinates c : player.currentCoordinates) {
+            if(!(player.destinationCoordinates.contains(c))) {
+                return null;
+            }
         }
-        return null;
+        return player;
     }
 
     @Override
