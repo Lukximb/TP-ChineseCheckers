@@ -5,7 +5,6 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ButtonBar?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.ProgressBar?>
 <?import javafx.scene.control.Spinner?>
 <?import javafx.scene.control.SpinnerValueFactory.IntegerSpinnerValueFactory?>
@@ -21,12 +20,13 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.paint.RadialGradient?>
 <?import javafx.scene.paint.Stop?>
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
-<StackPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
+<StackPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <StackPane fx:id="playerNickNamePanel" prefHeight="150.0" prefWidth="200.0">
          <children>
@@ -1646,11 +1646,6 @@
                   <Insets top="135.0" />
                </StackPane.margin>
             </GridPane>
-            <ListView prefHeight="200.0" prefWidth="200.0" StackPane.alignment="TOP_CENTER">
-               <StackPane.margin>
-                  <Insets top="720.0" />
-               </StackPane.margin>
-            </ListView>
             <Button fx:id="moveButton" mnemonicParsing="false" onAction="#doMoveOnClick" prefHeight="30.0" prefWidth="150.0" text="Move" StackPane.alignment="TOP_LEFT">
                <StackPane.margin>
                   <Insets left="50.0" top="660.0" />
@@ -1666,11 +1661,6 @@
                   <Insets left="30.0" top="50.0" />
                </StackPane.margin>
             </Button>
-            <Button fx:id="sendMsgButton" mnemonicParsing="false" text="Send" StackPane.alignment="TOP_CENTER">
-               <StackPane.margin>
-                  <Insets top="660.0" />
-               </StackPane.margin>
-            </Button>
             <Label fx:id="turnLabel" text="Your Turn" textFill="#00b200" StackPane.alignment="TOP_RIGHT">
                <StackPane.margin>
                   <Insets right="30.0" top="50.0" />
@@ -1679,6 +1669,20 @@
                   <Font size="30.0" />
                </font>
             </Label>
+            <VBox prefHeight="200.0" prefWidth="100.0" StackPane.alignment="BOTTOM_CENTER">
+               <StackPane.margin>
+                  <Insets top="700.0" />
+               </StackPane.margin>
+               <children>
+                  <Label fx:id="chatMessageBox" alignment="TOP_LEFT" prefHeight="168.0" prefWidth="600.0" text="----------------CHAT------------------" />
+                  <TextField fx:id="messageTextField" promptText="Message" />
+               </children>
+            </VBox>
+            <Button fx:id="sendMsgButton" mnemonicParsing="false" onAction="#sendMsgButtonOnClick" text="Send" StackPane.alignment="TOP_CENTER">
+               <StackPane.margin>
+                  <Insets top="660.0" />
+               </StackPane.margin>
+            </Button>
          </children>
       </StackPane>
       <StackPane fx:id="invitePopUp" disable="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="150.0" minWidth="200.0" opacity="0.75" prefHeight="150.0" prefWidth="200.0" visible="false" StackPane.alignment="TOP_RIGHT">
