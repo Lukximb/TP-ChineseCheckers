@@ -3,6 +3,7 @@ package server.lobby;
 import client.logic.MoveType;
 import server.player.Player;
 import server.board.Coordinates;
+import server.player.PlayerTemplate;
 
 import java.util.ArrayList;
 
@@ -66,7 +67,7 @@ public class RulesManager implements IRulesManager {
     }
 
     @Override
-    public Player checkWinner(Player player) {
+    public PlayerTemplate checkWinner(PlayerTemplate player) {
         for(Coordinates c : player.currentCoordinates) {
             if(!(player.destinationCoordinates.contains(c))) {
                 return null;
@@ -76,7 +77,7 @@ public class RulesManager implements IRulesManager {
     }
 
     @Override
-    public Player checkLooser(Player winner) {
+    public PlayerTemplate checkLooser(PlayerTemplate winner) {
 
         return null;
     }

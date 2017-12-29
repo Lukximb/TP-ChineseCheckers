@@ -96,7 +96,7 @@ public class Lobby extends NotificationBroadcasterSupport implements Runnable, L
 
     public boolean isEmpty() {
         boolean empty = true;
-            for(Player p : players) {
+            for(PlayerTemplate p : players) {
                 if(p != null) {
                     empty = false;
                     break;
@@ -243,7 +243,7 @@ public class Lobby extends NotificationBroadcasterSupport implements Runnable, L
     }
 
     @Override
-    public void createDestinationCoordinates(Player player, int corner) {
+    public void createDestinationCoordinates(PlayerTemplate player, int corner) {
         int bN = board.getN();
         int bM = board.getM();
         int rows = bN - bM;

@@ -1,7 +1,10 @@
 package server.player;
 
 import javafx.scene.paint.Color;
+import server.board.Coordinates;
 import server.lobby.Lobby;
+
+import java.util.ArrayList;
 
 public interface PlayerTemplate {
     int pid = 0;
@@ -9,6 +12,9 @@ public interface PlayerTemplate {
     Lobby lobby = null;
     Color color = null;
     int corner = -1;
+    ArrayList<Coordinates> currentCoordinates = new ArrayList<>();
+    ArrayList<Coordinates> destinationCoordinates = new ArrayList<>();
+
     /**
      * Adds player to lobby.
      * @param lobby name of lobby which player is joining.
@@ -51,4 +57,9 @@ public interface PlayerTemplate {
     String getName();
 
     int getPid();
+
+    void addCurrentCoordinates(int x, int y);
+
+    void addDestinationCoordinates(int x, int y);
+
 }

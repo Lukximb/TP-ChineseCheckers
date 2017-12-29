@@ -18,8 +18,8 @@ public class Bot implements PlayerTemplate{
     private MoveType moveType;
     private MoveType prevMoveType;
     private boolean correctMove;
-    private ArrayList<Coordinates> pawns;
-    private ArrayList<Coordinates> destinationPawns;
+    private ArrayList<Coordinates> currentCoordinates;
+    private ArrayList<Coordinates> destinationCoordinates;
     private int enemyCorner;
     private int numberOfPlayers;
     private int rows;
@@ -32,8 +32,8 @@ public class Bot implements PlayerTemplate{
         moveType = MoveType.EMPTY;
         prevMoveType = MoveType.EMPTY;
         correctMove = false;
-        pawns = new ArrayList<>();
-        destinationPawns = new ArrayList<>();
+        currentCoordinates = new ArrayList<>();
+        destinationCoordinates = new ArrayList<>();
         moveLogic = new CommonMoveLogic();
     }
 
@@ -50,8 +50,8 @@ public class Bot implements PlayerTemplate{
         this.rows = rows;
         this.numberOfPlayers  = numberOfPlayers;
 
-        pawns = moveLogic.fillPawnList(rows, corner);
-        destinationPawns = moveLogic.fillPawnList(rows, enemyCorner);
+        currentCoordinates = moveLogic.fillPawnList(rows, corner);
+        destinationCoordinates = moveLogic.fillPawnList(rows, enemyCorner);
     }
 
     @Override
@@ -103,5 +103,15 @@ public class Bot implements PlayerTemplate{
     @Override
     public int getPid() {
         return -1;
+    }
+
+    @Override
+    public void addCurrentCoordinates(int x, int y) {
+        currentCoordinates.add(new Coordinates(x, y));
+    }
+
+    @Override
+    public void addDestinationCoordinates(int x, int y) {
+        destinationCoordinates.add(new Coordinates(x, y));
     }
 }

@@ -5,6 +5,7 @@ import server.player.Player;
 import server.board.Coordinates;
 import server.board.Field;
 import server.board.IBoard;
+import server.player.PlayerTemplate;
 
 import java.util.ArrayList;
 
@@ -71,12 +72,12 @@ public class LobbyMediator {
     }
 
     public void checkWinner() {
-        Player winner = rulesManager.checkWinner(lobby.round);
+        PlayerTemplate winner = rulesManager.checkWinner(lobby.round);
         if(winner != null) {
             //TODO - send popup to winner
             int loosingCorner = (winner.corner + 3) % 6;
-            Player looser = null;
-            for(Player p : lobby.players) {
+            PlayerTemplate looser = null;
+            for(PlayerTemplate p : lobby.players) {
                 if(p.corner == loosingCorner) {
                     looser = p;
                     break;

@@ -132,12 +132,15 @@ public class Player extends NotificationBroadcasterSupport implements PlayerMBea
         return playersList;
     }
 
+    @Override
     public void addCurrentCoordinates(int x, int y) {
         currentCoordinates.add(new Coordinates(x, y));
     }
 
+    @Override
     public void addDestinationCoordinates(int x, int y) {
         destinationCoordinates.add(new Coordinates(x, y));
+    }
 
     @Override
     public String getName() {
