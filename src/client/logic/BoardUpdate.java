@@ -333,6 +333,8 @@ public class BoardUpdate {
                 prevMoveType = MoveType.EMPTY;
                 correctMove = false;
             }
+
+            client.connection.invokeNextRoundMethod(client.player, "nextRound");
         }
     }
 

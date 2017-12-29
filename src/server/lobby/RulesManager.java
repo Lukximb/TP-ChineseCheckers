@@ -5,6 +5,8 @@ import server.board.Field;
 import server.player.Player;
 import server.board.Coordinates;
 
+import java.util.ArrayList;
+
 public class RulesManager implements IRulesManager {
     private LobbyMediator mediator;
 
@@ -73,12 +75,16 @@ public class RulesManager implements IRulesManager {
     }
 
     @Override
-    public Player checkWinner() {
+    public Player checkWinner(Player player) {
+        if(player.currentCoordinates.containsAll(player.destinationCoordinates)) {
+            return player;
+        }
         return null;
     }
 
     @Override
-    public Player checkLooser() {
+    public Player checkLooser(Player winner) {
+
         return null;
     }
 

@@ -7,8 +7,11 @@ import server.board.Field;
 import server.board.IBoard;
 import server.player.PlayerTemplate;
 
+import java.util.ArrayList;
+
 public class LobbyMediator {
     private Clock clock;
+    private Thread clockThread;
     private IRulesManager rulesManager;
     private IBoard board;
     private Lobby lobby;
@@ -58,11 +61,29 @@ public class LobbyMediator {
         if(this.clock == null) {
             this.clock = clock;
             clock.setMediator(this);
-            new Thread(clock).start();
+
+            clockThread = new Thread(clock, "Clock");
+            clockThread.start();
         }
     }
 
     public void setRulesManager(IRulesManager rulesManager) {
         this.rulesManager = rulesManager;
+    }
+
+    public void checkWinner() {
+        Player winner = rulesManager.checkWinner(lobby.round);
+        if(winner != null) {
+            //TODO - send popup to winner
+            int loosingCorner = (winner.corner + 3) % 6;
+            Player looser = null;
+            for(Player p : lobby.players) {
+                if(p.corner == loosingCorner) {
+                    looser = p;
+                    break;
+                }
+            }
+            //TODO - send popup to looser
+        }
     }
 }

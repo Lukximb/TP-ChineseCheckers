@@ -5,7 +5,7 @@ import server.lobby.Lobby;
 public interface ILobbyManager {
     void createLobby();
 
-    void removeLobby();
+    void removeLobby(Lobby lobby);
 
     void setLobbyAsWaiting(Lobby lobby);
 

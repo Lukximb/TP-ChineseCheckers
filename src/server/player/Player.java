@@ -8,6 +8,7 @@ import server.lobby.Lobby;
 import javax.management.Notification;
 import javax.management.NotificationBroadcasterSupport;
 import java.io.Serializable;
+import java.util.ArrayList;
 
 public class Player extends NotificationBroadcasterSupport implements PlayerMBean, Serializable{
     public int pid;
@@ -15,11 +16,15 @@ public class Player extends NotificationBroadcasterSupport implements PlayerMBea
     public Lobby lobby;
     public Color color;
     public int corner;
+    public ArrayList<Coordinates> destinationCoordinates;
+    public ArrayList<Coordinates> currentCoordinates;
     private int enemyCorner;
 
     public Player(int pid, String name){
         this.pid = pid;
         this.name = name;
+        destinationCoordinates = new ArrayList<>();
+        currentCoordinates = new ArrayList<>();
         System.out.println(">> Create player with pid= " + pid);
     }
 
@@ -38,8 +43,14 @@ public class Player extends NotificationBroadcasterSupport implements PlayerMBea
             lobby.sendMoveNotification("E," + corner + ","
                     + currentCoordinates.getX() + "," + currentCoordinates.getY() + "," + destinationCoordinates.getX() + "," + destinationCoordinates.getY());
             lobby.nextRound();
-
+            this.currentCoordinates.remove(currentCoordinates);
+            this.currentCoordinates.add(destinationCoordinates);
         }
+    }
+
+    @Override
+    public void nextRound() {
+        lobby.nextRound();
     }
 
 
@@ -57,7 +68,13 @@ public class Player extends NotificationBroadcasterSupport implements PlayerMBea
 
     @Override
     public void exitFromLobby() {
-
+        lobby.removePlayer(this);
+        if(lobby.isEmpty()) {
+            //TODO
+            //removing lobby if is empty
+            //lobbyManager.removeLobby(lobby);
+        }
+        lobby = null;
     }
 
     @Override
@@ -73,7 +90,7 @@ public class Player extends NotificationBroadcasterSupport implements PlayerMBea
 
     @Override
     public void pass() {
-
+        lobby.nextRound();
     }
 
     @Override
@@ -88,7 +105,7 @@ public class Player extends NotificationBroadcasterSupport implements PlayerMBea
 
     @Override
     public void sendMessage(String message) {
-
+        sendNotification(new Notification(String.valueOf(lobby.name), lobby, 100011001, "M#" + name + "#" + message));
     }
 
     @Override
@@ -114,6 +131,14 @@ public class Player extends NotificationBroadcasterSupport implements PlayerMBea
             playersList = playersList.concat("," + p.getName());
         }
         return playersList;
+    }
+
+    public void addCurrentCoordinates(int x, int y) {
+        currentCoordinates.add(new Coordinates(x, y));
+    }
+
+    public void addDestinationCoordinates(int x, int y) {
+        destinationCoordinates.add(new Coordinates(x, y));
     }
 
     @Override
