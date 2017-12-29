@@ -8,6 +8,7 @@ import server.lobby.Lobby;
 import server.neuralNetwork.NNManager;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class Bot implements PlayerTemplate{
     public int pid;
@@ -27,6 +28,7 @@ public class Bot implements PlayerTemplate{
     private CommonMoveLogic moveLogic;
     private NNManager nnManager;
     private int failMoveNumber;
+    private boolean moveExecuted;
 
     public Bot(Difficult difficultLevel) {
         this.difficultLevel = difficultLevel;
@@ -37,6 +39,7 @@ public class Bot implements PlayerTemplate{
     }
 
     public void move() {
+        moveExecuted = false;
         myTurn = true;
         failMoveNumber = 0;
         ArrayList<Coordinates> coordinatesList =  new ArrayList<>();
@@ -45,23 +48,51 @@ public class Bot implements PlayerTemplate{
             if (myTurn) {
                 ArrayList<Coordinates> coordList;
                 coordList = find(c);
-                for (int k = 0; k < coordList.size(); k++) {
+                for (int k = 0; k < coordList.size() && myTurn; k++) {
                     if (coordList.get(k) != null) {
                         if (k == 0 || k == 1 || k == 4 || k == 7 || k == 10 || k == 11){
-                            System.out.println(name + " jump " + c.getX() + " " + c.getY() + " to " + coordList.get(k).getX() + " " + coordList.get(k).getY());
+                            ArrayList<ArrayList<Coordinates>> jumpCoordList = findJump(c, 0);
+                            for (ArrayList<Coordinates> array : jumpCoordList) {
+                                if (myTurn) {
+                                    for (Coordinates eC : destinationPawns) {
+                                        if (myTurn) {
+                                            double startDistance = Math.sqrt(Math.pow(eC.getX() - c.getX(), 2)
+                                                    + Math.pow(eC.getY() - c.getY(), 2));
+                                            double destinationDistance = Math.sqrt(Math.pow(eC.getX() - array.get(array.size() - 1).getX(), 2)
+                                                    + Math.pow(eC.getY() - array.get(array.size() - 1).getY(), 2));
+                                            if (startDistance - destinationDistance >= bestWayScore) {
+                                                bestWayScore = startDistance - destinationDistance;
+                                                coordinatesList.clear();
+                                                coordinatesList.add(c);
+                                                coordinatesList.add(array.get(array.size() - 1));
+                                                System.out.println(name + " jump " + c.getX() + " " + c.getY() + " to "
+                                                        + array.get(array.size() - 1).getX() + " " + array.get(array.size() - 1).getY());
+                                            }
+                                        } else {
+                                            break;
+                                        }
+                                    }
+                                } else {
+                                    break;
+                                }
+                            }
                         } else {
                             for(Coordinates eC : destinationPawns) {
-                                double startDistance = Math.sqrt(Math.pow(eC.getX() - c.getX(), 2)
-                                        + Math.pow(eC.getY() - c.getY(), 2));
-                                double destinationDistance = Math.sqrt(Math.pow(eC.getX() - coordList.get(k).getX(), 2)
-                                        + Math.pow(eC.getY() - coordList.get(k).getY(), 2));
-                                if (startDistance - destinationDistance >= bestWayScore) {
-                                    bestWayScore = startDistance - destinationDistance;
-                                    coordinatesList.clear();
-                                    coordinatesList.add(c);
-                                    coordinatesList.add(coordList.get(k));
-                                    System.out.println(name + " single " + c.getX() + " " + c.getY() + " to "
-                                            + coordList.get(k).getX() + " " + coordList.get(k).getY());
+                                if (myTurn) {
+                                    double startDistance = Math.sqrt(Math.pow(eC.getX() - c.getX(), 2)
+                                            + Math.pow(eC.getY() - c.getY(), 2));
+                                    double destinationDistance = Math.sqrt(Math.pow(eC.getX() - coordList.get(k).getX(), 2)
+                                            + Math.pow(eC.getY() - coordList.get(k).getY(), 2));
+                                    if (startDistance - destinationDistance >= bestWayScore) {
+                                        bestWayScore = startDistance - destinationDistance;
+                                        coordinatesList.clear();
+                                        coordinatesList.add(c);
+                                        coordinatesList.add(coordList.get(k));
+                                        System.out.println(name + " single " + c.getX() + " " + c.getY() + " to "
+                                                + coordList.get(k).getX() + " " + coordList.get(k).getY());
+                                    }
+                                } else {
+                                    break;
                                 }
                             }
                         }
@@ -69,23 +100,32 @@ public class Bot implements PlayerTemplate{
                 }
             } else {
                 executeMove(coordinatesList);
+                moveExecuted = true;
                 break;
             }
         }
 
-        if (myTurn) {
-            lobby.nextRound();
+        if (myTurn && !moveExecuted) {
+            executeMove(coordinatesList);
         }
+        lobby.nextRound();
     }
 
     private void executeMove(ArrayList<Coordinates> coordinatesList) {
-        if (coordinatesList.get(0) != null && coordinatesList.get(1) != null) {
-            System.out.println("move from " +name);
-            if (lobby.mediator.move(this, coordinatesList.get(0), coordinatesList.get(1))) {
-                changePawns(coordinatesList.get(0), coordinatesList.get(1));
-                lobby.sendMoveNotification("E," + corner + ","
-                        + coordinatesList.get(0).getX() + "," + coordinatesList.get(0).getY() + ","
-                        + coordinatesList.get(1).getX() + "," + coordinatesList.get(1).getY());
+        if (coordinatesList.size() == 2) {
+            if (coordinatesList.get(0) != null && coordinatesList.get(1) != null) {
+                System.out.println("move from " +name);
+                try {
+                    Thread.sleep(750);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                if (lobby.mediator.move(this, coordinatesList.get(0), coordinatesList.get(1))) {
+                    changePawns(coordinatesList.get(0), coordinatesList.get(1));
+                    lobby.sendMoveNotification("E," + corner + ","
+                            + coordinatesList.get(0).getX() + "," + coordinatesList.get(0).getY() + ","
+                            + coordinatesList.get(coordinatesList.size() - 1).getX() + "," + coordinatesList.get(coordinatesList.size() - 1).getY());
+                }
             }
         }
     }
@@ -112,7 +152,10 @@ public class Bot implements PlayerTemplate{
         rawoutput = nnManager.getOutput(data);
         int i = 0;
         for (Double d : rawoutput) {
-            if (myTurn == false) {
+            if (!myTurn) {
+                for (; i < 12; i++) {
+                    coordinatesList.add(null);
+                }
                 break;
             }
             if (d > 0.5) {
@@ -142,28 +185,61 @@ public class Bot implements PlayerTemplate{
         return coordinatesList;
     }
 
-    private ArrayList<Coordinates> findJump(Coordinates c) {
-        ArrayList<Coordinates> coordinatesList = new ArrayList<>();
+    private ArrayList<ArrayList<Coordinates>> findJump(Coordinates c, int invocationNumber) {
+        int boardN = lobby.board.getN();
+        int boardM = (2 * lobby.board.getM()) - 1;
+        System.out.println("Looking for jump......");
+        ArrayList<ArrayList<Coordinates>> coordinatesList = new ArrayList<>();
         ArrayList<Double> rawoutput;
         ArrayList<Double> data;
         data = getData(c);
         rawoutput = nnManager.getOutput(data);
+        int numberOfZero = 0;
+        Coordinates[] index = new Coordinates[12];
+        Arrays.fill(index, null);
         int i = 0;
         for (Double d : rawoutput) {
             if (d > 0.5) {
                 Coordinates cD = getCoordinates(i, c);
+                if (!myTurn) {
+                    break;
+                }
+                if (cD.getX() < 0 || cD.getY() < 0 || cD.getX() >= boardN || cD.getY() >= boardM) {
+                    cD = null;
+                }
                 if (i == 0 || i == 1 || i == 4 || i == 7 || i == 10 || i == 11) {
-                    if (checkMove(c, cD, MoveType.JUMP)) {
-                        coordinatesList.add(cD);
+                    if (cD != null && checkMove(c, cD, MoveType.JUMP)) {
+                        ArrayList<Coordinates> tmpCoordList = new ArrayList<>();
+                        tmpCoordList.add(c);
+                        tmpCoordList.add(cD);
+                        coordinatesList.add(tmpCoordList);
+                        index[i] = cD;
                     } else {
+                        numberOfZero++;
                         failMoveNumber++;
                     }
                 }
                 checkFailNumber();
+            } else {
+                numberOfZero++;
             }
             i++;
         }
-        return coordinatesList;
+        if (numberOfZero == 12 || invocationNumber == 10 || !myTurn) {
+            return coordinatesList;
+        } else {
+            int l = 0;
+            for (int k = 0;k < 12; k++) {
+                if (index[k] != null) {
+                    ArrayList<ArrayList<Coordinates>> tmpArray = findJump(index[k], invocationNumber + 1);
+                    for (ArrayList<Coordinates> cList : tmpArray) {
+                        coordinatesList.get(l).add(cList.get(1));
+                    }
+                    l++;
+                }
+            }
+            return coordinatesList;
+        }
     }
 
     private ArrayList<Double> getData(Coordinates c) {
@@ -292,15 +368,15 @@ public class Bot implements PlayerTemplate{
 
     private void checkFailNumber() {
         if (difficultLevel == Difficult.EASY && failMoveNumber == 5) {
-            lobby.nextRound();
+            //lobby.nextRound();
             myTurn = false;
             System.out.println("bot " + name + " has max fail number, pass");
         } else if (difficultLevel == Difficult.MEDIUM && failMoveNumber == 10) {
-            lobby.nextRound();
+            //lobby.nextRound();
             myTurn = false;
             System.out.println("bot " + name + " has max fail number, pass");
-        } else if (difficultLevel == Difficult.HARD && failMoveNumber == 45) {
-            lobby.nextRound();
+        } else if (difficultLevel == Difficult.HARD && failMoveNumber == 150) {
+            //lobby.nextRound();
             myTurn = false;
             System.out.println("bot " + name + " has max fail number, pass");
         }

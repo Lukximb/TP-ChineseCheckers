@@ -247,10 +247,11 @@ public class Lobby extends NotificationBroadcasterSupport implements Runnable, L
             roundCorner = 0;
         }
         round = players[roundCorner];
+        mediator.startRound();
+        System.out.println(">> Lobby " + name + " started next round for corner " + roundCorner);
         if (players[roundCorner].isBot()) {
             players[roundCorner].yourTurn();
         }
-        mediator.startRound();
     }
 
     public int getRoundCornerValue() {
