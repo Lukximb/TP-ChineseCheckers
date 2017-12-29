@@ -21,7 +21,7 @@ public class GeneratorLauncher extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
         FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(this.getClass().getResource("dataExample.txt"));
+        loader.setLocation(this.getClass().getResource("dataBoardGenerator.fxml"));
 
         Controller controller = new Controller();
         loader.setController(controller);
