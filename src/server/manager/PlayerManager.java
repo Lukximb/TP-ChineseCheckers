@@ -2,6 +2,7 @@ package server.manager;
 
 import server.player.Player;
 import server.player.Bot;
+import server.player.PlayerTemplate;
 
 import java.util.ArrayList;
 

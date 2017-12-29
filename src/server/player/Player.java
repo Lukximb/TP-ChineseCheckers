@@ -18,6 +18,7 @@ public class Player extends NotificationBroadcasterSupport implements PlayerMBea
     public int corner;
     public ArrayList<Coordinates> destinationCoordinates;
     public ArrayList<Coordinates> currentCoordinates;
+    private int enemyCorner;
 
     public Player(int pid, String name){
         this.pid = pid;
@@ -111,6 +112,7 @@ public class Player extends NotificationBroadcasterSupport implements PlayerMBea
 
     }
 
+    @Override
     public void setColor(Color color) {
         this.color = color;
     }
@@ -121,11 +123,11 @@ public class Player extends NotificationBroadcasterSupport implements PlayerMBea
 
     public String getPlayersNames() {
         String playersList = "";
-        for(Player p: lobby.players) {
+        for(PlayerTemplate p: lobby.players) {
             if (p == null) {
                 continue;
             }
-            playersList = playersList.concat(","+p.name);
+            playersList = playersList.concat("," + p.getName());
         }
         return playersList;
     }
@@ -136,6 +138,10 @@ public class Player extends NotificationBroadcasterSupport implements PlayerMBea
 
     public void addDestinationCoordinates(int x, int y) {
         destinationCoordinates.add(new Coordinates(x, y));
+
+    @Override
+    public String getName() {
+        return name;
     }
 
 }
