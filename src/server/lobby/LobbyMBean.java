@@ -25,6 +25,8 @@ public interface LobbyMBean {
 
     void putPawnsOnBoard(Player player, int corner);
 
+    void createDestinationCoordinates(Player player, int corner);
+
     IBoard getBoard();
 
     void getRoundTime();

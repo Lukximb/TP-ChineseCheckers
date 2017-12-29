@@ -8,6 +8,7 @@ import server.lobby.Lobby;
 import javax.management.Notification;
 import javax.management.NotificationBroadcasterSupport;
 import java.io.Serializable;
+import java.util.ArrayList;
 
 public class Player extends NotificationBroadcasterSupport implements PlayerMBean, Serializable{
     public int pid;
@@ -15,10 +16,14 @@ public class Player extends NotificationBroadcasterSupport implements PlayerMBea
     public Lobby lobby;
     public Color color;
     public int corner;
+    public ArrayList<Coordinates> destinationCoordinates;
+    public ArrayList<Coordinates> currentCoordinates;
 
     public Player(int pid, String name){
         this.pid = pid;
         this.name = name;
+        destinationCoordinates = new ArrayList<>();
+        currentCoordinates = new ArrayList<>();
         System.out.println(">> Create player with pid= " + pid);
     }
 
@@ -36,7 +41,8 @@ public class Player extends NotificationBroadcasterSupport implements PlayerMBea
         if (lobby.mediator.move(this, currentCoordinates, destinationCoordinates)) {
             lobby.sendMoveNotification("E," + corner + ","
                     + currentCoordinates.getX() + "," + currentCoordinates.getY() + "," + destinationCoordinates.getX() + "," + destinationCoordinates.getY());
-
+            this.currentCoordinates.remove(currentCoordinates);
+            this.currentCoordinates.add(destinationCoordinates);
         }
     }
 
@@ -122,6 +128,14 @@ public class Player extends NotificationBroadcasterSupport implements PlayerMBea
             playersList = playersList.concat(","+p.name);
         }
         return playersList;
+    }
+
+    public void addCurrentCoordinates(int x, int y) {
+        currentCoordinates.add(new Coordinates(x, y));
+    }
+
+    public void addDestinationCoordinates(int x, int y) {
+        destinationCoordinates.add(new Coordinates(x, y));
     }
 
 }

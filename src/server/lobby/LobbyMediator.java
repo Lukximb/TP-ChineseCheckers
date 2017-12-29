@@ -6,6 +6,8 @@ import server.board.Coordinates;
 import server.board.Field;
 import server.board.IBoard;
 
+import java.util.ArrayList;
+
 public class LobbyMediator {
     private Clock clock;
     private Thread clockThread;
@@ -66,5 +68,21 @@ public class LobbyMediator {
 
     public void setRulesManager(IRulesManager rulesManager) {
         this.rulesManager = rulesManager;
+    }
+
+    public void checkWinner() {
+        Player winner = rulesManager.checkWinner(lobby.round);
+        if(winner != null) {
+            //TODO - send popup to winner
+            int loosingCorner = (winner.corner + 3) % 6;
+            Player looser = null;
+            for(Player p : lobby.players) {
+                if(p.corner == loosingCorner) {
+                    looser = p;
+                    break;
+                }
+            }
+            //TODO - send popup to looser
+        }
     }
 }

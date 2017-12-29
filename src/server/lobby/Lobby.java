@@ -156,21 +156,26 @@ public class Lobby extends NotificationBroadcasterSupport implements Runnable, L
             if(numberOfPlayers == 6) {
                 players[i].setColor(colorPalette[i]);
                 putPawnsOnBoard(players[i], i);
+                createDestinationCoordinates(players[i], i);
             } else if(numberOfPlayers == 4) {
                 if(i%2 == 0) {
                     players[i].setColor(colorPalette[i*2]);
                     putPawnsOnBoard(players[i], i*2);
+                    createDestinationCoordinates(players[i], i*2);
                 }
                 else {
                     players[i].setColor(colorPalette[i*2-1]);
                     putPawnsOnBoard(players[i], i*2-1);
+                    createDestinationCoordinates(players[i], i*2-1);
                 }
             } else if(numberOfPlayers == 3) {
                 players[i].setColor(colorPalette[i*2]);
                 putPawnsOnBoard(players[i], i*2);
+                createDestinationCoordinates(players[i], i*2);
             } else if(numberOfPlayers == 2) {
                 players[i].setColor(colorPalette[i*3]);
                 putPawnsOnBoard(players[i], i*3);
+                createDestinationCoordinates(players[i], i*3);
             }
         }
     }
@@ -208,10 +213,12 @@ public class Lobby extends NotificationBroadcasterSupport implements Runnable, L
                     if(i%2 == 0) {
                         Field f = board.getField(new Coordinates(n+i, m+2*j+i));
                         f.setPlayerOn(player);
+                        player.addCurrentCoordinates(n+i, m+2*j+i);
                     }
                     else {
                         Field f = board.getField(new Coordinates(n+i, m+2*j+i));
                         f.setPlayerOn(player);
+                        player.addCurrentCoordinates(n+i, m+2*j+i);
                     }
                 }
             }
@@ -221,10 +228,55 @@ public class Lobby extends NotificationBroadcasterSupport implements Runnable, L
                 for(int j=0; j<rows-i; j++) {
                     if(i%2 == 0) {
                         board.getField(new Coordinates(n-i, m+2*j+i)).setPlayerOn(player);
+                        player.addCurrentCoordinates(n-i, m+2*j+i);
                     }
                     else {
                         board.getField(new Coordinates(n-i, m+2*j+i)).setPlayerOn(player);
+                        player.addCurrentCoordinates(n-i, m+2*j+i);
                     }
+                }
+            }
+        }
+    }
+
+    @Override
+    public void createDestinationCoordinates(Player player, int corner) {
+        int bN = board.getN();
+        int bM = board.getM();
+        int rows = bN - bM;
+        int n, m;
+        if(corner == 3) {
+            n = 3 * rows + 1;
+            m = 2 * rows + 1;
+        } else if(corner == 4) {
+            n = 3 * rows;
+            m = 0;
+        } else if(corner == 5) {
+            n = rows;
+            m = 0;
+        } else if(corner == 0) {
+            n = rows - 1;
+            m = 2 * rows + 1;
+        } else if(corner == 1) {
+            n = rows;
+            m = 4 * rows + 2;
+        } else if(corner == 2) {
+            n = 3 * rows;
+            m = 4 * rows + 2;
+        } else {
+            return;
+        }
+        if(corner == 0 || corner == 2 || corner == 4) {
+            for(int i=0; i<rows; i++) {
+                for(int j=0; j<rows-i; j++) {
+                    player.addDestinationCoordinates(n+i, m+2*j+i);
+                }
+            }
+        }
+        else {
+            for(int i=0; i<rows; i++) {
+                for(int j=0; j<rows-i; j++) {
+                    player.addDestinationCoordinates(n-i, m+2*j+i);
                 }
             }
         }
@@ -242,6 +294,7 @@ public class Lobby extends NotificationBroadcasterSupport implements Runnable, L
 
     @Override
     public void nextRound() {
+        mediator.checkWinner();
         roundCorner++;
         if(roundCorner == numberOfPlayers) {
             roundCorner = 0;
