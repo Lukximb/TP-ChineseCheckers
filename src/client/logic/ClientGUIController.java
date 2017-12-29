@@ -3,6 +3,7 @@ package client.logic;
 import client.core.ClientGUI;
 import javafx.application.Platform;
 import javafx.beans.property.ReadOnlyStringWrapper;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -443,31 +444,33 @@ public class ClientGUIController {
 	}
 
 	public void updatePlayersList(String[] list) {
-		//playersList.clear();
-//		for(String s: list) {
-//			playersList.add(s);
-//		}
-		playersList.setAll(list);
-		//playersList.addAll(list);
-		playersInLobbyList.setItems(playersList);
+		run(() -> {
+			playersList.setAll(list);
+			playersInLobbyList.setItems(playersList);
+		});
 	}
 
 	public void updateLobbyList(String[] list) {
-        //lobbyList.clear();
-//		for(String s: list) {
-//			lobbyList.add(s);
-//		}
-		//lobbyList.addAll(list);
-        lobbyList.setAll(list);
-        lobbyListTable.setItems(lobbyList);
+		run(() -> {
+			lobbyList.setAll(list);
+			lobbyListTable.setItems(lobbyList);
+		});
 	}
 
 	public void showInvitation(String[] PlayerAndLobbyName) {
-		invitePopUp.setStyle("-fx-background-image: url('/client/popupBackground.png');");
-		this.popUpPlayerNick.setText(PlayerAndLobbyName[0]);
-		this.invitePopUp.setVisible(true);
-		this.invitePopUp.setDisable(false);
-		client.lobbyName = PlayerAndLobbyName[1];
+		run(() -> {
+			invitePopUp.setStyle("-fx-background-image: url('/client/popupBackground.png');");
+			this.popUpPlayerNick.setText(PlayerAndLobbyName[0]);
+			this.invitePopUp.setVisible(true);
+			this.invitePopUp.setDisable(false);
+			client.lobbyName = PlayerAndLobbyName[1];
+		});
+	}
+
+	public static void run(Runnable treatment) {
+		if(treatment == null) throw new IllegalArgumentException("The treatment to perform can not be null");
+		if(Platform.isFxApplicationThread()) treatment.run();
+		else Platform.runLater(treatment);
 	}
 
 	public void showTurnLabel(boolean show) {
