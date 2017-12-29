@@ -12,7 +12,7 @@ public interface LobbyMBean {
 
     void endGame();
 
-    void addBot(Bot bot);
+    void addBot(PlayerTemplate bot);
 
     void sendMoveNotification(String message);
 

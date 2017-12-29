@@ -51,4 +51,8 @@ public interface PlayerTemplate {
     String getName();
 
     int getPid();
+
+    boolean isBot();
+
+    void start(int rows, int numberOfPlayers);
 }

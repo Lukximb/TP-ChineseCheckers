@@ -7,7 +7,7 @@ import server.board.Coordinates;
 import java.util.ArrayList;
 
 public interface IRulesManager {
-    boolean checkMove(Coordinates currentCoordinates, Coordinates newCoordinates, int pid, MoveType moveType);
+    boolean checkMove(Coordinates currentCoordinates, Coordinates newCoordinates, MoveType moveType);
 
     Player checkWinner(Player player);
 

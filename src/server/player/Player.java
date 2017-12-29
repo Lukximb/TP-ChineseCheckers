@@ -30,7 +30,7 @@ public class Player extends NotificationBroadcasterSupport implements PlayerMBea
 
     @Override
     public void checkMove(Coordinates currentCoordinates, Coordinates destinationCoordinates, MoveType moveType) {
-        if (lobby.mediator.checkMove(currentCoordinates, destinationCoordinates, pid, moveType) == true) {
+        if (lobby.mediator.checkMove(currentCoordinates, destinationCoordinates, moveType) == true) {
             sendNotification(new Notification(String.valueOf(pid), this, 110011110, "R CorrectMove"));
         } else {
             sendNotification(new Notification(String.valueOf(pid), this, 110011110, "R IncorrectMove"));
@@ -42,6 +42,7 @@ public class Player extends NotificationBroadcasterSupport implements PlayerMBea
         if (lobby.mediator.move(this, currentCoordinates, destinationCoordinates)) {
             lobby.sendMoveNotification("E," + corner + ","
                     + currentCoordinates.getX() + "," + currentCoordinates.getY() + "," + destinationCoordinates.getX() + "," + destinationCoordinates.getY());
+            lobby.nextRound();
             this.currentCoordinates.remove(currentCoordinates);
             this.currentCoordinates.add(destinationCoordinates);
         }
@@ -109,7 +110,7 @@ public class Player extends NotificationBroadcasterSupport implements PlayerMBea
 
     @Override
     public void yourTurn() {
-
+        //DO NOTHING
     }
 
     @Override
@@ -138,10 +139,20 @@ public class Player extends NotificationBroadcasterSupport implements PlayerMBea
 
     public void addDestinationCoordinates(int x, int y) {
         destinationCoordinates.add(new Coordinates(x, y));
+    }
 
     @Override
     public String getName() {
         return name;
     }
 
+    @Override
+    public boolean isBot() {
+        return false;
+    }
+
+    @Override
+    public void start(int rows, int numberOfPlayers){
+        //DO NOTHING
+    }
 }

@@ -5,6 +5,7 @@ import server.player.Player;
 import server.board.Coordinates;
 import server.board.Field;
 import server.board.IBoard;
+import server.player.PlayerTemplate;
 
 import java.util.ArrayList;
 
@@ -40,11 +41,11 @@ public class LobbyMediator {
         clock.endRound();
     }
 
-    public boolean checkMove(Coordinates currentCoordinates, Coordinates newCoordinates, int pid, MoveType moveType) {
-        return rulesManager.checkMove(currentCoordinates, newCoordinates, pid, moveType);
+    public boolean checkMove(Coordinates currentCoordinates, Coordinates newCoordinates, MoveType moveType) {
+        return rulesManager.checkMove(currentCoordinates, newCoordinates, moveType);
     }
 
-    public boolean move(Player player, Coordinates currentCoordinates, Coordinates newCoordinates) {
+    public boolean move(PlayerTemplate player, Coordinates currentCoordinates, Coordinates newCoordinates) {
         return board.executeMove(player, currentCoordinates, newCoordinates);
     }
 
