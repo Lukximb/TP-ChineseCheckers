@@ -183,18 +183,15 @@ public class NNManager {
 
     public ArrayList<Double> getOutput(ArrayList<Double> data) {
         ArrayList<Double> output = new ArrayList<>();
-        int dataNumber = 0;
-        this.target = target;
-        for (int i = 0; i < neuronNumberIN; i++, dataNumber++) {
-            in.neurons.get(i).addData(data.get(dataNumber));
+        for (int i = 0; i < neuronNumberIN; i++) {
+            in.neurons.get(i).addData(data.get(i));
             in.neurons.get(i).calculate();
             in.neurons.get(i).sendValue();
         }
-        for (int i = 0; i < hidenLayerNumber; i++) {
-            for (int j = 0; j < neuronNumberHID[i]; j++, dataNumber++) {
-                in.neurons.get(j).addData(data.get(dataNumber));
-                in.neurons.get(j).calculate();
-                in.neurons.get(j).sendValue();
+        for (int c = 0; c < hidenLayerNumber; c++) {
+            for (int j = 0; j < neuronNumberHID[c]; j++) {
+                hidden.get(c).neurons.get(j).calculate();
+                hidden.get(c).neurons.get(j).sendValue();
             }
         }
         for (Neuron neuronO: out.neurons) {
@@ -231,7 +228,7 @@ public class NNManager {
                     double error = 0;
                     for (int k = 0; k < neuronNumberOUT; k++) {
                         neuronH.connections.get(k).oldWeight = neuronH.connections.get(k).weight;
-                        neuronH.connections.get(k).weight += 0.001 * deltaSum.get(k) * neuronH.value;
+                        neuronH.connections.get(k).weight += 0.0000001 * deltaSum.get(k) * neuronH.value;
                         error += deltaSum.get(k) * neuronH.connections.get(k).oldWeight * sigmoidDerivative(neuronH.sum);
                     }
                     deltahiddenSum.add(error);
@@ -241,7 +238,7 @@ public class NNManager {
                     double error = 0;
                     for (int k = 0; k < neuronNumberHID[i+1]; k++) {
                         neuronH.connections.get(k).oldWeight = neuronH.connections.get(k).weight;
-                        neuronH.connections.get(k).weight += 0.001 * oldDeltahiddenSum.get(k) * neuronH.value;
+                        neuronH.connections.get(k).weight += 0.0000001 * oldDeltahiddenSum.get(k) * neuronH.value;
                         error += oldDeltahiddenSum.get(k) * neuronH.connections.get(k).oldWeight * sigmoidDerivative(neuronH.sum);
                     }
                     deltahiddenSum.add(error);
@@ -251,7 +248,7 @@ public class NNManager {
         for (int i = 0; i < neuronNumberIN; i++) {
             for (int k = 0; k < neuronNumberHID[0]; k++) {
                 in.neurons.get(i).connections.get(k).oldWeight = in.neurons.get(i).connections.get(k).weight;
-                in.neurons.get(i).connections.get(k).weight += 0.001 * deltahiddenSum.get(k) * (input.get(i) + 0.00000001);
+                in.neurons.get(i).connections.get(k).weight += 0.0000001 * deltahiddenSum.get(k) * (input.get(i) + 0.1);
             }
         }
         return errsum;
@@ -347,47 +344,57 @@ public class NNManager {
 
     public static void main (String[] args) {
         long startTime = System.currentTimeMillis();
-        int nHid[] = {14, 17, 13};
+        //int nHid[] = {14, 25, 17};
         //NNManager manager = new NNManager(12, 3, nHid, 12);//(IN, hLayer, [] neHID, OUT)
         NNManager manager = new NNManager();
         double prevErr;
         double err = 0;
 
-        for (int i = 0; i < 1000000; i++) {
-            for (int j = 0; j < 200; j++) {
+        for (int i = 0; i < 10000; i++) {
+            for (int j = 0; j < 5000; j++) {
 
-                BufferedReader br;
-                File file = new File("G:\\Repozytoria\\TP-ChineseCheckers\\src\\dataExample.txt");
+                BufferedReader brD;
+                BufferedReader brT;
+                File fileD = new File("G:\\Repozytoria\\TP-ChineseCheckers\\src\\dataEx.txt");
+                File fileT = new File("G:\\Repozytoria\\TP-ChineseCheckers\\src\\targetEx.txt");
+                if (j%2 == 1) {
+                    fileD = new File("G:\\Repozytoria\\TP-ChineseCheckers\\src\\dataEx1.txt");
+                    fileT = new File("G:\\Repozytoria\\TP-ChineseCheckers\\src\\targetEx1.txt");
+                }
+
                 ArrayList<Double> data;
                 ArrayList<Double> target;
                 ArrayList<Double> error = new ArrayList<>();
                 int rowNumber = 0;
 
                 try {
-                    br = new BufferedReader(new FileReader(file));
-                    String line = br.readLine();
-                    while (line != null) {
+                    brD = new BufferedReader(new FileReader(fileD));
+                    brT = new BufferedReader(new FileReader(fileT));
+                    String lineD = brD.readLine();
+                    String lineT = brT.readLine();
+                    while (lineD != null && lineT != null) {
                         data = new ArrayList<>();
                         target = new ArrayList<>();
                         error = new ArrayList<>();
-                        String[] dataString = line.split(" ");
+                        String[] dataString = lineD.split(" ");
+                        String[] targetString = lineT.split(" ");
                         for( String s: dataString) {
                             double n = Double.parseDouble(s);
                             data.add(n);
-                            if (n == 1) {
-                                target.add(0.0);
-                            } else {
-                                target.add(1.0);
-                            }
+                        }
+                        for( String s: targetString) {
+                            double n = Double.parseDouble(s);
+                            target.add(n);
                         }
                         manager.getOutput(j, i, data, target);
 
                         error.add(manager.learn(data));
                         rowNumber++;
 
-                        line = br.readLine();
+                        lineD = brD.readLine();
+                        lineT = brT.readLine();
                     }
-                    if (j == 199) {
+                    if (j == 4999) {
                         prevErr = err;
                         err = 0;
                         for (double d : error) {
@@ -401,11 +408,12 @@ public class NNManager {
                         System.out.print(i + " Err: ");
                         System.out.printf(" %.19f", err);
                         System.out.print("      DecErr: ");
-                        System.out.printf(" %.25f", Math.abs(prevErr - err));
+                        System.out.printf(" %.25f", prevErr - err);
                         System.out.println("");
 
                     }
-                    br.close();
+                    brD.close();
+                    brT.close();
                 } catch ( Exception e ) {
                     e.printStackTrace();
                 }

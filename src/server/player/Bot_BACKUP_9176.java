@@ -17,9 +17,17 @@ public class Bot implements PlayerTemplate{
     private int corner;
 
     private Difficult difficultLevel;
+<<<<<<< HEAD
+    private MoveType moveType;
+    private MoveType prevMoveType;
+    private boolean correctMove;
+    private ArrayList<Coordinates> currentCoordinates;
+    private ArrayList<Coordinates> destinationCoordinates;
+=======
     private boolean myTurn;
     private ArrayList<Coordinates> pawns;
     private ArrayList<Coordinates> destinationPawns;
+>>>>>>> origin/master
     private int enemyCorner;
     private int numberOfPlayers;
     private int rows;
@@ -32,8 +40,16 @@ public class Bot implements PlayerTemplate{
 
     public Bot(Difficult difficultLevel) {
         this.difficultLevel = difficultLevel;
+<<<<<<< HEAD
+        moveType = MoveType.EMPTY;
+        prevMoveType = MoveType.EMPTY;
+        correctMove = false;
+        currentCoordinates = new ArrayList<>();
+        destinationCoordinates = new ArrayList<>();
+=======
         pawns = new ArrayList<>();
         destinationPawns = new ArrayList<>();
+>>>>>>> origin/master
         moveLogic = new CommonMoveLogic();
         nnManager = new NNManager();
     }
@@ -391,8 +407,8 @@ public class Bot implements PlayerTemplate{
         this.rows = rows;
         this.numberOfPlayers  = numberOfPlayers;
 
-        pawns = moveLogic.fillPawnList(rows, corner);
-        destinationPawns = moveLogic.fillPawnList(rows, enemyCorner);
+        currentCoordinates = moveLogic.fillPawnList(rows, corner);
+        destinationCoordinates = moveLogic.fillPawnList(rows, enemyCorner);
     }
 
     @Override
@@ -448,7 +464,17 @@ public class Bot implements PlayerTemplate{
     }
 
     @Override
+<<<<<<< HEAD
+    public void addCurrentCoordinates(int x, int y) {
+        currentCoordinates.add(new Coordinates(x, y));
+    }
+
+    @Override
+    public void addDestinationCoordinates(int x, int y) {
+        destinationCoordinates.add(new Coordinates(x, y));
+=======
     public boolean isBot() {
         return true;
+>>>>>>> origin/master
     }
 }
