@@ -40,21 +40,37 @@
                   <Insets left="75.0" right="75.0" top="400.0" />
                </StackPane.margin>
             </TextField>
-            <Label alignment="CENTER" prefHeight="322.0" prefWidth="487.0" text="Chinese Checkers" textAlignment="CENTER" textFill="#e21d1d" wrapText="true" StackPane.alignment="TOP_CENTER">
+            <Label alignment="CENTER" prefHeight="322.0" prefWidth="487.0" text="Chinese Checkers" textAlignment="CENTER" wrapText="true" StackPane.alignment="TOP_CENTER">
                <font>
                   <Font name="Jokerman" size="69.0" />
                </font>
                <StackPane.margin>
                   <Insets top="75.0" />
                </StackPane.margin>
+               <textFill>
+                  <RadialGradient centerX="0.5" cycleMethod="REPEAT" focusDistance="0.8837209302325582" radius="0.20930232558139533">
+                     <stops>
+                        <Stop color="#07e026" />
+                        <Stop color="#ff5800" offset="1.0" />
+                     </stops>
+                  </RadialGradient>
+               </textFill>
             </Label>
-            <Button fx:id="loginButton" mnemonicParsing="false" onAction="#loginButtonOnClick" prefHeight="45.0" prefWidth="129.0" text="Login" textFill="#eb3131" StackPane.alignment="TOP_CENTER">
+            <Button fx:id="loginButton" mnemonicParsing="false" onAction="#loginButtonOnClick" prefHeight="45.0" prefWidth="129.0" text="Login" StackPane.alignment="TOP_CENTER">
                <font>
-                  <Font name="Viner Hand ITC" size="16.0" />
+                  <Font name="TypoUpright BT" size="30.0" />
                </font>
                <StackPane.margin>
                   <Insets top="450.0" />
                </StackPane.margin>
+               <textFill>
+                  <RadialGradient centerX="0.5" cycleMethod="REFLECT" focusDistance="0.8837209302325582" radius="0.4883720930232558">
+                     <stops>
+                        <Stop color="#09de1a" />
+                        <Stop color="RED" offset="1.0" />
+                     </stops>
+                  </RadialGradient>
+               </textFill>
             </Button>
          </children>
       </StackPane>
@@ -1701,6 +1717,70 @@
             </Button>
          </children>
       </StackPane>
+      <StackPane fx:id="winnerPopUp" disable="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="150.0" minWidth="200.0" opacity="0.75" prefHeight="150.0" prefWidth="200.0" visible="false" StackPane.alignment="TOP_RIGHT">
+         <children>
+            <Button fx:id="okButton" alignment="CENTER" mnemonicParsing="false" onAction="#okOnClick" opacity="0.75" text="OK" StackPane.alignment="BOTTOM_CENTER">
+               <StackPane.margin>
+                  <Insets bottom="10.0" />
+               </StackPane.margin>
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+               <effect>
+                  <Lighting diffuseConstant="1.3" specularConstant="1.05">
+                     <bumpInput>
+                        <Lighting bumpInput="$null">
+                           <light>
+                              <Light.Distant />
+                           </light>
+                        </Lighting>
+                     </bumpInput>
+                     <light>
+                        <Light.Distant color="#00ed10" />
+                     </light>
+                  </Lighting>
+               </effect>
+            </Button>
+            <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="20.0" prefWidth="60.0" text="Player:" textAlignment="CENTER" wrapText="true" StackPane.alignment="TOP_CENTER">
+               <StackPane.margin>
+                  <Insets left="20.0" right="20.0" top="5.0" />
+               </StackPane.margin>
+            </Label>
+            <Label fx:id="popUpWinnerNick" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="20.0" prefWidth="120.0" textAlignment="CENTER" textFill="#069a18" StackPane.alignment="TOP_CENTER">
+               <StackPane.margin>
+                  <Insets top="25.0" />
+               </StackPane.margin>
+               <font>
+                  <Font name="System Bold Italic" size="12.0" />
+               </font>
+            </Label>
+            <Label alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="200.0" text="just win the game againts player:" textAlignment="CENTER" wrapText="true" StackPane.alignment="TOP_CENTER">
+               <StackPane.margin>
+                  <Insets top="45.0" />
+               </StackPane.margin>
+            </Label>
+            <Label fx:id="popUpLooserNick" alignment="CENTER" prefHeight="20.0" prefWidth="120.0" textFill="#ee0000" StackPane.alignment="CENTER">
+               <StackPane.margin>
+                  <Insets top="20.0" />
+               </StackPane.margin>
+               <font>
+                  <Font name="System Bold Italic" size="12.0" />
+               </font>
+            </Label>
+         </children>
+         <opaqueInsets>
+            <Insets right="100.0" top="100.0" />
+         </opaqueInsets>
+         <StackPane.margin>
+            <Insets />
+         </StackPane.margin>
+         <effect>
+            <Glow />
+         </effect>
+      </StackPane>
       <StackPane fx:id="invitePopUp" disable="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="150.0" minWidth="200.0" opacity="0.75" prefHeight="150.0" prefWidth="200.0" visible="false" StackPane.alignment="TOP_RIGHT">
          <children>
             <Button fx:id="invitePopButtonAccept" mnemonicParsing="false" onAction="#acceptInviteOnClick" opacity="0.75" text="Accept" StackPane.alignment="TOP_LEFT">
@@ -1754,10 +1834,13 @@
                   <Insets left="20.0" right="20.0" top="10.0" />
                </StackPane.margin>
             </Label>
-            <Label fx:id="popUpPlayerNick" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="20.0" prefWidth="120.0" textAlignment="CENTER" StackPane.alignment="TOP_CENTER">
+            <Label fx:id="popUpPlayerNick" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="20.0" prefWidth="120.0" textAlignment="CENTER" textFill="#5800a4" StackPane.alignment="TOP_CENTER">
                <StackPane.margin>
                   <Insets top="40.0" />
                </StackPane.margin>
+               <font>
+                  <Font name="System Bold Italic" size="12.0" />
+               </font>
             </Label>
             <Label alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="120.0" text="Invite you to lobby" textAlignment="CENTER" wrapText="true" StackPane.alignment="TOP_CENTER">
                <StackPane.margin>
@@ -1774,6 +1857,94 @@
          <effect>
             <Glow />
          </effect>
+      </StackPane>
+      <StackPane fx:id="winner" disable="true" prefHeight="150.0" prefWidth="200.0" visible="false">
+         <children>
+            <Button fx:id="winnerPlayAgainButton" mnemonicParsing="false" onAction="#playAgainButtononClick" text="Play again" textFill="#18d31f" StackPane.alignment="CENTER">
+               <StackPane.margin>
+                  <Insets top="50.0" />
+               </StackPane.margin>
+               <font>
+                  <Font name="System Bold Italic" size="36.0" />
+               </font>
+            </Button>
+            <Button fx:id="winnerExitButton" mnemonicParsing="false" onAction="#exitOnClick" text="EXIT" textFill="RED" StackPane.alignment="CENTER">
+               <font>
+                  <Font name="System Bold Italic" size="36.0" />
+               </font>
+               <StackPane.margin>
+                  <Insets top="300.0" />
+               </StackPane.margin>
+            </Button>
+            <Label alignment="CENTER" text="WINNER" textFill="#ffd400" StackPane.alignment="TOP_CENTER">
+               <StackPane.margin>
+                  <Insets top="200.0" />
+               </StackPane.margin>
+               <font>
+                  <Font name="Engravers MT" size="96.0" />
+               </font>
+            </Label>
+            <Label text="You just loose against player:" StackPane.alignment="TOP_CENTER">
+               <StackPane.margin>
+                  <Insets top="320.0" />
+               </StackPane.margin>
+               <font>
+                  <Font name="System Bold Italic" size="18.0" />
+               </font>
+            </Label>
+            <Label fx:id="looserNickLabel" alignment="CENTER" prefHeight="30.0" prefWidth="150.0" textFill="RED" StackPane.alignment="TOP_CENTER">
+               <StackPane.margin>
+                  <Insets top="370.0" />
+               </StackPane.margin>
+               <font>
+                  <Font name="System Bold Italic" size="18.0" />
+               </font>
+            </Label>
+         </children>
+      </StackPane>
+      <StackPane fx:id="looser" disable="true" prefHeight="150.0" prefWidth="200.0" visible="false">
+         <children>
+            <Button fx:id="looserPlayAgainButton" mnemonicParsing="false" onAction="#playAgainButtononClick" text="Play again" textFill="#05b531" StackPane.alignment="CENTER">
+               <StackPane.margin>
+                  <Insets top="50.0" />
+               </StackPane.margin>
+               <font>
+                  <Font name="System Bold Italic" size="36.0" />
+               </font>
+            </Button>
+            <Button fx:id="looserExitButton" mnemonicParsing="false" onAction="#exitOnClick" text="EXIT" textFill="RED" StackPane.alignment="CENTER">
+               <font>
+                  <Font name="System Bold Italic" size="36.0" />
+               </font>
+               <StackPane.margin>
+                  <Insets top="300.0" />
+               </StackPane.margin>
+            </Button>
+            <Label alignment="CENTER" text="LOOSER" textFill="RED" StackPane.alignment="TOP_CENTER">
+               <StackPane.margin>
+                  <Insets top="200.0" />
+               </StackPane.margin>
+               <font>
+                  <Font name="Engravers MT" size="96.0" />
+               </font>
+            </Label>
+            <Label text="You just loose against player:" StackPane.alignment="TOP_CENTER">
+               <StackPane.margin>
+                  <Insets top="320.0" />
+               </StackPane.margin>
+               <font>
+                  <Font name="System Bold Italic" size="18.0" />
+               </font>
+            </Label>
+            <Label fx:id="winnerNickLabel" alignment="CENTER" prefHeight="30.0" prefWidth="150.0" textFill="#00ff3b" StackPane.alignment="TOP_CENTER">
+               <StackPane.margin>
+                  <Insets top="370.0" />
+               </StackPane.margin>
+               <font>
+                  <Font name="System Bold Italic" size="18.0" />
+               </font>
+            </Label>
+         </children>
       </StackPane>
    </children>
 </StackPane>

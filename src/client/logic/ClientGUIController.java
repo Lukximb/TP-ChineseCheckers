@@ -155,6 +155,32 @@ public class ClientGUIController {
 	private Button invitePopButtonDecline;
 	@FXML
 	private Label popUpPlayerNick;
+	//POPUP-WINNER-LOOSER--------------------------------------
+	@FXML
+	private StackPane winnerPopUp;
+	@FXML
+	private Button okButton;
+	@FXML
+	private Label popUpWinnerNick;
+	@FXML
+	private Label popUpLooserNick;
+	//WINNER----------------------------------------------------
+
+
+	//TODO
+
+
+
+	//LOOSER-----------------------------------------------------
+
+
+	//TODO
+
+
+
+	//------------------------------------------------------------
+
+
 
 	public ClientGUIController(ClientGUI client) {
 		this.client = client;
@@ -510,6 +536,39 @@ public class ClientGUIController {
 		this.invitePopUp.setVisible(false);
 		this.invitePopUp.setDisable(true);
 	}
+
+
+
+
+	//POPUP-WINNER/LOOSER--------------------------------------
+
+	//TODO
+
+	public void okOnClick(ActionEvent event) {
+
+	}
+
+
+
+
+	//WINNER----------------------------------------------------
+
+	//TODO
+
+	public void playAgainButtononClick(ActionEvent event) {
+
+	}
+
+	public void exitOnClick(ActionEvent event) {
+
+	}
+
+
+
+
+//LOOSER-----------------------------------------------------
+
+	//TODO
 
 
 
