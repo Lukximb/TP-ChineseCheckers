@@ -1,7 +1,6 @@
 package server.lobby;
 
-import server.player.Player;
-import server.board.IBoard;
+import server.board.Board;
 import server.player.Bot;
 import server.player.PlayerTemplate;
 
@@ -26,9 +25,9 @@ public interface LobbyMBean {
 
     void putPawnsOnBoard(PlayerTemplate player, int corner);
 
-    void createDestinationCoordinates(Player player, int corner);
+    void createDestinationCoordinates(PlayerTemplate player, int corner);
 
-    IBoard getBoard();
+    Board getBoard();
 
     void getRoundTime();
 

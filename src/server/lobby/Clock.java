@@ -7,7 +7,7 @@ public class Clock implements Runnable{
     private LobbyMediator mediator;
 
     @Override
-    public void run() {
+    public synchronized void run() {
         System.out.println("Clock created\n");
         while(true) {
             try {
@@ -23,14 +23,14 @@ public class Clock implements Runnable{
         }
     }
 
-    public long getRoundTime() {
+    public synchronized long getRoundTime() {
         currentTime = System.currentTimeMillis();
         currentRoundTime = (currentTime - startTime) / 1000;
         return currentRoundTime;
     }
 
 
-    public boolean checkTime() {
+    public synchronized boolean checkTime() {
         if(getRoundTime() >= 30) {
             return false;
         }
@@ -38,11 +38,11 @@ public class Clock implements Runnable{
     }
 
 
-    public void startRound() {
+    public synchronized void startRound() {
         startTime = System.currentTimeMillis();
     }
 
-    public void endRound() {
+    public synchronized void endRound() {
         startTime = 0;
         currentTime = 0;
         currentRoundTime = 0;

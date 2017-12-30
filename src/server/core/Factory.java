@@ -139,10 +139,10 @@ public class Factory extends NotificationBroadcasterSupport implements FactoryMB
     public LobbyMediator createLobbyMediator(){
         LobbyMediator mediator = new LobbyMediator();
         IRulesManager rules = new RulesManager();
-        Clock clock = createClock();
+        //Clock clock = createClock();
         rules.setMediator(mediator);
         mediator.setRulesManager(rules);
-        mediator.setClock(clock);
+        //mediator.setClock(clock);
         return mediator;
     }
 

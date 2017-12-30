@@ -4,6 +4,7 @@ import client.logic.MoveType;
 import server.board.Field;
 import server.player.Player;
 import server.board.Coordinates;
+import server.player.PlayerTemplate;
 
 import java.util.ArrayList;
 
@@ -11,7 +12,7 @@ public class RulesManager implements IRulesManager {
     private LobbyMediator mediator;
 
     @Override
-    public boolean checkMove(Coordinates currentCoordinates, Coordinates newCoordinates, MoveType moveType) {
+    public synchronized boolean checkMove(Coordinates currentCoordinates, Coordinates newCoordinates, MoveType moveType) {
         if (moveType == MoveType.SINGLE) {
             //System.out.println("Check move for single");
             Field field = mediator.getField(newCoordinates);
@@ -75,7 +76,7 @@ public class RulesManager implements IRulesManager {
     }
 
     @Override
-    public Player checkWinner(Player player) {
+    public PlayerTemplate checkWinner(PlayerTemplate player) {
         if(player.currentCoordinates.containsAll(player.destinationCoordinates)) {
             return player;
         }
@@ -83,7 +84,7 @@ public class RulesManager implements IRulesManager {
     }
 
     @Override
-    public Player checkLooser(Player winner) {
+    public PlayerTemplate checkLooser(PlayerTemplate winner) {
 
         return null;
     }
