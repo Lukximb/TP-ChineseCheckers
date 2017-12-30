@@ -104,9 +104,9 @@ public class Manager extends NotificationBroadcasterSupport implements ManagerMB
 
     @Override
     public void sendPlayersInLobbyList(String playerName) {
-        Player player = null;
-        for(Player p: playerManager.playerInGameList) {
-            if(p.name.equals(playerName)) {
+        PlayerTemplate player = null;
+        for(PlayerTemplate p: playerManager.playerInGameList) {
+            if(p.getName().equals(playerName)) {
                 player = p;
                 break;
             }
@@ -114,7 +114,7 @@ public class Manager extends NotificationBroadcasterSupport implements ManagerMB
         if(player != null) {
             System.out.println("Player is not NULL");
             String playersNames = player.getPlayersNames();
-            sendNotification(new Notification(String.valueOf(player.pid), this,
+            sendNotification(new Notification(String.valueOf(player.getPid()), this,
                     001100101010, "P" + playersNames));
         }
         else {
