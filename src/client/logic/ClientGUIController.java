@@ -23,8 +23,6 @@ import java.util.ArrayList;
 
 public class ClientGUIController {
 
-//	ClientGUI client;
-
 	public ClientGUI client;
 	public BoardUpdate boardUpdate;
 	private PlayerLogic playerLogic;
@@ -66,6 +64,8 @@ public class ClientGUIController {
 	@FXML
 	private TextField lobbyNameField;
 	@FXML
+	private Label choosedPlayerInLobbyLabel;
+	@FXML
 	private Button player2Button;
 	@FXML
 	private Button player3Button;
@@ -95,6 +95,8 @@ public class ClientGUIController {
 	//LOBBY---------------------------------------
 	@FXML
 	public StackPane lobby;
+	@FXML
+	private Label playernumberInLobbyStatusLabel;
 	@FXML
 	private TableView<String> playersInLobbyList;
 	@FXML
@@ -181,7 +183,8 @@ public class ClientGUIController {
         board = board4;
 	}
 
-	//LOGIN
+	//LOGIN---------------------------------------
+
 	public void loginButtonOnClick(ActionEvent exent) {
 		this.playerNickNamePanel.setVisible(false);
 		this.playerNickNamePanel.setDisable(true);
@@ -191,8 +194,12 @@ public class ClientGUIController {
 		this.menu.setVisible(true);
 		this.menu.setDisable(false);
 	}
-	
-	//MENU
+
+
+
+
+	//MENU----------------------------------------
+
 	public void newGameButtonOnClick(ActionEvent exent) {
 		this.menu.setVisible(false);
 		this.menu.setDisable(true);
@@ -200,25 +207,32 @@ public class ClientGUIController {
 		this.createLobby.setVisible(true);
 		this.createLobby.setDisable(false);
 	}
-	
-	public void exitButtonOnClick(ActionEvent event) {
-		Platform.exit();
-	}
-	
+
 	public void joinGameButtonOnClick(ActionEvent event) {
 		this.menu.setVisible(false);
 		this.menu.setDisable(true);
 
 		Object  opParams[] = {client.playerName};
 		String  opSig[] = {String.class.getName()};
-        client.connection.invokeMethod(client.manager, "sendWaitingLobbyList", opParams, opSig);
+		client.connection.invokeMethod(client.manager, "sendWaitingLobbyList", opParams, opSig);
 
 		this.joinLobby.setVisible(true);
 		this.joinLobby.setDisable(false);
-		
+
 	}
-	//CREATE LOBBY
-	public void createLobbyButtonOnClick(ActionEvent event) {		
+
+	public void exitButtonOnClick(ActionEvent event) {
+		Platform.exit();
+	}
+
+
+
+
+
+
+	//CREATE LOBBY--------------------------------
+
+	public void createLobbyButtonOnClick(ActionEvent event) {
 		this.createLobby.setVisible(false);
 		this.createLobby.setDisable(true);
 
@@ -249,41 +263,66 @@ public class ClientGUIController {
 		this.lobby.setVisible(true);
 		this.lobby.setDisable(false);
 	}
-	
+
 	public void cancelCreateLobbyButtonOnClick(ActionEvent event) {
 		this.createLobby.setVisible(false);
 		this.createLobby.setDisable(true);
-		
+
 		this.menu.setVisible(true);
 		this.menu.setDisable(false);
 	}
-	
-	//JOIN LOBBY
+
+	public void setPlayerNumberOn2ButtonOnClick(ActionEvent event) {
+		client.playerInLobby = 2;
+		choosedPlayerInLobbyLabel.setText("2 players");
+	}
+
+	public void setPlayerNumberOn3ButtonOnClick(ActionEvent event) {
+		client.playerInLobby = 3;
+		choosedPlayerInLobbyLabel.setText("3 players");
+	}
+
+	public void setPlayerNumberOn4ButtonOnClick(ActionEvent event) {
+		client.playerInLobby = 4;
+		choosedPlayerInLobbyLabel.setText("4 players");
+	}
+
+	public void setPlayerNumberOn6ButtonOnClick(ActionEvent event) {
+		client.playerInLobby = 6;
+		choosedPlayerInLobbyLabel.setText("6 players");
+	}
+
+
+
+
+
+	//JOIN LOBBY----------------------------------
+
 	public void joinLobbyButtonOnClick(ActionEvent event) {
 		this.joinLobby.setVisible(false);
 		this.joinLobby.setDisable(true);
 
-        String lobbyName;
-        lobbyName = lobbyListTable.getSelectionModel().getSelectedItem();
+		String lobbyName;
+		lobbyName = lobbyListTable.getSelectionModel().getSelectedItem();
 
 		Object  opParams[] = {lobbyName, client.playerName};
 		String  opSig[] = {String.class.getName(), String.class.getName()};
-        client.connection.invokeMethod(client.manager, "addPlayerToLobby", opParams, opSig );
+		client.connection.invokeMethod(client.manager, "addPlayerToLobby", opParams, opSig );
 
-        System.out.println("Player: " + client.playerName + "joined to lobby: " + lobbyName);
+		System.out.println("Player: " + client.playerName + "joined to lobby: " + lobbyName);
 
 		Object opParams1[] = {client.playerName};
 		String opSig1[] = {String.class.getName()};
 		client.connection.invokeMethod(client.manager, "sendPlayersInLobbyList", opParams1, opSig1);
 
-        client.lobbyName = lobbyName;
+		client.lobbyName = lobbyName;
 		try {
 			client.lobbyObject = new ObjectName(client.domain+"L" +":type=lobby.Lobby,name=" + client.lobbyName);
 		} catch (MalformedObjectNameException e) {
 			e.printStackTrace();
 		}
 		client.addNotificationListenerToLobby();
-		
+
 		this.lobby.setVisible(true);
 		this.lobby.setDisable(false);
 	}
@@ -291,18 +330,29 @@ public class ClientGUIController {
 	public void refreshLobbyListOnClick(ActionEvent event) {
 		Object  opParams[] = {client.playerName};
 		String  opSig[] = {String.class.getName()};
-        client.connection.invokeMethod(client.manager, "sendWaitingLobbyList", opParams, opSig);
-    }
-	
+		client.connection.invokeMethod(client.manager, "sendWaitingLobbyList", opParams, opSig);
+	}
+
+	public void updateLobbyList(String[] list) {
+		run(() -> {
+			lobbyList.setAll(list);
+			lobbyListTable.setItems(lobbyList);
+		});
+	}
+
 	public void cancelJoinLobbyButtonOnClick(ActionEvent event) {
 		this.joinLobby.setVisible(false);
 		this.joinLobby.setDisable(true);
-		
+
 		this.menu.setVisible(true);
 		this.menu.setDisable(false);
 	}
-	
-	//LOBBY
+
+
+
+
+	//LOBBY---------------------------------------
+
 	public void readyButtonOnClick(ActionEvent event) {
 		this.lobby.setVisible(false);
 		this.lobby.setDisable(true);
@@ -310,9 +360,30 @@ public class ClientGUIController {
 		Object  opParams[] = {client.lobbyName};
 		String  opSig[] = {String.class.getName()};
 		client.connection.invokeMethod(client.manager, "startGame", opParams, opSig);
-		
+
 		this.game.setVisible(true);
 		this.game.setDisable(false);
+	}
+
+	public void addPlayerButtonOnClick(ActionEvent event) {
+		playerLogic.addPlayerButtonOnClick(event);
+	}
+
+	public void removePlayerButtonOnClick(ActionEvent event) {
+		playerLogic.removePlayerButtonOnClick(event);
+	}
+
+
+	public void setBotDifficultEASYButtonOnClick(ActionEvent event) {
+		botDifficult = Difficult.EASY;
+	}
+
+	public void setBotDifficultMEDIUMButtonOnClick(ActionEvent event) {
+		botDifficult = Difficult.MEDIUM;
+	}
+
+	public void setBotDifficultHARDButtonOnClick(ActionEvent event) {
+		botDifficult = Difficult.HARD;
 	}
 
 	public void addBotButtonOnClick(ActionEvent event) {
@@ -320,7 +391,7 @@ public class ClientGUIController {
 		String  opSig[] = {Difficult.class.getName()};
 		client.connection.invokeMethod(client.player, "addBot", opParams, opSig);
 	}
-	
+
 	public void exitLobbyButtonOnClick(ActionEvent event) {
 		this.lobby.setVisible(false);
 		this.lobby.setDisable(true);
@@ -330,7 +401,7 @@ public class ClientGUIController {
 		String  opSig[] = {String.class.getName(), String.class.getName()};
 		client.connection.invokeMethod(client.manager, "removePlayerFromLobby", opParams, opSig);
 		client.lobbyName = "";
-		
+
 		this.menu.setVisible(true);
 		this.menu.setDisable(false);
 	}
@@ -338,18 +409,19 @@ public class ClientGUIController {
 	public void refreshPlayersListButtonOnClick(ActionEvent event) {
 		Object  opParams[] = {client.playerName};
 		String  opSig[] = {String.class.getName()};
-        client.connection.invokeMethod(client.manager, "sendPlayersInLobbyList", opParams, opSig);
-    }
-
-	public void addPlayerButtonOnClick(ActionEvent event) {
-		playerLogic.addPlayerButtonOnClick(event);
+		client.connection.invokeMethod(client.manager, "sendPlayersInLobbyList", opParams, opSig);
 	}
 
-	public void removePlayerButtonOnClick(ActionEvent event) {
-		playerLogic.removePlayerButtonOnClick(event);
+	public void updatePlayersList(String[] list) {
+		run(() -> {
+			playersList.setAll(list);
+			playersInLobbyList.setItems(playersList);
+			playernumberInLobbyStatusLabel.setText( client.lobbyName + ":  " + list.length + " / " + client.playerInLobby);
+		});
 	}
-	
-	//GAME
+
+	//GAME----------------------------------------
+
 	public void surrenderButtonOnClick(ActionEvent event) {
 		this.game.setVisible(false);
 		this.game.setDisable(true);
@@ -378,39 +450,13 @@ public class ClientGUIController {
 		client.connection.invokeMethod(client.player, "sendMessage", opParams, opSig);
 	}
 
+	public void showTurnLabel(boolean show) {
+		turnLabel.setVisible(show);
+	}
+
 	public void addMessage(String message) {
 		chatMessageBox.setText(message);
 	}
-
-	public void setPlayerNumberOn2ButtonOnClick(ActionEvent event) {
-		client.playerInLobby = 2;
-	}
-
-	public void setPlayerNumberOn3ButtonOnClick(ActionEvent event) {
-		client.playerInLobby = 3;
-	}
-
-	public void setPlayerNumberOn4ButtonOnClick(ActionEvent event) {
-		client.playerInLobby = 4;
-	}
-
-	public void setPlayerNumberOn6ButtonOnClick(ActionEvent event) {
-		client.playerInLobby = 6;
-	}
-
-
-	public void setBotDifficultEASYButtonOnClick(ActionEvent event) {
-		botDifficult = Difficult.EASY;
-	}
-
-	public void setBotDifficultMEDIUMButtonOnClick(ActionEvent event) {
-		botDifficult = Difficult.MEDIUM;
-	}
-
-	public void setBotDifficultHARDButtonOnClick(ActionEvent event) {
-		botDifficult = Difficult.HARD;
-	}
-
 
 	public void doMoveOnClick(ActionEvent event) {
 		boardUpdate.doMoveOnClick(event);
@@ -420,13 +466,30 @@ public class ClientGUIController {
 		boardUpdate.chooseCircleOnClick(event);
 	}
 
+
+
+
+
+
+	//POPUP-INVITE--------------------------------------
+
+	public void showInvitation(String[] PlayerAndLobbyName) {
+		run(() -> {
+			invitePopUp.setStyle("-fx-background-image: url('/client/popupBackground.png');");
+			this.popUpPlayerNick.setText(PlayerAndLobbyName[0]);
+			this.invitePopUp.setVisible(true);
+			this.invitePopUp.setDisable(false);
+			client.lobbyName = PlayerAndLobbyName[1];
+		});
+	}
+
 	public void acceptInviteOnClick(ActionEvent event) {
 		try {
 			client.lobbyObject = new ObjectName(client.domain+"L" +":type=lobby.Lobby,name=" + client.lobbyName);
 		} catch (MalformedObjectNameException e) {
 			e.printStackTrace();
 		}
-        client.addNotificationListenerToLobby();
+		client.addNotificationListenerToLobby();
 		playerLogic.addPlayerToLobby();
 
 		this.invitePopUp.setVisible(false);
@@ -447,6 +510,15 @@ public class ClientGUIController {
 		this.invitePopUp.setVisible(false);
 		this.invitePopUp.setDisable(true);
 	}
+
+
+
+
+
+	//=========================================================================
+
+
+	//UPDATE GUI GAME----------------------------------------------------------
 
 	//Set methods are invoked by notification listener after acceptation received
 	public void setStartNode(Node node) {
@@ -500,29 +572,10 @@ public class ClientGUIController {
 		}
 	}
 
-	public void updatePlayersList(String[] list) {
-		run(() -> {
-			playersList.setAll(list);
-			playersInLobbyList.setItems(playersList);
-		});
-	}
 
-	public void updateLobbyList(String[] list) {
-		run(() -> {
-			lobbyList.setAll(list);
-			lobbyListTable.setItems(lobbyList);
-		});
-	}
 
-	public void showInvitation(String[] PlayerAndLobbyName) {
-		run(() -> {
-			invitePopUp.setStyle("-fx-background-image: url('/client/popupBackground.png');");
-			this.popUpPlayerNick.setText(PlayerAndLobbyName[0]);
-			this.invitePopUp.setVisible(true);
-			this.invitePopUp.setDisable(false);
-			client.lobbyName = PlayerAndLobbyName[1];
-		});
-	}
+
+	//OTHERS------------------------------------------------
 
 	public static void run(Runnable treatment) {
 		if(treatment == null) throw new IllegalArgumentException("The treatment to perform can not be null");
@@ -530,12 +583,10 @@ public class ClientGUIController {
 		else Platform.runLater(treatment);
 	}
 
-	public void showTurnLabel(boolean show) {
-		turnLabel.setVisible(show);
-	}
 
 
-	//TEST
+
+	//TEST---------------------------------------------------------------------------
 	public void submitButtonOnClick(ActionEvent event) {
 	}
 
