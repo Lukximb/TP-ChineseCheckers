@@ -209,7 +209,9 @@ public class ClientGUIController {
 		this.menu.setVisible(false);
 		this.menu.setDisable(true);
 
-        client.connection.invokeSendWaitingLobbyList(client.manager, "sendWaitingLobbyList", client.playerName);
+		Object  opParams[] = {client.playerName};
+		String  opSig[] = {String.class.getName()};
+        client.connection.invokeMethod(client.manager, "sendWaitingLobbyList", opParams, opSig);
 
 		this.joinLobby.setVisible(true);
 		this.joinLobby.setDisable(false);
@@ -226,9 +228,15 @@ public class ClientGUIController {
 
 		client.lobbyName = lobbyNameField.getText();
 		client.rowOfPawn = (int)boardSizeSpinner.getValue();
-		client.connection.invokeCreateLobbyMethod(client.factory, "createLobby", client.playerInLobby ,
-				client.rowOfPawn, client.lobbyName, client.pid);
-		client.connection.invokeSendPlayersInLobbyList(client.manager, "sendPlayersInLobbyList", client.playerName);
+
+		Object  opParams[] = {client.playerInLobby , client.rowOfPawn, client.lobbyName, client.pid};
+		String  opSig[] = {int.class.getName(), int.class.getName(), String.class.getName(), int.class.getName()};
+		client.connection.invokeMethod(client.factory, "createLobby", opParams, opSig);
+
+		Object opParams1[] = {client.playerName};
+		String opSig1[] = {String.class.getName()};
+		client.connection.invokeMethod(client.manager, "sendPlayersInLobbyList", opParams1, opSig1);
+
 		boardUpdate.setCorner(0);
 		clientListener.setCorner(0);
 		try {
@@ -257,9 +265,17 @@ public class ClientGUIController {
 
         String lobbyName;
         lobbyName = lobbyListTable.getSelectionModel().getSelectedItem();
-        client.connection.invokeAddPlayerToLobbyMethod(client.manager, "addPlayerToLobby", lobbyName, client.playerName);
+
+		Object  opParams[] = {lobbyName, client.playerName};
+		String  opSig[] = {String.class.getName(), String.class.getName()};
+        client.connection.invokeMethod(client.manager, "addPlayerToLobby", opParams, opSig );
+
         System.out.println("Player: " + client.playerName + "joined to lobby: " + lobbyName);
-        client.connection.invokeSendPlayersInLobbyList(client.manager, "sendPlayersInLobbyList", client.playerName);
+
+		Object opParams1[] = {client.playerName};
+		String opSig1[] = {String.class.getName()};
+		client.connection.invokeMethod(client.manager, "sendPlayersInLobbyList", opParams1, opSig1);
+
         client.lobbyName = lobbyName;
 		try {
 			client.lobbyObject = new ObjectName(client.domain+"L" +":type=lobby.Lobby,name=" + client.lobbyName);
@@ -273,7 +289,9 @@ public class ClientGUIController {
 	}
 
 	public void refreshLobbyListOnClick(ActionEvent event) {
-        client.connection.invokeSendWaitingLobbyList(client.manager, "sendWaitingLobbyList", client.playerName);
+		Object  opParams[] = {client.playerName};
+		String  opSig[] = {String.class.getName()};
+        client.connection.invokeMethod(client.manager, "sendWaitingLobbyList", opParams, opSig);
     }
 	
 	public void cancelJoinLobbyButtonOnClick(ActionEvent event) {
@@ -289,15 +307,18 @@ public class ClientGUIController {
 		this.lobby.setVisible(false);
 		this.lobby.setDisable(true);
 
-		//client.connection.invokeStartGameMethod(client.player, "startGame");
-		client.connection.invokeStartGameMethod(client.manager, "startGame", client.lobbyName);
+		Object  opParams[] = {client.lobbyName};
+		String  opSig[] = {String.class.getName()};
+		client.connection.invokeMethod(client.manager, "startGame", opParams, opSig);
 		
 		this.game.setVisible(true);
 		this.game.setDisable(false);
 	}
 
 	public void addBotButtonOnClick(ActionEvent event) {
-		client.connection.invokeAddBotMethod(client.player, "addBot", botDifficult);
+		Object  opParams[] = {botDifficult};
+		String  opSig[] = {Difficult.class.getName()};
+		client.connection.invokeMethod(client.player, "addBot", opParams, opSig);
 	}
 	
 	public void exitLobbyButtonOnClick(ActionEvent event) {
@@ -305,7 +326,9 @@ public class ClientGUIController {
 		this.lobby.setDisable(true);
 
 //		client.connection.invokeExitFromLobbyMethod(client.player, "exitFromLobby");
-		client.connection.invokeRemovePlayerToLobbyMethod(client.manager, "removePlayerFromLobby", client.playerName, client.lobbyName);
+		Object  opParams[] = {client.playerName, client.lobbyName};
+		String  opSig[] = {String.class.getName(), String.class.getName()};
+		client.connection.invokeMethod(client.manager, "removePlayerFromLobby", opParams, opSig);
 		client.lobbyName = "";
 		
 		this.menu.setVisible(true);
@@ -313,7 +336,9 @@ public class ClientGUIController {
 	}
 
 	public void refreshPlayersListButtonOnClick(ActionEvent event) {
-        client.connection.invokeSendPlayersInLobbyList(client.manager, "sendPlayersInLobbyList", client.playerName);
+		Object  opParams[] = {client.playerName};
+		String  opSig[] = {String.class.getName()};
+        client.connection.invokeMethod(client.manager, "sendPlayersInLobbyList", opParams, opSig);
     }
 
 	public void addPlayerButtonOnClick(ActionEvent event) {
@@ -330,7 +355,9 @@ public class ClientGUIController {
 		this.game.setDisable(true);
 
 //		client.connection.invokeExitFromLobbyMethod(client.player, "exitFromLobby");
-		client.connection.invokeRemovePlayerToLobbyMethod(client.manager, "removePlayerFromGame", client.playerName, client.lobbyName);
+		Object  opParams[] = {client.playerName, client.lobbyName};
+		String  opSig[] = {String.class.getName(), String.class.getName()};
+		client.connection.invokeMethod(client.manager, "removePlayerFromGame", opParams, opSig);
 		client.lobbyName = "";
 
 		this.menu.setVisible(true);
@@ -339,14 +366,16 @@ public class ClientGUIController {
 
 	public void passButtonOnClick(ActionEvent event) {
 		if (boardUpdate.checkRound()) {
-			client.connection.invokePassMethod(client.player, "pass");
+			client.connection.invokeMethod(client.player, "nextRound", null, null);
 		}
 	}
 
 	public void sendMsgButtonOnClick(ActionEvent event) {
 		String message = messageTextField.getText();
 		messageTextField.clear();
-		client.connection.invokeSendMessageMethod(client.player, "sendMessage", message);
+		Object  opParams[] = {message};
+		String  opSig[] = {String.class.getName()};
+		client.connection.invokeMethod(client.player, "sendMessage", opParams, opSig);
 	}
 
 	public void addMessage(String message) {

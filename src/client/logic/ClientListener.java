@@ -35,12 +35,16 @@ public class ClientListener implements NotificationListener {
                 break;
             case('A')://Accept Invitation
                 String[] acceptation = notification.getMessage().substring(2).split(",");
-                controller.client.connection.invokeSendPlayersInLobbyList(controller.client.manager,
-                        "sendPlayersInLobbyList", controller.client.playerName);
+                Object  opParams[] = {controller.client.playerName};
+                String  opSig[] = {String.class.getName()};
+                controller.client.connection.invokeMethod(controller.client.manager,
+                        "sendPlayersInLobbyList", opParams, opSig);
                 break;
             case('B')://Add bot
-                controller.client.connection.invokeSendPlayersInLobbyList(controller.client.manager,
-                        "sendPlayersInLobbyList", controller.client.playerName);
+                Object  opParams1[] = {controller.client.playerName};
+                String  opSig1[] = {String.class.getName()};
+                controller.client.connection.invokeMethod(controller.client.manager,
+                        "sendPlayersInLobbyList", opParams1, opSig1);
                 break;
             case('S')://Start Game
                 String[] args = notification.getMessage().substring(2).split(",");
