@@ -6,7 +6,7 @@ import server.player.PlayerTemplate;
 
 import java.util.ArrayList;
 
-public class PlayerManager implements IPlayerManager {
+public class PlayerManager {
     public ArrayList<Player> playerFreeList;
     public ArrayList<Player> playerInGameList;
     public ArrayList<Bot> botList;
@@ -32,38 +32,31 @@ public class PlayerManager implements IPlayerManager {
         botList = new ArrayList<>();
     }
 
-    @Override
     public void getNewPlayer(Player player) {
         playerFreeList.add(player);
         System.out.println(">> PM added new player to list");
     }
 
-    @Override
     public void addPlayerToInGameList(Player player) {
 
     }
 
-    @Override
     public void addPlayerToFreeList(Player player) {
 
     }
 
-    @Override
     public void removePlayerFromInGameList(Player player) {
 
     }
 
-    @Override
     public void removePlayerFromFreeList(Player player) {
 
     }
 
-    @Override
     public void killBot(Bot bot) {
 
     }
 
-    @Override
     public int checkPlayerStatus(int pid) {
         for(Player p: playerFreeList) {
             if(p.pid == pid) {

@@ -6,7 +6,7 @@ import server.player.PlayerTemplate;
 
 import java.util.ArrayList;
 
-public class LobbyManager implements ILobbyManager {
+public class LobbyManager {
     public ArrayList<Lobby> runningLobbyList;
     public ArrayList<Lobby> waitingLobbyList;
     private static volatile LobbyManager instance = null;
@@ -27,12 +27,10 @@ public class LobbyManager implements ILobbyManager {
         waitingLobbyList = new ArrayList<>();
     }
 
-    @Override
     public void createLobby() {
 
     }
 
-    @Override
     public void removeLobby(Lobby lobby) {
         setLobbyAsWaiting(lobby);
         waitingLobbyList.remove(lobby);
@@ -40,7 +38,6 @@ public class LobbyManager implements ILobbyManager {
         //usuwanie lobby z rejestru
     }
 
-    @Override
     public void setLobbyAsWaiting(Lobby lobby) {
         if(runningLobbyList.contains(lobby)) {
             runningLobbyList.remove(lobby);
@@ -48,7 +45,6 @@ public class LobbyManager implements ILobbyManager {
         }
     }
 
-    @Override
     public void setLobbyAsRunning(Lobby lobby) {
         if(waitingLobbyList.contains(lobby)) {
             waitingLobbyList.remove(lobby);
@@ -56,7 +52,6 @@ public class LobbyManager implements ILobbyManager {
         }
     }
 
-    @Override
     public void runLobby(Lobby lobby) {
         /*Runnable[] runners = new Runnable[10];
         Thread[] threads = new Thread[10];

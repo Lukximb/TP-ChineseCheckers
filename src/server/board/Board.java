@@ -1,12 +1,11 @@
 package server.board;
 
-import server.player.Player;
 import server.player.PlayerTemplate;
 
-public class Board implements IBoard {
-    private int n;
-    private int m;
-    public Field[][] fieldList = null;
+public class Board {
+    private volatile int n;
+    private volatile int m;
+    public volatile Field[][] fieldList = null;
 
     public Board(int n, int m) {
         this.n = n;
@@ -56,11 +55,9 @@ public class Board implements IBoard {
         }
     }
 
-    @Override
-    public boolean executeMove(PlayerTemplate player, Coordinates currentCoordinates, Coordinates newCoordinates) {
+    public synchronized boolean executeMove(PlayerTemplate player, Coordinates currentCoordinates, Coordinates newCoordinates) {
         boolean isPlayerOnCurrent = getField(currentCoordinates).getPlayerOn().equals(player);
         boolean isPlayerOnDest = getField(newCoordinates).getPlayerOn() == null;
-        System.out.print("");
         if (isPlayerOnCurrent && isPlayerOnDest) {
             getField(currentCoordinates).setPlayerOn(null);
             getField(newCoordinates).setPlayerOn(player);
@@ -70,18 +67,15 @@ public class Board implements IBoard {
         }
     }
 
-    @Override
-    public Field getField(Coordinates coordinates) {
+    public synchronized Field getField(Coordinates coordinates) {
         return fieldList[coordinates.getX()][coordinates.getY()];
     }
 
-    @Override
-    public int getN() {
+    public synchronized int getN() {
         return n;
     }
 
-    @Override
-    public int getM() {
+    public synchronized int getM() {
         return m;
     }
 }

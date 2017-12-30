@@ -44,9 +44,14 @@ public class ClientGUI extends Application {
     @Override
     public void stop() {
 //        connection.invokeExitFromLobbyMethod(player, "exitFromLobby");
-        connection.invokeRemovePlayerToLobbyMethod(manager, "removePlayerFromLobby", playerName, lobbyName);
+        Object  opParams[] = {playerName, lobbyName};
+        String  opSig[] = {String.class.getName(), String.class.getName()};
+        connection.invokeMethod(manager, "removePlayerFromLobby", opParams, opSig);
         lobbyName = "";
-        connection.invokeMethod(factory, "deletePlayer", pid);
+
+        Object  opParams1[] = {pid};
+        String  opSig1[] = {int.class.getName()};
+        connection.invokeMethod(factory, "deletePlayer", opParams1, opSig1);
         connection.closeConnection();
     }
 

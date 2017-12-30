@@ -1,29 +1,29 @@
 package server.lobby;
 
-import javafx.scene.paint.Color;
-import server.player.Player;
+//import javafx.scene.paint.Color;
+import server.board.Board;
 import server.board.Coordinates;
 import server.board.Field;
-import server.board.IBoard;
 import server.player.Bot;
 import server.player.PlayerTemplate;
 
 import javax.management.Notification;
 import javax.management.NotificationBroadcasterSupport;
 
-public class Lobby extends NotificationBroadcasterSupport implements Runnable, LobbyMBean{
-    public final Color[] colorPalette = {Color.DEEPPINK, Color.YELLOW, Color.MEDIUMBLUE, Color.LIMEGREEN, Color.FIREBRICK, Color.CYAN};
-    public String name;
-    public PlayerTemplate admin;
-    public PlayerTemplate[] players;
-    public IBoard board;
-    public int numberOfPlayers;
-    public PlayerTemplate round;
-    public int roundCorner;
+public class Lobby extends NotificationBroadcasterSupport implements LobbyMBean{
+    //public final Color[] colorPalette = {Color.DEEPPINK, Color.YELLOW, Color.MEDIUMBLUE, Color.LIMEGREEN, Color.FIREBRICK, Color.CYAN};
     public LobbyMediator mediator;
-    public Chat chat;
-    public int rowNumber;
-    public int playerCorner;
+    public String name;
+    public volatile PlayerTemplate[] players;
+    public Board board;
+    public PlayerTemplate round;
+
+    private PlayerTemplate admin;
+    private int numberOfPlayers;
+    private volatile int roundCorner;
+    private Chat chat;
+    private int rowNumber;
+    private int playerCorner;
 
     public Lobby(int playerNum, int rowNumber, String lobbyName, PlayerTemplate admin, LobbyMediator mediator) {
         this.mediator = mediator;
@@ -39,32 +39,19 @@ public class Lobby extends NotificationBroadcasterSupport implements Runnable, L
     }
 
     @Override
-    public void run() {
-        while(true) {
-            /*System.out.println("Watek "+id);
-            try {
-                //usypiamy wątek na 100 milisekund
-                Thread.sleep(100);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }*/
-        }
-    }
-
-    @Override
-    public void startGame() {
+    public synchronized void startGame() {
         initPlayersOnBoard();
         mediator.setBoard(board);
         round = players[0];
         roundCorner = 0;
         sendNotification(new Notification(String.valueOf(name), this, 110011110,
                 "S,StartGame," + rowNumber + "," + numberOfPlayers));
+        mediator.startRound();
         for (PlayerTemplate p : players) {
             if (p.isBot()) {
-                p.start(rowNumber, numberOfPlayers);
+               p.start();
             }
         }
-        mediator.startRound();
     }
 
     @Override
@@ -73,7 +60,7 @@ public class Lobby extends NotificationBroadcasterSupport implements Runnable, L
     }
 
     @Override
-    public void addPlayer(PlayerTemplate player) {
+    public synchronized void addPlayer(PlayerTemplate player) {
         if(roundCorner < numberOfPlayers) {
             player.joinToLobby(this, playerCorner);
             players[roundCorner] = player;
@@ -104,7 +91,7 @@ public class Lobby extends NotificationBroadcasterSupport implements Runnable, L
 
     public boolean isEmpty() {
         boolean empty = true;
-            for(Player p : players) {
+            for(PlayerTemplate p : players) {
                 if(p != null) {
                     empty = false;
                     break;
@@ -165,26 +152,26 @@ public class Lobby extends NotificationBroadcasterSupport implements Runnable, L
 
         for(int i=0; i<numberOfPlayers; i++) {
             if(numberOfPlayers == 6) {
-                players[i].setColor(colorPalette[i]);
+                //players[i].setColor(colorPalette[i]);
                 putPawnsOnBoard(players[i], i);
                 createDestinationCoordinates(players[i], i);
             } else if(numberOfPlayers == 4) {
                 if(i%2 == 0) {
-                    players[i].setColor(colorPalette[i*2]);
+                    //players[i].setColor(colorPalette[i*2]);
                     putPawnsOnBoard(players[i], i*2);
                     createDestinationCoordinates(players[i], i*2);
                 }
                 else {
-                    players[i].setColor(colorPalette[i*2-1]);
+                    //players[i].setColor(colorPalette[i*2-1]);
                     putPawnsOnBoard(players[i], i*2-1);
                     createDestinationCoordinates(players[i], i*2-1);
                 }
             } else if(numberOfPlayers == 3) {
-                players[i].setColor(colorPalette[i*2]);
+                //players[i].setColor(colorPalette[i*2]);
                 putPawnsOnBoard(players[i], i*2);
                 createDestinationCoordinates(players[i], i*2);
             } else if(numberOfPlayers == 2) {
-                players[i].setColor(colorPalette[i*3]);
+                //players[i].setColor(colorPalette[i*3]);
                 putPawnsOnBoard(players[i], i*3);
                 createDestinationCoordinates(players[i], i*3);
             }
@@ -251,7 +238,7 @@ public class Lobby extends NotificationBroadcasterSupport implements Runnable, L
     }
 
     @Override
-    public void createDestinationCoordinates(Player player, int corner) {
+    public void createDestinationCoordinates(PlayerTemplate player, int corner) {
         int bN = board.getN();
         int bM = board.getM();
         int rows = bN - bM;
@@ -280,7 +267,7 @@ public class Lobby extends NotificationBroadcasterSupport implements Runnable, L
         if(corner == 0 || corner == 2 || corner == 4) {
             for(int i=0; i<rows; i++) {
                 for(int j=0; j<rows-i; j++) {
-                    player.addDestinationCoordinates(n+i, m+2*j+i);
+                    player.addDestinationCoordinates(n-i, m+2*j+i);
                 }
             }
         }
@@ -294,7 +281,7 @@ public class Lobby extends NotificationBroadcasterSupport implements Runnable, L
     }
 
     @Override
-    public IBoard getBoard() {
+    public Board getBoard() {
         return board;
     }
 
@@ -304,7 +291,7 @@ public class Lobby extends NotificationBroadcasterSupport implements Runnable, L
     }
 
     @Override
-    public void nextRound() {
+    public synchronized void nextRound() {
         mediator.checkWinner();
         roundCorner++;
         if(roundCorner == numberOfPlayers) {
@@ -337,7 +324,7 @@ public class Lobby extends NotificationBroadcasterSupport implements Runnable, L
     }
 
     @Override
-    public void sendTurnNotification() {
+    public synchronized void sendTurnNotification() {
         String message = "T,";
         message = message.concat(Integer.toString(getRoundCornerValue()));
         sendNotification(new Notification(String.valueOf(name), this, 1100110000, message));
