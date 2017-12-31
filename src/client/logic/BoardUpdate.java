@@ -204,7 +204,9 @@ public class BoardUpdate {
                             new Coordinates(GridPane.getRowIndex(controller.destinationPosition),
                                     GridPane.getColumnIndex(controller.destinationPosition));
 
-                    client.connection.invokeMovePlayerMethod(client.player, "move", cCoordinates, dCoordinates);
+                    Object  opParams[] = {cCoordinates, dCoordinates};
+                    String  opSig[] = {Coordinates.class.getName(), Coordinates.class.getName()};
+                    client.connection.invokeMethod(client.player, "move", opParams, opSig);
 
                     int index = 0;
                     for (Coordinates c : pawns) {
@@ -238,7 +240,9 @@ public class BoardUpdate {
                     dCoordinates =
                             new Coordinates(GridPane.getRowIndex(controller.jumpPositions.get(0)),
                                     GridPane.getColumnIndex(controller.jumpPositions.get(0)));
-                    client.connection.invokeMovePlayerMethod(client.player, "move", cCoordinates, dCoordinates);
+                    Object  opParams[] = {cCoordinates, dCoordinates};
+                    String  opSig[] = {Coordinates.class.getName(), Coordinates.class.getName()};
+                    client.connection.invokeMethod(client.player, "move", opParams, opSig);
 
                     int index = 0;
                     for (Coordinates c : pawns) {
@@ -275,7 +279,9 @@ public class BoardUpdate {
                         dCoordinates =
                                 new Coordinates(GridPane.getRowIndex(controller.jumpPositions.get(i)),
                                         GridPane.getColumnIndex(controller.jumpPositions.get(i)));
-                        client.connection.invokeMovePlayerMethod(client.player, "move", cCoordinates, dCoordinates);
+                        Object  opParams1[] = {cCoordinates, dCoordinates};
+                        String  opSig1[] = {Coordinates.class.getName(), Coordinates.class.getName()};
+                        client.connection.invokeMethod(client.player, "move", opParams1, opSig1);
 
                         Circle circleJ2 = (Circle) controller.jumpPositions.get(i);
                         circleJ2.setStrokeWidth(1);
@@ -306,7 +312,9 @@ public class BoardUpdate {
                     dCoordinates =
                             new Coordinates(GridPane.getRowIndex(controller.destinationPosition),
                                     GridPane.getColumnIndex(controller.destinationPosition));
-                    client.connection.invokeMovePlayerMethod(client.player, "move", cCoordinates, dCoordinates);
+                    Object  opParams2[] = {cCoordinates, dCoordinates};
+                    String  opSig2[] = {Coordinates.class.getName(), Coordinates.class.getName()};
+                    client.connection.invokeMethod(client.player, "move", opParams2, opSig2);
 
                     index = 0;
                     for (Coordinates c : pawns) {
@@ -334,7 +342,7 @@ public class BoardUpdate {
                 correctMove = false;
             }
 
-            client.connection.invokeNextRoundMethod(client.player, "nextRound");
+            client.connection.invokeMethod(client.player, "nextRound", null, null);
         }
     }
 
@@ -374,7 +382,9 @@ public class BoardUpdate {
                         if (correctMove) {
                             controller.waitingNode = node;
                             controller.clientListener.setMove("end");
-                            client.connection.invokeCheckMoveMethod(client.player, "checkMove", cCoordinates, dCoordinates, moveType);
+                            Object  opParams[] = {cCoordinates, dCoordinates, moveType};
+                            String  opSig[] = {Coordinates.class.getName(), Coordinates.class.getName(), MoveType.class.getName()};
+                            client.connection.invokeMethod(client.player, "checkMove", opParams, opSig);
                         }
                     } else if (node == controller.destinationPosition
                             && event.getButton() == MouseButton.SECONDARY) {
@@ -412,11 +422,15 @@ public class BoardUpdate {
                         if (correctMove && moveType == MoveType.JUMP) {
                             controller.waitingNode = node;
                             controller.clientListener.setMove("jump");
-                            client.connection.invokeCheckMoveMethod(client.player, "checkMove", cCoordinates, dCoordinates, moveType);
+                            Object  opParams[] = {cCoordinates, dCoordinates, moveType};
+                            String  opSig[] = {Coordinates.class.getName(), Coordinates.class.getName(), MoveType.class.getName()};
+                            client.connection.invokeMethod(client.player, "checkMove", opParams, opSig);
                         } else if (correctMove && moveType == MoveType.SINGLE) {
                             controller.waitingNode = node;
                             controller.clientListener.setMove("end");
-                            client.connection.invokeCheckMoveMethod(client.player, "checkMove", cCoordinates, dCoordinates, moveType);
+                            Object  opParams[] = {cCoordinates, dCoordinates, moveType};
+                            String  opSig[] = {Coordinates.class.getName(), Coordinates.class.getName(), MoveType.class.getName()};
+                            client.connection.invokeMethod(client.player, "checkMove", opParams, opSig);
                         }
                     } else if (node != controller.currentPosition
                             && node != controller.destinationPosition

@@ -30,7 +30,7 @@ public class Player extends NotificationBroadcasterSupport implements PlayerMBea
 
     @Override
     public void checkMove(Coordinates currentCoordinates, Coordinates destinationCoordinates, MoveType moveType) {
-        if (lobby.mediator.checkMove(currentCoordinates, destinationCoordinates, moveType) == true) {
+        if (lobby.mediator.checkMove(currentCoordinates, destinationCoordinates, moveType)) {
             sendNotification(new Notification(String.valueOf(pid), this, 110011110, "R CorrectMove"));
         } else {
             sendNotification(new Notification(String.valueOf(pid), this, 110011110, "R IncorrectMove"));
@@ -40,9 +40,8 @@ public class Player extends NotificationBroadcasterSupport implements PlayerMBea
     @Override
     public void move(Coordinates currentCoordinates, Coordinates destinationCoordinates) {
         if (lobby.mediator.move(this, currentCoordinates, destinationCoordinates)) {
-            lobby.sendMoveNotification("E," + corner + ","
-                    + currentCoordinates.getX() + "," + currentCoordinates.getY() + "," + destinationCoordinates.getX() + "," + destinationCoordinates.getY());
-            lobby.nextRound();
+            lobby.sendMoveNotification("E," + corner + "," + currentCoordinates.getX() + ","
+                    + currentCoordinates.getY() + "," + destinationCoordinates.getX() + "," + destinationCoordinates.getY());
             this.currentCoordinates.remove(currentCoordinates);
             this.currentCoordinates.add(destinationCoordinates);
         }
@@ -78,11 +77,6 @@ public class Player extends NotificationBroadcasterSupport implements PlayerMBea
     }
 
     @Override
-    public void createLobby(String lobbyName) {
-
-    }
-
-    @Override
     public void addBot(Difficult difficultLevel) {
         Bot bot = new Bot(difficultLevel);
         lobby.addBot(bot);
@@ -114,14 +108,6 @@ public class Player extends NotificationBroadcasterSupport implements PlayerMBea
     }
 
     @Override
-    public void setColor(Color color) {
-        this.color = color;
-    }
-
-    public Color getColor() {
-        return this.color;
-    }
-
     public String getPlayersNames() {
         String playersList = "";
         for(PlayerTemplate p: lobby.players) {
@@ -154,7 +140,10 @@ public class Player extends NotificationBroadcasterSupport implements PlayerMBea
     }
 
     @Override
-    public void start(int rows, int numberOfPlayers){
-        //DO NOTHING
+    public void start() {
+
     }
+
+    //@Override
+    //public void sortDestinationCoordinates() {}
 }
