@@ -451,4 +451,14 @@ public class Bot implements PlayerTemplate{
     public boolean isBot() {
         return true;
     }
+
+    @Override
+    public void addCurrentCoordinates(int x, int y) {
+        currentCoordinates.add(new Coordinates(x, y));
+    }
+
+    @Override
+    public void addDestinationCoordinates(int x, int y) {
+        destinationCoordinates.add(new Coordinates(x, y));
+    }
 }
