@@ -291,7 +291,7 @@ public class Lobby extends NotificationBroadcasterSupport implements LobbyMBean{
         else {
             for(int i=0; i<rows; i++) {
                 for(int j=0; j<rows-i; j++) {
-                    player.addDestinationCoordinates(n-i, m+2*j+i);
+                    player.addDestinationCoordinates(n+i, m+2*j+i);
                 }
             }
         }
