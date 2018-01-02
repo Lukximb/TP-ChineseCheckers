@@ -3,9 +3,6 @@ package client.logic;
 import client.core.ClientGUI;
 import javafx.event.ActionEvent;
 
-import javax.management.MalformedObjectNameException;
-import javax.management.ObjectName;
-
 public class PlayerLogic {
     private ClientGUIController controller;
     private ClientGUI client;
@@ -39,18 +36,11 @@ public class PlayerLogic {
     }
 
     public void createPlayer() {
-        if (client.player == null) {
+        if (client.player == null && !controller.nickNameField.getText().equals("")) {
             Object  opParams[] = {client.pid, controller.nickNameField.getText()};
             String  opSig[] = {int.class.getName(), String.class.getName()};
             client.connection.invokeMethod(client.factory,
                     "createPlayer", opParams, opSig);
-            try {
-                client.player = new ObjectName(client.domain+ client.pid +":type=server.player.Player,name=Player" + client.pid);
-                client.addNotificationListenerToPlayer();
-                client.playerName = controller.nickNameField.getText();
-            } catch (MalformedObjectNameException e) {
-                e.printStackTrace();
-            }
         }
     }
 

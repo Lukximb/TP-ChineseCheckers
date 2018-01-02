@@ -82,8 +82,9 @@ public class Manager extends NotificationBroadcasterSupport implements ManagerMB
     public void removePlayerFromLobby(String lobbyName, String playerName) {
         Player player = playerManager.getPlayerFromInGameList(playerName);
         if(player != null) {
-            lobbyManager.removePlayerFromLobby(lobbyName, player);
-            playerManager.movePlayerToFreeList(player);
+            if(lobbyManager.removePlayerFromLobby(lobbyName, playerName)) {
+                playerManager.movePlayerToFreeList(player);
+            }
             System.out.println("Player " + player.name + " removed from lobby " + player.lobby.name);
         } else {
             System.out.println("Error, can't remove player: " + playerName);

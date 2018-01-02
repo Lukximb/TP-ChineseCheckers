@@ -104,4 +104,22 @@ public class Bot implements PlayerTemplate{
         botThread = new Thread(borRunnable);
         botThread.start();
     }
+
+    @Override
+    public boolean compareCoordinates() {
+        if(currentCoordinates.containsAll(destinationCoordinates)) {
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public int getCorner() {
+        return corner;
+    }
+
+    @Override
+    public void setLobby(Lobby lobby) {
+        this.lobby = lobby;
+    }
 }

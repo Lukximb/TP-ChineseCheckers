@@ -59,5 +59,11 @@ public interface PlayerTemplate {
 
     void start();
 
+    boolean compareCoordinates();
+
+    int getCorner();
+
+    void setLobby(Lobby lobby);
+
     //void sortDestinationCoordinates();
 }

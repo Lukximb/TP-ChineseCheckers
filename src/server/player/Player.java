@@ -42,7 +42,14 @@ public class Player extends NotificationBroadcasterSupport implements PlayerMBea
         if (lobby.mediator.move(this, currentCoordinates, destinationCoordinates)) {
             lobby.sendMoveNotification("E," + corner + "," + currentCoordinates.getX() + ","
                     + currentCoordinates.getY() + "," + destinationCoordinates.getX() + "," + destinationCoordinates.getY());
-            this.currentCoordinates.remove(currentCoordinates);
+            int curX = currentCoordinates.getX();
+            int curY = currentCoordinates.getY();
+            for(Coordinates c : this.currentCoordinates) {
+                if(c.getX() == curX && c.getY() == curY) {
+                    this.currentCoordinates.remove(c);
+                    break;
+                }
+            }
             this.currentCoordinates.add(destinationCoordinates);
         }
     }
@@ -89,7 +96,8 @@ public class Player extends NotificationBroadcasterSupport implements PlayerMBea
 
     @Override
     public void surrender() {
-
+        lobby.surrender(this);
+//        lobby = null;
     }
 
     @Override
@@ -119,10 +127,12 @@ public class Player extends NotificationBroadcasterSupport implements PlayerMBea
         return playersList;
     }
 
+    @Override
     public void addCurrentCoordinates(int x, int y) {
         currentCoordinates.add(new Coordinates(x, y));
     }
 
+    @Override
     public void addDestinationCoordinates(int x, int y) {
         destinationCoordinates.add(new Coordinates(x, y));
     }
@@ -140,6 +150,38 @@ public class Player extends NotificationBroadcasterSupport implements PlayerMBea
     @Override
     public void start() {
 
+    }
+
+    @Override
+    public boolean compareCoordinates() {
+//        if(currentCoordinates.containsAll(destinationCoordinates)) {
+//            return true;
+//        }
+        int correct = 0;
+        for(Coordinates c : currentCoordinates) {
+            int cX = c.getX();
+            int cY = c.getY();
+            for(Coordinates d : destinationCoordinates) {
+                if(d.getX() == cX && d.getY() == cY) {
+                    correct++;
+                    break;
+                }
+            }
+        }
+        if(correct == destinationCoordinates.size()) {
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public int getCorner() {
+        return corner;
+    }
+
+    @Override
+    public void setLobby(Lobby lobby) {
+        this.lobby = lobby;
     }
 
     //@Override

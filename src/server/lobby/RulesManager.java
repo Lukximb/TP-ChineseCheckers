@@ -9,7 +9,7 @@ public class RulesManager implements IRulesManager {
     private LobbyMediator mediator;
 
     @Override
-    public synchronized boolean checkMove(Coordinates currentCoordinates, Coordinates newCoordinates, MoveType moveType) {
+    public boolean checkMove(Coordinates currentCoordinates, Coordinates newCoordinates, MoveType moveType) {
         if (moveType == MoveType.SINGLE) {
             //System.out.println("Check move for single");
             Field field = mediator.getField(newCoordinates);
@@ -74,7 +74,7 @@ public class RulesManager implements IRulesManager {
 
     @Override
     public PlayerTemplate checkWinner(PlayerTemplate player) {
-        if(player.currentCoordinates.containsAll(player.destinationCoordinates)) {
+        if(player.compareCoordinates()) {
             return player;
         }
         return null;
