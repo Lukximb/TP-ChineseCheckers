@@ -1,3 +1,7 @@
 out/
 .gitignore
 .idea/workspace.xml
+src/server/player/Bot_BACKUP_10864.java
+src/server/player/Bot_BASE_10864.java
+src/server/player/Bot_LOCAL_10864.java
+src/server/player/Bot_REMOTE_10864.java

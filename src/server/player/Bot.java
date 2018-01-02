@@ -1,14 +1,9 @@
 package server.player;
 
-import client.logic.MoveType;
-import javafx.scene.paint.Color;
 import server.board.Coordinates;
-import server.board.Field;
 import server.lobby.Lobby;
-import server.neuralNetwork.NNManager;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class Bot implements PlayerTemplate{
     public int pid;
@@ -108,5 +103,23 @@ public class Bot implements PlayerTemplate{
         borRunnable = new BotThread(this);
         botThread = new Thread(borRunnable);
         botThread.start();
+    }
+
+    @Override
+    public boolean compareCoordinates() {
+        if(currentCoordinates.containsAll(destinationCoordinates)) {
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public int getCorner() {
+        return corner;
+    }
+
+    @Override
+    public void setLobby(Lobby lobby) {
+        this.lobby = lobby;
     }
 }

@@ -1,6 +1,5 @@
 package server.player;
 
-import javafx.scene.paint.Color;
 import server.board.Coordinates;
 import server.lobby.Lobby;
 
@@ -59,6 +58,12 @@ public interface PlayerTemplate {
     void addDestinationCoordinates(int x, int y);
 
     void start();
+
+    boolean compareCoordinates();
+
+    int getCorner();
+
+    void setLobby(Lobby lobby);
 
     //void sortDestinationCoordinates();
 }
