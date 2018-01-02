@@ -20,20 +20,10 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="375">
-      <file leaf-file-name="Manager.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/server/manager/Manager.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="192">
-              <caret line="99" column="79" lean-forward="false" selection-start-line="99" selection-start-column="79" selection-end-line="99" selection-end-column="79" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="Player.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/server/player/Player.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="183">
+            <state relative-caret-position="-963">
               <caret line="98" column="0" lean-forward="false" selection-start-line="98" selection-start-column="0" selection-end-line="98" selection-end-column="0" />
               <folding>
                 <element signature="e#2247#2248#0" expanded="true" />
@@ -66,12 +56,32 @@
       <file leaf-file-name="LobbyMediator.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/server/lobby/LobbyMediator.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="465">
-              <caret line="92" column="62" lean-forward="false" selection-start-line="92" selection-start-column="62" selection-end-line="92" selection-end-column="62" />
+            <state relative-caret-position="504">
+              <caret line="32" column="35" lean-forward="true" selection-start-line="32" selection-start-column="35" selection-end-line="32" selection-end-column="35" />
               <folding>
-                <element signature="e#1924#1925#0" expanded="true" />
-                <element signature="e#1972#1973#0" expanded="true" />
+                <element signature="e#2004#2005#0" expanded="true" />
+                <element signature="e#2052#2053#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Bot.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/server/player/Bot.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="906">
+              <caret line="139" column="22" lean-forward="true" selection-start-line="139" selection-start-column="22" selection-end-line="139" selection-end-column="22" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="BotThread.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/server/player/BotThread.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="108">
+              <caret line="616" column="51" lean-forward="true" selection-start-line="616" selection-start-column="51" selection-end-line="616" selection-end-column="51" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -91,12 +101,15 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Lobby.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="Lobby.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/server/lobby/Lobby.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="246">
-              <caret line="412" column="25" lean-forward="true" selection-start-line="412" selection-start-column="25" selection-end-line="412" selection-end-column="25" />
-              <folding />
+            <state relative-caret-position="-3717">
+              <caret line="108" column="21" lean-forward="true" selection-start-line="108" selection-start-column="21" selection-end-line="108" selection-end-column="21" />
+              <folding>
+                <element signature="e#9964#9965#0" expanded="true" />
+                <element signature="e#9992#9993#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -126,10 +139,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ClientGUI.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="ClientGUI.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/client/core/ClientGUI.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2436">
+            <state relative-caret-position="2205">
               <caret line="127" column="44" lean-forward="true" selection-start-line="127" selection-start-column="44" selection-end-line="127" selection-end-column="44" />
               <folding>
                 <element signature="e#4495#4496#0" expanded="true" />
@@ -138,20 +151,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="PlayerLogic.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/client/logic/PlayerLogic.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="966">
-              <caret line="47" column="58" lean-forward="false" selection-start-line="47" selection-start-column="58" selection-end-line="47" selection-end-column="58" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="ClientGUIController.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/client/logic/ClientGUIController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="183">
+            <state relative-caret-position="-216">
               <caret line="557" column="0" lean-forward="false" selection-start-line="557" selection-start-column="0" selection-end-line="557" selection-end-column="0" />
               <folding>
                 <element signature="imports" expanded="true" />
@@ -215,13 +218,13 @@
         <option value="$PROJECT_DIR$/src/server/core/Factory.java" />
         <option value="$PROJECT_DIR$/src/client/logic/PlayerLogic.java" />
         <option value="$PROJECT_DIR$/test/test/serverTest/lobbyTest/RulesManagerTest.java" />
-        <option value="$PROJECT_DIR$/src/server/lobby/LobbyMediator.java" />
         <option value="$PROJECT_DIR$/src/client/logic/ClientGUIController.java" />
         <option value="$PROJECT_DIR$/src/client/ClientFXML.fxml" />
         <option value="$PROJECT_DIR$/src/server/manager/Manager.java" />
-        <option value="$PROJECT_DIR$/src/server/lobby/Lobby.java" />
         <option value="$PROJECT_DIR$/src/client/logic/ClientListener.java" />
         <option value="$PROJECT_DIR$/src/client/core/ClientGUI.java" />
+        <option value="$PROJECT_DIR$/src/server/lobby/LobbyMediator.java" />
+        <option value="$PROJECT_DIR$/src/server/lobby/Lobby.java" />
       </list>
     </option>
   </component>
@@ -663,7 +666,7 @@
       <workItem from="1514590282156" duration="987000" />
       <workItem from="1514723333446" duration="2179000" />
       <workItem from="1514841897929" duration="19680000" />
-      <workItem from="1514895843195" duration="28281000" />
+      <workItem from="1514895843195" duration="30905000" />
     </task>
     <servers />
   </component>
@@ -700,7 +703,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="51127000" />
+    <option name="totallyTimeSpent" value="53751000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-9" y="-9" width="1938" height="1048" extended-state="7" />
@@ -780,7 +783,7 @@
         </line-breakpoint>
         <line-breakpoint type="java-method">
           <url>file://$PROJECT_DIR$/src/server/lobby/Lobby.java</url>
-          <line>293</line>
+          <line>300</line>
           <properties class="server.lobby.Lobby">
             <option name="EMULATED" value="true" />
           </properties>
@@ -812,7 +815,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/src/server/lobby/Lobby.java</url>
-          <line>397</line>
+          <line>404</line>
           <properties class="server.lobby.Lobby">
             <option name="EMULATED" value="true" />
           </properties>
@@ -890,7 +893,10 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="4326">
           <caret line="213" column="42" lean-forward="false" selection-start-line="213" selection-start-column="42" selection-end-line="213" selection-end-column="42" />
-          <folding />
+          <folding>
+            <element signature="e#9964#9965#0" expanded="true" />
+            <element signature="e#9992#9993#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -981,16 +987,6 @@
         <state relative-caret-position="399">
           <caret line="19" column="68" lean-forward="true" selection-start-line="19" selection-start-column="68" selection-end-line="19" selection-end-column="68" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/client/logic/BoardUpdate.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="192">
-          <caret line="49" column="0" lean-forward="false" selection-start-line="49" selection-start-column="0" selection-end-line="49" selection-end-column="0" />
-          <folding>
-            <element signature="e#1521#1522#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1107,14 +1103,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/server/player/Bot.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="183">
-          <caret line="102" column="0" lean-forward="false" selection-start-line="102" selection-start-column="0" selection-end-line="102" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/server/board/Board.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="297">
@@ -1138,14 +1126,6 @@
           <folding>
             <element signature="e#3424#3425#0" expanded="false" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/server/player/BotThread.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="22" lean-forward="true" selection-start-line="0" selection-start-column="22" selection-end-line="0" selection-end-column="22" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1194,9 +1174,33 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/server/manager/Manager.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="192">
+          <caret line="99" column="79" lean-forward="false" selection-start-line="99" selection-start-column="79" selection-end-line="99" selection-end-column="79" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/client/logic/PlayerLogic.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="966">
+          <caret line="47" column="58" lean-forward="false" selection-start-line="47" selection-start-column="58" selection-end-line="47" selection-end-column="58" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/client/logic/BoardUpdate.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-6003">
+          <caret line="48" column="29" lean-forward="false" selection-start-line="48" selection-start-column="29" selection-end-line="48" selection-end-column="29" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/client/logic/ClientGUIController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="183">
+        <state relative-caret-position="-216">
           <caret line="557" column="0" lean-forward="false" selection-start-line="557" selection-start-column="0" selection-end-line="557" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
@@ -1228,11 +1232,24 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/server/manager/Manager.java">
+    <entry file="file://$PROJECT_DIR$/src/server/player/BotThread.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="192">
-          <caret line="99" column="79" lean-forward="false" selection-start-line="99" selection-start-column="79" selection-end-line="99" selection-end-column="79" />
+        <state relative-caret-position="108">
+          <caret line="616" column="51" lean-forward="true" selection-start-line="616" selection-start-column="51" selection-end-line="616" selection-end-column="51" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/client/logic/ClientListener.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="127" column="49" lean-forward="true" selection-start-line="127" selection-start-column="49" selection-end-line="127" selection-end-column="49" />
+          <folding>
+            <element signature="e#8562#8563#0" expanded="true" />
+            <element signature="e#8594#8595#0" expanded="true" />
+            <element signature="e#8635#8636#0" expanded="true" />
+            <element signature="e#8671#8672#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1246,28 +1263,38 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/server/lobby/Lobby.java">
+    <entry file="file://$PROJECT_DIR$/src/server/core/Factory.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="246">
-          <caret line="412" column="25" lean-forward="true" selection-start-line="412" selection-start-column="25" selection-end-line="412" selection-end-column="25" />
-          <folding />
+        <state relative-caret-position="42">
+          <caret line="135" column="9" lean-forward="false" selection-start-line="135" selection-start-column="9" selection-end-line="135" selection-end-column="9" />
+          <folding>
+            <element signature="e#5961#5962#0" expanded="true" />
+            <element signature="e#6005#6006#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/server/lobby/LobbyMediator.java">
+    <entry file="file://$PROJECT_DIR$/src/client/core/ClientGUI.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="465">
-          <caret line="92" column="62" lean-forward="false" selection-start-line="92" selection-start-column="62" selection-end-line="92" selection-end-column="62" />
+        <state relative-caret-position="2205">
+          <caret line="127" column="44" lean-forward="true" selection-start-line="127" selection-start-column="44" selection-end-line="127" selection-end-column="44" />
           <folding>
-            <element signature="e#1924#1925#0" expanded="true" />
-            <element signature="e#1972#1973#0" expanded="true" />
+            <element signature="e#4495#4496#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/server/player/Bot.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="906">
+          <caret line="139" column="22" lean-forward="true" selection-start-line="139" selection-start-column="22" selection-end-line="139" selection-end-column="22" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/server/player/Player.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="183">
+        <state relative-caret-position="-963">
           <caret line="98" column="0" lean-forward="false" selection-start-line="98" selection-start-column="0" selection-end-line="98" selection-end-column="0" />
           <folding>
             <element signature="e#2247#2248#0" expanded="true" />
@@ -1296,44 +1323,24 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/client/logic/PlayerLogic.java">
+    <entry file="file://$PROJECT_DIR$/src/server/lobby/LobbyMediator.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="966">
-          <caret line="47" column="58" lean-forward="false" selection-start-line="47" selection-start-column="58" selection-end-line="47" selection-end-column="58" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/server/core/Factory.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="42">
-          <caret line="135" column="9" lean-forward="false" selection-start-line="135" selection-start-column="9" selection-end-line="135" selection-end-column="9" />
+        <state relative-caret-position="504">
+          <caret line="32" column="35" lean-forward="true" selection-start-line="32" selection-start-column="35" selection-end-line="32" selection-end-column="35" />
           <folding>
-            <element signature="e#5961#5962#0" expanded="true" />
-            <element signature="e#6005#6006#0" expanded="true" />
+            <element signature="e#2004#2005#0" expanded="true" />
+            <element signature="e#2052#2053#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/client/logic/ClientListener.java">
+    <entry file="file://$PROJECT_DIR$/src/server/lobby/Lobby.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="127" column="49" lean-forward="true" selection-start-line="127" selection-start-column="49" selection-end-line="127" selection-end-column="49" />
+        <state relative-caret-position="-3717">
+          <caret line="108" column="21" lean-forward="true" selection-start-line="108" selection-start-column="21" selection-end-line="108" selection-end-column="21" />
           <folding>
-            <element signature="e#8562#8563#0" expanded="true" />
-            <element signature="e#8594#8595#0" expanded="true" />
-            <element signature="e#8635#8636#0" expanded="true" />
-            <element signature="e#8671#8672#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/client/core/ClientGUI.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2436">
-          <caret line="127" column="44" lean-forward="true" selection-start-line="127" selection-start-column="44" selection-end-line="127" selection-end-column="44" />
-          <folding>
-            <element signature="e#4495#4496#0" expanded="true" />
+            <element signature="e#9964#9965#0" expanded="true" />
+            <element signature="e#9992#9993#0" expanded="true" />
           </folding>
         </state>
       </provider>

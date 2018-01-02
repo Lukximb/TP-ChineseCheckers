@@ -13,6 +13,7 @@ import server.player.PlayerTemplate;
 
 import javax.management.Notification;
 import javax.management.NotificationBroadcasterSupport;
+import java.util.Random;
 
 public class Lobby extends NotificationBroadcasterSupport implements LobbyMBean{
     //public final Color[] colorPalette = {Color.DEEPPINK, Color.YELLOW, Color.MEDIUMBLUE, Color.LIMEGREEN, Color.FIREBRICK, Color.CYAN};
@@ -47,8 +48,11 @@ public class Lobby extends NotificationBroadcasterSupport implements LobbyMBean{
     public synchronized void startGame() {
         initPlayersOnBoard();
         mediator.setBoard(board);
-        round = players[0];
-        roundCorner = 0;
+        Random generator = new Random();
+        roundCorner = generator.nextInt(numberOfPlayers);
+        round = players[roundCorner];
+//        round = players[0];
+//        roundCorner = 0;
         sendNotification(new Notification(String.valueOf(name), this, 110011110,
                 "S,StartGame," + rowNumber + "," + numberOfPlayers));
         mediator.startRound();
@@ -57,6 +61,7 @@ public class Lobby extends NotificationBroadcasterSupport implements LobbyMBean{
                p.start();
             }
         }
+//        nextRound();
     }
 
     @Override
@@ -98,8 +103,10 @@ public class Lobby extends NotificationBroadcasterSupport implements LobbyMBean{
         boolean empty = true;
             for(PlayerTemplate p : players) {
                 if(p != null) {
-                    empty = false;
-                    break;
+                    if(!p.isBot()) {
+                        empty = false;
+                        break;
+                    }
                 }
             }
         return empty;

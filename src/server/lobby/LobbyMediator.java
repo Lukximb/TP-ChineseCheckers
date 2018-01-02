@@ -29,6 +29,9 @@ public class LobbyMediator {
 
     public synchronized void startRound() {
         lobby.sendTurnNotification();
+        if(lobby.round.isBot()) {
+            lobby.round.yourTurn();
+        }
        // clock.startRound();
     }
 
