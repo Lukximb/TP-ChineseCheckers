@@ -83,13 +83,13 @@
       <file leaf-file-name="ClientListener.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/client/logic/ClientListener.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="381">
-              <caret line="105" column="85" lean-forward="false" selection-start-line="105" selection-start-column="85" selection-end-line="105" selection-end-column="85" />
+            <state relative-caret-position="273">
+              <caret line="51" column="52" lean-forward="true" selection-start-line="51" selection-start-column="52" selection-end-line="51" selection-end-column="52" />
               <folding>
-                <element signature="e#8216#8217#0" expanded="true" />
-                <element signature="e#8248#8249#0" expanded="true" />
-                <element signature="e#8289#8290#0" expanded="true" />
-                <element signature="e#8325#8326#0" expanded="true" />
+                <element signature="e#8269#8270#0" expanded="true" />
+                <element signature="e#8301#8302#0" expanded="true" />
+                <element signature="e#8342#8343#0" expanded="true" />
+                <element signature="e#8378#8379#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -115,8 +115,8 @@
       <file leaf-file-name="Factory.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/server/core/Factory.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="357">
-              <caret line="165" column="124" lean-forward="true" selection-start-line="165" selection-start-column="124" selection-end-line="165" selection-end-column="124" />
+            <state relative-caret-position="-126">
+              <caret line="141" column="9" lean-forward="true" selection-start-line="141" selection-start-column="9" selection-end-line="141" selection-end-column="9" />
               <folding>
                 <element signature="e#5704#5705#0" expanded="true" />
                 <element signature="e#5761#5762#0" expanded="true" />
@@ -133,6 +133,16 @@
           </provider>
         </entry>
       </file>
+      <file leaf-file-name="ClientGUI.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/client/core/ClientGUI.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="255">
+              <caret line="73" column="42" lean-forward="true" selection-start-line="73" selection-start-column="42" selection-end-line="73" selection-end-column="42" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="PlayerLogic.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/client/logic/PlayerLogic.java">
           <provider selected="true" editor-type-id="text-editor">
@@ -143,32 +153,32 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ClientGUIController.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="ClientGUIController.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/client/logic/ClientGUIController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="318">
-              <caret line="306" column="75" lean-forward="true" selection-start-line="306" selection-start-column="75" selection-end-line="306" selection-end-column="75" />
+            <state relative-caret-position="1704">
+              <caret line="482" column="56" lean-forward="true" selection-start-line="482" selection-start-column="56" selection-end-line="482" selection-end-column="56" />
               <folding>
-                <element signature="e#11496#11497#0" expanded="true" />
-                <element signature="e#11544#11545#0" expanded="true" />
-                <element signature="e#11605#11606#0" expanded="true" />
-                <element signature="e#11656#11657#0" expanded="true" />
-                <element signature="e#11725#11726#0" expanded="true" />
-                <element signature="e#11761#11762#0" expanded="true" />
-                <element signature="e#11831#11832#0" expanded="true" />
-                <element signature="e#11869#11870#0" expanded="true" />
-                <element signature="e#11937#11938#0" expanded="true" />
-                <element signature="e#11973#11974#0" expanded="true" />
-                <element signature="e#14444#14445#0" expanded="true" />
-                <element signature="e#14477#14478#0" expanded="true" />
-                <element signature="e#14520#14521#0" expanded="true" />
-                <element signature="e#14558#14559#0" expanded="true" />
-                <element signature="e#14607#14608#0" expanded="true" />
-                <element signature="e#14646#14647#0" expanded="true" />
-                <element signature="e#14700#14701#0" expanded="true" />
-                <element signature="e#14745#14746#0" expanded="true" />
-                <element signature="e#17086#17087#0" expanded="true" />
-                <element signature="e#17108#17109#0" expanded="true" />
+                <element signature="e#13032#13033#0" expanded="true" />
+                <element signature="e#13080#13081#0" expanded="true" />
+                <element signature="e#13141#13142#0" expanded="true" />
+                <element signature="e#13192#13193#0" expanded="true" />
+                <element signature="e#13261#13262#0" expanded="true" />
+                <element signature="e#13297#13298#0" expanded="true" />
+                <element signature="e#13367#13368#0" expanded="true" />
+                <element signature="e#13405#13406#0" expanded="true" />
+                <element signature="e#13473#13474#0" expanded="true" />
+                <element signature="e#13509#13510#0" expanded="true" />
+                <element signature="e#15980#15981#0" expanded="true" />
+                <element signature="e#16013#16014#0" expanded="true" />
+                <element signature="e#16056#16057#0" expanded="true" />
+                <element signature="e#16094#16095#0" expanded="true" />
+                <element signature="e#16143#16144#0" expanded="true" />
+                <element signature="e#16182#16183#0" expanded="true" />
+                <element signature="e#16236#16237#0" expanded="true" />
+                <element signature="e#16281#16282#0" expanded="true" />
+                <element signature="e#18622#18623#0" expanded="true" />
+                <element signature="e#18644#18645#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -205,11 +215,11 @@
         <option value="$PROJECT_DIR$/src/server/lobby/LobbyMediator.java" />
         <option value="$PROJECT_DIR$/src/server/lobby/Lobby.java" />
         <option value="$PROJECT_DIR$/src/server/manager/Manager.java" />
-        <option value="$PROJECT_DIR$/src/client/logic/ClientListener.java" />
         <option value="$PROJECT_DIR$/src/server/core/Factory.java" />
         <option value="$PROJECT_DIR$/src/client/logic/PlayerLogic.java" />
-        <option value="$PROJECT_DIR$/src/client/logic/ClientGUIController.java" />
         <option value="$PROJECT_DIR$/test/test/serverTest/lobbyTest/RulesManagerTest.java" />
+        <option value="$PROJECT_DIR$/src/client/logic/ClientGUIController.java" />
+        <option value="$PROJECT_DIR$/src/client/logic/ClientListener.java" />
       </list>
     </option>
   </component>
@@ -423,7 +433,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="JUnit.RulesManagerTest">
+  <component name="RunManager" selected="Application.ClientGUI">
     <configuration default="true" type="Applet" factoryName="Applet">
       <option name="HTML_USED" value="false" />
       <option name="WIDTH" value="400" />
@@ -627,9 +637,9 @@
     </list>
     <recent_temporary>
       <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="JUnit.RulesManagerTest" />
-        <item index="1" class="java.lang.String" itemvalue="Application.ClientGUI" />
-        <item index="2" class="java.lang.String" itemvalue="Application.Server" />
+        <item index="0" class="java.lang.String" itemvalue="Application.ClientGUI" />
+        <item index="1" class="java.lang.String" itemvalue="Application.Server" />
+        <item index="2" class="java.lang.String" itemvalue="JUnit.RulesManagerTest" />
         <item index="3" class="java.lang.String" itemvalue="JUnit.LobbyTest.startGame" />
         <item index="4" class="java.lang.String" itemvalue="JUnit.LobbyTest.isEmptyTest2" />
       </list>
@@ -651,7 +661,7 @@
       <workItem from="1514590282156" duration="987000" />
       <workItem from="1514723333446" duration="2179000" />
       <workItem from="1514841897929" duration="19680000" />
-      <workItem from="1514895843195" duration="20998000" />
+      <workItem from="1514895843195" duration="24509000" />
     </task>
     <servers />
   </component>
@@ -688,7 +698,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="43844000" />
+    <option name="totallyTimeSpent" value="47355000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-9" y="-9" width="1938" height="1048" extended-state="6" />
@@ -841,9 +851,9 @@
         <state relative-caret-position="4200">
           <caret line="222" column="55" lean-forward="true" selection-start-line="222" selection-start-column="55" selection-end-line="222" selection-end-column="55" />
           <folding>
-            <element signature="e#5546#5547#0" expanded="false" />
-            <element signature="e#17086#17087#0" expanded="true" />
-            <element signature="e#17108#17109#0" expanded="true" />
+            <element signature="e#5820#5821#0" expanded="false" />
+            <element signature="e#18622#18623#0" expanded="true" />
+            <element signature="e#18644#18645#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1074,14 +1084,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/client/core/ClientGUI.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="147">
-          <caret line="18" column="7" lean-forward="false" selection-start-line="18" selection-start-column="7" selection-end-line="18" selection-end-column="7" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://C:/jdk1.8.0_121/javafx-src.zip!/javafx/fxml/FXMLLoader.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="192">
@@ -1263,61 +1265,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/client/logic/ClientListener.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="381">
-          <caret line="105" column="85" lean-forward="false" selection-start-line="105" selection-start-column="85" selection-end-line="105" selection-end-column="85" />
-          <folding>
-            <element signature="e#8216#8217#0" expanded="true" />
-            <element signature="e#8248#8249#0" expanded="true" />
-            <element signature="e#8289#8290#0" expanded="true" />
-            <element signature="e#8325#8326#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/server/lobby/Lobby.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="128">
-          <caret line="394" column="30" lean-forward="false" selection-start-line="394" selection-start-column="30" selection-end-line="394" selection-end-column="30" />
-          <folding>
-            <element signature="e#9731#9732#0" expanded="true" />
-            <element signature="e#9759#9760#0" expanded="true" />
-            <element signature="e#9807#9808#0" expanded="true" />
-            <element signature="e#9846#9847#0" expanded="true" />
-            <element signature="e#12557#12558#0" expanded="true" />
-            <element signature="e#12607#12608#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/server/core/Factory.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="357">
-          <caret line="165" column="124" lean-forward="true" selection-start-line="165" selection-start-column="124" selection-end-line="165" selection-end-column="124" />
-          <folding>
-            <element signature="e#5704#5705#0" expanded="true" />
-            <element signature="e#5761#5762#0" expanded="true" />
-            <element signature="e#5821#5822#0" expanded="true" />
-            <element signature="e#5859#5860#0" expanded="true" />
-            <element signature="e#5905#5906#0" expanded="true" />
-            <element signature="e#5938#5939#0" expanded="true" />
-            <element signature="e#5986#5987#0" expanded="true" />
-            <element signature="e#6020#6021#0" expanded="true" />
-            <element signature="e#6092#6093#0" expanded="true" />
-            <element signature="e#6136#6137#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/client/logic/PlayerLogic.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="402">
-          <caret line="47" column="58" lean-forward="false" selection-start-line="47" selection-start-column="58" selection-end-line="47" selection-end-column="58" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/test/test/serverTest/lobbyTest/RulesManagerTest.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2205">
@@ -1336,32 +1283,95 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/server/lobby/Lobby.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="128">
+          <caret line="394" column="30" lean-forward="false" selection-start-line="394" selection-start-column="30" selection-end-line="394" selection-end-column="30" />
+          <folding>
+            <element signature="e#9731#9732#0" expanded="true" />
+            <element signature="e#9759#9760#0" expanded="true" />
+            <element signature="e#9807#9808#0" expanded="true" />
+            <element signature="e#9846#9847#0" expanded="true" />
+            <element signature="e#12557#12558#0" expanded="true" />
+            <element signature="e#12607#12608#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/client/logic/PlayerLogic.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="402">
+          <caret line="47" column="58" lean-forward="false" selection-start-line="47" selection-start-column="58" selection-end-line="47" selection-end-column="58" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/server/core/Factory.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-126">
+          <caret line="141" column="9" lean-forward="true" selection-start-line="141" selection-start-column="9" selection-end-line="141" selection-end-column="9" />
+          <folding>
+            <element signature="e#5704#5705#0" expanded="true" />
+            <element signature="e#5761#5762#0" expanded="true" />
+            <element signature="e#5821#5822#0" expanded="true" />
+            <element signature="e#5859#5860#0" expanded="true" />
+            <element signature="e#5905#5906#0" expanded="true" />
+            <element signature="e#5938#5939#0" expanded="true" />
+            <element signature="e#5986#5987#0" expanded="true" />
+            <element signature="e#6020#6021#0" expanded="true" />
+            <element signature="e#6092#6093#0" expanded="true" />
+            <element signature="e#6136#6137#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/client/logic/ClientGUIController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="318">
-          <caret line="306" column="75" lean-forward="true" selection-start-line="306" selection-start-column="75" selection-end-line="306" selection-end-column="75" />
+        <state relative-caret-position="1704">
+          <caret line="482" column="56" lean-forward="true" selection-start-line="482" selection-start-column="56" selection-end-line="482" selection-end-column="56" />
           <folding>
-            <element signature="e#11496#11497#0" expanded="true" />
-            <element signature="e#11544#11545#0" expanded="true" />
-            <element signature="e#11605#11606#0" expanded="true" />
-            <element signature="e#11656#11657#0" expanded="true" />
-            <element signature="e#11725#11726#0" expanded="true" />
-            <element signature="e#11761#11762#0" expanded="true" />
-            <element signature="e#11831#11832#0" expanded="true" />
-            <element signature="e#11869#11870#0" expanded="true" />
-            <element signature="e#11937#11938#0" expanded="true" />
-            <element signature="e#11973#11974#0" expanded="true" />
-            <element signature="e#14444#14445#0" expanded="true" />
-            <element signature="e#14477#14478#0" expanded="true" />
-            <element signature="e#14520#14521#0" expanded="true" />
-            <element signature="e#14558#14559#0" expanded="true" />
-            <element signature="e#14607#14608#0" expanded="true" />
-            <element signature="e#14646#14647#0" expanded="true" />
-            <element signature="e#14700#14701#0" expanded="true" />
-            <element signature="e#14745#14746#0" expanded="true" />
-            <element signature="e#17086#17087#0" expanded="true" />
-            <element signature="e#17108#17109#0" expanded="true" />
+            <element signature="e#13032#13033#0" expanded="true" />
+            <element signature="e#13080#13081#0" expanded="true" />
+            <element signature="e#13141#13142#0" expanded="true" />
+            <element signature="e#13192#13193#0" expanded="true" />
+            <element signature="e#13261#13262#0" expanded="true" />
+            <element signature="e#13297#13298#0" expanded="true" />
+            <element signature="e#13367#13368#0" expanded="true" />
+            <element signature="e#13405#13406#0" expanded="true" />
+            <element signature="e#13473#13474#0" expanded="true" />
+            <element signature="e#13509#13510#0" expanded="true" />
+            <element signature="e#15980#15981#0" expanded="true" />
+            <element signature="e#16013#16014#0" expanded="true" />
+            <element signature="e#16056#16057#0" expanded="true" />
+            <element signature="e#16094#16095#0" expanded="true" />
+            <element signature="e#16143#16144#0" expanded="true" />
+            <element signature="e#16182#16183#0" expanded="true" />
+            <element signature="e#16236#16237#0" expanded="true" />
+            <element signature="e#16281#16282#0" expanded="true" />
+            <element signature="e#18622#18623#0" expanded="true" />
+            <element signature="e#18644#18645#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/client/logic/ClientListener.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="273">
+          <caret line="51" column="52" lean-forward="true" selection-start-line="51" selection-start-column="52" selection-end-line="51" selection-end-column="52" />
+          <folding>
+            <element signature="e#8269#8270#0" expanded="true" />
+            <element signature="e#8301#8302#0" expanded="true" />
+            <element signature="e#8342#8343#0" expanded="true" />
+            <element signature="e#8378#8379#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/client/core/ClientGUI.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="73" column="42" lean-forward="true" selection-start-line="73" selection-start-column="42" selection-end-line="73" selection-end-column="42" />
+          <folding />
         </state>
       </provider>
     </entry>

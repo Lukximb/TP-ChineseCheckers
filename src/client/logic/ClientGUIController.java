@@ -149,6 +149,11 @@ public class ClientGUIController {
 	private Label chatMessageBox;
 	@FXML
 	private TextField messageTextField;
+	@FXML
+	private TableView<String> playersInGameTable;
+	@FXML
+	private TableColumn<String, String> playersInGameColumn;
+
 	//POPUP-INVITE--------------------------------------
 	@FXML
 	private StackPane invitePopUp;
@@ -220,6 +225,9 @@ public class ClientGUIController {
         lobbyListColumn.setCellValueFactory(param -> new ReadOnlyStringWrapper(param.getValue()));
         lobbyListTable.setItems(lobbyList);
         board = board4;
+
+        playersInGameColumn.setCellValueFactory(param -> new ReadOnlyStringWrapper(param.getValue()));
+        playersInGameTable.setItems(playersList);
 	}
 
 	//LOGIN---------------------------------------
@@ -438,6 +446,42 @@ public class ClientGUIController {
 
 		this.game.setVisible(true);
 		this.game.setDisable(false);
+	}
+
+	public void fillPlayersInGameTable() {
+		run(() -> {
+			ObservableList<String> newPlayersList = FXCollections.observableArrayList();
+			if(playersList.size() == 2) {
+				newPlayersList.add(playersList.get(0));
+				newPlayersList.add("");
+				newPlayersList.add("");
+				newPlayersList.add(playersList.get(1));
+				newPlayersList.add("");
+				newPlayersList.add("");
+			} else if(playersList.size() == 3) {
+				newPlayersList.add(playersList.get(0));
+				newPlayersList.add("");
+				newPlayersList.add(playersList.get(1));
+				newPlayersList.add("");
+				newPlayersList.add(playersList.get(2));
+				newPlayersList.add("");
+			} else if(playersList.size() == 4) {
+				newPlayersList.add(playersList.get(0));
+				newPlayersList.add(playersList.get(1));
+				newPlayersList.add("");
+				newPlayersList.add(playersList.get(2));
+				newPlayersList.add(playersList.get(3));
+				newPlayersList.add("");
+			} else if(playersList.size() == 6) {
+				newPlayersList.add(playersList.get(0));
+				newPlayersList.add(playersList.get(1));
+				newPlayersList.add(playersList.get(2));
+				newPlayersList.add(playersList.get(3));
+				newPlayersList.add(playersList.get(4));
+				newPlayersList.add(playersList.get(5));
+			}
+			playersInGameTable.setItems(newPlayersList);
+		});
 	}
 
 	public void addPlayerButtonOnClick(ActionEvent event) {

@@ -49,6 +49,7 @@ public class ClientListener implements NotificationListener {
             case('S')://Start Game
                 String[] args = notification.getMessage().substring(2).split(",");
                 hendleStartGame(args);
+                controller.fillPlayersInGameTable();
                 break;
             case('C')://Corner
                 int c = Integer.parseInt(notification.getMessage().substring(2));
