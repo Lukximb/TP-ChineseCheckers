@@ -3,7 +3,6 @@ package client.logic;
 import client.core.ClientGUI;
 import javafx.application.Platform;
 import javafx.beans.property.ReadOnlyStringWrapper;
-import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -51,7 +50,7 @@ public class ClientGUIController {
 
 	//MENU----------------------------------------
 	@FXML
-	private StackPane menu;
+	public StackPane menu;
 	@FXML
 	private Button newGameButton;
 	@FXML

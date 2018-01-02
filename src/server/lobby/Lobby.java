@@ -116,8 +116,12 @@ public class Lobby extends NotificationBroadcasterSupport implements LobbyMBean{
                 next = i+1;
                 roundCorner--;
             }
+            i++;
         }
-        while(next < numberOfPlayers || players[next] != null) {
+        while(next < numberOfPlayers) {
+            if(players[next] == null) {
+                break;
+            }
             players[next-1] = players[next];
             players[next] = null;
             next++;
@@ -126,19 +130,13 @@ public class Lobby extends NotificationBroadcasterSupport implements LobbyMBean{
 
     @Override
     public void removePlayer(String playerName) {
-        int i = 0;
-        int next = 0;
-        while(i<numberOfPlayers) {
-            if(players[i].name.equals(playerName)) {
-                players[i] = null;
-                next = i+1;
-                roundCorner--;
+        for(PlayerTemplate p : players) {
+            if(p.getName().equals(playerName)) {
+                p.exitFromLobby();
+                String message = "X," + p.getName() + "," + this.name;
+                sendNotification(new Notification(String.valueOf(p.getPid()), this, 110000110, message));
+                break;
             }
-        }
-        while(next < numberOfPlayers || players[next] != null) {
-            players[next-1] = players[next];
-            players[next] = null;
-            next++;
         }
     }
 

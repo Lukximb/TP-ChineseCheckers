@@ -83,7 +83,7 @@ public class LobbyManager {
         }
     }
 
-    public void removePlayerFromLobby(String lobbyName, PlayerTemplate player) {
+    public boolean removePlayerFromLobby(String lobbyName, String playerName) {
         Lobby lobby = null;
 
         for(Lobby l: waitingLobbyList) {
@@ -93,11 +93,13 @@ public class LobbyManager {
             }
         }
         if(lobby != null) {
-            lobby.removePlayer(player);
+            lobby.removePlayer(playerName);
             if(lobby.isEmpty()) {
                 removeLobby(lobby);
             }
+            return true;
         }
+        return false;
     }
 
     public void removePlayerFromGame(String lobbyName, Player player) {

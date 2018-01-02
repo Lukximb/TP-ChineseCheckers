@@ -83,6 +83,17 @@ public class ClientListener implements NotificationListener {
                 String line = message[0] + ": " + message[1];
                 controller.addMessage(line);
                 break;
+            case('X'):
+                String[] removeMessage = notification.getMessage().substring(2).split(",");
+                if(removeMessage[0].equals(controller.client.playerName)) {
+                    controller.lobby.setDisable(true);
+                    controller.lobby.setVisible(false);
+
+                    controller.menu.setDisable(false);
+                    controller.menu.setVisible(true);
+                    //TODO popup
+                }
+                break;
             default:
         }
     }
