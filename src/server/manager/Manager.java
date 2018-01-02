@@ -1,7 +1,7 @@
 package server.manager;
 
-import server.player.Player;
 import server.lobby.Lobby;
+import server.player.Player;
 import server.player.PlayerTemplate;
 
 import javax.management.Notification;

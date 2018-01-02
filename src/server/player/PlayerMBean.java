@@ -2,8 +2,6 @@ package server.player;
 
 import client.logic.MoveType;
 import server.board.Coordinates;
-import server.lobby.Lobby;
-import server.player.Difficult;
 
 /**
  * Intefrace which is implemented by Player class.

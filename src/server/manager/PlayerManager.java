@@ -1,8 +1,7 @@
 package server.manager;
 
-import server.player.Player;
 import server.player.Bot;
-import server.player.PlayerTemplate;
+import server.player.Player;
 
 import java.util.ArrayList;
 
