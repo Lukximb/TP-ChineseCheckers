@@ -10,7 +10,7 @@ public class Bot implements PlayerTemplate{
     public String name;
     public Lobby lobby;
     public int corner;
-    private volatile Difficult difficultLevel;
+    public volatile Difficult difficultLevel;
     private volatile Runnable borRunnable;
     private volatile Thread botThread;
     public boolean myTurn;
@@ -24,9 +24,6 @@ public class Bot implements PlayerTemplate{
         currentCoordinates = new ArrayList<>();
         destinationCoordinates = new ArrayList<>();
         myTurn = false;
-        //nnManager = new NNManager();
-        //Runnable runners = new Runnable;
-        //Thread threads = new Thread;
     }
 
 

@@ -1,9 +1,6 @@
 package client.logic;
 
 
-import server.board.Coordinates;
-import server.player.Difficult;
-
 import javax.management.MBeanServerConnection;
 import javax.management.ObjectName;
 import javax.management.remote.JMXConnector;

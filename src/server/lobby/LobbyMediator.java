@@ -9,7 +9,7 @@ import server.player.Player;
 import server.player.PlayerTemplate;
 
 public class LobbyMediator {
-    private volatile Clock clock;
+//    private volatile Clock clock;
     private volatile Thread clockThread;
     private IRulesManager rulesManager;
     private Board board;
@@ -18,10 +18,10 @@ public class LobbyMediator {
     public LobbyMediator() {
     }
 
-    public synchronized long getRoundTime() {
-        return 30;
-        //return clock.getRoundTime();
-    }
+//    public synchronized long getRoundTime() {
+//        return 30;
+//        //return clock.getRoundTime();
+//    }
 
     public void setBoard(Board board) {
         this.board = board;
@@ -37,9 +37,9 @@ public class LobbyMediator {
         return field;
     }
 
-    public synchronized void endRound() {
-        //clock.endRound();
-    }
+//    public synchronized void endRound() {
+//        //clock.endRound();
+//    }
 
     public synchronized boolean checkMove(Coordinates currentCoordinates, Coordinates newCoordinates, MoveType moveType) {
         return rulesManager.checkMove(currentCoordinates, newCoordinates, moveType);
@@ -49,23 +49,23 @@ public class LobbyMediator {
         return board.executeMove(player, currentCoordinates, newCoordinates);
     }
 
-    public synchronized void endOfTime() {
-        lobby.nextRound();
-    }
+//    public synchronized void endOfTime() {
+//        lobby.nextRound();
+//    }
 
     public void setLobby(Lobby lobby) {
         this.lobby = lobby;
     }
 
-    public synchronized void setClock(Clock clock) {
-        if(this.clock == null) {
-            this.clock = clock;
-            clock.setMediator(this);
-
-            clockThread = new Thread(clock, "Clock");
-            clockThread.start();
-        }
-    }
+//    public synchronized void setClock(Clock clock) {
+//        if(this.clock == null) {
+//            this.clock = clock;
+//            clock.setMediator(this);
+//
+//            clockThread = new Thread(clock, "Clock");
+//            clockThread.start();
+//        }
+//    }
 
     public void setRulesManager(IRulesManager rulesManager) {
         this.rulesManager = rulesManager;

@@ -8,14 +8,13 @@ import server.lobby.*;
 import server.manager.LobbyManager;
 import server.manager.Manager;
 import server.manager.PlayerManager;
-import server.player.Bot;
 import server.player.Player;
 
 import javax.management.Notification;
 import javax.management.NotificationBroadcasterSupport;
 
 public class Factory extends NotificationBroadcasterSupport implements FactoryMBean {
-    private Server server;
+    public Server server;
     private Manager manager;
     private LobbyManager lobbyManager;
     private PlayerManager playerManager;
@@ -86,11 +85,11 @@ public class Factory extends NotificationBroadcasterSupport implements FactoryMB
         if(isFree) {
             System.out.println(pid);
             Player player = new Player(pid, name);
-
-
-            server.connection.createMBeanMainObject("server.player.Player", "Player" + pid, String.valueOf(pid), player);
+            server.connection.createMBeanMainObject("server.player.Player", "Player" +
+                    pid, String.valueOf(pid), player);
             playerManager.getNewPlayer(player);
-            sendNotification(new Notification(String.valueOf(pid), this, 001100110011, "N#P#" + pid));
+            sendNotification(new Notification(String.valueOf(pid), this, 001100110011,
+                    "N#P#" + pid));
         }
     }
 
@@ -116,11 +115,6 @@ public class Factory extends NotificationBroadcasterSupport implements FactoryMB
             playerManager.playerInGameList.remove(index);
         }
         System.out.println(">> Delete player: " + pid + " from playerList");
-    }
-
-    @Override
-    public Bot createBot() {
-        return null;
     }
 
     @Override
@@ -188,15 +182,10 @@ public class Factory extends NotificationBroadcasterSupport implements FactoryMB
         return new Board(n, m);
     }
 
-    @Override
-    public Chat createChat() {
-        return new Chat();
-    }
-
-    @Override
-    public Clock createClock() {
-        return new Clock();
-    }
+//    @Override
+//    public Clock createClock() {
+//        return new Clock();
+//    }
 
     @Override
     public Coordinates createCoordinates(int n, int m) {

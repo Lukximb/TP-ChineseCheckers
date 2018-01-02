@@ -107,6 +107,7 @@ public class ClientListener implements NotificationListener {
                 String[] playerInfo = notification.getMessage().substring(2).split("#");
                 if(playerInfo[0].equals("P")) {
                     controller.playerCreated();
+                    System.out.println(">> LISTENER playerCreated");
                 } else if(playerInfo[0].equals("L")) {
                     controller.lobbyCreated();
                 }

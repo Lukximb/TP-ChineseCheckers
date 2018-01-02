@@ -226,8 +226,10 @@ public class ClientGUIController {
         lobbyListTable.setItems(lobbyList);
         board = board4;
 
+
         playersInGameColumn.setCellValueFactory(param -> new ReadOnlyStringWrapper(param.getValue()));
         playersInGameTable.setItems(playersList);
+		client.playerInLobby = 0;
 	}
 
 	//LOGIN---------------------------------------
@@ -297,12 +299,13 @@ public class ClientGUIController {
 	public void createLobbyButtonOnClick(ActionEvent event) {
 		if(!lobbyNameField.getText().equals("")) {
 			if(!lobbyNameField.getText().contains("#")) {
-				int playerInLobby = 2;
-
+				if (client.playerInLobby ==  0) {
+					client.playerInLobby = 2;
+				}
 				client.lobbyName = lobbyNameField.getText();
 				client.rowOfPawn = (int) boardSizeSpinner.getValue();
 
-				Object opParams[] = {playerInLobby, client.rowOfPawn, client.lobbyName, client.pid};
+				Object opParams[] = {client.playerInLobby, client.rowOfPawn, client.lobbyName, client.pid};
 				String opSig[] = {int.class.getName(), int.class.getName(), String.class.getName(), int.class.getName()};
 				client.connection.invokeMethod(client.factory, "createLobby", opParams, opSig);
 				showLobbyNameErrorMessage("");

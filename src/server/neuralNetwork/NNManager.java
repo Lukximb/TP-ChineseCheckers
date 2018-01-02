@@ -1,9 +1,8 @@
 package server.neuralNetwork;
 
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Random;
-import java.lang.StringBuilder;
-import java.io.*;
 
 public class NNManager {
     private Layer in;
