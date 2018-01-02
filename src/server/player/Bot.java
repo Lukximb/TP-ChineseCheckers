@@ -1,21 +1,16 @@
 package server.player;
 
-import client.logic.MoveType;
-import javafx.scene.paint.Color;
 import server.board.Coordinates;
-import server.board.Field;
 import server.lobby.Lobby;
-import server.neuralNetwork.NNManager;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class Bot implements PlayerTemplate{
     public int pid;
     public String name;
     public Lobby lobby;
     public int corner;
-    private volatile Difficult difficultLevel;
+    public volatile Difficult difficultLevel;
     private volatile Runnable borRunnable;
     private volatile Thread botThread;
     public boolean myTurn;

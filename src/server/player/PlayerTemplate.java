@@ -1,6 +1,5 @@
 package server.player;
 
-import javafx.scene.paint.Color;
 import server.board.Coordinates;
 import server.lobby.Lobby;
 

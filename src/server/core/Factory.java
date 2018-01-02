@@ -1,6 +1,5 @@
 package server.core;
 
-import server.player.Player;
 import server.board.Board;
 import server.board.Coordinates;
 import server.board.Field;
@@ -10,7 +9,7 @@ import server.manager.LobbyManager;
 import server.manager.Manager;
 import server.manager.PlayerManager;
 import server.player.Bot;
-import server.player.PlayerTemplate;
+import server.player.Player;
 
 import javax.management.Notification;
 import javax.management.NotificationBroadcasterSupport;

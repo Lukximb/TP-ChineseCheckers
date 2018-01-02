@@ -1,12 +1,9 @@
 package server.lobby;
 
 import client.logic.MoveType;
-import server.board.Field;
-import server.player.Player;
 import server.board.Coordinates;
+import server.board.Field;
 import server.player.PlayerTemplate;
-
-import java.util.ArrayList;
 
 public class RulesManager implements IRulesManager {
     private LobbyMediator mediator;

@@ -1,6 +1,5 @@
 package server.neuralNetwork;
 
-import java.lang.Math;
 import java.util.ArrayList;
 
 public class Neuron {

@@ -1,6 +1,5 @@
 package server.board;
 
-import server.player.Player;
 import server.player.PlayerTemplate;
 
 public class Field {
