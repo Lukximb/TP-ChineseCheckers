@@ -117,6 +117,14 @@ public class ClientGUI extends Application {
         }
     }
 
+    public void removeNotificationListenerFromLobby() {
+        try {
+            connection.mbsc.removeNotificationListener(lobbyObject, clientListener, myFilter, null);
+        } catch(Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     public static void main(String[] args) {
         launch(args);
     }

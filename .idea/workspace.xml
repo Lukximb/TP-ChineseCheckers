@@ -20,11 +20,21 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="375">
+      <file leaf-file-name="Manager.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/server/manager/Manager.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="192">
+              <caret line="99" column="79" lean-forward="false" selection-start-line="99" selection-start-column="79" selection-end-line="99" selection-end-column="79" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="Player.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/server/player/Player.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="183">
-              <caret line="119" column="0" lean-forward="false" selection-start-line="119" selection-start-column="0" selection-end-line="119" selection-end-column="0" />
+              <caret line="98" column="0" lean-forward="false" selection-start-line="98" selection-start-column="0" selection-end-line="98" selection-end-column="0" />
               <folding>
                 <element signature="e#2247#2248#0" expanded="true" />
                 <element signature="e#2280#2281#0" expanded="true" />
@@ -32,7 +42,6 @@
                 <element signature="e#2369#2370#0" expanded="true" />
                 <element signature="e#3040#3041#0" expanded="true" />
                 <element signature="e#3073#3074#0" expanded="true" />
-                <element signature="e#3118#3119#0" expanded="true" />
                 <element signature="e#3155#3156#0" expanded="true" />
                 <element signature="e#3196#3197#0" expanded="true" />
                 <element signature="e#3222#3223#0" expanded="true" />
@@ -54,16 +63,6 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="LobbyManager.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/server/manager/LobbyManager.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="213">
-              <caret line="125" column="0" lean-forward="false" selection-start-line="125" selection-start-column="0" selection-end-line="125" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="LobbyMediator.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/server/lobby/LobbyMediator.java">
           <provider selected="true" editor-type-id="text-editor">
@@ -72,7 +71,6 @@
               <folding>
                 <element signature="e#1924#1925#0" expanded="true" />
                 <element signature="e#1972#1973#0" expanded="true" />
-                <marker date="1514927275142" expanded="true" signature="1857:1862" ph="{...}" />
               </folding>
             </state>
           </provider>
@@ -81,13 +79,13 @@
       <file leaf-file-name="ClientListener.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/client/logic/ClientListener.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="273">
-              <caret line="51" column="52" lean-forward="false" selection-start-line="51" selection-start-column="52" selection-end-line="51" selection-end-column="52" />
+            <state relative-caret-position="0">
+              <caret line="127" column="49" lean-forward="true" selection-start-line="127" selection-start-column="49" selection-end-line="127" selection-end-column="49" />
               <folding>
-                <element signature="e#8338#8339#0" expanded="true" />
-                <element signature="e#8370#8371#0" expanded="true" />
-                <element signature="e#8411#8412#0" expanded="true" />
-                <element signature="e#8447#8448#0" expanded="true" />
+                <element signature="e#8562#8563#0" expanded="true" />
+                <element signature="e#8594#8595#0" expanded="true" />
+                <element signature="e#8635#8636#0" expanded="true" />
+                <element signature="e#8671#8672#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -96,9 +94,21 @@
       <file leaf-file-name="Lobby.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/server/lobby/Lobby.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="4473">
-              <caret line="223" column="9" lean-forward="true" selection-start-line="223" selection-start-column="9" selection-end-line="223" selection-end-column="9" />
+            <state relative-caret-position="246">
+              <caret line="412" column="25" lean-forward="true" selection-start-line="412" selection-start-column="25" selection-end-line="412" selection-end-column="25" />
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ClientConnection.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/client/logic/ClientConnection.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="192">
+              <caret line="47" column="0" lean-forward="false" selection-start-line="47" selection-start-column="0" selection-end-line="47" selection-end-column="0" />
+              <folding>
+                <marker date="1514927275049" expanded="true" signature="1647:1848" ph="{...}" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -111,18 +121,19 @@
               <folding>
                 <element signature="e#5961#5962#0" expanded="true" />
                 <element signature="e#6005#6006#0" expanded="true" />
-                <marker date="1514927275054" expanded="true" signature="5885:5890" ph=" }" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ClientGUI.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="ClientGUI.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/client/core/ClientGUI.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-606">
-              <caret line="73" column="42" lean-forward="false" selection-start-line="73" selection-start-column="42" selection-end-line="73" selection-end-column="42" />
-              <folding />
+            <state relative-caret-position="2436">
+              <caret line="127" column="44" lean-forward="true" selection-start-line="127" selection-start-column="44" selection-end-line="127" selection-end-column="44" />
+              <folding>
+                <element signature="e#4495#4496#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -130,7 +141,7 @@
       <file leaf-file-name="PlayerLogic.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/client/logic/PlayerLogic.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="402">
+            <state relative-caret-position="966">
               <caret line="47" column="58" lean-forward="false" selection-start-line="47" selection-start-column="58" selection-end-line="47" selection-end-column="58" />
               <folding />
             </state>
@@ -140,8 +151,8 @@
       <file leaf-file-name="ClientGUIController.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/client/logic/ClientGUIController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="4179">
-              <caret line="231" column="33" lean-forward="false" selection-start-line="231" selection-start-column="33" selection-end-line="231" selection-end-column="33" />
+            <state relative-caret-position="183">
+              <caret line="557" column="0" lean-forward="false" selection-start-line="557" selection-start-column="0" selection-end-line="557" selection-end-column="0" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#5816#5817#0" expanded="true" />
@@ -173,19 +184,6 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ClientFXML.fxml" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/client/ClientFXML.fxml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="42">
-              <caret line="28" column="33" lean-forward="true" selection-start-line="28" selection-start-column="33" selection-end-line="28" selection-end-column="33" />
-              <folding />
-            </state>
-          </provider>
-          <provider editor-type-id="JavaFX-Scene-Builder">
-            <state />
-          </provider>
-        </entry>
-      </file>
     </leaf>
   </component>
   <component name="Git.Settings">
@@ -214,15 +212,16 @@
         <option value="$PROJECT_DIR$/src/server/player/Bot.java" />
         <option value="$PROJECT_DIR$/src/server/player/BotThread.java" />
         <option value="$PROJECT_DIR$/src/server/manager/PlayerManager.java" />
-        <option value="$PROJECT_DIR$/src/server/manager/Manager.java" />
         <option value="$PROJECT_DIR$/src/server/core/Factory.java" />
         <option value="$PROJECT_DIR$/src/client/logic/PlayerLogic.java" />
         <option value="$PROJECT_DIR$/test/test/serverTest/lobbyTest/RulesManagerTest.java" />
-        <option value="$PROJECT_DIR$/src/client/logic/ClientListener.java" />
         <option value="$PROJECT_DIR$/src/server/lobby/LobbyMediator.java" />
-        <option value="$PROJECT_DIR$/src/server/lobby/Lobby.java" />
         <option value="$PROJECT_DIR$/src/client/logic/ClientGUIController.java" />
         <option value="$PROJECT_DIR$/src/client/ClientFXML.fxml" />
+        <option value="$PROJECT_DIR$/src/server/manager/Manager.java" />
+        <option value="$PROJECT_DIR$/src/server/lobby/Lobby.java" />
+        <option value="$PROJECT_DIR$/src/client/logic/ClientListener.java" />
+        <option value="$PROJECT_DIR$/src/client/core/ClientGUI.java" />
       </list>
     </option>
   </component>
@@ -232,7 +231,7 @@
     <detection-done>true</detection-done>
     <sorting>DEFINITION_ORDER</sorting>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
+  <component name="ProjectFrameBounds" extendedState="7">
     <option name="x" value="433" />
     <option name="y" value="-13" />
     <option name="width" value="976" />
@@ -664,7 +663,7 @@
       <workItem from="1514590282156" duration="987000" />
       <workItem from="1514723333446" duration="2179000" />
       <workItem from="1514841897929" duration="19680000" />
-      <workItem from="1514895843195" duration="26361000" />
+      <workItem from="1514895843195" duration="28281000" />
     </task>
     <servers />
   </component>
@@ -701,10 +700,10 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="49207000" />
+    <option name="totallyTimeSpent" value="51127000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-9" y="-9" width="1938" height="1048" extended-state="6" />
+    <frame x="-9" y="-9" width="1938" height="1048" extended-state="7" />
     <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -813,7 +812,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/src/server/lobby/Lobby.java</url>
-          <line>393</line>
+          <line>397</line>
           <properties class="server.lobby.Lobby">
             <option name="EMULATED" value="true" />
           </properties>
@@ -859,7 +858,6 @@
             <element signature="e#2369#2370#0" expanded="true" />
             <element signature="e#3040#3041#0" expanded="true" />
             <element signature="e#3073#3074#0" expanded="true" />
-            <element signature="e#3118#3119#0" expanded="true" />
             <element signature="e#3155#3156#0" expanded="true" />
             <element signature="e#3196#3197#0" expanded="true" />
             <element signature="e#3222#3223#0" expanded="true" />
@@ -1117,16 +1115,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/client/logic/ClientConnection.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="183">
-          <caret line="50" column="0" lean-forward="false" selection-start-line="50" selection-start-column="0" selection-end-line="50" selection-end-column="0" />
-          <folding>
-            <marker date="1514927275049" expanded="true" signature="1647:1848" ph="{...}" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/server/board/Board.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="297">
@@ -1153,14 +1141,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/server/manager/Manager.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="183">
-          <caret line="87" column="79" lean-forward="true" selection-start-line="87" selection-start-column="79" selection-end-line="87" selection-end-column="79" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/server/player/BotThread.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -1173,14 +1153,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="266">
           <caret line="87" column="0" lean-forward="false" selection-start-line="87" selection-start-column="0" selection-end-line="87" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/server/manager/LobbyManager.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="213">
-          <caret line="125" column="0" lean-forward="false" selection-start-line="125" selection-start-column="0" selection-end-line="125" selection-end-column="0" />
           <folding />
         </state>
       </provider>
@@ -1203,95 +1175,29 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/client/logic/PlayerLogic.java">
+    <entry file="file://$PROJECT_DIR$/src/client/ClientFXML.fxml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="402">
-          <caret line="47" column="58" lean-forward="false" selection-start-line="47" selection-start-column="58" selection-end-line="47" selection-end-column="58" />
+        <state relative-caret-position="84">
+          <caret line="28" column="33" lean-forward="true" selection-start-line="28" selection-start-column="33" selection-end-line="28" selection-end-column="33" />
           <folding />
         </state>
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/server/core/Factory.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="42">
-          <caret line="135" column="9" lean-forward="false" selection-start-line="135" selection-start-column="9" selection-end-line="135" selection-end-column="9" />
-          <folding>
-            <element signature="e#5961#5962#0" expanded="true" />
-            <element signature="e#6005#6006#0" expanded="true" />
-            <marker date="1514927275054" expanded="true" signature="5885:5890" ph=" }" />
-          </folding>
-        </state>
+      <provider editor-type-id="JavaFX-Scene-Builder">
+        <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/client/core/ClientGUI.java">
+    <entry file="file://$PROJECT_DIR$/src/server/manager/LobbyManager.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-606">
-          <caret line="73" column="42" lean-forward="false" selection-start-line="73" selection-start-column="42" selection-end-line="73" selection-end-column="42" />
+        <state relative-caret-position="213">
+          <caret line="125" column="0" lean-forward="false" selection-start-line="125" selection-start-column="0" selection-end-line="125" selection-end-column="0" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/client/logic/ClientListener.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="273">
-          <caret line="51" column="52" lean-forward="false" selection-start-line="51" selection-start-column="52" selection-end-line="51" selection-end-column="52" />
-          <folding>
-            <element signature="e#8338#8339#0" expanded="true" />
-            <element signature="e#8370#8371#0" expanded="true" />
-            <element signature="e#8411#8412#0" expanded="true" />
-            <element signature="e#8447#8448#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/server/lobby/LobbyMediator.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="465">
-          <caret line="92" column="62" lean-forward="false" selection-start-line="92" selection-start-column="62" selection-end-line="92" selection-end-column="62" />
-          <folding>
-            <element signature="e#1924#1925#0" expanded="true" />
-            <element signature="e#1972#1973#0" expanded="true" />
-            <marker date="1514927275142" expanded="true" signature="1857:1862" ph="{...}" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/server/player/Player.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="183">
-          <caret line="119" column="0" lean-forward="false" selection-start-line="119" selection-start-column="0" selection-end-line="119" selection-end-column="0" />
-          <folding>
-            <element signature="e#2247#2248#0" expanded="true" />
-            <element signature="e#2280#2281#0" expanded="true" />
-            <element signature="e#2342#2343#0" expanded="true" />
-            <element signature="e#2369#2370#0" expanded="true" />
-            <element signature="e#3040#3041#0" expanded="true" />
-            <element signature="e#3073#3074#0" expanded="true" />
-            <element signature="e#3118#3119#0" expanded="true" />
-            <element signature="e#3155#3156#0" expanded="true" />
-            <element signature="e#3196#3197#0" expanded="true" />
-            <element signature="e#3222#3223#0" expanded="true" />
-            <element signature="e#3859#3860#0" expanded="true" />
-            <element signature="e#3920#3921#0" expanded="true" />
-            <element signature="e#3993#3994#0" expanded="true" />
-            <element signature="e#4058#4059#0" expanded="true" />
-            <element signature="e#4103#4104#0" expanded="true" />
-            <element signature="e#4130#4131#0" expanded="true" />
-            <element signature="e#4174#4175#0" expanded="true" />
-            <element signature="e#4202#4203#0" expanded="true" />
-            <element signature="e#4929#4930#0" expanded="true" />
-            <element signature="e#4958#4959#0" expanded="true" />
-            <element signature="e#5013#5014#0" expanded="true" />
-            <element signature="e#5047#5048#0" expanded="true" />
-            <marker date="1514902683495" expanded="true" signature="5114:5115" ph="{}" />
-          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/client/logic/ClientGUIController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4179">
-          <caret line="231" column="33" lean-forward="false" selection-start-line="231" selection-start-column="33" selection-end-line="231" selection-end-column="33" />
+        <state relative-caret-position="183">
+          <caret line="557" column="0" lean-forward="false" selection-start-line="557" selection-start-column="0" selection-end-line="557" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#5816#5817#0" expanded="true" />
@@ -1322,23 +1228,114 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/server/lobby/Lobby.java">
+    <entry file="file://$PROJECT_DIR$/src/server/manager/Manager.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4473">
-          <caret line="223" column="9" lean-forward="true" selection-start-line="223" selection-start-column="9" selection-end-line="223" selection-end-column="9" />
+        <state relative-caret-position="192">
+          <caret line="99" column="79" lean-forward="false" selection-start-line="99" selection-start-column="79" selection-end-line="99" selection-end-column="79" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/client/ClientFXML.fxml">
+    <entry file="file://$PROJECT_DIR$/src/client/logic/ClientConnection.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="42">
-          <caret line="28" column="33" lean-forward="true" selection-start-line="28" selection-start-column="33" selection-end-line="28" selection-end-column="33" />
+        <state relative-caret-position="192">
+          <caret line="47" column="0" lean-forward="false" selection-start-line="47" selection-start-column="0" selection-end-line="47" selection-end-column="0" />
+          <folding>
+            <marker date="1514927275049" expanded="true" signature="1647:1848" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/server/lobby/Lobby.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="246">
+          <caret line="412" column="25" lean-forward="true" selection-start-line="412" selection-start-column="25" selection-end-line="412" selection-end-column="25" />
           <folding />
         </state>
       </provider>
-      <provider editor-type-id="JavaFX-Scene-Builder">
-        <state />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/server/lobby/LobbyMediator.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="465">
+          <caret line="92" column="62" lean-forward="false" selection-start-line="92" selection-start-column="62" selection-end-line="92" selection-end-column="62" />
+          <folding>
+            <element signature="e#1924#1925#0" expanded="true" />
+            <element signature="e#1972#1973#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/server/player/Player.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="183">
+          <caret line="98" column="0" lean-forward="false" selection-start-line="98" selection-start-column="0" selection-end-line="98" selection-end-column="0" />
+          <folding>
+            <element signature="e#2247#2248#0" expanded="true" />
+            <element signature="e#2280#2281#0" expanded="true" />
+            <element signature="e#2342#2343#0" expanded="true" />
+            <element signature="e#2369#2370#0" expanded="true" />
+            <element signature="e#3040#3041#0" expanded="true" />
+            <element signature="e#3073#3074#0" expanded="true" />
+            <element signature="e#3155#3156#0" expanded="true" />
+            <element signature="e#3196#3197#0" expanded="true" />
+            <element signature="e#3222#3223#0" expanded="true" />
+            <element signature="e#3859#3860#0" expanded="true" />
+            <element signature="e#3920#3921#0" expanded="true" />
+            <element signature="e#3993#3994#0" expanded="true" />
+            <element signature="e#4058#4059#0" expanded="true" />
+            <element signature="e#4103#4104#0" expanded="true" />
+            <element signature="e#4130#4131#0" expanded="true" />
+            <element signature="e#4174#4175#0" expanded="true" />
+            <element signature="e#4202#4203#0" expanded="true" />
+            <element signature="e#4929#4930#0" expanded="true" />
+            <element signature="e#4958#4959#0" expanded="true" />
+            <element signature="e#5013#5014#0" expanded="true" />
+            <element signature="e#5047#5048#0" expanded="true" />
+            <marker date="1514902683495" expanded="true" signature="5114:5115" ph="{}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/client/logic/PlayerLogic.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="966">
+          <caret line="47" column="58" lean-forward="false" selection-start-line="47" selection-start-column="58" selection-end-line="47" selection-end-column="58" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/server/core/Factory.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="42">
+          <caret line="135" column="9" lean-forward="false" selection-start-line="135" selection-start-column="9" selection-end-line="135" selection-end-column="9" />
+          <folding>
+            <element signature="e#5961#5962#0" expanded="true" />
+            <element signature="e#6005#6006#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/client/logic/ClientListener.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="127" column="49" lean-forward="true" selection-start-line="127" selection-start-column="49" selection-end-line="127" selection-end-column="49" />
+          <folding>
+            <element signature="e#8562#8563#0" expanded="true" />
+            <element signature="e#8594#8595#0" expanded="true" />
+            <element signature="e#8635#8636#0" expanded="true" />
+            <element signature="e#8671#8672#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/client/core/ClientGUI.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2436">
+          <caret line="127" column="44" lean-forward="true" selection-start-line="127" selection-start-column="44" selection-end-line="127" selection-end-column="44" />
+          <folding>
+            <element signature="e#4495#4496#0" expanded="true" />
+          </folding>
+        </state>
       </provider>
     </entry>
   </component>

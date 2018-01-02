@@ -291,7 +291,7 @@ public class Lobby extends NotificationBroadcasterSupport implements LobbyMBean{
         else {
             for(int i=0; i<rows; i++) {
                 for(int j=0; j<rows-i; j++) {
-                    player.addDestinationCoordinates(n-i, m+2*j+i);
+                    player.addDestinationCoordinates(n+i, m+2*j+i);
                 }
             }
         }
@@ -364,7 +364,11 @@ public class Lobby extends NotificationBroadcasterSupport implements LobbyMBean{
 
     public synchronized void sendLooserNotification(PlayerTemplate looser, PlayerTemplate winner) {
         String message = "-,";
-        message = message.concat(looser.getName() + "," + winner.getName());
+        if(winner == null) {
+            message = message.concat(looser.getName() + "," + " ");
+        } else {
+            message = message.concat(looser.getName() + "," + winner.getName());
+        }
         sendNotification(new Notification(String.valueOf(looser.getPid()), this, 11001100, message));
     }
 
@@ -414,6 +418,8 @@ public class Lobby extends NotificationBroadcasterSupport implements LobbyMBean{
                     }
                 }
             }
+        } else {
+            sendLooserNotification(player, null);
         }
 
         for(int i=0; i<numberOfPlayers; i++) {
