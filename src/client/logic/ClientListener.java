@@ -1,9 +1,7 @@
 package client.logic;
 
-import javax.management.MalformedObjectNameException;
 import javax.management.Notification;
 import javax.management.NotificationListener;
-import javax.management.ObjectName;
 
 public class ClientListener implements NotificationListener {
     private ClientGUIController controller;
@@ -105,22 +103,12 @@ public class ClientListener implements NotificationListener {
                 controller.showLooserScreen(looser);
                 break;
             case('N')://new player created
-                String[] playerInfo = notification.getMessage().substring(2).split(",");
-                controller.playerNickNamePanel.setVisible(false);
-                controller.playerNickNamePanel.setDisable(true);
-
-                try {
-                    controller.client.player = new ObjectName(controller.client.domain+
-                            controller.client.pid +":type=server.player.Player,name=Player" + controller.client.pid);
-
-                    controller.client.addNotificationListenerToPlayer();
-                    controller.client.playerName = controller.nickNameField.getText();
-                } catch (MalformedObjectNameException e) {
-                    e.printStackTrace();
+                String[] playerInfo = notification.getMessage().substring(2).split("#");
+                if(playerInfo[0].equals("P")) {
+                    controller.playerCreated();
+                } else if(playerInfo[0].equals("L")) {
+                    controller.lobbyCreated();
                 }
-
-                controller.menu.setVisible(true);
-                controller.menu.setDisable(false);
                 break;
             case('*')://winner/looser popup
                 String[] playersNames = notification.getMessage().substring(2).split(",");

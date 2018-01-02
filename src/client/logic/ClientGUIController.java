@@ -224,6 +224,23 @@ public class ClientGUIController {
 		playerLogic.createPlayer();
 	}
 
+	public void playerCreated() {
+		playerNickNamePanel.setVisible(false);
+		playerNickNamePanel.setDisable(true);
+
+		try {
+			client.player = new ObjectName(client.domain+ client.pid +":type=server.player.Player,name=Player" + client.pid);
+
+			client.addNotificationListenerToPlayer();
+			client.playerName = nickNameField.getText();
+		} catch (MalformedObjectNameException e) {
+			e.printStackTrace();
+		}
+
+		menu.setVisible(true);
+		menu.setDisable(false);
+	}
+
 
 
 
@@ -262,19 +279,31 @@ public class ClientGUIController {
 	//CREATE LOBBY--------------------------------
 
 	public void createLobbyButtonOnClick(ActionEvent event) {
+		if(!lobbyNameField.getText().equals("")) {
+			if(!lobbyNameField.getText().contains("#")) {
+				int playerInLobby = 2;
+
+				client.lobbyName = lobbyNameField.getText();
+				client.rowOfPawn = (int) boardSizeSpinner.getValue();
+
+				Object opParams[] = {playerInLobby, client.rowOfPawn, client.lobbyName, client.pid};
+				String opSig[] = {int.class.getName(), int.class.getName(), String.class.getName(), int.class.getName()};
+				client.connection.invokeMethod(client.factory, "createLobby", opParams, opSig);
+			} else {
+				//ERROR - wrong name
+			}
+		} else {
+			//ERROR - Empty lobby name
+		}
+	}
+
+	public void lobbyCreated() {
 		this.createLobby.setVisible(false);
 		this.createLobby.setDisable(true);
 
 		if (client.playerInLobby == 0) {
 			client.playerInLobby = 2;
 		}
-
-		client.lobbyName = lobbyNameField.getText();
-		client.rowOfPawn = (int)boardSizeSpinner.getValue();
-
-		Object  opParams[] = {client.playerInLobby , client.rowOfPawn, client.lobbyName, client.pid};
-		String  opSig[] = {int.class.getName(), int.class.getName(), String.class.getName(), int.class.getName()};
-		client.connection.invokeMethod(client.factory, "createLobby", opParams, opSig);
 
 		Object opParams1[] = {client.playerName};
 		String opSig1[] = {String.class.getName()};
