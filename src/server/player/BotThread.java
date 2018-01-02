@@ -52,7 +52,7 @@ public class BotThread implements Runnable{
                                 }
                             } else if (bot.difficultLevel == Difficult.HARD) {
                                 if (checkPass()) {
-                                    moveMEDIUM();
+                                    moveHARD();
                                 }
                             }
                             bot.myTurn = false;
@@ -79,23 +79,46 @@ public class BotThread implements Runnable{
                 coordList = find(c);
                 for (int k = 0; k < coordList.size() && bot.myTurn; k++) {
                     if (coordList.get(k) != null) {
-                        if (k == 0 || k == 1 || k == 4 || k == 7 || k == 10 || k == 11){
+                        if (k == 0 || k == 1 || k == 4 || k == 7 || k == 10 || k == 11) {
                             ArrayList<ArrayList<Coordinates>> jumpCoordList = findJump(c, 0);
                             for (ArrayList<Coordinates> array : jumpCoordList) {
                                 if (bot.myTurn) {
-                                    Coordinates destCoor = destinationCoordinates.get(0);
-                                    for (int m = 0; m < destinationCoordinates.size(); m++) {
-                                        Coordinates newC = new Coordinates(destinationCoordinates.get(m).getX(), destinationCoordinates.get(m).getY());
-                                        if (lobby.mediator.getField(newC).getPlayerOn() == null) {
-                                            destCoor = destinationCoordinates.get(m);
-                                            break;
+                                    Coordinates destCoor = null;
+                                    for (int q = 0; q < destinationCoordinates.size() && bot.myTurn; q++) {
+                                        if (destinationCoordinates.get(q).getX() == c.getX() &&
+                                                destinationCoordinates.get(q).getY() == c.getY()) {
+                                            for (int w = 0; w < q; w++) {
+                                                if (lobby.mediator.getField(destinationCoordinates.get(w)).getPlayerOn() == null) {
+                                                    destCoor = destinationCoordinates.get(w);
+                                                    break;
+                                                }
+                                            }
+                                        }
+                                    }
+                                    if (destCoor == null) {
+                                        for (int m = 0; m < destinationCoordinates.size(); m++) {
+                                            Coordinates newC = new Coordinates(destinationCoordinates.get(m).getX(), destinationCoordinates.get(m).getY());
+                                            if (lobby.mediator.getField(newC).getPlayerOn() != bot) {
+                                                destCoor = destinationCoordinates.get(m);
+                                                break;
+                                            }
                                         }
                                     }
                                     double startDistance = Math.sqrt(Math.pow(destCoor.getX() - c.getX(), 2)
                                             + Math.pow(destCoor.getY() - c.getY(), 2));
                                     double destinationDistance = Math.sqrt(Math.pow(destCoor.getX() - array.get(array.size() - 1).getX(), 2)
                                             + Math.pow(destCoor.getY() - array.get(array.size() - 1).getY(), 2));
-                                    if (startDistance - destinationDistance >= bestWayScore) {
+                                    int minusForDestination = 0;
+                                    int x = destinationCoordinates.size();
+                                    for (Coordinates dest : destinationCoordinates) {
+                                        if (dest.getX() == destCoor.getX() &&
+                                                dest.getY() == destCoor.getY()) {
+                                            minusForDestination = x;
+                                            break;
+                                        }
+                                        x--;
+                                    }
+                                    if (startDistance - destinationDistance - minusForDestination >= bestWayScore) {
                                         bestWayScore = startDistance - destinationDistance;
                                         coordinatesList.clear();
                                         coordinatesList.add(c);
@@ -107,19 +130,43 @@ public class BotThread implements Runnable{
                             }
                         } else {
                             if (bot.myTurn) {
-                                Coordinates destCoor = destinationCoordinates.get(0);
-                                for (int m = 0; m < destinationCoordinates.size(); m++) {
-                                    Coordinates newC = new Coordinates(destinationCoordinates.get(m).getX(), destinationCoordinates.get(m).getY());
-                                    if (lobby.mediator.getField(newC).getPlayerOn() == null) {
-                                        destCoor = destinationCoordinates.get(m);
-                                        break;
+                                Coordinates destCoor = null;
+                                for (int q = 0; q < destinationCoordinates.size() && bot.myTurn; q++) {
+                                    if (destinationCoordinates.get(q).getX() == c.getX() &&
+                                            destinationCoordinates.get(q).getY() == c.getY()) {
+                                        for (int w = 0; w < q; w++) {
+                                            if (lobby.mediator.getField(destinationCoordinates.get(w)).getPlayerOn() == null) {
+                                                destCoor = destinationCoordinates.get(w);
+                                                break;
+                                            }
+                                        }
+
+                                    }
+                                }
+                                if (destCoor == null) {
+                                    for (int m = 0; m < destinationCoordinates.size(); m++) {
+                                        Coordinates newC = new Coordinates(destinationCoordinates.get(m).getX(), destinationCoordinates.get(m).getY());
+                                        if (lobby.mediator.getField(newC).getPlayerOn() != bot) {
+                                            destCoor = destinationCoordinates.get(m);
+                                            break;
+                                        }
                                     }
                                 }
                                 double startDistance = Math.sqrt(Math.pow(destCoor.getX() - c.getX(), 2)
                                         + Math.pow(destCoor.getY() - c.getY(), 2));
                                 double destinationDistance = Math.sqrt(Math.pow(destCoor.getX() - coordList.get(k).getX(), 2)
                                         + Math.pow(destCoor.getY() - coordList.get(k).getY(), 2));
-                                if (startDistance - destinationDistance >= bestWayScore) {
+                                int minusForDestination = 0;
+                                int x = destinationCoordinates.size();
+                                for (Coordinates dest : destinationCoordinates) {
+                                    if (dest.getX() == destCoor.getX() &&
+                                            dest.getY() == destCoor.getY()) {
+                                        minusForDestination = x;
+                                        break;
+                                    }
+                                    x--;
+                                }
+                                if (startDistance - destinationDistance - minusForDestination >= bestWayScore) {
                                     bestWayScore = startDistance - destinationDistance;
                                     coordinatesList.clear();
                                     coordinatesList.add(c);
@@ -131,8 +178,6 @@ public class BotThread implements Runnable{
                         }
                     }
                 }
-            } else {
-                break;
             }
         }
         if (bot.myTurn) {
@@ -158,12 +203,26 @@ public class BotThread implements Runnable{
                     if (coordList.get(k) != null) {
                         if (k == 0 || k == 1 || k == 4 || k == 7 || k == 10 || k == 11){
                             if (bot.myTurn) {
-                                Coordinates destCoor = destinationCoordinates.get(0);
-                                for (int m = 0; m < destinationCoordinates.size(); m++) {
-                                    Coordinates newC = new Coordinates(destinationCoordinates.get(m).getX(), destinationCoordinates.get(m).getY());
-                                    if (lobby.mediator.getField(newC).getPlayerOn() == null) {
-                                        destCoor = destinationCoordinates.get(m);
-                                        break;
+                                Coordinates destCoor = null;
+                                for (int q = 0; q < destinationCoordinates.size() && bot.myTurn; q++) {
+                                    if (destinationCoordinates.get(q).getX() == c.getX() &&
+                                            destinationCoordinates.get(q).getY() == c.getY()) {
+                                        for (int w = 0; w < q; w++) {
+                                            if (lobby.mediator.getField(destinationCoordinates.get(w)).getPlayerOn() == null) {
+                                                destCoor = destinationCoordinates.get(w);
+                                                break;
+                                            }
+                                        }
+
+                                    }
+                                }
+                                if (destCoor == null) {
+                                    for (int m = 0; m < destinationCoordinates.size(); m++) {
+                                        Coordinates newC = new Coordinates(destinationCoordinates.get(m).getX(), destinationCoordinates.get(m).getY());
+                                        if (lobby.mediator.getField(newC).getPlayerOn() != bot) {
+                                            destCoor = destinationCoordinates.get(m);
+                                            break;
+                                        }
                                     }
                                 }
                                 double startDistance = Math.sqrt(Math.pow(destCoor.getX() - c.getX(), 2)
@@ -179,12 +238,26 @@ public class BotThread implements Runnable{
                             }
                         } else {
                             if (bot.myTurn) {
-                                Coordinates destCoor = destinationCoordinates.get(0);
-                                for (int m = 0; m < destinationCoordinates.size(); m++) {
-                                    Coordinates newC = new Coordinates(destinationCoordinates.get(m).getX(), destinationCoordinates.get(m).getY());
-                                    if (lobby.mediator.getField(newC).getPlayerOn() == null) {
-                                        destCoor = destinationCoordinates.get(m);
-                                        break;
+                                Coordinates destCoor = null;
+                                for (int q = 0; q < destinationCoordinates.size() && bot.myTurn; q++) {
+                                    if (destinationCoordinates.get(q).getX() == c.getX() &&
+                                            destinationCoordinates.get(q).getY() == c.getY()) {
+                                        for (int w = 0; w < q; w++) {
+                                            if (lobby.mediator.getField(destinationCoordinates.get(w)).getPlayerOn() == null) {
+                                                destCoor = destinationCoordinates.get(w);
+                                                break;
+                                            }
+                                        }
+
+                                    }
+                                }
+                                if (destCoor == null) {
+                                    for (int m = 0; m < destinationCoordinates.size(); m++) {
+                                        Coordinates newC = new Coordinates(destinationCoordinates.get(m).getX(), destinationCoordinates.get(m).getY());
+                                        if (lobby.mediator.getField(newC).getPlayerOn() != bot) {
+                                            destCoor = destinationCoordinates.get(m);
+                                            break;
+                                        }
                                     }
                                 }
                                 double startDistance = Math.sqrt(Math.pow(destCoor.getX() - c.getX(), 2)
@@ -230,12 +303,26 @@ public class BotThread implements Runnable{
                             continue;
                         } else {
                             if (bot.myTurn) {
-                                Coordinates destCoor = destinationCoordinates.get(0);
-                                for (int m = 0; m < destinationCoordinates.size(); m++) {
-                                    Coordinates newC = new Coordinates(destinationCoordinates.get(m).getX(), destinationCoordinates.get(m).getY());
-                                    if (lobby.mediator.getField(newC).getPlayerOn() == null) {
-                                        destCoor = destinationCoordinates.get(m);
-                                        break;
+                                Coordinates destCoor = null;
+                                for (int q = 0; q < destinationCoordinates.size() && bot.myTurn; q++) {
+                                    if (destinationCoordinates.get(q).getX() == c.getX() &&
+                                            destinationCoordinates.get(q).getY() == c.getY()) {
+                                        for (int w = 0; w < q; w++) {
+                                            if (lobby.mediator.getField(destinationCoordinates.get(w)).getPlayerOn() == null) {
+                                                destCoor = destinationCoordinates.get(w);
+                                                break;
+                                            }
+                                        }
+
+                                    }
+                                }
+                                if (destCoor == null) {
+                                    for (int m = 0; m < destinationCoordinates.size(); m++) {
+                                        Coordinates newC = new Coordinates(destinationCoordinates.get(m).getX(), destinationCoordinates.get(m).getY());
+                                        if (lobby.mediator.getField(newC).getPlayerOn() != bot) {
+                                            destCoor = destinationCoordinates.get(m);
+                                            break;
+                                        }
                                     }
                                 }
                                 double startDistance = Math.sqrt(Math.pow(destCoor.getX() - c.getX(), 2)
@@ -527,7 +614,7 @@ public class BotThread implements Runnable{
         } else if (bot.difficultLevel == Difficult.MEDIUM) {
             return (rnd.nextDouble() > 0.1);
         } else if (bot.difficultLevel == Difficult.HARD) {
-            return (rnd.nextDouble() > 0.05);
+            return (rnd.nextDouble() > 0.001);
         }
         return true;
     }

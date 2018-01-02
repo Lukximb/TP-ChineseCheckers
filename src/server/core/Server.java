@@ -23,6 +23,10 @@ public class Server {
         System.out.println(">> server is running...");
     }
 
+    public Server(int i) {
+
+    }
+
     private void getFactory() {
         factory = Factory.getInstance(this);
     }

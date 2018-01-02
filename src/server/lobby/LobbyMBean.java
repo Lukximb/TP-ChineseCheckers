@@ -29,7 +29,7 @@ public interface LobbyMBean {
 
     Board getBoard();
 
-    void getRoundTime();
+   // void getRoundTime();
 
     void nextRound();
 

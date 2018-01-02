@@ -24,9 +24,6 @@ public class Bot implements PlayerTemplate{
         currentCoordinates = new ArrayList<>();
         destinationCoordinates = new ArrayList<>();
         myTurn = false;
-        //nnManager = new NNManager();
-        //Runnable runners = new Runnable;
-        //Thread threads = new Thread;
     }
 
 

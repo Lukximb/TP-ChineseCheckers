@@ -47,6 +47,8 @@ public class ClientGUIController {
 	private Button loginButton;
 	@FXML
 	public TextField nickNameField;
+	@FXML
+	private Label nickNameErrorLabel;
 
 	//MENU----------------------------------------
 	@FXML
@@ -78,6 +80,8 @@ public class ClientGUIController {
 	private Button createLobbyButton;
 	@FXML
 	private Button cancelCreateLobbyButton;
+	@FXML
+	private Label lobbyNameErrorLabel;
 	//JOIN LOBBY----------------------------------
     @FXML
     private TableView<String> lobbyListTable;
@@ -145,6 +149,11 @@ public class ClientGUIController {
 	private Label chatMessageBox;
 	@FXML
 	private TextField messageTextField;
+	@FXML
+	private TableView<String> playersInGameTable;
+	@FXML
+	private TableColumn<String, String> playersInGameColumn;
+
 	//POPUP-INVITE--------------------------------------
 	@FXML
 	private StackPane invitePopUp;
@@ -216,6 +225,11 @@ public class ClientGUIController {
         lobbyListColumn.setCellValueFactory(param -> new ReadOnlyStringWrapper(param.getValue()));
         lobbyListTable.setItems(lobbyList);
         board = board4;
+
+
+        playersInGameColumn.setCellValueFactory(param -> new ReadOnlyStringWrapper(param.getValue()));
+        playersInGameTable.setItems(playersList);
+		client.playerInLobby = 0;
 	}
 
 	//LOGIN---------------------------------------
@@ -241,7 +255,11 @@ public class ClientGUIController {
 		menu.setDisable(false);
 	}
 
-
+	public void showPlayerNameErrorMessage(String message) {
+		run(() -> {
+			nickNameErrorLabel.setText(message);
+		});
+	}
 
 
 	//MENU----------------------------------------
@@ -281,19 +299,23 @@ public class ClientGUIController {
 	public void createLobbyButtonOnClick(ActionEvent event) {
 		if(!lobbyNameField.getText().equals("")) {
 			if(!lobbyNameField.getText().contains("#")) {
-				int playerInLobby = 2;
-
+				if (client.playerInLobby ==  0) {
+					client.playerInLobby = 2;
+				}
 				client.lobbyName = lobbyNameField.getText();
 				client.rowOfPawn = (int) boardSizeSpinner.getValue();
 
-				Object opParams[] = {playerInLobby, client.rowOfPawn, client.lobbyName, client.pid};
+				Object opParams[] = {client.playerInLobby, client.rowOfPawn, client.lobbyName, client.pid};
 				String opSig[] = {int.class.getName(), int.class.getName(), String.class.getName(), int.class.getName()};
 				client.connection.invokeMethod(client.factory, "createLobby", opParams, opSig);
+				showLobbyNameErrorMessage("");
 			} else {
 				//ERROR - wrong name
+				showLobbyNameErrorMessage("ERROR, lobby name can't contains '#' characters!");
 			}
 		} else {
 			//ERROR - Empty lobby name
+			showLobbyNameErrorMessage("ERROR, lobby name can't be empty!");
 		}
 	}
 
@@ -320,6 +342,12 @@ public class ClientGUIController {
 
 		this.lobby.setVisible(true);
 		this.lobby.setDisable(false);
+	}
+
+	public void showLobbyNameErrorMessage(String message) {
+		run(() -> {
+			lobbyNameErrorLabel.setText(message);
+		});
 	}
 
 	public void cancelCreateLobbyButtonOnClick(ActionEvent event) {
@@ -421,6 +449,42 @@ public class ClientGUIController {
 
 		this.game.setVisible(true);
 		this.game.setDisable(false);
+	}
+
+	public void fillPlayersInGameTable() {
+		run(() -> {
+			ObservableList<String> newPlayersList = FXCollections.observableArrayList();
+			if(playersList.size() == 2) {
+				newPlayersList.add(playersList.get(0));
+				newPlayersList.add("");
+				newPlayersList.add("");
+				newPlayersList.add(playersList.get(1));
+				newPlayersList.add("");
+				newPlayersList.add("");
+			} else if(playersList.size() == 3) {
+				newPlayersList.add(playersList.get(0));
+				newPlayersList.add("");
+				newPlayersList.add(playersList.get(1));
+				newPlayersList.add("");
+				newPlayersList.add(playersList.get(2));
+				newPlayersList.add("");
+			} else if(playersList.size() == 4) {
+				newPlayersList.add(playersList.get(0));
+				newPlayersList.add(playersList.get(1));
+				newPlayersList.add("");
+				newPlayersList.add(playersList.get(2));
+				newPlayersList.add(playersList.get(3));
+				newPlayersList.add("");
+			} else if(playersList.size() == 6) {
+				newPlayersList.add(playersList.get(0));
+				newPlayersList.add(playersList.get(1));
+				newPlayersList.add(playersList.get(2));
+				newPlayersList.add(playersList.get(3));
+				newPlayersList.add(playersList.get(4));
+				newPlayersList.add(playersList.get(5));
+			}
+			playersInGameTable.setItems(newPlayersList);
+		});
 	}
 
 	public void addPlayerButtonOnClick(ActionEvent event) {

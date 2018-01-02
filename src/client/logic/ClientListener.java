@@ -49,6 +49,7 @@ public class ClientListener implements NotificationListener {
             case('S')://Start Game
                 String[] args = notification.getMessage().substring(2).split(",");
                 hendleStartGame(args);
+                controller.fillPlayersInGameTable();
                 break;
             case('C')://Corner
                 int c = Integer.parseInt(notification.getMessage().substring(2));
@@ -89,6 +90,8 @@ public class ClientListener implements NotificationListener {
                     controller.lobby.setDisable(true);
                     controller.lobby.setVisible(false);
 
+                    controller.client.removeNotificationListenerFromLobby();
+
                     controller.menu.setDisable(false);
                     controller.menu.setVisible(true);
                     //TODO popup
@@ -97,15 +100,18 @@ public class ClientListener implements NotificationListener {
             case('+')://Winner
                 String[] winner = notification.getMessage().substring(2).split(",");
                 controller.showWinnerScreen(winner);
+                controller.client.removeNotificationListenerFromLobby();
                 break;
             case('-')://Looser
                 String[] looser = notification.getMessage().substring(2).split(",");
                 controller.showLooserScreen(looser);
+                controller.client.removeNotificationListenerFromLobby();
                 break;
             case('N')://new player created
                 String[] playerInfo = notification.getMessage().substring(2).split("#");
                 if(playerInfo[0].equals("P")) {
                     controller.playerCreated();
+                    System.out.println(">> LISTENER playerCreated");
                 } else if(playerInfo[0].equals("L")) {
                     controller.lobbyCreated();
                 }
