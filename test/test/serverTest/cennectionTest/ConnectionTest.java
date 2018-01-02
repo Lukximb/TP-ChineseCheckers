@@ -1,11 +1,8 @@
 package test.serverTest.cennectionTest;
 
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import server.connection.Connection;
-import server.core.Factory;
-import server.core.Server;
 import server.manager.Manager;
 
 import javax.management.MBeanServer;

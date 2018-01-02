@@ -23,7 +23,6 @@ public class Lobby extends NotificationBroadcasterSupport implements LobbyMBean{
 
     private PlayerTemplate admin;
     private volatile int roundCorner;
-    private Chat chat;
     private int rowNumber;
     private int playerCorner;
 
@@ -286,10 +285,10 @@ public class Lobby extends NotificationBroadcasterSupport implements LobbyMBean{
         return board;
     }
 
-    @Override
-    public void getRoundTime() {
-        mediator.getRoundTime();
-    }
+//    @Override
+//    public void getRoundTime() {
+//        mediator.getRoundTime();
+//    }
 
     @Override
     public synchronized void nextRound() {
@@ -348,7 +347,7 @@ public class Lobby extends NotificationBroadcasterSupport implements LobbyMBean{
 
     @Override
     public void printMessage(PlayerTemplate player, String message) {
-        chat.printMessage(player, message);
+        //chat.printMessage(player, message);
     }
 
     public void surrender(PlayerTemplate player) {
