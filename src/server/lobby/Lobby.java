@@ -4,6 +4,7 @@ package server.lobby;
 import server.board.Board;
 import server.board.Coordinates;
 import server.board.Field;
+import server.manager.LobbyManager;
 import server.player.Bot;
 import server.player.PlayerTemplate;
 
@@ -17,9 +18,10 @@ public class Lobby extends NotificationBroadcasterSupport implements LobbyMBean{
     public volatile PlayerTemplate[] players;
     public Board board;
     public PlayerTemplate round;
+    public int numberOfPlayers;
+    public LobbyManager lobbyManager;
 
     private PlayerTemplate admin;
-    private int numberOfPlayers;
     private volatile int roundCorner;
     private Chat chat;
     private int rowNumber;
@@ -36,6 +38,7 @@ public class Lobby extends NotificationBroadcasterSupport implements LobbyMBean{
         playerCorner = 0;
         players = new PlayerTemplate[numberOfPlayers];
         addPlayer(admin);
+        lobbyManager = LobbyManager.getInstance();
     }
 
     @Override
@@ -301,6 +304,9 @@ public class Lobby extends NotificationBroadcasterSupport implements LobbyMBean{
         if (players[roundCorner].isBot()) {
             players[roundCorner].yourTurn();
         }
+        if(round == null) {
+            nextRound();
+        }
     }
 
     public int getRoundCornerValue() {
@@ -328,8 +334,31 @@ public class Lobby extends NotificationBroadcasterSupport implements LobbyMBean{
         sendNotification(new Notification(String.valueOf(name), this, 1100110000, message));
     }
 
+    public synchronized void sendWinnerNotification(PlayerTemplate winner, PlayerTemplate looser) {
+        String message = "+,";
+        message = message.concat(winner.getName() + "," + looser.getName());
+        sendNotification(new Notification(String.valueOf(winner.getPid()), this, 1100111110, message));
+    }
+
+    public synchronized void sendLooserNotification(PlayerTemplate looser, PlayerTemplate winner) {
+        String message = "-,";
+        message = message.concat(looser.getName() + "," + winner.getName());
+        sendNotification(new Notification(String.valueOf(looser.getPid()), this, 11001100, message));
+    }
+
     @Override
     public void printMessage(PlayerTemplate player, String message) {
         chat.printMessage(player, message);
     }
+
+    public void surrender(PlayerTemplate player) {
+        int winnerCorner = (player.getCorner() + 3) % 6;
+        for(PlayerTemplate p : players) {
+            if(p.getCorner() == winnerCorner) {
+                sendWinnerNotification(p, player);
+                sendLooserNotification(player, p);
+            }
+        }
+    }
+
 }

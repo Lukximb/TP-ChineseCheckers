@@ -1,12 +1,9 @@
 package server.lobby;
 
 import client.logic.MoveType;
-import server.board.Field;
-import server.player.Player;
 import server.board.Coordinates;
+import server.board.Field;
 import server.player.PlayerTemplate;
-
-import java.util.ArrayList;
 
 public class RulesManager implements IRulesManager {
     private LobbyMediator mediator;
@@ -77,12 +74,10 @@ public class RulesManager implements IRulesManager {
 
     @Override
     public PlayerTemplate checkWinner(PlayerTemplate player) {
-        for(Coordinates c : player.currentCoordinates) {
-            if(!(player.destinationCoordinates.contains(c))) {
-                return null;
-            }
+        if(player.compareCoordinates()) {
+            return player;
         }
-        return player;
+        return null;
     }
 
     @Override

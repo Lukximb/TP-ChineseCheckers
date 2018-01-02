@@ -1,7 +1,9 @@
 package client.logic;
 
+import javax.management.MalformedObjectNameException;
 import javax.management.Notification;
 import javax.management.NotificationListener;
+import javax.management.ObjectName;
 
 public class ClientListener implements NotificationListener {
     private ClientGUIController controller;
@@ -20,10 +22,10 @@ public class ClientListener implements NotificationListener {
         System.out.println("Receive notification: " + notification.getMessage());
 //        System.out.println("Notifiaction: " + notification.getMessage().charAt(0) + " " + notification.getMessage().charAt(2));
         switch (notification.getMessage().charAt(0)) {
-            case('P')://player
+            case('P')://updating list of players in lobby
                 receivePlayersNames(notification.getMessage().substring(2));
                 break;
-            case('W'):
+            case('W')://Updating list of waiting lobbys
                 receiveLobbyNames(notification.getMessage().substring(2));
                 break;
             case('R')://RulesManager
@@ -83,7 +85,7 @@ public class ClientListener implements NotificationListener {
                 String line = message[0] + ": " + message[1];
                 controller.addMessage(line);
                 break;
-            case('X'):
+            case('X')://Remove player
                 String[] removeMessage = notification.getMessage().substring(2).split(",");
                 if(removeMessage[0].equals(controller.client.playerName)) {
                     controller.lobby.setDisable(true);
@@ -93,6 +95,42 @@ public class ClientListener implements NotificationListener {
                     controller.menu.setVisible(true);
                     //TODO popup
                 }
+                break;
+            case('+')://Winner
+                String[] winner = notification.getMessage().substring(2).split(",");
+                controller.looserNickLabel.setText(winner[1]);
+                controller.game.setVisible(false);
+                controller.game.setDisable(true);
+
+                controller.winner.setDisable(false);
+                controller.winner.setVisible(true);
+                break;
+            case('-')://Looser
+                String[] looser = notification.getMessage().substring(2).split(",");
+                controller.winnerNickLabel.setText(looser[1]);
+                controller.game.setVisible(false);
+                controller.game.setDisable(true);
+
+                controller.looser.setDisable(false);
+                controller.looser.setVisible(true);
+                break;
+            case('N')://new player created
+                String[] playerInfo = notification.getMessage().substring(2).split(",");
+                controller.playerNickNamePanel.setVisible(false);
+                controller.playerNickNamePanel.setDisable(true);
+
+                try {
+                    controller.client.player = new ObjectName(controller.client.domain+
+                            controller.client.pid +":type=server.player.Player,name=Player" + controller.client.pid);
+
+                    controller.client.addNotificationListenerToPlayer();
+                    controller.client.playerName = controller.nickNameField.getText();
+                } catch (MalformedObjectNameException e) {
+                    e.printStackTrace();
+                }
+
+                controller.menu.setVisible(true);
+                controller.menu.setDisable(false);
                 break;
             default:
         }

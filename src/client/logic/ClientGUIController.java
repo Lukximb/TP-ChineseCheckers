@@ -42,7 +42,7 @@ public class ClientGUIController {
 
 	//LOGIN---------------------------------------
 	@FXML
-	private StackPane playerNickNamePanel;
+	public StackPane playerNickNamePanel;
 	@FXML
 	private Button loginButton;
 	@FXML
@@ -164,16 +164,26 @@ public class ClientGUIController {
 	@FXML
 	private Label popUpLooserNick;
 	//WINNER----------------------------------------------------
-
-
-	//TODO
+	@FXML
+	public StackPane winner;
+	@FXML
+	private Button winnerPlayAgainButton;
+	@FXML
+	private Button winnerExitButton;
+	@FXML
+	public Label looserNickLabel;
 
 
 
 	//LOOSER-----------------------------------------------------
-
-
-	//TODO
+	@FXML
+	public StackPane looser;
+	@FXML
+	private Button looserPlayAgainButton;
+	@FXML
+	private Button looserExitButton;
+	@FXML
+	public Label winnerNickLabel;
 
 
 
@@ -211,13 +221,7 @@ public class ClientGUIController {
 	//LOGIN---------------------------------------
 
 	public void loginButtonOnClick(ActionEvent exent) {
-		this.playerNickNamePanel.setVisible(false);
-		this.playerNickNamePanel.setDisable(true);
-
 		playerLogic.createPlayer();
-
-		this.menu.setVisible(true);
-		this.menu.setDisable(false);
 	}
 
 
@@ -448,8 +452,10 @@ public class ClientGUIController {
 	//GAME----------------------------------------
 
 	public void surrenderButtonOnClick(ActionEvent event) {
-		this.game.setVisible(false);
-		this.game.setDisable(true);
+//		this.game.setVisible(false);
+//		this.game.setDisable(true);
+
+		client.connection.invokeMethod(client.player, "surrender", null, null);
 
 //		client.connection.invokeExitFromLobbyMethod(client.player, "exitFromLobby");
 		Object  opParams[] = {client.playerName, client.lobbyName};
@@ -457,8 +463,8 @@ public class ClientGUIController {
 		client.connection.invokeMethod(client.manager, "removePlayerFromGame", opParams, opSig);
 		client.lobbyName = "";
 
-		this.menu.setVisible(true);
-		this.menu.setDisable(false);
+//		this.looser.setVisible(true);
+//		this.looser.setDisable(false);
 	}
 
 	public void passButtonOnClick(ActionEvent event) {
@@ -555,11 +561,17 @@ public class ClientGUIController {
 	//TODO
 
 	public void playAgainButtononClick(ActionEvent event) {
+		winner.setVisible(false);
+		winner.setDisable(true);
+		looser.setVisible(false);
+		looser.setDisable(true);
 
+		menu.setDisable(false);
+		menu.setVisible(true);
 	}
 
 	public void exitOnClick(ActionEvent event) {
-
+		Platform.exit();
 	}
 
 

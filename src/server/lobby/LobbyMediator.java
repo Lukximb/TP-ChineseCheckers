@@ -72,16 +72,29 @@ public class LobbyMediator {
     public void checkWinner() {
         PlayerTemplate winner = rulesManager.checkWinner(lobby.round);
         if(winner != null) {
-            //TODO - send popup to winner
-            int loosingCorner = (winner.corner + 3) % 6;
+            int loosingCorner = (winner.getCorner() + 3) % 6;
             PlayerTemplate looser = null;
             for(PlayerTemplate p : lobby.players) {
-                if(p.corner == loosingCorner) {
+                if(p.getCorner() == loosingCorner) {
                     looser = p;
                     break;
                 }
             }
-            //TODO - send popup to looser
+
+            for(int i=0; i<lobby.numberOfPlayers; i++) {
+                if(lobby.players[i].equals(winner) || lobby.players[i].equals(looser)) {
+                    lobby.players[i].setLobby(null);
+                    lobby.players[i] = null;
+                }
+            }
+
+            lobby.sendWinnerNotification(winner, looser);
+            lobby.sendLooserNotification(looser, winner);
+            //TODO manager >> move to freePlayersList
+
+            if(lobby.isEmpty()) {
+                lobby.lobbyManager.removeLobby(lobby);
+            }
         }
     }
 }

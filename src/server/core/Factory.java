@@ -1,6 +1,5 @@
 package server.core;
 
-import server.player.Player;
 import server.board.Board;
 import server.board.Coordinates;
 import server.board.Field;
@@ -10,7 +9,7 @@ import server.manager.LobbyManager;
 import server.manager.Manager;
 import server.manager.PlayerManager;
 import server.player.Bot;
-import server.player.PlayerTemplate;
+import server.player.Player;
 
 import javax.management.Notification;
 import javax.management.NotificationBroadcasterSupport;
@@ -73,13 +72,26 @@ public class Factory extends NotificationBroadcasterSupport implements FactoryMB
 
     @Override
     public void createPlayer(int pid, String name) {
-        System.out.println(pid);
-        Player player = new Player(pid, name);
+        boolean isFree = true;
+        for(Player p : playerManager.playerFreeList) {
+            if(p.getName().equals(name)) {
+                isFree = false;
+            }
+        }
+        for(Player p : playerManager.playerInGameList) {
+            if(p.getName().equals(name)) {
+                isFree = false;
+            }
+        }
+        if(isFree) {
+            System.out.println(pid);
+            Player player = new Player(pid, name);
 
 
-        server.connection.createMBeanMainObject("server.player.Player", "Player"+pid, String.valueOf(pid), player);
-        playerManager.getNewPlayer(player);
-        sendNotification(new Notification(String.valueOf(pid), this, 001100110011, "####hello player created: " + pid));
+            server.connection.createMBeanMainObject("server.player.Player", "Player" + pid, String.valueOf(pid), player);
+            playerManager.getNewPlayer(player);
+            sendNotification(new Notification(String.valueOf(pid), this, 001100110011, "N," + pid));
+        }
     }
 
     public void deletePlayer(int pid) {

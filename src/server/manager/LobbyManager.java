@@ -34,6 +34,7 @@ public class LobbyManager {
     public void removeLobby(Lobby lobby) {
         setLobbyAsWaiting(lobby);
         waitingLobbyList.remove(lobby);
+        System.out.println("Lobby deleted");
         //TODO
         //usuwanie lobby z rejestru
     }
@@ -112,7 +113,12 @@ public class LobbyManager {
             }
         }
         if(lobby != null) {
-            lobby.removePlayer(player);
+//            lobby.removePlayer(player);
+            for(PlayerTemplate p : lobby.players) {
+                if(p.equals(player)) {
+                    p = null;
+                }
+            }
             if(lobby.isEmpty()) {
                 removeLobby(lobby);
             }
