@@ -4,6 +4,8 @@ import client.logic.MoveType;
 import server.board.Board;
 import server.board.Coordinates;
 import server.board.Field;
+import server.manager.PlayerManager;
+import server.player.Player;
 import server.player.PlayerTemplate;
 
 public class LobbyMediator {
@@ -90,7 +92,16 @@ public class LobbyMediator {
 
             lobby.sendWinnerNotification(winner, looser);
             lobby.sendLooserNotification(looser, winner);
-            //TODO manager >> move to freePlayersList
+
+            PlayerManager playerManager = PlayerManager.getInstance();
+            if(winner instanceof Player) {
+                playerManager.movePlayerToFreeList((Player)winner);
+            }
+            if(looser instanceof Player) {
+                playerManager.movePlayerToFreeList((Player)looser);
+            }
+
+            lobby.sendWinnerPopUpNotification(winner, looser);
 
             if(lobby.isEmpty()) {
                 lobby.lobbyManager.removeLobby(lobby);

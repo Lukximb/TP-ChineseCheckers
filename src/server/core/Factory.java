@@ -85,16 +85,12 @@ public class Factory extends NotificationBroadcasterSupport implements FactoryMB
         if(isFree) {
             System.out.println(pid);
             Player player = new Player(pid, name);
-            registryPlayer(player, pid);
+            server.connection.createMBeanMainObject("server.player.Player", "Player" +
+                    pid, String.valueOf(pid), player);
+            playerManager.getNewPlayer(player);
+            sendNotification(new Notification(String.valueOf(pid), this, 001100110011,
+                    "N#P#" + pid));
         }
-    }
-
-    private void registryPlayer(Player player, int pid) {
-        server.connection.createMBeanMainObject("server.player.Player", "Player" +
-                pid, String.valueOf(pid), player);
-        playerManager.getNewPlayer(player);
-        sendNotification(new Notification(String.valueOf(pid), this, 001100110011,
-                "N," + pid));
     }
 
     public void deletePlayer(int pid) {
@@ -123,26 +119,46 @@ public class Factory extends NotificationBroadcasterSupport implements FactoryMB
 
     @Override
     public void createLobby(int playerNum, int rowNumber, String lobbyName, int adminPid) {
-        Player admin;
-        LobbyMediator lobbyMediator= createLobbyMediator();
-        int value = playerManager.checkPlayerStatus(adminPid);
-        int index = 0;
-        for(Player p: playerManager.playerFreeList) {
-            if(p.pid == adminPid) {
+        boolean isFree = true;
+        for (Lobby l : lobbyManager.waitingLobbyList) {
+            if (l.name.equals(lobbyName)) {
+                isFree = false;
                 break;
             }
-            index++;
         }
-        admin = playerManager.playerFreeList.get(index);
-        playerManager.playerFreeList.remove(index);
-        playerManager.playerInGameList.add(admin);
-        System.out.println(">> Lobby " + lobbyName + " created");
-        Lobby lobby = new Lobby(playerNum, rowNumber, lobbyName, admin, lobbyMediator);
-        lobby.board = createBoard(4*rowNumber+1, 3*rowNumber+1);
-        lobbyMediator.setBoard(lobby.board);
-        admin.lobby = lobby;
-        lobbyManager.waitingLobbyList.add(lobby);
-        server.connection.createMBeanMainObject("lobby.Lobby", lobby.name, "L", lobby);
+        if (isFree) {
+            for (Lobby l : lobbyManager.runningLobbyList) {
+                if (l.name.equals(lobbyName)) {
+                    isFree = false;
+                    break;
+                }
+            }
+        }
+
+        if (isFree) {
+            Player admin;
+            LobbyMediator lobbyMediator = createLobbyMediator();
+            int value = playerManager.checkPlayerStatus(adminPid);
+            int index = 0;
+            for (Player p : playerManager.playerFreeList) {
+                if (p.pid == adminPid) {
+                    break;
+                }
+                index++;
+            }
+            admin = playerManager.playerFreeList.get(index);
+            playerManager.playerFreeList.remove(index);
+            playerManager.playerInGameList.add(admin);
+            System.out.println(">> Lobby " + lobbyName + " created");
+            Lobby lobby = new Lobby(playerNum, rowNumber, lobbyName, admin, lobbyMediator);
+            lobby.board = createBoard(4 * rowNumber + 1, 3 * rowNumber + 1);
+            lobbyMediator.setBoard(lobby.board);
+            admin.lobby = lobby;
+            lobbyManager.waitingLobbyList.add(lobby);
+            server.connection.createMBeanMainObject("lobby.Lobby", lobby.name, "L", lobby);
+
+            sendNotification(new Notification(String.valueOf(admin.getPid()), this, 001100110011, "N#L#" + admin.getPid()));
+        }
     }
 
     @Override

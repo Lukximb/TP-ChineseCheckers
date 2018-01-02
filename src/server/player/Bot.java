@@ -24,9 +24,6 @@ public class Bot implements PlayerTemplate{
         currentCoordinates = new ArrayList<>();
         destinationCoordinates = new ArrayList<>();
         myTurn = false;
-        //nnManager = new NNManager();
-        //Runnable runners = new Runnable;
-        //Thread threads = new Thread;
     }
 
 
@@ -107,7 +104,18 @@ public class Bot implements PlayerTemplate{
 
     @Override
     public boolean compareCoordinates() {
-        if(currentCoordinates.containsAll(destinationCoordinates)) {
+        int correct = 0;
+        for(Coordinates c : currentCoordinates) {
+            int cX = c.getX();
+            int cY = c.getY();
+            for(Coordinates d : destinationCoordinates) {
+                if(d.getX() == cX && d.getY() == cY) {
+                    correct++;
+                    break;
+                }
+            }
+        }
+        if(correct == destinationCoordinates.size()) {
             return true;
         }
         return false;
@@ -121,5 +129,17 @@ public class Bot implements PlayerTemplate{
     @Override
     public void setLobby(Lobby lobby) {
         this.lobby = lobby;
+    }
+
+    public void updateDestinationCoordinates(Coordinates currentCoordinates, Coordinates destinationCoordinates) {
+        int curX = currentCoordinates.getX();
+        int curY = currentCoordinates.getY();
+        for(Coordinates c : this.currentCoordinates) {
+            if(c.getX() == curX && c.getY() == curY) {
+                this.currentCoordinates.remove(c);
+                break;
+            }
+        }
+        this.currentCoordinates.add(destinationCoordinates);
     }
 }

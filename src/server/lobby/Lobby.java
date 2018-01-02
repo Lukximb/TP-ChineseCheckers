@@ -1,11 +1,14 @@
 package server.lobby;
 
 //import javafx.scene.paint.Color;
+
 import server.board.Board;
 import server.board.Coordinates;
 import server.board.Field;
 import server.manager.LobbyManager;
+import server.manager.PlayerManager;
 import server.player.Bot;
+import server.player.Player;
 import server.player.PlayerTemplate;
 
 import javax.management.Notification;
@@ -117,6 +120,7 @@ public class Lobby extends NotificationBroadcasterSupport implements LobbyMBean{
                 players[i] = null;
                 next = i+1;
                 roundCorner--;
+                break;
             }
             i++;
         }
@@ -156,16 +160,29 @@ public class Lobby extends NotificationBroadcasterSupport implements LobbyMBean{
                 putPawnsOnBoard(players[i], i);
                 createDestinationCoordinates(players[i], i);
             } else if(numberOfPlayers == 4) {
-                if(i%2 == 0) {
-                    //players[i].setColor(colorPalette[i*2]);
-                    putPawnsOnBoard(players[i], i*2);
-                    createDestinationCoordinates(players[i], i*2);
+                if(i == 0) {
+                    putPawnsOnBoard(players[i], 0);
+                    createDestinationCoordinates(players[i], 0);
+                } else if(i == 1) {
+                    putPawnsOnBoard(players[i], 1);
+                    createDestinationCoordinates(players[i], 1);
+                } else if(i == 2) {
+                    putPawnsOnBoard(players[i], 3);
+                    createDestinationCoordinates(players[i], 3);
+                } else if(i == 3) {
+                    putPawnsOnBoard(players[i], 4);
+                    createDestinationCoordinates(players[i], 4);
                 }
-                else {
-                    //players[i].setColor(colorPalette[i*2-1]);
-                    putPawnsOnBoard(players[i], i*2-1);
-                    createDestinationCoordinates(players[i], i*2-1);
-                }
+//                if(i%2 == 0) {
+//                    //players[i].setColor(colorPalette[i*2]);
+//                    putPawnsOnBoard(players[i], i*2);
+//                    createDestinationCoordinates(players[i], i*2);
+//                }
+//                else {
+//                    //players[i].setColor(colorPalette[i*2-1]);
+//                    putPawnsOnBoard(players[i], i*2-1);
+//                    createDestinationCoordinates(players[i], i*2-1);
+//                }
             } else if(numberOfPlayers == 3) {
                 //players[i].setColor(colorPalette[i*2]);
                 putPawnsOnBoard(players[i], i*2);
@@ -293,18 +310,17 @@ public class Lobby extends NotificationBroadcasterSupport implements LobbyMBean{
     @Override
     public synchronized void nextRound() {
         mediator.checkWinner();
-        roundCorner++;
-        if(roundCorner == numberOfPlayers) {
-            roundCorner = 0;
-        }
-        round = players[roundCorner];
+        do {
+            roundCorner++;
+            if (roundCorner == numberOfPlayers) {
+                roundCorner = 0;
+            }
+            round = players[roundCorner];
+        } while(round == null);
         mediator.startRound();
         System.out.println(">> Lobby " + name + " started next round for corner " + roundCorner);
         if (players[roundCorner].isBot()) {
             players[roundCorner].yourTurn();
-        }
-        if(round == null) {
-            nextRound();
         }
     }
 
@@ -312,11 +328,14 @@ public class Lobby extends NotificationBroadcasterSupport implements LobbyMBean{
         if(numberOfPlayers == 6) {
             return roundCorner;
         } else if(numberOfPlayers == 4) {
-            if(roundCorner%2 == 0) {
-                return roundCorner*2;
-            }
-            else {
-                return roundCorner*2-1;
+            if(roundCorner == 0) {
+                return 0;
+            } else if(roundCorner == 1) {
+                return 1;
+            } else if(roundCorner == 2) {
+                return 3;
+            } else if(roundCorner == 3) {
+                return 4;
             }
         } else if(numberOfPlayers == 3) {
             return roundCorner*2;
@@ -345,19 +364,68 @@ public class Lobby extends NotificationBroadcasterSupport implements LobbyMBean{
         sendNotification(new Notification(String.valueOf(looser.getPid()), this, 11001100, message));
     }
 
+    public synchronized void sendWinnerPopUpNotification(PlayerTemplate winner, PlayerTemplate looser) {
+        String message = "*,";
+        message = message.concat(winner.getName() + "," + looser.getName());
+        for(PlayerTemplate p : players) {
+            if(p != null) {
+                if (!p.isBot()) {
+                    if(!p.equals(looser) && !p.equals(winner)) {
+                        sendNotification(new Notification(String.valueOf(p.getPid()), this, 11001100, message));
+                    }
+                }
+            }
+        }
+    }
+
     @Override
     public void printMessage(PlayerTemplate player, String message) {
         //chat.printMessage(player, message);
     }
 
     public void surrender(PlayerTemplate player) {
+        PlayerManager playerManager = PlayerManager.getInstance();
+
         int winnerCorner = (player.getCorner() + 3) % 6;
-        for(PlayerTemplate p : players) {
-            if(p.getCorner() == winnerCorner) {
-                sendWinnerNotification(p, player);
-                sendLooserNotification(player, p);
+
+        for(int i=0; i<numberOfPlayers; i++) {
+            if(players[i] != null) {
+                if (players[i].getCorner() == winnerCorner) {
+                    sendWinnerNotification(players[i], player);
+                    sendLooserNotification(player, players[i]);
+                    sendWinnerPopUpNotification(players[i], player);
+
+                    if(players[i] instanceof Player) {
+                        playerManager.movePlayerToFreeList((Player)players[i]);
+                    }
+
+                    players[i].setLobby(null);
+                    players[i] = null;
+                    break;
+                }
             }
         }
+
+        for(int i=0; i<numberOfPlayers; i++) {
+            if(players[i].equals(player)) {
+                if(round.equals(players[i])) {
+                    nextRound();
+                }
+
+                if(players[i] instanceof Player) {
+                    playerManager.movePlayerToFreeList((Player)players[i]);
+                }
+
+                players[i].setLobby(null);
+                players[i] = null;
+                break;
+            }
+        }
+
+        if(isEmpty()) {
+            lobbyManager.removeLobby(this);
+        }
+
     }
 
 }
