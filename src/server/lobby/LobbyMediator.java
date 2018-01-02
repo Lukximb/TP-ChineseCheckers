@@ -74,35 +74,54 @@ public class LobbyMediator {
     public void checkWinner() {
         PlayerTemplate winner = rulesManager.checkWinner(lobby.round);
         if(winner != null) {
-            int loosingCorner = (winner.getCorner() + 3) % 6;
-            PlayerTemplate looser = null;
-            for(PlayerTemplate p : lobby.players) {
-                if(p.getCorner() == loosingCorner) {
-                    looser = p;
-                    break;
+            if(lobby.numberOfPlayers == 3) {
+                for (int i = 0; i < lobby.numberOfPlayers; i++) {
+                    if (lobby.players[i].equals(winner)) {
+                        lobby.players[i].setLobby(null);
+                        lobby.players[i] = null;
+                        break;
+                    }
                 }
-            }
 
-            for(int i=0; i<lobby.numberOfPlayers; i++) {
-                if(lobby.players[i].equals(winner) || lobby.players[i].equals(looser)) {
-                    lobby.players[i].setLobby(null);
-                    lobby.players[i] = null;
+                lobby.sendWinnerNotification(winner, null);
+
+                PlayerManager playerManager = PlayerManager.getInstance();
+                if (winner instanceof Player) {
+                    playerManager.movePlayerToFreeList((Player) winner);
                 }
+
+                lobby.sendWinnerPopUpNotification(winner, null);
+
+            } else {
+                int loosingCorner = (winner.getCorner() + 3) % 6;
+                PlayerTemplate looser = null;
+                for (PlayerTemplate p : lobby.players) {
+                    if (p.getCorner() == loosingCorner) {
+                        looser = p;
+                        break;
+                    }
+                }
+
+                for (int i = 0; i < lobby.numberOfPlayers; i++) {
+                    if (lobby.players[i].equals(winner) || lobby.players[i].equals(looser)) {
+                        lobby.players[i].setLobby(null);
+                        lobby.players[i] = null;
+                    }
+                }
+
+                lobby.sendWinnerNotification(winner, looser);
+                lobby.sendLooserNotification(looser, winner);
+
+                PlayerManager playerManager = PlayerManager.getInstance();
+                if (winner instanceof Player) {
+                    playerManager.movePlayerToFreeList((Player) winner);
+                }
+                if (looser instanceof Player) {
+                    playerManager.movePlayerToFreeList((Player) looser);
+                }
+
+                lobby.sendWinnerPopUpNotification(winner, looser);
             }
-
-            lobby.sendWinnerNotification(winner, looser);
-            lobby.sendLooserNotification(looser, winner);
-
-            PlayerManager playerManager = PlayerManager.getInstance();
-            if(winner instanceof Player) {
-                playerManager.movePlayerToFreeList((Player)winner);
-            }
-            if(looser instanceof Player) {
-                playerManager.movePlayerToFreeList((Player)looser);
-            }
-
-            lobby.sendWinnerPopUpNotification(winner, looser);
-
             if(lobby.isEmpty()) {
                 lobby.lobbyManager.removeLobby(lobby);
             }

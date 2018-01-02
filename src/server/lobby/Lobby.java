@@ -355,7 +355,11 @@ public class Lobby extends NotificationBroadcasterSupport implements LobbyMBean{
 
     public synchronized void sendWinnerNotification(PlayerTemplate winner, PlayerTemplate looser) {
         String message = "+,";
-        message = message.concat(winner.getName() + "," + looser.getName());
+        if(looser == null) {
+            message = message.concat(winner.getName() + "," + " ");
+        } else {
+            message = message.concat(winner.getName() + "," + looser.getName());
+        }
         sendNotification(new Notification(String.valueOf(winner.getPid()), this, 1100111110, message));
     }
 
@@ -367,7 +371,11 @@ public class Lobby extends NotificationBroadcasterSupport implements LobbyMBean{
 
     public synchronized void sendWinnerPopUpNotification(PlayerTemplate winner, PlayerTemplate looser) {
         String message = "*,";
-        message = message.concat(winner.getName() + "," + looser.getName());
+        if(looser == null) {
+            message = message.concat(winner.getName() + "," + " ");
+        } else {
+            message = message.concat(winner.getName() + "," + looser.getName());
+        }
         for(PlayerTemplate p : players) {
             if(p != null) {
                 if (!p.isBot()) {
@@ -387,22 +395,24 @@ public class Lobby extends NotificationBroadcasterSupport implements LobbyMBean{
     public void surrender(PlayerTemplate player) {
         PlayerManager playerManager = PlayerManager.getInstance();
 
-        int winnerCorner = (player.getCorner() + 3) % 6;
+        if(numberOfPlayers != 3) {
+            int winnerCorner = (player.getCorner() + 3) % 6;
 
-        for(int i=0; i<numberOfPlayers; i++) {
-            if(players[i] != null) {
-                if (players[i].getCorner() == winnerCorner) {
-                    sendWinnerNotification(players[i], player);
-                    sendLooserNotification(player, players[i]);
-                    sendWinnerPopUpNotification(players[i], player);
+            for (int i = 0; i < numberOfPlayers; i++) {
+                if (players[i] != null) {
+                    if (players[i].getCorner() == winnerCorner) {
+                        sendWinnerNotification(players[i], player);
+                        sendLooserNotification(player, players[i]);
+                        sendWinnerPopUpNotification(players[i], player);
 
-                    if(players[i] instanceof Player) {
-                        playerManager.movePlayerToFreeList((Player)players[i]);
+                        if (players[i] instanceof Player) {
+                            playerManager.movePlayerToFreeList((Player) players[i]);
+                        }
+
+                        players[i].setLobby(null);
+                        players[i] = null;
+                        break;
                     }
-
-                    players[i].setLobby(null);
-                    players[i] = null;
-                    break;
                 }
             }
         }
