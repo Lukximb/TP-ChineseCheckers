@@ -47,6 +47,8 @@ public class ClientGUIController {
 	private Button loginButton;
 	@FXML
 	public TextField nickNameField;
+	@FXML
+	private Label nickNameErrorLabel;
 
 	//MENU----------------------------------------
 	@FXML
@@ -78,6 +80,8 @@ public class ClientGUIController {
 	private Button createLobbyButton;
 	@FXML
 	private Button cancelCreateLobbyButton;
+	@FXML
+	private Label lobbyNameErrorLabel;
 	//JOIN LOBBY----------------------------------
     @FXML
     private TableView<String> lobbyListTable;
@@ -241,7 +245,11 @@ public class ClientGUIController {
 		menu.setDisable(false);
 	}
 
-
+	public void showPlayerNameErrorMessage(String message) {
+		run(() -> {
+			nickNameErrorLabel.setText(message);
+		});
+	}
 
 
 	//MENU----------------------------------------
@@ -289,11 +297,14 @@ public class ClientGUIController {
 				Object opParams[] = {playerInLobby, client.rowOfPawn, client.lobbyName, client.pid};
 				String opSig[] = {int.class.getName(), int.class.getName(), String.class.getName(), int.class.getName()};
 				client.connection.invokeMethod(client.factory, "createLobby", opParams, opSig);
+				showLobbyNameErrorMessage("");
 			} else {
 				//ERROR - wrong name
+				showLobbyNameErrorMessage("ERROR, lobby name can't contains '#' characters!");
 			}
 		} else {
 			//ERROR - Empty lobby name
+			showLobbyNameErrorMessage("ERROR, lobby name can't be empty!");
 		}
 	}
 
@@ -320,6 +331,12 @@ public class ClientGUIController {
 
 		this.lobby.setVisible(true);
 		this.lobby.setDisable(false);
+	}
+
+	public void showLobbyNameErrorMessage(String message) {
+		run(() -> {
+			lobbyNameErrorLabel.setText(message);
+		});
 	}
 
 	public void cancelCreateLobbyButtonOnClick(ActionEvent event) {

@@ -72,6 +72,11 @@
                   </RadialGradient>
                </textFill>
             </Button>
+            <Label fx:id="nickNameErrorLabel" StackPane.alignment="TOP_CENTER">
+               <StackPane.margin>
+                  <Insets top="370.0" />
+               </StackPane.margin>
+            </Label>
          </children>
       </StackPane>
       <StackPane fx:id="menu" disable="true" prefHeight="150.0" prefWidth="200.0" visible="false">
@@ -163,6 +168,11 @@
                <font>
                   <Font name="System Bold Italic" size="14.0" />
                </font>
+            </Label>
+            <Label fx:id="lobbyNameErrorLabel" StackPane.alignment="TOP_CENTER">
+               <StackPane.margin>
+                  <Insets top="350.0" />
+               </StackPane.margin>
             </Label>
          </children>
       </StackPane>

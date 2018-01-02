@@ -38,13 +38,16 @@ public class PlayerLogic {
     public void createPlayer() {
         if (controller.nickNameField.getText().contains("#")) {
             //ERROR - wrong name
+            controller.showPlayerNameErrorMessage("ERROR, player's name can't contains '#' characters!");
         } else {
             if (client.player == null && !controller.nickNameField.getText().equals("")) {
                 Object opParams[] = {client.pid, controller.nickNameField.getText()};
                 String opSig[] = {int.class.getName(), String.class.getName()};
                 client.connection.invokeMethod(client.factory,
                         "createPlayer", opParams, opSig);
+                controller.showPlayerNameErrorMessage("");
             } else {
+                controller.showPlayerNameErrorMessage("ERROR, player's name can't be empty!");
                 //ERROR - empty player name
             }
         }
