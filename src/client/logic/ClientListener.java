@@ -98,21 +98,11 @@ public class ClientListener implements NotificationListener {
                 break;
             case('+')://Winner
                 String[] winner = notification.getMessage().substring(2).split(",");
-                controller.looserNickLabel.setText(winner[1]);
-                controller.game.setVisible(false);
-                controller.game.setDisable(true);
-
-                controller.winner.setDisable(false);
-                controller.winner.setVisible(true);
+                controller.showWinnerScreen(winner);
                 break;
             case('-')://Looser
                 String[] looser = notification.getMessage().substring(2).split(",");
-                controller.winnerNickLabel.setText(looser[1]);
-                controller.game.setVisible(false);
-                controller.game.setDisable(true);
-
-                controller.looser.setDisable(false);
-                controller.looser.setVisible(true);
+                controller.showLooserScreen(looser);
                 break;
             case('N')://new player created
                 String[] playerInfo = notification.getMessage().substring(2).split(",");
@@ -132,6 +122,9 @@ public class ClientListener implements NotificationListener {
                 controller.menu.setVisible(true);
                 controller.menu.setDisable(false);
                 break;
+            case('*')://winner/looser popup
+                String[] playersNames = notification.getMessage().substring(2).split(",");
+                controller.showWinnerPopUp(playersNames);
             default:
         }
     }

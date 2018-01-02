@@ -32,7 +32,7 @@ public class PlayerLogic {
         System.out.println("Remove player: " + playerName + " from lobby: " + client.lobbyName);
         Object  opParams1[] = {client.playerName};
         String  opSig1[] = {String.class.getName()};
-        client.connection.invokeMethod(client.manager, "sendPlayersInLobbyList", opParams1, opSig1);
+//        client.connection.invokeMethod(client.manager, "sendPlayersInLobbyList", opParams1, opSig1);
     }
 
     public void createPlayer() {

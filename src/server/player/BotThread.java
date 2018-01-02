@@ -144,6 +144,8 @@ public class BotThread implements Runnable{
                     lobby.sendMoveNotification("E," + corner + ","
                             + coordinatesList.get(0).getX() + "," + coordinatesList.get(0).getY() + ","
                             + coordinatesList.get(coordinatesList.size() - 1).getX() + "," + coordinatesList.get(coordinatesList.size() - 1).getY());
+
+
                 }
             }
         }
@@ -418,6 +420,7 @@ public class BotThread implements Runnable{
             newDestCoordinates.add(toRemove);
         }
         destinationCoordinates = newDestCoordinates;
+        bot.destinationCoordinates = destinationCoordinates;
     }
 
     public synchronized boolean checkMove(Coordinates currentCoordinates, Coordinates destinationCoordinates, MoveType moveType) {

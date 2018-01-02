@@ -97,7 +97,6 @@ public class Player extends NotificationBroadcasterSupport implements PlayerMBea
     @Override
     public void surrender() {
         lobby.surrender(this);
-//        lobby = null;
     }
 
     @Override

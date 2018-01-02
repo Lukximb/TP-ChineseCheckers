@@ -426,7 +426,7 @@ public class ClientGUIController {
 		this.lobby.setDisable(true);
 
 //		client.connection.invokeExitFromLobbyMethod(client.player, "exitFromLobby");
-		Object  opParams[] = {client.playerName, client.lobbyName};
+		Object  opParams[] = {client.lobbyName, client.playerName};
 		String  opSig[] = {String.class.getName(), String.class.getName()};
 		client.connection.invokeMethod(client.manager, "removePlayerFromLobby", opParams, opSig);
 		client.lobbyName = "";
@@ -455,10 +455,12 @@ public class ClientGUIController {
 //		this.game.setVisible(false);
 //		this.game.setDisable(true);
 
-		client.connection.invokeMethod(client.player, "surrender", null, null);
+		Object  opParams1[] = {};
+		String  opSig1[] = {};
+		client.connection.invokeMethod(client.player, "surrender", opParams1, opSig1);
 
 //		client.connection.invokeExitFromLobbyMethod(client.player, "exitFromLobby");
-		Object  opParams[] = {client.playerName, client.lobbyName};
+		Object  opParams[] = {client.lobbyName, client.playerName};
 		String  opSig[] = {String.class.getName(), String.class.getName()};
 		client.connection.invokeMethod(client.manager, "removePlayerFromGame", opParams, opSig);
 		client.lobbyName = "";
@@ -549,7 +551,19 @@ public class ClientGUIController {
 
 	//TODO
 
+	public void showWinnerPopUp(String[] PlayersNames) {
+		run(() -> {
+			winnerPopUp.setStyle("-fx-background-image: url('/client/popupBackground.png');");
+			this.popUpWinnerNick.setText(PlayersNames[0]);
+			this.popUpLooserNick.setText(PlayersNames[1]);
+			this.winnerPopUp.setVisible(true);
+			this.winnerPopUp.setDisable(false);
+		});
+	}
+
 	public void okOnClick(ActionEvent event) {
+		winnerPopUp.setDisable(true);
+		winnerPopUp.setVisible(false);
 
 	}
 
@@ -559,6 +573,17 @@ public class ClientGUIController {
 	//WINNER----------------------------------------------------
 
 	//TODO
+
+	public void showWinnerScreen(String[] winner) {
+		run(() -> {
+			looserNickLabel.setText(winner[1]);
+			game.setVisible(false);
+			game.setDisable(true);
+
+			this.winner.setDisable(false);
+			this.winner.setVisible(true);
+		});
+	}
 
 	public void playAgainButtononClick(ActionEvent event) {
 		winner.setVisible(false);
@@ -578,6 +603,17 @@ public class ClientGUIController {
 
 
 //LOOSER-----------------------------------------------------
+
+	public void showLooserScreen(String[] looser) {
+		run(() -> {
+			winnerNickLabel.setText(looser[1]);
+			game.setVisible(false);
+			game.setDisable(true);
+
+			this.looser.setDisable(false);
+			this.looser.setVisible(true);
+		});
+	}
 
 	//TODO
 
