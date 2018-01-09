@@ -19,6 +19,7 @@ import server.player.Difficult;
 import javax.management.MalformedObjectNameException;
 import javax.management.ObjectName;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class ClientGUIController {
 
@@ -124,6 +125,8 @@ public class ClientGUIController {
 	private Button exitLobbyButton;
 	@FXML
     private Button refreshPlayersListButton;
+	@FXML
+	private Label startGameInfoLabel;
 	//GAME----------------------------------------
 	@FXML
 	public StackPane game;
@@ -440,15 +443,25 @@ public class ClientGUIController {
 	//LOBBY---------------------------------------
 
 	public void readyButtonOnClick(ActionEvent event) {
-		this.lobby.setVisible(false);
-		this.lobby.setDisable(true);
-
 		Object  opParams[] = {client.lobbyName};
 		String  opSig[] = {String.class.getName()};
 		client.connection.invokeMethod(client.manager, "startGame", opParams, opSig);
 
+		startGameInfoLabel.setText("");
+	}
+
+	public void startGame() {
+		this.lobby.setVisible(false);
+		this.lobby.setDisable(true);
+
 		this.game.setVisible(true);
 		this.game.setDisable(false);
+	}
+
+	public void showLobbyInfo() {
+		run(() -> {
+			startGameInfoLabel.setText("Not enough players in lobby - " + playersList.size() + "/" + boardUpdate.getNumberOfPlayers() + " players.");
+		});
 	}
 
 	public void fillPlayersInGameTable() {
@@ -536,9 +549,11 @@ public class ClientGUIController {
 
 	public void updatePlayersList(String[] list) {
 		run(() -> {
-			playersList.setAll(list);
+			boardUpdate.setNumberOfPlayers(Integer.parseInt(list[0]));
+			String[] playersNames = Arrays.copyOfRange(list, 1, list.length);
+			playersList.setAll(playersNames);
 			playersInLobbyList.setItems(playersList);
-			playernumberInLobbyStatusLabel.setText( client.lobbyName + ":  " + list.length + " / " + client.playerInLobby);
+			playernumberInLobbyStatusLabel.setText( client.lobbyName + ":  " + playersNames.length + " / " + client.playerInLobby);
 		});
 	}
 

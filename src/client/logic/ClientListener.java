@@ -50,6 +50,7 @@ public class ClientListener implements NotificationListener {
                 String[] args = notification.getMessage().substring(2).split(",");
                 hendleStartGame(args);
                 controller.fillPlayersInGameTable();
+                controller.startGame();
                 break;
             case('C')://Corner
                 int c = Integer.parseInt(notification.getMessage().substring(2));
@@ -96,6 +97,9 @@ public class ClientListener implements NotificationListener {
                     controller.menu.setVisible(true);
                     //TODO popup
                 }
+                break;
+            case('F')://player must add new player before start game
+                controller.showLobbyInfo();
                 break;
             case('+')://Winner
                 String[] winner = notification.getMessage().substring(2).split(",");

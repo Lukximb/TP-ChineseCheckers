@@ -459,4 +459,13 @@ public class BoardUpdate {
     public void setMoveTypeAsEmpty() {
         this.moveType = MoveType.EMPTY;
     }
+
+    public void setNumberOfPlayers(int number) {
+        this.numberOfPlayers = number;
+    }
+
+    public int getNumberOfPlayers() {
+        return numberOfPlayers;
+    }
+
 }

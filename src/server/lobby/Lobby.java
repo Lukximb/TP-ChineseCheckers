@@ -46,22 +46,26 @@ public class Lobby extends NotificationBroadcasterSupport implements LobbyMBean{
 
     @Override
     public synchronized void startGame() {
-        initPlayersOnBoard();
-        mediator.setBoard(board);
-        Random generator = new Random();
-        roundCorner = generator.nextInt(numberOfPlayers);
-        round = players[roundCorner];
+        if(players[numberOfPlayers-1] != null) {
+            initPlayersOnBoard();
+            mediator.setBoard(board);
+            Random generator = new Random();
+            roundCorner = generator.nextInt(numberOfPlayers);
+            round = players[roundCorner];
 //        round = players[0];
 //        roundCorner = 0;
-        sendNotification(new Notification(String.valueOf(name), this, 110011110,
-                "S,StartGame," + rowNumber + "," + numberOfPlayers));
-        mediator.startRound();
-        for (PlayerTemplate p : players) {
-            if (p.isBot()) {
-               p.start();
+            sendNotification(new Notification(String.valueOf(name), this, 110011110,
+                    "S,StartGame," + rowNumber + "," + numberOfPlayers));
+            mediator.startRound();
+            for (PlayerTemplate p : players) {
+                if (p.isBot()) {
+                    p.start();
+                }
             }
-        }
 //        nextRound();
+        } else {
+            sendNotification(new Notification(String.valueOf(name), this, 10100010, "F"));
+        }
     }
 
     @Override

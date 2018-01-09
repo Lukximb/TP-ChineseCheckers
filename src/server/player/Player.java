@@ -116,7 +116,7 @@ public class Player extends NotificationBroadcasterSupport implements PlayerMBea
 
     @Override
     public String getPlayersNames() {
-        String playersList = "";
+        String playersList = "," + lobby.numberOfPlayers;
         for(PlayerTemplate p: lobby.players) {
             if (p == null) {
                 continue;
