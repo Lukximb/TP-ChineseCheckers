@@ -115,18 +115,22 @@ public class ClientGUI extends Application {
     }
 
     public void addNotificationListenerToPlayer() {
-        try {
-            connection.mbsc.addNotificationListener(player, clientListener, myFilter, null);
-        } catch (Exception e) {
-            e.printStackTrace();
+        if (player != null) {
+            try {
+                connection.mbsc.addNotificationListener(player, clientListener, myFilter, null);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
     }
 
     public void removeNotificationListenerFromLobby() {
-        try {
-            connection.mbsc.removeNotificationListener(lobbyObject, clientListener, myFilter, null);
-        } catch(Exception e) {
-            e.printStackTrace();
+        if (lobbyObject != null) {
+            try {
+                connection.mbsc.removeNotificationListener(lobbyObject, clientListener, myFilter, null);
+            } catch(Exception e) {
+                e.printStackTrace();
+            }
         }
     }
 

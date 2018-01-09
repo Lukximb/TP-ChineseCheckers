@@ -16,7 +16,6 @@ import javax.management.NotificationBroadcasterSupport;
 import java.util.Random;
 
 public class Lobby extends NotificationBroadcasterSupport implements LobbyMBean{
-    //public final Color[] colorPalette = {Color.DEEPPINK, Color.YELLOW, Color.MEDIUMBLUE, Color.LIMEGREEN, Color.FIREBRICK, Color.CYAN};
     public LobbyMediator mediator;
     public String name;
     public volatile PlayerTemplate[] players;
@@ -46,16 +45,8 @@ public class Lobby extends NotificationBroadcasterSupport implements LobbyMBean{
 
     @Override
     public synchronized void startGame() {
-        boolean fullLobby = true;
-        for (PlayerTemplate p : players) {
-            if (p == null) {
-                fullLobby = false;
-                sendNotification(new Notification(String.valueOf(name), this, 110011110,
-                        "F" ));
-                break;
-            }
-        }
-        if (fullLobby) {
+        if(players[numberOfPlayers-1] != null) {
+            lobbyManager.setLobbyAsRunning(this);
             initPlayersOnBoard();
             mediator.setBoard(board);
             Random generator = new Random();
@@ -69,6 +60,8 @@ public class Lobby extends NotificationBroadcasterSupport implements LobbyMBean{
                     p.start();
                 }
             }
+        } else {
+            sendNotification(new Notification(String.valueOf(name), this, 10100010, "F"));
         }
     }
 
@@ -101,6 +94,10 @@ public class Lobby extends NotificationBroadcasterSupport implements LobbyMBean{
                 001100101010, "B"));
     }
 
+    /**
+     * Checks if lobby is empty.
+     * @return true if is empty
+     */
     public boolean isEmpty() {
         boolean empty = true;
             for(PlayerTemplate p : players) {
@@ -323,6 +320,10 @@ public class Lobby extends NotificationBroadcasterSupport implements LobbyMBean{
         }
     }
 
+    /**
+     * Returns corner value for player in lobby.
+     * @return real corner int value [0, 5]
+     */
     public int getRoundCornerValue() {
         if(numberOfPlayers == 6) {
             return roundCorner;
@@ -351,6 +352,11 @@ public class Lobby extends NotificationBroadcasterSupport implements LobbyMBean{
         sendNotification(new Notification(String.valueOf(name), this, 1100110000, message));
     }
 
+    /**
+     * Sends information about winning game to winner.
+     * @param winner
+     * @param looser
+     */
     public synchronized void sendWinnerNotification(PlayerTemplate winner, PlayerTemplate looser) {
         String message = "+,";
         if(looser == null) {
@@ -361,6 +367,11 @@ public class Lobby extends NotificationBroadcasterSupport implements LobbyMBean{
         sendNotification(new Notification(String.valueOf(winner.getPid()), this, 1100111110, message));
     }
 
+    /**
+     * Sends information about loosing game to looser
+     * @param looser
+     * @param winner
+     */
     public synchronized void sendLooserNotification(PlayerTemplate looser, PlayerTemplate winner) {
         String message = "-,";
         if(winner == null) {
@@ -371,6 +382,11 @@ public class Lobby extends NotificationBroadcasterSupport implements LobbyMBean{
         sendNotification(new Notification(String.valueOf(looser.getPid()), this, 11001100, message));
     }
 
+    /**
+     * Sends information about winner and looser for other players in game.
+     * @param winner
+     * @param looser
+     */
     public synchronized void sendWinnerPopUpNotification(PlayerTemplate winner, PlayerTemplate looser) {
         String message = "*,";
         if(looser == null) {
@@ -394,6 +410,10 @@ public class Lobby extends NotificationBroadcasterSupport implements LobbyMBean{
         //chat.printMessage(player, message);
     }
 
+    /**
+     * Handles surrender.
+     * @param player - looser
+     */
     public void surrender(PlayerTemplate player) {
         PlayerManager playerManager = PlayerManager.getInstance();
 

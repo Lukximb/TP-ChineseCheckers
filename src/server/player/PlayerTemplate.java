@@ -49,20 +49,51 @@ public interface PlayerTemplate {
 
     String getName();
 
+    /**
+     * Returns player's pid
+     * @return pid
+     */
     int getPid();
 
+    /**
+     * Checks if Player is bot
+     * @return true if is bot
+     * @return false if is not bot
+     */
     boolean isBot();
 
+    /**
+     * Adds single coordinate to currentCoordinates list
+     * @param x - x value of added coordinate
+     * @param y - y value of added coordinate
+     */
     void addCurrentCoordinates(int x, int y);
 
+    /**
+     * Adds single coordinate to destinationCoordinates list
+     * @param x - x value of added coordinate
+     * @param y - y value of added coordinate
+     */
     void addDestinationCoordinates(int x, int y);
 
     void start();
 
+    /**
+     * Compares coordinates in currentCoordinates and destinationCoordinates lists
+     * @return true if all coordinates are the same for both lists
+     */
     boolean compareCoordinates();
 
+    /**
+     *Returns player's corner on the board.
+     * @return corner
+     */
     int getCorner();
 
+    /**
+     * Sets player's lobby
+     * @param lobby - new lobby
+     */
     void setLobby(Lobby lobby);
 
     void stop();

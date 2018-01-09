@@ -15,6 +15,9 @@ public class Board {
         fillFieldList();
     }
 
+    /**
+     * Initialize board with fields.
+     */
     public void fillFieldList() {
         int x=n-m;
         for(int i=x; i<n; i++) {
@@ -55,6 +58,13 @@ public class Board {
         }
     }
 
+    /**
+     * Moves player's pawn.
+     * @param player - moving player.
+     * @param currentCoordinates - current coordinates of pawn.
+     * @param newCoordinates - destination coordinates of pawn.
+     * @return
+     */
     public synchronized boolean executeMove(PlayerTemplate player, Coordinates currentCoordinates, Coordinates newCoordinates) {
         boolean isPlayerOnCurrent = getField(currentCoordinates).getPlayerOn().equals(player);
         boolean isPlayerOnDest = getField(newCoordinates).getPlayerOn() == null;
@@ -67,14 +77,27 @@ public class Board {
         }
     }
 
+    /**
+     * returns field with specified coordinates.
+     * @param coordinates - coordinates of returned field.
+     * @return field
+     */
     public synchronized Field getField(Coordinates coordinates) {
         return fieldList[coordinates.getX()][coordinates.getY()];
     }
 
+    /**
+     * Returns n-size of board.
+     * @return n
+     */
     public synchronized int getN() {
         return n;
     }
 
+    /**
+     * Returns m-size of board.
+     * @return m
+     */
     public synchronized int getM() {
         return m;
     }

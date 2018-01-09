@@ -101,6 +101,14 @@ public class BoardUpdate {
         }
     }
 
+    public void clearBoard() {
+        ObservableList<Node> childrens = controller.board.getChildren();
+        for(Node node : childrens) {
+            Circle circle = (Circle)node;
+            circle.setFill(Color.WHITE);
+        }
+    }
+
     private void setEnemyCorner() {
         if(numberOfPlayers == 2) {
             enemyCorner.add(0);
@@ -340,9 +348,9 @@ public class BoardUpdate {
                 moveType = MoveType.EMPTY;
                 prevMoveType = MoveType.EMPTY;
                 correctMove = false;
+                
+                client.connection.invokeMethod(client.player, "nextRound", null, null);
             }
-
-            client.connection.invokeMethod(client.player, "nextRound", null, null);
         }
     }
 
@@ -459,4 +467,13 @@ public class BoardUpdate {
     public void setMoveTypeAsEmpty() {
         this.moveType = MoveType.EMPTY;
     }
+
+    public void setNumberOfPlayers(int number) {
+        this.numberOfPlayers = number;
+    }
+
+    public int getNumberOfPlayers() {
+        return numberOfPlayers;
+    }
+
 }

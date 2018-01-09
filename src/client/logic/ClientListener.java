@@ -15,6 +15,11 @@ public class ClientListener implements NotificationListener {
         corner = -1;
     }
 
+    /**
+     * Handles notifications from server.
+     * @param notification
+     * @param handback
+     */
     public void handleNotification(Notification notification, Object handback)
     {
         System.out.println("Receive notification: " + notification.getMessage());
@@ -50,6 +55,7 @@ public class ClientListener implements NotificationListener {
                 String[] args = notification.getMessage().substring(2).split(",");
                 hendleStartGame(args);
                 controller.fillPlayersInGameTable();
+                controller.startGame();
                 break;
             case('C')://Corner
                 int c = Integer.parseInt(notification.getMessage().substring(2));
@@ -97,15 +103,20 @@ public class ClientListener implements NotificationListener {
                     //TODO popup
                 }
                 break;
+            case('F')://player must add new player before start game
+                controller.showLobbyInfo();
+                break;
             case('+')://Winner
                 String[] winner = notification.getMessage().substring(2).split(",");
                 controller.showWinnerScreen(winner);
                 controller.client.removeNotificationListenerFromLobby();
+                controller.boardUpdate.clearBoard();
                 break;
             case('-')://Looser
                 String[] looser = notification.getMessage().substring(2).split(",");
                 controller.showLooserScreen(looser);
                 controller.client.removeNotificationListenerFromLobby();
+                controller.boardUpdate.clearBoard();
                 break;
             case('N')://new player created
                 String[] playerInfo = notification.getMessage().substring(2).split("#");
