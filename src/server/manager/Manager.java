@@ -154,4 +154,5 @@ public class Manager extends NotificationBroadcasterSupport implements ManagerMB
         }
         lobby.startGame();
     }
+
 }

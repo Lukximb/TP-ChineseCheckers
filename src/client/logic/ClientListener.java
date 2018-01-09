@@ -15,6 +15,11 @@ public class ClientListener implements NotificationListener {
         corner = -1;
     }
 
+    /**
+     * Handles notifications from server.
+     * @param notification
+     * @param handback
+     */
     public void handleNotification(Notification notification, Object handback)
     {
         System.out.println("Receive notification: " + notification.getMessage());

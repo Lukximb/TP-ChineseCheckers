@@ -31,6 +31,10 @@ public class LobbyManager {
 
     }
 
+    /**
+     * Removes lobby from list of lobbys running or waiting.
+     * @param lobby - lobby to remove.
+     */
     public void removeLobby(Lobby lobby) {
         setLobbyAsWaiting(lobby);
         waitingLobbyList.remove(lobby);
@@ -39,6 +43,10 @@ public class LobbyManager {
         //usuwanie lobby z rejestru
     }
 
+    /**
+     * Sets lobby as waiting.
+     * @param lobby - lobby to set.
+     */
     public void setLobbyAsWaiting(Lobby lobby) {
         if(runningLobbyList.contains(lobby)) {
             runningLobbyList.remove(lobby);
@@ -46,6 +54,10 @@ public class LobbyManager {
         }
     }
 
+    /**
+     * Sets lobby as running.
+     * @param lobby - lobby to set.
+     */
     public void setLobbyAsRunning(Lobby lobby) {
         if(waitingLobbyList.contains(lobby)) {
             waitingLobbyList.remove(lobby);
@@ -70,6 +82,11 @@ public class LobbyManager {
         }*/
     }
 
+    /**
+     * Adds player to loby.
+     * @param lobbyName - name of lobby.
+     * @param player - PlayerTemplate object of player.
+     */
     public void addPlayerToLobby(String lobbyName, PlayerTemplate player) {
         Lobby lobby = null;
 
@@ -84,6 +101,12 @@ public class LobbyManager {
         }
     }
 
+    /**
+     * Removes player from lobby.
+     * @param lobbyName - name of lobby.
+     * @param playerName - name of player.
+     * @return true if player was removed, else - false.
+     */
     public boolean removePlayerFromLobby(String lobbyName, String playerName) {
         Lobby lobby = null;
 
@@ -103,6 +126,11 @@ public class LobbyManager {
         return false;
     }
 
+    /**
+     * Removes player from running game.
+     * @param lobbyName - name of lobby.
+     * @param player - Player object of player.
+     */
     public void removePlayerFromGame(String lobbyName, Player player) {
         Lobby lobby = null;
 
@@ -125,6 +153,10 @@ public class LobbyManager {
         }
     }
 
+    /**
+     * Returns list of waiting lobbys as String with names of lobby separated by ',' char.
+     * @return list of waiting lobbys.
+     */
     public String getWaitingLobbyList() {
         String lobbyList = "";
         for(Lobby l: waitingLobbyList) {
