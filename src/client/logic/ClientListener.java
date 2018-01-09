@@ -110,11 +110,13 @@ public class ClientListener implements NotificationListener {
                 String[] winner = notification.getMessage().substring(2).split(",");
                 controller.showWinnerScreen(winner);
                 controller.client.removeNotificationListenerFromLobby();
+                controller.boardUpdate.clearBoard();
                 break;
             case('-')://Looser
                 String[] looser = notification.getMessage().substring(2).split(",");
                 controller.showLooserScreen(looser);
                 controller.client.removeNotificationListenerFromLobby();
+                controller.boardUpdate.clearBoard();
                 break;
             case('N')://new player created
                 String[] playerInfo = notification.getMessage().substring(2).split("#");

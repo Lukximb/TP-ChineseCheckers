@@ -101,6 +101,14 @@ public class BoardUpdate {
         }
     }
 
+    public void clearBoard() {
+        ObservableList<Node> childrens = controller.board.getChildren();
+        for(Node node : childrens) {
+            Circle circle = (Circle)node;
+            circle.setFill(Color.WHITE);
+        }
+    }
+
     private void setEnemyCorner() {
         if(numberOfPlayers == 2) {
             enemyCorner.add(0);
