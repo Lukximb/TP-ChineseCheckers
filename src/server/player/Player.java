@@ -183,6 +183,11 @@ public class Player extends NotificationBroadcasterSupport implements PlayerMBea
         this.lobby = lobby;
     }
 
+    @Override
+    public void stop() {
+        //DO NOTHING
+    }
+
     //@Override
     //public void sortDestinationCoordinates() {}
 }

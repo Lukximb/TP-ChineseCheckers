@@ -49,8 +49,10 @@ public class Factory extends NotificationBroadcasterSupport implements FactoryMB
         createLobbyManager();
         createPlayerManager();
         manager = Manager.getInstance();
+        manager.setServer(server);
         manager.setPlayerManager(playerManager);
         manager.setLobbyManager(lobbyManager);
+        lobbyManager.setManager(manager);
         return manager;
     }
 
@@ -70,7 +72,7 @@ public class Factory extends NotificationBroadcasterSupport implements FactoryMB
     }
 
     @Override
-    public void createPlayer(int pid, String name) {
+    public synchronized void createPlayer(int pid, String name) {
         boolean isFree = true;
         for(Player p : playerManager.playerFreeList) {
             if(p.getName().equals(name)) {
@@ -93,12 +95,14 @@ public class Factory extends NotificationBroadcasterSupport implements FactoryMB
         }
     }
 
-    public void deletePlayer(int pid) {
+    public synchronized void deletePlayer(int pid) {
         int value = playerManager.checkPlayerStatus(pid);
+        Player player = null;
         int index = 0;
         if(value == 1) {
             for(Player p: playerManager.playerFreeList) {
                 if(p.pid == pid) {
+                    player = p;
                     break;
                 }
                 index++;
@@ -108,6 +112,7 @@ public class Factory extends NotificationBroadcasterSupport implements FactoryMB
         else if(value == 2) {
             for(Player p: playerManager.playerInGameList) {
                 if(p.pid == pid) {
+                    player = p;
                     break;
                 }
                 index++;
@@ -118,7 +123,7 @@ public class Factory extends NotificationBroadcasterSupport implements FactoryMB
     }
 
     @Override
-    public void createLobby(int playerNum, int rowNumber, String lobbyName, int adminPid) {
+    public synchronized void createLobby(int playerNum, int rowNumber, String lobbyName, int adminPid) {
         boolean isFree = true;
         for (Lobby l : lobbyManager.waitingLobbyList) {
             if (l.name.equals(lobbyName)) {

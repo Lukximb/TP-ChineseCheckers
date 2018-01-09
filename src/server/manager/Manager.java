@@ -1,13 +1,14 @@
 package server.manager;
 
+import server.core.Server;
 import server.lobby.Lobby;
 import server.player.Player;
 import server.player.PlayerTemplate;
 
-import javax.management.Notification;
-import javax.management.NotificationBroadcasterSupport;
+import javax.management.*;
 
 public class Manager extends NotificationBroadcasterSupport implements ManagerMBean {
+    private Server server;
     public PlayerManager playerManager;
     public LobbyManager lobbyManager;
     private static volatile Manager instance = null;
@@ -24,6 +25,10 @@ public class Manager extends NotificationBroadcasterSupport implements ManagerMB
     }
 
     private Manager() {
+    }
+
+    public void setServer(Server server) {
+        this.server = server;
     }
 
     @Override
@@ -153,5 +158,17 @@ public class Manager extends NotificationBroadcasterSupport implements ManagerMB
             }
         }
         lobby.startGame();
+    }
+
+    public void unregisterLobby(Lobby lobby) {
+        try {
+            String mbeanObjectNameStr =
+                    server.connection.getDomain() + "L" + ":type=" + "lobby.Lobby" + ",name=" + lobby.name;
+            ObjectName mbeanObjectName =
+                    ObjectName.getInstance(mbeanObjectNameStr);
+            server.connection.mbs.unregisterMBean(mbeanObjectName);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

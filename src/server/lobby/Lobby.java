@@ -46,27 +46,30 @@ public class Lobby extends NotificationBroadcasterSupport implements LobbyMBean{
 
     @Override
     public synchronized void startGame() {
-        initPlayersOnBoard();
-        mediator.setBoard(board);
-        Random generator = new Random();
-        roundCorner = generator.nextInt(numberOfPlayers);
-        round = players[roundCorner];
-//        round = players[0];
-//        roundCorner = 0;
-        sendNotification(new Notification(String.valueOf(name), this, 110011110,
-                "S,StartGame," + rowNumber + "," + numberOfPlayers));
-        mediator.startRound();
+        boolean fullLobby = true;
         for (PlayerTemplate p : players) {
-            if (p.isBot()) {
-               p.start();
+            if (p == null) {
+                fullLobby = false;
+                sendNotification(new Notification(String.valueOf(name), this, 110011110,
+                        "F" ));
+                break;
             }
         }
-//        nextRound();
-    }
-
-    @Override
-    public void endGame() {
-
+        if (fullLobby) {
+            initPlayersOnBoard();
+            mediator.setBoard(board);
+            Random generator = new Random();
+            roundCorner = generator.nextInt(numberOfPlayers);
+            round = players[roundCorner];
+            sendNotification(new Notification(String.valueOf(name), this, 110011110,
+                    "S,StartGame," + rowNumber + "," + numberOfPlayers));
+            mediator.startRound();
+            for (PlayerTemplate p : players) {
+                if (p.isBot()) {
+                    p.start();
+                }
+            }
+        }
     }
 
     @Override
@@ -96,7 +99,6 @@ public class Lobby extends NotificationBroadcasterSupport implements LobbyMBean{
         addPlayer(bot);
         sendNotification(new Notification(String.valueOf(name), this,
                 001100101010, "B"));
-
     }
 
     public boolean isEmpty() {
@@ -180,22 +182,10 @@ public class Lobby extends NotificationBroadcasterSupport implements LobbyMBean{
                     putPawnsOnBoard(players[i], 4);
                     createDestinationCoordinates(players[i], 4);
                 }
-//                if(i%2 == 0) {
-//                    //players[i].setColor(colorPalette[i*2]);
-//                    putPawnsOnBoard(players[i], i*2);
-//                    createDestinationCoordinates(players[i], i*2);
-//                }
-//                else {
-//                    //players[i].setColor(colorPalette[i*2-1]);
-//                    putPawnsOnBoard(players[i], i*2-1);
-//                    createDestinationCoordinates(players[i], i*2-1);
-//                }
             } else if(numberOfPlayers == 3) {
-                //players[i].setColor(colorPalette[i*2]);
                 putPawnsOnBoard(players[i], i*2);
                 createDestinationCoordinates(players[i], i*2);
             } else if(numberOfPlayers == 2) {
-                //players[i].setColor(colorPalette[i*3]);
                 putPawnsOnBoard(players[i], i*3);
                 createDestinationCoordinates(players[i], i*3);
             }
@@ -235,11 +225,13 @@ public class Lobby extends NotificationBroadcasterSupport implements LobbyMBean{
                     if(i%2 == 0) {
                         Field f = board.getField(new Coordinates(n+i, m+2*j+i));
                         f.setPlayerOn(player);
+                        f.setowner(player);
                         player.addCurrentCoordinates(n+i, m+2*j+i);
                     }
                     else {
                         Field f = board.getField(new Coordinates(n+i, m+2*j+i));
                         f.setPlayerOn(player);
+                        f.setowner(player);
                         player.addCurrentCoordinates(n+i, m+2*j+i);
                     }
                 }

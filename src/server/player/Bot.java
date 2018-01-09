@@ -13,7 +13,8 @@ public class Bot implements PlayerTemplate{
     public volatile Difficult difficultLevel;
     private volatile Runnable borRunnable;
     private volatile Thread botThread;
-    public boolean myTurn;
+    public volatile boolean myTurn;
+    public volatile boolean run;
     public volatile ArrayList<Coordinates> currentCoordinates;
     public volatile ArrayList<Coordinates> destinationCoordinates;
 
@@ -24,6 +25,7 @@ public class Bot implements PlayerTemplate{
         currentCoordinates = new ArrayList<>();
         destinationCoordinates = new ArrayList<>();
         myTurn = false;
+        run = true;
     }
 
 
@@ -52,6 +54,11 @@ public class Bot implements PlayerTemplate{
     @Override
     public void yourTurn() {
         myTurn = true;
+    }
+
+    @Override
+    public void stop() {
+        run = false;
     }
 
     @Override

@@ -65,5 +65,7 @@ public interface PlayerTemplate {
 
     void setLobby(Lobby lobby);
 
+    void stop();
+
     //void sortDestinationCoordinates();
 }

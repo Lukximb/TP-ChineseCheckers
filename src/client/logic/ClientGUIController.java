@@ -683,6 +683,8 @@ public class ClientGUIController {
 		winner.setDisable(true);
 		looser.setVisible(false);
 		looser.setDisable(true);
+		boardUpdate = new BoardUpdate(this, client);
+		playerLogic = new PlayerLogic(this, client);
 
 		menu.setDisable(false);
 		menu.setVisible(true);
@@ -707,8 +709,6 @@ public class ClientGUIController {
 			this.looser.setVisible(true);
 		});
 	}
-
-	//TODO
 
 
 

@@ -81,6 +81,7 @@ public class LobbyMediator {
                 for (int i = 0; i < lobby.numberOfPlayers; i++) {
                     if (lobby.players[i].equals(winner)) {
                         lobby.players[i].setLobby(null);
+                        lobby.players[i].stop();
                         lobby.players[i] = null;
                         break;
                     }
@@ -101,6 +102,7 @@ public class LobbyMediator {
                 for (PlayerTemplate p : lobby.players) {
                     if (p.getCorner() == loosingCorner) {
                         looser = p;
+                        p.stop();
                         break;
                     }
                 }

@@ -9,8 +9,6 @@ public interface LobbyMBean {
 
     void addPlayer(PlayerTemplate player);
 
-    void endGame();
-
     void addBot(PlayerTemplate bot);
 
     void sendMoveNotification(String message);

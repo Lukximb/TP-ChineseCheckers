@@ -37,7 +37,7 @@ public class BotThread implements Runnable{
     @Override
     public void run() {
         Random rnd = new Random();
-        while (true) {
+        while (bot.run) {
             try {
                 if (bot.myTurn) {
                     synchronized (bot) {
@@ -657,6 +657,6 @@ public class BotThread implements Runnable{
     }
 
     public synchronized boolean checkMove(Coordinates currentCoordinates, Coordinates destinationCoordinates, MoveType moveType) {
-        return lobby.mediator.checkMove(currentCoordinates, destinationCoordinates, moveType );
+        return lobby.mediator.checkMove(currentCoordinates, destinationCoordinates, moveType);
     }
 }

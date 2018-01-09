@@ -9,7 +9,7 @@ import javax.management.remote.JMXServiceURL;
 import java.rmi.registry.LocateRegistry;
 
 public class Connection {
-    private MBeanServer mbs = null;
+    public MBeanServer mbs = null;
     private String domain = null;
     private static volatile Connection instance = null;
 
@@ -64,8 +64,8 @@ public class Connection {
     public void createConnectorServer() {
         try {
             JMXServiceURL url = new JMXServiceURL(
-                    "service:jmx:rmi://localhost:44445/jndi/rmi://localhost:44444/jmxrmi");
- //                   "service:jmx:rmi://25.0.246.243:44445/jndi/rmi://25.0.246.243:44444/jmxrmi");
+//                    "service:jmx:rmi://localhost:44445/jndi/rmi://localhost:44444/jmxrmi");
+                    "service:jmx:rmi://25.0.246.243:44445/jndi/rmi://25.0.246.243:44444/jmxrmi");
 //                    "service:jmx:rmi://25.71.242.160:44445/jndi/rmi://25.71.242.160:44444/jmxrmi");
             JMXConnectorServer cs = JMXConnectorServerFactory.newJMXConnectorServer(url, null, mbs);
             cs.start();
@@ -74,5 +74,9 @@ public class Connection {
         catch ( Exception e ) {
             e.printStackTrace();
         }
+    }
+
+    public String getDomain() {
+        return domain;
     }
 }

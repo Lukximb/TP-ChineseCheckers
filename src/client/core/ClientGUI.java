@@ -52,6 +52,11 @@ public class ClientGUI extends Application {
         Object  opParams1[] = {pid};
         String  opSig1[] = {int.class.getName()};
         connection.invokeMethod(factory, "deletePlayer", opParams1, opSig1);
+        try {
+            connection.mbsc.unregisterMBean(player);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         connection.closeConnection();
     }
 

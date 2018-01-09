@@ -7,6 +7,7 @@ import server.player.PlayerTemplate;
 import java.util.ArrayList;
 
 public class LobbyManager {
+    private Manager manager;
     public ArrayList<Lobby> runningLobbyList;
     public ArrayList<Lobby> waitingLobbyList;
     private static volatile LobbyManager instance = null;
@@ -35,8 +36,7 @@ public class LobbyManager {
         setLobbyAsWaiting(lobby);
         waitingLobbyList.remove(lobby);
         System.out.println("Lobby deleted");
-        //TODO
-        //usuwanie lobby z rejestru
+        manager.unregisterLobby(lobby);
     }
 
     public void setLobbyAsWaiting(Lobby lobby) {
@@ -51,23 +51,6 @@ public class LobbyManager {
             waitingLobbyList.remove(lobby);
             runningLobbyList.add(lobby);
         }
-    }
-
-    public void runLobby(Lobby lobby) {
-        /*Runnable[] runners = new Runnable[10];
-        Thread[] threads = new Thread[10];
-
-        for(int i=0; i<10; i++) {
-            runners[i] = new MyRun(i);
-        }
-
-        for(int i=0; i<10; i++) {
-            threads[i] = new Thread(runners[i]);
-        }
-
-        for(int i=0; i<10; i++) {
-            threads[i].start();
-        }*/
     }
 
     public void addPlayerToLobby(String lobbyName, PlayerTemplate player) {
@@ -131,5 +114,9 @@ public class LobbyManager {
             lobbyList = lobbyList.concat((","+l.name));
         }
         return lobbyList;
+    }
+
+    public void setManager(Manager manager) {
+        this.manager = manager;
     }
 }
